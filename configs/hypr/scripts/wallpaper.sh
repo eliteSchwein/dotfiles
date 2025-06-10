@@ -50,7 +50,7 @@ set_theme() {
   hyprctl keyword general:col.active_border "$bg_color"
   hyprctl hyprpaper preload "$image"
   hyprctl hyprpaper wallpaper ",$image"
-  cp "$image" "/tmp/wallpaper.png"
+  cp -r "$image" "/tmp/wallpaper.png"
   astal changeThemeColor "$theme_color" > /dev/null &
 }
 
