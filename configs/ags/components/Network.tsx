@@ -10,6 +10,7 @@ export default function Network() {
     const wiredState = bind(network.wired, "state");
 
     function setWifiState() {
+        console.log(wifi)
         wifi.get().set_enabled(!wifi.get().get_enabled());
     }
 
