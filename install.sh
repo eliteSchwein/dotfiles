@@ -16,6 +16,8 @@ paru -S --noconfirm --rebuild=all \
   aylurs-gtk-shell-git power-profiles-daemon \
   seahorse kate dolphin wl-clipboard phinger-cursors zsh git
 
+ags init
+
 sudo cp -r ./configs/hypr/gtk-themes/* $THEME_PATH
 
 gsettings set org.gnome.desktop.interface gtk-theme 'Flat-Remix-GTK-Blue-Darkest-Solid'
