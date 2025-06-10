@@ -12,9 +12,36 @@ paru -S --noconfirm --rebuild=all \
 # Addons
 paru -S --noconfirm --rebuild=all \
   ydotool emote papirus-icon-theme-git drawing \
-  gwenview gimp libastal-meta clipse-bin \
-  aylurs-gtk-shell-git power-profiles-daemon \
+  gwenview gimp clipse-bin \
+  power-profiles-daemon \
   seahorse kate dolphin wl-clipboard phinger-cursors zsh git
+
+# Utilities
+paru -S --noconfirm --rebuild=all \
+  firefox
+
+# Astal
+paru -S --noconfirm --rebuild=all \
+  aylurs-gtk-shell-git \
+  libastal-4-git \
+  libastal-apps-git \
+  libastal-auth-git \
+  libastal-battery-git \
+  libastal-bluetooth-git \
+  libastal-cava-git \
+  libastal-git \
+  libastal-gjs-git \
+  libastal-greetd-git \
+  libastal-hyprland-git \
+  libastal-io-git \
+  libastal-meta \
+  libastal-mpris-git \
+  libastal-network-git \
+  libastal-notifd-git \
+  libastal-powerprofiles-git \
+  libastal-river-git \
+  libastal-tray-git \
+  libastal-wireplumber-git
 
 ags init
 
