@@ -19,7 +19,10 @@ paru -S --noconfirm --rebuild=all \
 
 # Utilities
 paru -S --noconfirm --rebuild=all \
-  firefox
+  firefox \
+  legcord-git \
+  firefox-beta \
+  ungoogled-chromium-bin
 
 # Astal
 paru -S --noconfirm --rebuild=all \
