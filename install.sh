@@ -3,14 +3,14 @@
 THEME_PATH="/usr/share/themes/"
 
 # Hyprland Core
-paru -S --noconfirm --rebuild=all \
+paru -S --noconfirm \
   qt5-wayland qt6-wayland hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr xdg-desktop-portal \
   hypridle hyprlock hyprpaper hyprpicker hyprpolkitagent \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc
 
 # Addons
-paru -S --noconfirm --rebuild=all \
+paru -S --noconfirm \
   ydotool emote papirus-icon-theme-git drawing \
   gwenview gimp clipse-bin \
   power-profiles-daemon \
@@ -18,14 +18,14 @@ paru -S --noconfirm --rebuild=all \
   brightnessctl
 
 # Utilities
-paru -S --noconfirm --rebuild=all \
+paru -S --noconfirm \
   firefox \
   legcord-git \
   firefox-beta \
   ungoogled-chromium-bin
 
 # Astal
-paru -S --noconfirm --rebuild=all \
+paru -S --noconfirm \
   aylurs-gtk-shell-git \
   libastal-4-git \
   libastal-apps-git \
