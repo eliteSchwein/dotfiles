@@ -4,7 +4,7 @@ import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"
 import OpenApplauncherRequest from "./request/OpenApplauncherRequest";
 import ThemeColorRequest from "./request/ThemeColorRequest";
-import {monitorFile, readFile} from "../../../../usr/share/astal/gjs";
+import {monitorFile, readFile} from "/usr/share/astal/gjs";
 
 exec("sass ./style.scss /tmp/style.css")
 
