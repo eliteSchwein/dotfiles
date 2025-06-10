@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "Colors" as colors;
+
+button {
+  background: transparent;
+  color: colors.gtkalpha(colors.$foreground, .8);
+  border: 1pt solid transparent;
+  text-shadow: none;
+  outline: none;
+
+  &:hover, &:focus {
+    border-color: transparent;
+    background: black;
+  }
+}
+
+entry {
+  border: 1pt solid colors.$input;
+  box-shadow: none;
+  color: colors.$foreground;
+  background-color: transparent;
+  margin-bottom: .8rem;
+}

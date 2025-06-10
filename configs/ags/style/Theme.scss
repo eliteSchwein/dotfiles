@@ -1,0 +1,33 @@
+@use "sass:color";
+
+$accent: #378DF7;
+
+window.Bar {
+  .Workspaces {
+    .focused {
+      color: $accent;
+      border-color: $accent;
+    }
+  }
+
+  .FocusedClient {
+    color: $accent;
+  }
+
+  .AudioSlider {
+    highlight {
+      background-color: $accent;
+    }
+  }
+}
+
+entry:focus {
+  border-color: $accent;
+  box-shadow: 0 0 5px 0 $accent;
+}
+
+button {
+  &:focus, &:hover {
+    box-shadow: 0 0 5px 0 $accent;
+  }
+}

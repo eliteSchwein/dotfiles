@@ -1,0 +1,119 @@
+@use "sass:color";
+@use "Colors" as colors;
+
+window.Bar {
+    border: none;
+    box-shadow: none;
+    color: colors.$foreground;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    label {
+        margin: 0 8px;
+    }
+
+    centerbox {
+        padding: 10px 13px 0;
+
+        .bar-box {
+            border-radius: colors.$radius;
+            padding: 3px 5px;
+            background-color: colors.$backgroundDarken;
+
+            &.center-box {
+                border-radius: colors.$widgetRadius;
+                padding: 3px 10px;
+            }
+        }
+    }
+
+    .Workspaces {
+        button {
+            padding: unset;
+
+            label {
+                padding: 0 6px;
+                margin: 1px;
+            }
+        }
+    }
+
+    button {
+        all: unset;
+        background-color: transparent;
+        transition: 200ms;
+        padding: 0 4px;
+        margin: 2px;
+        border-radius: colors.$radius;
+        border: 1pt solid transparent;
+        box-shadow: none;
+
+        &:hover {
+            background-color: black;
+            box-shadow: none;
+        }
+
+        &:active {
+            background-color: black;
+            box-shadow: none;
+        }
+    }
+
+    label {
+        transition: 200ms;
+        padding: 0 8px;
+        margin: 2px;
+        border-radius: colors.$radius;
+        border: 1pt solid transparent;
+    }
+
+
+    .SysTray {
+        margin-right: 8px;
+    }
+
+    .Media .Cover {
+        min-height: 1.2em;
+        min-width: 1.2em;
+        border-radius: colors.$radius;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .Battery label {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .AudioSlider {
+        * {
+            all: unset;
+        }
+
+        icon {
+            margin-right: .6em;
+        }
+
+        & {
+            margin: 0 1em;
+        }
+
+        trough {
+            background-color: color.adjust(colors.$foreground, $alpha: -0.8);
+            border-radius: colors.$radius;
+        }
+
+        highlight {
+            min-height: .8em;
+            border-radius: colors.$radius;
+        }
+
+        slider {
+            background-color: colors.$foreground;
+            border-radius: colors.$radius;
+            min-height: 1em;
+            min-width: 1em;
+            margin: -.2em;
+        }
+    }
+}

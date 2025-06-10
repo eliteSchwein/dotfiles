@@ -1,0 +1,117 @@
+@use "Colors" as colors;
+
+window.NotificationPopups {
+    all: unset;
+}
+
+eventbox.Notification {
+
+    &:first-child>box {
+        margin-top: 1rem;
+    }
+
+    &:last-child>box {
+        margin-bottom: 1rem;
+    }
+
+    // eventboxes can not take margins so we style its inner box instead
+    >box {
+        min-width: 400px;
+        border-radius: 13px;
+        background-color: colors.$background;
+        margin: .5rem 1rem .5rem 1rem;
+        box-shadow: 2px 3px 8px 0 colors.gtkalpha(black, .4);
+        border: 1pt solid colors.gtkalpha(colors.$foreground, .03);
+    }
+
+    &.critical>box {
+        border: 1pt solid colors.gtkalpha(colors.$error, .4);
+
+        .header {
+
+            .app-name {
+                color: colors.gtkalpha(colors.$error, .8);
+
+            }
+
+            .app-icon {
+                color: colors.gtkalpha(colors.$error, .6);
+            }
+        }
+    }
+
+    .header {
+        padding: .5rem;
+        color: colors.gtkalpha(colors.$foreground, 0.5);
+
+        .app-icon {
+            margin: 0 .4rem;
+        }
+
+        .app-name {
+            margin-right: .3rem;
+            font-weight: bold;
+
+            &:first-child {
+                margin-left: .4rem;
+            }
+        }
+
+        .time {
+            margin: 0 .4rem;
+        }
+
+        button {
+            padding: .2rem;
+            min-width: 0;
+            min-height: 0;
+        }
+    }
+
+    separator {
+        margin: 0 .4rem;
+        background-color: colors.gtkalpha(colors.$foreground, .1);
+    }
+
+    .content {
+        margin: 1rem;
+        margin-top: .5rem;
+
+        .summary {
+            font-size: 1em;
+            color: colors.$foreground;
+        }
+
+        .body {
+            color: colors.gtkalpha(colors.$foreground, 0.5);
+            font-size: .9em;
+        }
+
+        .image {
+            border: 1px solid colors.gtkalpha(colors.$foreground, .02);
+            margin-right: .5rem;
+            border-radius: 9px;
+            min-width: 50px;
+            min-height: 50px;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    .actions {
+        margin: 1rem;
+        margin-top: 0;
+
+        button {
+            margin: 0 .3rem;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
