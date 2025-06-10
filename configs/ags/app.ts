@@ -36,14 +36,14 @@ App.start({
         res('unkown command');
     },
     main() {
-        const config = JSON.parse(readFile("./local.config.json"))
+        //const config = JSON.parse(readFile("./local.config.json"))
 
-        const primaryMonitorIndex = (config.primary_monitor) ? config.primary_monitor : 0
-        const primaryMonitor = App.get_monitors()[primaryMonitorIndex]
-        Bar(primaryMonitor)
-        NotificationPopups(primaryMonitor)
-        //App.get_monitors().map(Bar)
-        //App.get_monitors().map(NotificationPopups)
+        //const primaryMonitorIndex = (config.primary_monitor) ? config.primary_monitor : 0
+        //const primaryMonitor = App.get_monitors()[primaryMonitorIndex]
+        //Bar(primaryMonitor)
+        //NotificationPopups(primaryMonitor)
+        App.get_monitors().map(Bar)
+        App.get_monitors().map(NotificationPopups)
     },
 })
 
