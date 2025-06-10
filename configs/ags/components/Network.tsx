@@ -4,10 +4,31 @@ import { GObject } from "/usr/share/astal/gjs";
 
 const DummyDevice = GObject.registerClass({
     Properties: {
-        'iconName': GObject.ParamSpec.string('iconName', '', '', GObject.ParamFlags.READWRITE, 'network-wired-symbolic'),
-        'state': GObject.ParamSpec.int('state', '', '', GObject.ParamFlags.READWRITE, 0, 999, 100),
+        'iconName': GObject.ParamSpec.string(
+            'iconName', '', '',
+            GObject.ParamFlags.READWRITE,
+            'network-wired-symbolic'
+        ),
+        'state': GObject.ParamSpec.int(
+            'state', '', '',
+            GObject.ParamFlags.READWRITE,
+            0, 999, 0 // default state = 0 (disconnected)
+        ),
+        'enabled': GObject.ParamSpec.boolean(
+            'enabled', '', '',
+            GObject.ParamFlags.READWRITE,
+            false // default: disabled
+        ),
     },
-}, class DummyDevice extends GObject.Object {});
+}, class DummyDevice extends GObject.Object {
+    get_enabled() {
+        return this.enabled;
+    }
+
+    set_enabled(value) {
+        this.enabled = value;
+    }
+});
 
 export default function Network() {
     const network = AstalNetwork.get_default();
