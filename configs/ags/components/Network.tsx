@@ -1,7 +1,7 @@
 import { bind } from "astal";
 import AstalNetwork from "gi://AstalNetwork";
 
-// Dummy fallback device
+// Dummy fallback
 const dummyDevice = {
     iconName: "network-offline-symbolic",
     state: 0,
@@ -9,45 +9,33 @@ const dummyDevice = {
     set_enabled: () => {},
 };
 
-// Safe bind helper
-function safeBind(obj, prop, fallback = null) {
-    try {
-        return bind(obj ?? dummyDevice, prop);
-    } catch (e) {
-        print(`❌ Failed to bind "${prop}":`, e);
-        return fallback;
-    }
-}
-
 export default function Network() {
     const network = AstalNetwork.get_default();
 
-    // Safe fallback devices
     const wifiDevice = network.wifi ?? dummyDevice;
     const wiredDevice = network.wired ?? dummyDevice;
 
-    // Bindings
-    const wifi = safeBind(network, "wifi");
-    const wifiIcon = safeBind(wifiDevice, "iconName");
-    const wiredIcon = safeBind(wiredDevice, "iconName");
-    const wiredState = safeBind(wiredDevice, "state");
+    const wifiIcon = bind(wifiDevice, "iconName");
+    const wiredIcon = bind(wiredDevice, "iconName");
+    const wiredState = bind(wiredDevice, "state");
 
     function setWifiState() {
-        try {
-            const w = wifi.get();
-            if (w) w.set_enabled(!w.get_enabled());
-        } catch (e) {
-            print("⚠️ Error toggling WiFi:", e);
+        if (network.wifi) {
+            network.wifi.set_enabled(!network.wifi.get_enabled());
         }
     }
 
     return (
         <box className="Workspaces">
             {wiredState?.as((state) => {
-                const isWiredConnected = state === 100; // NM.DeviceState.ACTIVATED
+                const isWiredConnected = state === 100;
+
                 return (
                     <button onClicked={setWifiState}>
-                        <icon className="icon" icon={isWiredConnected ? wiredIcon : wifiIcon ?? "network-offline-symbolic"} />
+                        <icon
+                            className="icon"
+                            icon={isWiredConnected ? wiredIcon : wifiIcon}
+                        />
                     </button>
                 );
             }) ?? <label>No network</label>}
