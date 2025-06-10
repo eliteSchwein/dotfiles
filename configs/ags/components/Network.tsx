@@ -3,7 +3,6 @@ import AstalNetwork from "gi://AstalNetwork";
 
 export default function Network() {
     const network = AstalNetwork.get_default();
-    console.log(network.wired)
 
     const wifi = bind(network, "wifi");
     const wifiIcon = bind(network.wifi, "iconName");
