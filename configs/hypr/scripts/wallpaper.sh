@@ -48,9 +48,9 @@ set_theme() {
 
   hyprctl hyprpaper unload all
   hyprctl keyword general:col.active_border "$bg_color"
-  hyprctl hyprpaper preload "$image"
-  hyprctl hyprpaper wallpaper ",$image"
   cp -r "$image" "/tmp/wallpaper.png"
+  hyprctl hyprpaper preload "/tmp/wallpaper.png"
+  hyprctl hyprpaper wallpaper ",/tmp/wallpaper.png"
   astal changeThemeColor "$theme_color" > /dev/null &
 }
 
