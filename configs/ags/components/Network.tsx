@@ -6,8 +6,15 @@ export default function Network() {
 
     const wifi = bind(network, "wifi");
     const wifiIcon = bind(network.wifi, "iconName");
-    const wiredIcon = bind(network.wired, "iconName");
-    const wiredState = bind(network.wired, "state");
+    const dummyWired = {
+        iconName: "network-wired-symbolic",
+        state: 100, // NM.DeviceState.ACTIVATED
+    };
+
+    const wiredDevice = network.wired ?? dummyWired;
+    const wiredIcon = bind(wiredDevice, "iconName");
+    const wiredState = bind(wiredDevice, "state");
+
 
     function setWifiState() {
         wifi.get().set_enabled(!wifi.get().get_enabled());
