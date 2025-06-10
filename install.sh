@@ -14,7 +14,8 @@ paru -S --noconfirm --rebuild=all \
   ydotool emote papirus-icon-theme-git drawing \
   gwenview gimp clipse-bin \
   power-profiles-daemon \
-  seahorse kate dolphin wl-clipboard phinger-cursors zsh git
+  seahorse kate dolphin wl-clipboard phinger-cursors zsh \
+  brightnessctl
 
 # Utilities
 paru -S --noconfirm --rebuild=all \
