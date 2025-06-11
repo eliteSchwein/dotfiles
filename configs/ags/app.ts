@@ -50,10 +50,7 @@ App.start({
         App.connect("monitor-removed", () => {
             hypr.dispatch("vdeskreset", ``);
 
-            execAsync([
-                "bash", "-c",
-                "ags quit && ags run $HOME/.config/ags/app.ts"
-            ])
+            restartAgs()
         });
     },
 })
@@ -61,6 +58,13 @@ App.start({
 function registerMonitor(monitor: Gdk.Monitor) {
     Bar(monitor);
     NotificationPopups(monitor);
+}
+
+export function restartAgs() {
+    execAsync([
+        "bash", "-c",
+        "ags quit && ags run $HOME/.config/ags/app.ts"
+    ])
 }
 
 App.apply_css('/tmp/theme.css')
