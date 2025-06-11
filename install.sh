@@ -47,7 +47,11 @@ paru -S --noconfirm \
   libastal-tray-git \
   libastal-wireplumber-git
 
-ags init
+# Social Media stuff
+paru -S --noconfirm \
+  legcord-git
+
+ags init --gtk 3
 
 sudo cp -r ./configs/hypr/gtk-themes/* $THEME_PATH
 
