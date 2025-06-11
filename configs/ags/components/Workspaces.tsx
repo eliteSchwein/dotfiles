@@ -1,42 +1,49 @@
-import { Variable, GLib, bind } from "astal"
-import Hyprland from "gi://AstalHyprland"
+import { bind } from "astal";
+import { App, Gdk } from "astal/gtk3"
+import Hyprland from "gi://AstalHyprland";
 
 export default function Workspaces() {
     const hypr = Hyprland.get_default();
 
-    return <box className="Workspaces">
-        {bind(hypr, "monitors").as(monitors => (
-            <>
-                {[...Array(5)].map((_, i) => {
-                    const workspaceId = i + 1;
-                    const monitorCount = monitors.length;
+    return (
+        <box className="Workspaces">
+            {bind(App, "monitors").as(monitors => {
+                if (!Array.isArray(monitors) || monitors.some(m => m == null)) {
+                    return <label>Loading monitors…</label>;
+                }
 
-                    return (
-                        <button
-                            key={workspaceId}
-                            className={bind(hypr, "focusedWorkspace").as(fw => {
-                                if(!fw) {
-                                    return ""
-                                }
+                const monitorCount = monitors.length;
 
-                                const minWorkspace = (workspaceId - 1) * monitorCount + 1;
-                                const maxWorkspace = minWorkspace + monitorCount - 1;
+                return (
+                    <>
+                        {[...Array(5)].map((_, i) => {
+                            const workspaceId = i + 1;
 
-                                const allMonitorsInRange =
-                                    fw.id >= minWorkspace &&
-                                    fw.id <= maxWorkspace
+                            return (
+                                <button
+                                    key={workspaceId}
+                                    className={bind(hypr, "focusedWorkspace").as(fw => {
+                                        if (!fw || fw.id === 0) return "";
 
-                                return allMonitorsInRange ? "focused" : "";
-                            })}
-                            onClicked={() => {
-                                hypr.dispatch("vdesk", `${workspaceId}`)
-                            }}
-                        >
-                            {workspaceId}
-                        </button>
-                    );
-                })}
-            </>
-        ))}
-    </box>
+                                        const minWorkspace = (workspaceId - 1) * monitorCount + 1;
+                                        const maxWorkspace = minWorkspace + monitorCount - 1;
+
+                                        const allMonitorsInRange =
+                                            fw.id >= minWorkspace && fw.id <= maxWorkspace;
+
+                                        return allMonitorsInRange ? "focused" : "d-none";
+                                    })}
+                                    onClicked={() => {
+                                        hypr.dispatch("vdesk", `${workspaceId}`);
+                                    }}
+                                >
+                                    {workspaceId}
+                                </button>
+                            );
+                        })}
+                    </>
+                );
+            })}
+        </box>
+    );
 }

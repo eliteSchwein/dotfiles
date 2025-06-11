@@ -1,10 +1,11 @@
-import { App } from "astal/gtk3"
+import { App, Gdk } from "astal/gtk3"
 import { exec } from "astal/process"
 import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"
 import OpenApplauncherRequest from "./request/OpenApplauncherRequest";
 import ThemeColorRequest from "./request/ThemeColorRequest";
-import {monitorFile, readFile} from "/usr/share/astal/gjs";
+import {execAsync, GLib, monitorFile, readFile, Variable} from "/usr/share/astal/gjs";
+import Hyprland from "gi://AstalHyprland";
 
 exec("sass ./style.scss /tmp/style.css")
 
@@ -33,19 +34,33 @@ App.start({
         await (new OpenApplauncherRequest()).execute(request, res);
         await (new ThemeColorRequest()).execute(request, res);
 
-        res('unkown command');
+        res('unknown command');
     },
     main() {
-        //const config = JSON.parse(readFile("./local.config.json"))
+        const hypr = Hyprland.get_default();
 
-        //const primaryMonitorIndex = (config.primary_monitor) ? config.primary_monitor : 0
-        //const primaryMonitor = App.get_monitors()[primaryMonitorIndex]
-        //Bar(primaryMonitor)
-        //NotificationPopups(primaryMonitor)
-        App.get_monitors().map(Bar)
-        App.get_monitors().map(NotificationPopups)
+        App.get_monitors().map(registerMonitor)
+
+        App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
+            registerMonitor(monitor)
+
+            hypr.dispatch("vdeskreset", ``);
+        });
+
+        App.connect("monitor-removed", () => {
+            hypr.dispatch("vdeskreset", ``);
+
+            execAsync([
+                "bash", "-c",
+                "ags quit && ags run $HOME/.config/ags/app.ts"
+            ])
+        });
     },
 })
 
+function registerMonitor(monitor: Gdk.Monitor) {
+    Bar(monitor);
+    NotificationPopups(monitor);
+}
 
 App.apply_css('/tmp/theme.css')
