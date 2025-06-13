@@ -1,5 +1,5 @@
 import BaseRequest from "./BaseRequest";
-import Applauncher from "../widget/Applauncher";
+import Applauncher from "../widget/windows/Applauncher";
 
 export default class OpenApplauncherRequest extends BaseRequest {
     command = "openAppLauncher"

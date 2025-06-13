@@ -5,7 +5,7 @@ pid_file="$2"
 
 rm $pid_file 2> /dev/null
 
-drawing "$screenshot_file" &
+satty -f="$screenshot_file" --output-filename="$screenshot_file" &
 echo $! > "$pid_file"
 
 wait

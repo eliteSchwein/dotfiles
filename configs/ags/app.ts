@@ -6,6 +6,7 @@ import OpenApplauncherRequest from "./request/OpenApplauncherRequest";
 import ThemeColorRequest from "./request/ThemeColorRequest";
 import {execAsync, GLib, monitorFile, readFile, Variable} from "/usr/share/astal/gjs";
 import Hyprland from "gi://AstalHyprland";
+import {NotificationCenter} from "./widget/windows/NotificationCenter";
 
 exec("sass ./style.scss /tmp/style.css")
 
@@ -38,6 +39,8 @@ App.start({
     },
     main() {
         const hypr = Hyprland.get_default();
+
+        //NotificationCenter()
 
         App.get_monitors().map(registerMonitor)
 

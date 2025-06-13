@@ -13,7 +13,8 @@ const time = (time: number, format = "%H:%M") => GLib.DateTime
     .new_from_unix_local(time)
     .format(format)!
 
-const urgency = (n: Notifd.Notification) => {
+const urgency = (n: Notifd.Notification = undefined) => {
+    if(!n) return
     const { LOW, NORMAL, CRITICAL } = Notifd.Urgency
     // match operator when?
     switch (n.urgency) {
@@ -33,8 +34,77 @@ export default function Notification(props: Props) {
     const { notification: n, setup } = props
     const { START, CENTER, END } = Gtk.Align
 
+    if (n.appName === "Hyprshot") {
+        return <eventbox
+            className={`Notification font-victor ${urgency(n)}`}
+            setup={setup}>
+            <box vertical>
+                <box className="header">
+                    {(n.desktopEntry) && <icon
+                        className="app-icon"
+                        visible={Boolean(n.desktopEntry)}
+                        icon={n.desktopEntry}
+                    />}
+                    <label
+                        className="app-name font-orbitron"
+                        halign={START}
+                        truncate
+                        label={n.appName || "Unknown"}
+                    />
+                    <label
+                        className="time"
+                        hexpand
+                        halign={END}
+                        label={time(n.time)}
+                    />
+                    <button className="bg-transparent bx-none" onClicked={() => n.dismiss()}>
+                        <icon icon="window-close-symbolic" />
+                    </button>
+                </box>
+                <Gtk.Separator visible />
+                <box className="content">
+                    <box vertical>
+                        <label
+                            className="summary"
+                            halign={START}
+                            xalign={0}
+                            label={n.summary}
+                            truncate
+                        />
+                        {n.body && <label
+                            className="body"
+                            wrap
+                            useMarkup
+                            halign={START}
+                            xalign={0}
+                            justifyFill
+                            label={n.body}
+                        />}
+                    </box>
+                </box>
+                <box className="content full-image">
+                    {n.appIcon && fileExists(n.appIcon) && <box
+                        valign={CENTER}
+                        className="image"
+                        css={`background-image: url('${n.appIcon}')`}
+                    />}
+                </box>
+                {n.get_actions().length > 0 && <box className="actions">
+                    {n.get_actions().map(({ label, id }) => (
+                        <button
+                            className="bx-none"
+                            hexpand
+                            onClicked={() => {n.invoke(id); n.dismiss();}}>
+                            <label label={label} halign={CENTER} hexpand />
+                        </button>
+                    ))}
+                </box>}
+            </box>
+        </eventbox>
+    }
+
     return <eventbox
-        className={`Notification ${urgency(n)}`}
+        className={`Notification font-victor ${urgency(n)}`}
         setup={setup}>
         <box vertical>
             <box className="header">
@@ -44,7 +114,7 @@ export default function Notification(props: Props) {
                     icon={n.appIcon || n.desktopEntry}
                 />}
                 <label
-                    className="app-name"
+                    className="app-name font-orbitron"
                     halign={START}
                     truncate
                     label={n.appName || "Unknown"}

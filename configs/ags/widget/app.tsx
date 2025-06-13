@@ -2,6 +2,7 @@ import { App, Astal, Gtk } from "astal/gtk3"
 import { Variable } from "astal"
 import Popover from "./Popover"
 import Popover2 from "./Popover2"
+import {NotificationCenter} from "./windows/NotificationWindow";
 const { TOP, RIGHT, LEFT } = Astal.WindowAnchor
 
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis semper risus."

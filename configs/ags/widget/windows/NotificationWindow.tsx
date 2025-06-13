@@ -1,7 +1,7 @@
 import Notifd from "gi://AstalNotifd";
 import { bind } from "astal";
 import { App, Astal, Gtk } from "astal/gtk3";
-import icons from "~/lib/icons";
+import icons from "../../lib/icons";
 import Notification from "../Notification";
 
 const Items = ({ notis }: { notis: Notifd.Notification[] }) => {
@@ -62,7 +62,6 @@ const Header = ({ notifd }: { notifd: Notifd.Notifd }) => {
     return (
         <box className="notifications-header">
             <box>
-                <Title title="NOTIFICATIONS" />
                 <box halign={Gtk.Align.END} spacing={8} hexpand>
                     {dndToggleBtn}
                     {clearAllBtn}
@@ -87,11 +86,7 @@ const Main = () => {
                     <Items notis={notis} />
                 ) : (
                     <box>
-                        <Fallback
-                            icon={icons.notification.disabled}
-                            label="You're all caught up"
-                            iconSize={48}
-                        />
+                        AAA
                     </box>
                 ),
             )}
@@ -104,7 +99,7 @@ export function NotificationCenter() {
 
     return (
         <window
-            visible={false}
+            visible={true}
             name="notification-center"
             anchor={RIGHT | TOP}
             margin={6}

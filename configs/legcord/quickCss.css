@@ -4,20 +4,31 @@
 @import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/JoyPixels.css);
 @import url("https://refact0r.github.io/system24/src/main.css");
 
+body {
+  font-family: "VictorMono", monospace !important;
+}
+
+* {
+  font-family: "VictorMono", monospace !important;
+}
+
+
 :root {
-    --accent-1: #4DB6AC;
-    --accent-2: #00897B;
-    --accent-3: #26A69A;
-    --accent-4: #00796B;
-    --accent-5: #00695C;
-    --accent-new: #00BFA5;
-    --red-1: #EF5350;
-    --red-2: #E53935;
-    --red-3: #D32F2F;
-    --red-4: #B71C1C;
-    --red-5: #791313;
+  --accent-1: #4DB6AC;
+  --accent-2: #00897B;
+  --accent-3: #26A69A;
+  --accent-4: #00796B;
+  --accent-5: #00695C;
+  --accent-new: #00BFA5;
+  --red-1: #EF5350;
+  --red-2: #E53935;
+  --red-3: #D32F2F;
+  --red-4: #B71C1C;
+  --red-5: #791313;
   /* system24 */
-  --font: "Fira Code Mono"; /* UI font name. it must be installed on your system. */
+  --font-secondary: "VictorMono"; /* UI font name. it must be installed on your system. */
+  --font-primary: "VictorMono"; /* UI font name. it must be installed on your system. */
+  --font: "VictorMono"; /* UI font name. it must be installed on your system. */
   letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
   font-weight: 300; /* UI font weight. */
   --label-font-weight: 500; /* font weight for panel labels. */
@@ -30,7 +41,7 @@
   --bg-0: oklch(19% 0 0); /* main background color. */
   --bg-0-t: oklch(0 0 0 / 0.4); /* main background color. */
   --bg-1: oklch(
-    23% 0 0
+          23% 0 0
   ); /* background color for secondary elements like code blocks, embeds, etc. */
   --bg-2: oklch(27% 0 0); /* color of neutral buttons. */
   --bg-3: oklch(31% 0 0); /* color of neutral buttons when hovered. */
@@ -68,25 +79,25 @@
   /* mention/ping and message colors */
   --mention-txt: var(--acc-0); /* color of mention text. */
   --mention-bg: color-mix(
-    in oklch,
-    var(--acc-0),
-    transparent 90%
+          in oklch,
+          var(--acc-0),
+          transparent 90%
   ); /* background highlight of mention text. */
   --mention-overlay: color-mix(
-    in oklch,
-    var(--acc-0),
-    transparent 90%
+          in oklch,
+          var(--acc-0),
+          transparent 90%
   ); /* overlay color of messages that mention you. */
   --mention-hover-overlay: color-mix(
-    in oklch,
-    var(--acc-0),
-    transparent 95%
+          in oklch,
+          var(--acc-0),
+          transparent 95%
   ); /* overlay color of messages that mention you when hovered. */
   --reply-overlay: var(
-    --active
+          --active
   ); /* overlay color of message you are replying to. */
   --reply-hover-overlay: var(
-    --hover
+          --hover
   ); /* overlay color of message you are replying to when hovered. */
 
   /* color shades */
@@ -120,7 +131,7 @@
   --rs-streaming-color: #643da7; /* Colour for streaming status */
   --rs-invisible-color: #747f8d; /* Colour for invisible status - Note: this will only show for your own invisibility */
   --rs-phone-color: var(
-    --rs-online-color
+          --rs-online-color
   ); /* Colour of the ring and phone icon when a user is on their phone |  */
 
   --rs-phone-visible: block; /* Visibility of the phone icon next to a users avatar. | block = visible | none = hidden */
@@ -243,38 +254,38 @@
 
 /* Home Button */
 .scroller_ef3116
-  .listItemWrapper__91816
-  .wrapper_cc5dd2
-  svg
-  foreignObject
-  .wrapper__6e9f8
-  .childWrapper__6e9f8
-  svg,
+.listItemWrapper__91816
+.wrapper_cc5dd2
+svg
+foreignObject
+.wrapper__6e9f8
+.childWrapper__6e9f8
+svg,
 .scroller_ef3116
-  .listItemWrapper__91816
-  .wrapper_cc5dd2
-  svg
-  foreignObject
-  .wrapper__6e9f8
-  .childWrapper__6e9f8::before,
+.listItemWrapper__91816
+.wrapper_cc5dd2
+svg
+foreignObject
+.wrapper__6e9f8
+.childWrapper__6e9f8::before,
 .scroller_ef3116 .listItemWrapper__91816 .wrapper_cc5dd2 .lowerBadge_cc5dd2,
 .scroller_ef3116 .listItemWrapper__91816 .wrapper_cc5dd2 svg mask:nth-child(2),
 .scroller_ef3116
-  .listItemWrapper__91816
-  .wrapper_cc5dd2
-  svg
-  defs
-  rect:nth-child(3) {
+.listItemWrapper__91816
+.wrapper_cc5dd2
+svg
+defs
+rect:nth-child(3) {
   display: none;
 }
 .scroller_ef3116
-  .listItemWrapper__91816
-  .wrapper_cc5dd2
-  svg
-  foreignObject
-  .wrapper__6e9f8
-  .childWrapper__6e9f8 {
-    border-radius: 10px;  background-image: url(https://i.pinimg.com/736x/c4/86/1e/c4861efe61bdc5573810bfd899629865.jpg);
+.listItemWrapper__91816
+.wrapper_cc5dd2
+svg
+foreignObject
+.wrapper__6e9f8
+.childWrapper__6e9f8 {
+  border-radius: 10px;  background-image: url(https://i.pinimg.com/736x/c4/86/1e/c4861efe61bdc5573810bfd899629865.jpg);
   background-color: transparent;
   background-size: var(--guildbar-avatar-size);
   background-repeat: no-repeat;
@@ -303,9 +314,9 @@ button[aria-label="Send a gift"],
 .menus_ce8328 .overlay_c0bea0 div button[data-list-item-id*="___shop"],
 .menus_ce8328 .overlay_c0bea0 div button[data-list-item-id*="___get-premium"],
 .menus_ce8328
-  .overlay_c0bea0
-  div[data-list-id="profile-288633425303437312"]
-  .menuDivider_ce8328,
+.overlay_c0bea0
+div[data-list-id="profile-288633425303437312"]
+.menuDivider_ce8328,
 .inner_c0bea0 .wrapper_da5890 > button,
 .channelAppLauncher_e6e74f,
 .gradientBackground__11664,
@@ -316,34 +327,34 @@ button[aria-label="Send a gift"],
 }
 
 /* system24 fixes*/body,
-.appMount__51fd7,
-.container__133bf,
-.container__9293f,
-.nowPlayingColumn__133bf,
-.chat_f75fb0,
-.chatContent_f75fb0,
-.bg__960e4,
-.sidebarList_c48ade,
-.panels_c48ade, 
-.container__37e49,
-.themedBackground__74017,
-.sidebar_c48ade {
-  background: transparent !important;
-}
+                   .appMount__51fd7,
+                   .container__133bf,
+                   .container__9293f,
+                   .nowPlayingColumn__133bf,
+                   .chat_f75fb0,
+                   .chatContent_f75fb0,
+                   .bg__960e4,
+                   .sidebarList_c48ade,
+                   .panels_c48ade,
+                   .container__37e49,
+                   .themedBackground__74017,
+                   .sidebar_c48ade {
+                     background: transparent !important;
+                   }
 .messagesWrapper__36d07,
 .peopleColumn__133bf,
 .subtitleContainer_f75fb0,
 .container__9293f:not([aria-label="Channel header"]),
-.panels_c48ade, 
+.panels_c48ade,
 .privateChannels__35e86:not([aria-label="Private channels"]),
 .container__2637a:not([aria-label*="server"]),
 .container_c8ffbb,
-.layer__960e4,  
+.layer__960e4,
 .sidebarList_c48ade,
 .guilds_c48ade,
 .container__7d20c,
 .outer_c0bea0,
-.container_f369db,   
+.container_f369db,
 .mainCard_f369db,
 .sidebarRegion__23e6b,
 .contentRegionScroller__23e6b,
@@ -380,4 +391,8 @@ button[aria-label="Send a gift"],
 
 #app-mount .wrapper__44b0c rect[fill="#d83a42"] {
   stroke: var(--rs-dnd-color);
+}
+
+.form_f75fb0 {
+  padding-left: 0!important;
 }

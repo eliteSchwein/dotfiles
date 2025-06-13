@@ -87,6 +87,16 @@ eventbox.Notification {
             font-size: .9em;
         }
 
+        &.full-image {
+            margin: .5rem;
+            margin-top: 0rem;
+
+            .image {
+                min-height: 300px;
+                min-width: 500px;
+            }
+        }
+
         .image {
             border: 1px solid colors.gtkalpha(colors.$foreground, .02);
             margin-right: .5rem;
