@@ -35,3 +35,4 @@ source = ./configs/workspaces.conf
 # Start Exec
 source = ./configs/startexec.conf
 # source = ./configs/startexec/intel_igpu.conf
+# source = ./configs/startexec/laptop.conf
