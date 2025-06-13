@@ -8,8 +8,7 @@ source = ./configs/monitor/laptop.conf
 #source = ./configs/monitor/desktop.conf
 
 # Decoration
-source = ./configs/decoration/laptop.conf
-#source = ./configs/decoration/desktop.conf
+source = ./configs/decoration.conf
 source = ./configs/animation.conf
 
 # Input
