@@ -27,6 +27,8 @@ if hyprshot -zm region -o "$screenshot_dir" -f "$file_name"; then
         #    -normalize \
         #    "$screenshot_file"
 
+        sleep 0.5
+
         # Open screenshot editor
         bash "$HOME/.config/hypr/scripts/screenshotEdit.sh" "$screenshot_file" "$pid_file" &
 
