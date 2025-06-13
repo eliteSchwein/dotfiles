@@ -15,7 +15,7 @@ paru -S --noconfirm \
   gwenview gimp clipse-bin \
   power-profiles-daemon \
   seahorse kate dolphin wl-clipboard phinger-cursors zsh \
-  brightnessctl
+  brightnessctl playerctl
 
 # Utilities
 paru -S --noconfirm \
