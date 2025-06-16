@@ -1,0 +1,8 @@
+[Unit]
+Description=Automatic keyboard light controls.
+[Service]
+Type=simple
+ExecStart=/bin/bash %h/dotfiles/scripts/frameworkAutoKeyboardLed.sh
+ExecStop=brightnessctl -sd chromeos::kbd_backlight set 0
+[Install]
+WantedBy=default.target

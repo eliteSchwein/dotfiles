@@ -4,41 +4,59 @@ DOTFILES_DIR="$HOME/dotfiles"
 CONFIGS_DIR="$DOTFILES_DIR/configs"
 TARGET_CONFIG="$HOME/.config"
 
-echo "🔗 Linking individual config files from $CONFIGS_DIR into $TARGET_CONFIG..."
+echo "🔗 Linking config files from $CONFIGS_DIR into $TARGET_CONFIG..."
 
 mkdir -p "$TARGET_CONFIG"
 
-# Loop through each config directory (e.g., nvim, tmux)
 for config_dir in "$CONFIGS_DIR"/*; do
   config_name=$(basename "$config_dir")
   target_dir="$TARGET_CONFIG/$config_name"
 
-  echo "📁 Preparing $target_dir"
-  mkdir -p "$target_dir"
+  echo "📁 Processing $config_name"
 
-  # Loop through the contents of each config subdirectory
-  for item in "$config_dir"/*; do
-    item_name=$(basename "$item")
-    target_item="$target_dir/$item_name"
+  if [[ "$config_name" == "systemd" ]]; then
+    # Recursively link only files in systemd
+    find "$config_dir" -type f | while read -r src_file; do
+      rel_path="${src_file#$CONFIGS_DIR/}"
+      target_path="$TARGET_CONFIG/$rel_path"
+      target_parent=$(dirname "$target_path")
 
-    # Remove if an old symlink or file exists
-    if [ -L "$target_item" ] || [ -f "$target_item" ] || [ -d "$target_item" ]; then
-      echo "⚠️  Removing existing $target_item"
-      rm -rf "$target_item"
-    fi
+      mkdir -p "$target_parent"
 
-    echo "✅ Linking $item → $target_item"
-    ln -s "$item" "$target_item"
-  done
+      if [ -e "$target_path" ] || [ -L "$target_path" ]; then
+        echo "⚠️  Removing existing $target_path"
+        rm -rf "$target_path"
+      fi
+
+      echo "✅ Linking $src_file → $target_path"
+      ln -s "$src_file" "$target_path"
+    done
+  else
+    # Non-systemd: one level deep, only link files
+    mkdir -p "$target_dir"
+    for item in "$config_dir"/*; do
+      [ -f "$item" ] || continue
+      item_name=$(basename "$item")
+      target_item="$target_dir/$item_name"
+
+      if [ -e "$target_item" ] || [ -L "$target_item" ]; then
+        echo "⚠️  Removing existing $target_item"
+        rm -rf "$target_item"
+      fi
+
+      echo "✅ Linking $item → $target_item"
+      ln -s "$item" "$target_item"
+    done
+  fi
 done
 
-# Symlink .zshrc from dotfiles
+# Symlink .zshrc separately
 ZSHRC_SOURCE="$DOTFILES_DIR/.zshrc"
 ZSHRC_TARGET="$HOME/.zshrc"
 
 echo "🔗 Linking $ZSHRC_SOURCE → $ZSHRC_TARGET"
 
-if [ -L "$ZSHRC_TARGET" ] || [ -e "$ZSHRC_TARGET" ]; then
+if [ -e "$ZSHRC_TARGET" ] || [ -L "$ZSHRC_TARGET" ]; then
   echo "⚠️  Removing existing $ZSHRC_TARGET"
   rm -rf "$ZSHRC_TARGET"
 fi
