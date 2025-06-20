@@ -16,7 +16,7 @@ paru -S --noconfirm \
   power-profiles-daemon \
   seahorse wl-clipboard phinger-cursors zsh \
   brightnessctl playerctl inotify-tools \
-  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp gvfs-ntp
+  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp
 
 # Utilities
 paru -S --noconfirm \
