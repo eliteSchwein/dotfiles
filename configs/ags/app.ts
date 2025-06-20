@@ -40,7 +40,7 @@ App.start({
     main() {
         const hypr = Hyprland.get_default();
 
-        //NotificationCenter()
+        NotificationCenter()
 
         App.get_monitors().map(registerMonitor)
 

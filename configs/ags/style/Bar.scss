@@ -20,6 +20,13 @@ window.Bar {
             padding: 3px 5px;
             background-color: colors.$backgroundDarken;
 
+            &.left-box {
+                border-radius: colors.$widgetRadius;
+                padding: 2px 0;
+                border-radius: 0;
+                background-color: transparent;
+            }
+
             &.center-box {
                 border-radius: colors.$widgetRadius;
                 padding: 3px 10px;
@@ -28,12 +35,20 @@ window.Bar {
     }
 
     .Workspaces {
+        padding: 0;
+        background: none;
+
+        .focused {
+            color: colors.$backgroundDarken;
+        }
+
         button {
-            padding: unset;
+            min-width: 25pt;
+            padding: 2px 0;
 
             label {
                 padding: 0 6px;
-                margin: 1px;
+                margin: 0;
             }
         }
     }

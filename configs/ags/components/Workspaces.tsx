@@ -6,7 +6,7 @@ export default function Workspaces() {
     const hypr = Hyprland.get_default();
 
     return (
-        <box className="Workspaces">
+        <box className="Workspaces font-victor-medium">
             {bind(App, "monitors").as(monitors => {
                 if (!Array.isArray(monitors) || monitors.some(m => m == null)) {
                     return <label>Loading monitors…</label>;

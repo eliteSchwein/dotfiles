@@ -5,8 +5,17 @@ $accent: #378DF7;
 window.Bar {
   .Workspaces {
     .focused {
-      color: $accent;
-      border-color: $accent;
+      /*color: $accent;
+      border-color: $accent;*/
+      background-color: $accent;
+      box-shadow: 0 0 3px 0 $accent;
+    }
+
+    button {
+      &:hover {
+        color: $accent;
+        border-color: $accent;
+      }
     }
   }
 
@@ -23,11 +32,11 @@ window.Bar {
 
 entry:focus {
   border-color: $accent;
-  box-shadow: 0 0 5px 0 $accent;
+  box-shadow: 0 0 3px 0 $accent;
 }
 
 button {
   &:focus, &:hover {
-    box-shadow: 0 0 5px 0 $accent;
+    box-shadow: 0 0 3px 0 $accent;
   }
 }

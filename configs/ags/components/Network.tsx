@@ -49,7 +49,7 @@ export default function Network() {
     }
 
     return (
-        <box className="Workspaces">
+        <box className="">
             {wiredState.as((state) => {
                 const isWiredConnected = state === 100; // NM.DeviceState.ACTIVATED
 
