@@ -11,9 +11,10 @@ window.Bar {
       box-shadow: 0 0 3px 0 $accent;
     }
 
-    button {
+    > button:not(.focused) {
+      color: $accent;
+
       &:hover {
-        color: $accent;
         border-color: $accent;
       }
     }

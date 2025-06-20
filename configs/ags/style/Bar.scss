@@ -38,10 +38,6 @@ window.Bar {
         padding: 0;
         background: none;
 
-        .focused {
-            color: colors.$backgroundDarken;
-        }
-
         button {
             min-width: 25pt;
             padding: 2px 0;
@@ -49,6 +45,10 @@ window.Bar {
             label {
                 padding: 0 6px;
                 margin: 0;
+            }
+
+            &.focused {
+                color: colors.$backgroundDarken;
             }
         }
     }
