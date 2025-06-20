@@ -3,10 +3,31 @@
 DOTFILES_DIR="$HOME/dotfiles"
 CONFIGS_DIR="$DOTFILES_DIR/configs"
 TARGET_CONFIG="$HOME/.config"
+RECURSIVE_LINK_DIRS=("xfce4")
 
 echo "🔗 Linking config files from $CONFIGS_DIR into $TARGET_CONFIG..."
 
 mkdir -p "$TARGET_CONFIG"
+
+for config_name in "${RECURSIVE_LINK_DIRS[@]}"; do
+    config_dir="$CONFIGS_DIR/$config_name"
+    target_dir="$TARGET_CONFIG/$config_name"
+
+    echo "📁 Recursively processing $config_name"
+
+    if [ ! -d "$config_dir" ]; then
+        echo "⛔ Directory $config_dir does not exist. Skipping."
+        continue
+    fi
+
+    if [ -e "$target_dir" ] || [ -L "$target_dir" ]; then
+        echo "⚠️  Removing existing $target_dir"
+        rm -rf "$target_dir"
+    fi
+
+    echo "✅ Linking $config_dir → $target_dir"
+    ln -s "$config_dir" "$target_dir"
+done
 
 for config_dir in "$CONFIGS_DIR"/*; do
   config_name=$(basename "$config_dir")

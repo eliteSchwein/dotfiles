@@ -12,10 +12,11 @@ paru -S --noconfirm \
 # Addons
 paru -S --noconfirm \
   ydotool emote papirus-icon-theme-git satty \
-  gwenview gimp clipse-bin \
+  gimp clipse-bin \
   power-profiles-daemon \
-  seahorse kate dolphin wl-clipboard phinger-cursors zsh \
-  brightnessctl playerctl inotify-tools
+  seahorse wl-clipboard phinger-cursors zsh \
+  brightnessctl playerctl inotify-tools \
+  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp gvfs-ntp
 
 # Utilities
 paru -S --noconfirm \
