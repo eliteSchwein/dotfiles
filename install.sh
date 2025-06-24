@@ -22,7 +22,6 @@ paru -S --noconfirm \
 paru -S --noconfirm \
   firefox \
   legcord-git \
-  firefox-nightly-bin \
   ungoogled-chromium-bin
 
 # Astal
