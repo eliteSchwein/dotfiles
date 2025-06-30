@@ -1,4 +1,5 @@
 import { App, Gdk } from "ags/gtk3"
+import app from "ags/gtk3/app"
 import { exec } from "ags/process"
 import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"
@@ -29,7 +30,7 @@ for(const monitorPath of monitorPaths) {
     )
 }
 
-App.start({
+app.start({
     css: "/tmp/style.css",
     async requestHandler(request: string, res: (response: any) => void) {
         await (new OpenApplauncherRequest()).execute(request, res);
@@ -42,9 +43,9 @@ App.start({
 
         //NotificationCenter()
 
-        App.get_monitors().map(registerMonitor)
+        app.get_monitors().map(registerMonitor)
 
-        App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
+        app.connect('monitor-added', (app: app, monitor: Gdk.Monitor) => {
             registerMonitor(monitor)
 
             hypr.dispatch("vdeskreset", ``);
@@ -70,4 +71,4 @@ export function restartAgs() {
     ])
 }
 
-App.apply_css('/tmp/theme.css')
+app.apply_css('/tmp/theme.css')
