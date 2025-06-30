@@ -2,7 +2,8 @@ import { Astal, Gtk, Gdk } from "ags/gtk3"
 import Notifd from "gi://AstalNotifd"
 import Notification from "./Notification"
 import { type Subscribable } from "ags/binding"
-import { Variable, bind, timeout } from "ags"
+import { createBinding } from "ags"
+import {timeout, Variable } from "/usr/share/astal/gjs"
 
 // see comment below in constructor
 const TIMEOUT_DELAY = 10_000
@@ -89,12 +90,12 @@ export default function NotificationPopups(gdkmonitor: Gdk.Monitor) {
     const notifs = new NotifiationMap()
 
     return <window
-        className="NotificationPopups"
+        class="NotificationPopups"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | RIGHT}>
         <box vertical noImplicitDestroy>
-            {bind(notifs)}
+            {createBinding(notifs)}
         </box>
     </window>
 }

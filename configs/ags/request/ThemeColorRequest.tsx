@@ -1,5 +1,5 @@
 import BaseRequest from "./BaseRequest";
-import { App } from "ags/gtk3";
+import app from "ags/gtk3/app"
 import { exec } from "ags/process";
 
 export default class ThemeColorRequest extends BaseRequest {
@@ -15,10 +15,10 @@ export default class ThemeColorRequest extends BaseRequest {
             exec(`sed -i 's/#378DF7/#${params[0]}/g' /tmp/Theme.scss`);
             exec(`sass /tmp/Theme.scss /tmp/theme.css`);
 
-            App.reset_css();
+            app.reset_css();
 
-            App.apply_css('/tmp/style.css');
-            App.apply_css('/tmp/theme.css');
+            app.apply_css('/tmp/style.css');
+            app.apply_css('/tmp/theme.css');
             return res("ok");
         } catch (error) {
             console.error("Error updating theme color:", error);

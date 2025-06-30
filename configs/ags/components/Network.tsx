@@ -1,4 +1,4 @@
-import { bind } from "ags";
+import { createBinding } from "ags";
 import AstalNetwork from "gi://AstalNetwork";
 import { GObject } from "/usr/share/astal/gjs";
 
@@ -37,11 +37,11 @@ export default function Network() {
     const wiredDevice = network.wired ?? new DummyDevice();
     const wifiDevice = network.wifi ?? new DummyDevice();
 
-    const wifi = bind(network, "wifi");
-    const wifiIcon = bind(wifiDevice, "iconName");
+    const wifi = createBinding(network, "wifi");
+    const wifiIcon = createBinding(wifiDevice, "iconName");
 
-    const wiredIcon = bind(wiredDevice, "iconName");
-    const wiredState = bind(wiredDevice, "state");
+    const wiredIcon = createBinding(wiredDevice, "iconName");
+    const wiredState = createBinding(wiredDevice, "state");
 
 
     function setWifiState() {
@@ -49,13 +49,13 @@ export default function Network() {
     }
 
     return (
-        <box className="">
+        <box class="">
             {wiredState.as((state) => {
                 const isWiredConnected = state === 100; // NM.DeviceState.ACTIVATED
 
                 return (
                     <button onClicked={setWifiState}>
-                        <icon className="icon" icon={isWiredConnected ? wiredIcon : wifiIcon} />
+                        <icon class="icon" icon={isWiredConnected ? wiredIcon : wifiIcon} />
                     </button>
                 );
             })}

@@ -1,4 +1,4 @@
-import { App, Gdk } from "ags/gtk3"
+import { Gdk } from "ags/gtk3"
 import app from "ags/gtk3/app"
 import { exec } from "ags/process"
 import Bar from "./widget/Bar"
@@ -22,10 +22,10 @@ for(const monitorPath of monitorPaths) {
         async () => {
             exec("sass ./style.scss /tmp/style.css")
 
-            App.reset_css()
+            app.reset_css()
 
-            App.apply_css('/tmp/style.css')
-            App.apply_css('/tmp/theme.css')
+            app.apply_css('/tmp/style.css')
+            app.apply_css('/tmp/theme.css')
         }
     )
 }
@@ -51,7 +51,7 @@ app.start({
             hypr.dispatch("vdeskreset", ``);
         });
 
-        App.connect("monitor-removed", () => {
+        app.connect("monitor-removed", () => {
             hypr.dispatch("vdeskreset", ``);
 
             restartAgs()

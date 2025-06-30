@@ -1,13 +1,13 @@
-import { bind } from "ags";
-import { App, Gdk } from "ags/gtk3"
+import { createBinding } from "ags";
 import Hyprland from "gi://AstalHyprland";
+import app from "ags/gtk3/app"
 
 export default function Workspaces() {
     const hypr = Hyprland.get_default();
 
     return (
-        <box className="Workspaces font-victor-medium">
-            {bind(App, "monitors").as(monitors => {
+        <box class="Workspaces font-victor-medium">
+            {createBinding(app, "monitors").as(monitors => {
                 if (!Array.isArray(monitors) || monitors.some(m => m == null)) {
                     return <label>Loading monitors…</label>;
                 }
@@ -21,8 +21,7 @@ export default function Workspaces() {
 
                             return (
                                 <button
-                                    key={workspaceId}
-                                    className={bind(hypr, "focusedWorkspace").as(fw => {
+                                    class={createBinding(hypr, "focusedWorkspace").as(fw => {
                                         if (!fw || fw.id === 0) return "";
 
                                         const minWorkspace = (workspaceId - 1) * monitorCount + 1;

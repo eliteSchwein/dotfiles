@@ -1,5 +1,5 @@
 import { App } from "ags/gtk3"
-import { Variable, GLib, bind } from "ags"
+import { createBinding } from "ags"
 import { Astal, Gtk, Gdk } from "ags/gtk3"
 import Hyprland from "gi://AstalHyprland"
 import Mpris from "gi://AstalMpris"
@@ -11,16 +11,17 @@ import Network from "../components/Network";
 import SysTray from "../components/SysTray";
 import Workspaces from "../components/Workspaces";
 import BatteryLevel from "../components/BatteryLevel";
+import { GLib, Variable } from "/usr/share/astal/gjs"
 
 function AudioSlider() {
     const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-    return <box className="AudioSlider" css="min-width: 140px">
-        <icon icon={bind(speaker, "volumeIcon")} />
+    return <box class="AudioSlider" css="min-width: 140px">
+        <icon icon={createBinding(speaker, "volumeIcon")} />
         <slider
             hexpand
             onDragged={({ value }) => speaker.volume = value}
-            value={bind(speaker, "volume")}
+            value={createBinding(speaker, "volume")}
         />
     </box>
 }
@@ -28,18 +29,18 @@ function AudioSlider() {
 function Media() {
     const mpris = Mpris.get_default()
 
-    return <box className="Media">
-        {bind(mpris, "players").as(ps => ps[0] ? (
+    return <box class="Media">
+        {createBinding(mpris, "players").as(ps => ps[0] ? (
             <box>
                 <box
-                    className="Cover"
+                    class="Cover"
                     valign={Gtk.Align.CENTER}
-                    css={bind(ps[0], "coverArt").as(cover =>
+                    css={createBinding(ps[0], "coverArt").as(cover =>
                         `background-image: url('${cover}');`
                     )}
                 />
                 <label
-                    label={bind(ps[0], "metadata").as(() =>
+                    label={createBinding(ps[0], "metadata").as(() =>
                         `${ps[0].title} - ${ps[0].artist}`
                     )}
                 />
@@ -52,13 +53,13 @@ function Media() {
 
 function FocusedClient() {
     const hypr = Hyprland.get_default()
-    const focused = bind(hypr, "focusedClient")
+    const focused = createBinding(hypr, "focusedClient")
 
     return <box
-        className="Focused"
+        class="Focused"
         visible={focused.as(Boolean)}>
         {focused.as(client => (
-            client && <label label={bind(client, "title").as(String)} />
+            client && <label label={createBinding(client, "title").as(String)} />
         ))}
     </box>
 }
@@ -68,7 +69,7 @@ function Time({ format = "%H:%M:%S - %A %e." }) {
         GLib.DateTime.new_now_local().format(format)!)
 
     return <label
-        className="Time"
+        class="Time"
         onDestroy={() => time.drop()}
         label={time()}
     />
@@ -78,18 +79,18 @@ export default function Bar(monitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     return <window
-        className="Bar font-victor"
+        class="Bar font-victor"
         gdkmonitor={monitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}>
         <centerbox>
-            <box className="bar-box left-box font-turretroad" hexpand halign={Gtk.Align.START}>
+            <box class="bar-box left-box font-turretroad" hexpand halign={Gtk.Align.START}>
                 <Workspaces />
             </box>
-            <box className="bar-box center-box font-victor">
+            <box class="bar-box center-box font-victor">
                 <Time />
             </box>
-            <box className="bar-box right-box" hexpand halign={Gtk.Align.END} >
+            <box class="bar-box right-box" hexpand halign={Gtk.Align.END} >
                 <SysTray />
                 <Network />
                 <AudioSlider />

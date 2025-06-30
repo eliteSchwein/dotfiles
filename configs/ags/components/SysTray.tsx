@@ -1,17 +1,17 @@
-import { Variable, GLib, bind } from "ags"
+import { Variable, GLib, createBinding } from "ags"
 import Tray from "gi://AstalTray"
 
 export default function SysTray() {
     const tray = Tray.get_default()
 
-    return <box className="SysTray">
-        {bind(tray, "items").as(items => items.map(item => (
+    return <box class="SysTray">
+        {createBinding(tray, "items").as(items => items.map(item => (
             <menubutton
-                tooltipMarkup={bind(item, "tooltipMarkup")}
+                tooltipMarkup={createBinding(item, "tooltipMarkup")}
                 usePopover={false}
-                actionGroup={bind(item, "actionGroup").as(ag => ["dbusmenu", ag])}
-                menuModel={bind(item, "menuModel")}>
-                <icon gicon={bind(item, "gicon")}  />
+                actionGroup={createBinding(item, "actionGroup").as(ag => ["dbusmenu", ag])}
+                menuModel={createBinding(item, "menuModel")}>
+                <icon gicon={createBinding(item, "gicon")}  />
             </menubutton>
         )))}
     </box>

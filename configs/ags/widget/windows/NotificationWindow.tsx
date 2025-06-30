@@ -9,7 +9,7 @@ const Items = ({ notis }: { notis: Notifd.Notification[] }) => {
 
     return (
         <scrollable
-            className="notifications-scrollable"
+            class="notifications-scrollable"
             hscroll={NEVER}
             vscroll={ALWAYS}
             vexpand
@@ -26,7 +26,7 @@ const Items = ({ notis }: { notis: Notifd.Notification[] }) => {
 const Header = ({ notifd }: { notifd: Notifd.Notifd }) => {
     const dndToggleBtn = (
         <button
-            className={bind(notifd, "dontDisturb").as((dnd) =>
+            class={bind(notifd, "dontDisturb").as((dnd) =>
                 dnd ? "notifications-disabled" : "notifications-default",
             )}
             onClick={() => {
@@ -60,7 +60,7 @@ const Header = ({ notifd }: { notifd: Notifd.Notifd }) => {
     );
 
     return (
-        <box className="notifications-header">
+        <box class="notifications-header">
             <box>
                 <box halign={Gtk.Align.END} spacing={8} hexpand>
                     {dndToggleBtn}

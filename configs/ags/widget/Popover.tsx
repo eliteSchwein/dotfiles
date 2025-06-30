@@ -6,7 +6,7 @@ type PopoverProps = Pick<
     Widget.WindowProps,
     | "name"
     | "namespace"
-    | "className"
+    | "class"
     | "visible"
     | "child"
     | "marginBottom"
