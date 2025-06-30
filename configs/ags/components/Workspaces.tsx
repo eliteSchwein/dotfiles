@@ -1,6 +1,6 @@
 import { createBinding } from "ags";
 import Hyprland from "gi://AstalHyprland";
-import app from "ags/gtk3/app"
+import app from "ags/gtk4/app"
 
 export default function Workspaces() {
     const hypr = Hyprland.get_default();

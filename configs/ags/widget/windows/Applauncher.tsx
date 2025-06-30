@@ -1,6 +1,6 @@
 import Apps from "gi://AstalApps"
-import { Astal, Gdk, Gtk } from "ags/gtk3"
-import app from "ags/gtk3/app"
+import { Astal, Gdk, Gtk } from "ags/gtk4"
+import app from "ags/gtk4/app"
 import { Variable } from "/usr/share/astal/gjs"
 
 const MAX_ITEMS = 8

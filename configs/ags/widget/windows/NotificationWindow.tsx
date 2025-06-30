@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd";
 import { bind } from "ags";
-import { App, Astal, Gtk } from "ags/gtk3";
+import { App, Astal, Gtk } from "ags/gtk4";
 import icons from "../../lib/icons";
 import Notification from "../Notification";
 

@@ -1,5 +1,5 @@
-import { Gdk } from "ags/gtk3"
-import app from "ags/gtk3/app"
+import { Gdk } from "ags/gtk4"
+import app from "ags/gtk4/app"
 import { exec } from "ags/process"
 import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"

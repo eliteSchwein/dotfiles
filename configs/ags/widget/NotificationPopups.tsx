@@ -1,4 +1,4 @@
-import { Astal, Gtk, Gdk } from "ags/gtk3"
+import { Astal, Gtk, Gdk } from "ags/gtk4"
 import Notifd from "gi://AstalNotifd"
 import Notification from "./Notification"
 import { type Subscribable } from "ags/binding"

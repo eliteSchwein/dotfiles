@@ -1,5 +1,5 @@
-import { Gtk, Astal } from "ags/gtk3"
-import { type EventBox } from "ags/gtk3/widget"
+import { Gtk, Astal } from "ags/gtk4"
+import { type EventBox } from "ags/gtk4/widget"
 import Notifd from "gi://AstalNotifd"
 import { GLib } from "/usr/share/astal/gjs"
 

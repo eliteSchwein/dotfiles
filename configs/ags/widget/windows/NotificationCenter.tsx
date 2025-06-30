@@ -1,5 +1,5 @@
 import Apps from "gi://AstalApps"
-import { App, Astal, Gdk, Gtk } from "ags/gtk3"
+import { App, Astal, Gdk, Gtk } from "ags/gtk4"
 import { Variable } from "ags"
 
 export function NotificationCenter() {

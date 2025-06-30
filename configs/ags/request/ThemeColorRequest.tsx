@@ -1,5 +1,5 @@
 import BaseRequest from "./BaseRequest";
-import app from "ags/gtk3/app"
+import app from "ags/gtk4/app"
 import { exec } from "ags/process";
 
 export default class ThemeColorRequest extends BaseRequest {

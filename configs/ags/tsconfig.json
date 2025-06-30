@@ -9,6 +9,6 @@
         // "checkJs": true,
         // "allowJs": true,
         "jsx": "react-jsx",
-        "jsxImportSource": "ags/gtk3",
+        "jsxImportSource": "ags/gtk4",
     }
 }

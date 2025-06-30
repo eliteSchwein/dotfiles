@@ -1,6 +1,5 @@
-import { App } from "ags/gtk3"
 import { createBinding } from "ags"
-import { Astal, Gtk, Gdk } from "ags/gtk3"
+import { Astal, Gtk, Gdk } from "ags/gtk4"
 import Hyprland from "gi://AstalHyprland"
 import Mpris from "gi://AstalMpris"
 import Battery from "gi://AstalBattery"
