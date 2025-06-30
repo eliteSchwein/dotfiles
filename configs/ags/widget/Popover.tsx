@@ -1,4 +1,4 @@
-import { Astal, Gdk, Gtk, Widget } from "astal/gtk3"
+import { Astal, Gdk, Gtk, Widget } from "ags/gtk3"
 
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
 

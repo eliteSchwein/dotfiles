@@ -1,4 +1,4 @@
-import { Variable, GLib, bind } from "astal"
+import { Variable, GLib, bind } from "ags"
 import Battery from "gi://AstalBattery"
 
 export default function BatteryLevel() {

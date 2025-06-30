@@ -1,4 +1,4 @@
-import { bind } from "astal";
+import { bind } from "ags";
 import AstalNetwork from "gi://AstalNetwork";
 import { GObject } from "/usr/share/astal/gjs";
 

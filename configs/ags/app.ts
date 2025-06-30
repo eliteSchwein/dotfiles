@@ -1,5 +1,5 @@
-import { App, Gdk } from "astal/gtk3"
-import { exec } from "astal/process"
+import { App, Gdk } from "ags/gtk3"
+import { exec } from "ags/process"
 import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"
 import OpenApplauncherRequest from "./request/OpenApplauncherRequest";

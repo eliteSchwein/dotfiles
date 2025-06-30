@@ -1,6 +1,6 @@
 import Apps from "gi://AstalApps"
-import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import { Variable } from "astal"
+import { App, Astal, Gdk, Gtk } from "ags/gtk3"
+import { Variable } from "ags"
 
 export function NotificationCenter() {
     const { CENTER } = Gtk.Align

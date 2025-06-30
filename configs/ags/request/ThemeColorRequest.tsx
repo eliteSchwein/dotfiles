@@ -1,6 +1,6 @@
 import BaseRequest from "./BaseRequest";
-import { App } from "astal/gtk3";
-import { exec } from "astal/process";
+import { App } from "ags/gtk3";
+import { exec } from "ags/process";
 
 export default class ThemeColorRequest extends BaseRequest {
     command = "changeThemeColor"

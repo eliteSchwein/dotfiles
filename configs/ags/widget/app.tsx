@@ -1,5 +1,5 @@
-import { App, Astal, Gtk } from "astal/gtk3"
-import { Variable } from "astal"
+import { App, Astal, Gtk } from "ags/gtk3"
+import { Variable } from "ags"
 import Popover from "./Popover"
 import Popover2 from "./Popover2"
 import {NotificationCenter} from "./windows/NotificationWindow";

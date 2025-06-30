@@ -1,5 +1,5 @@
-import { bind } from "astal";
-import { App, Gdk } from "astal/gtk3"
+import { bind } from "ags";
+import { App, Gdk } from "ags/gtk3"
 import Hyprland from "gi://AstalHyprland";
 
 export default function Workspaces() {

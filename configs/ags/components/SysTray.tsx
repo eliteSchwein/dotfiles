@@ -1,4 +1,4 @@
-import { Variable, GLib, bind } from "astal"
+import { Variable, GLib, bind } from "ags"
 import Tray from "gi://AstalTray"
 
 export default function SysTray() {
