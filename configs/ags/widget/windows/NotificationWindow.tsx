@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd";
-import { bind } from "ags";
-import { App, Astal, Gtk } from "ags/gtk4";
+import { bind } from "astal";
+import { App, Astal, Gtk } from "astal/gtk3";
 import icons from "../../lib/icons";
 import Notification from "../Notification";
 
@@ -9,7 +9,7 @@ const Items = ({ notis }: { notis: Notifd.Notification[] }) => {
 
     return (
         <scrollable
-            class="notifications-scrollable"
+            className="notifications-scrollable"
             hscroll={NEVER}
             vscroll={ALWAYS}
             vexpand
@@ -26,7 +26,7 @@ const Items = ({ notis }: { notis: Notifd.Notification[] }) => {
 const Header = ({ notifd }: { notifd: Notifd.Notifd }) => {
     const dndToggleBtn = (
         <button
-            class={bind(notifd, "dontDisturb").as((dnd) =>
+            className={bind(notifd, "dontDisturb").as((dnd) =>
                 dnd ? "notifications-disabled" : "notifications-default",
             )}
             onClick={() => {
@@ -60,7 +60,7 @@ const Header = ({ notifd }: { notifd: Notifd.Notifd }) => {
     );
 
     return (
-        <box class="notifications-header">
+        <box className="notifications-header">
             <box>
                 <box halign={Gtk.Align.END} spacing={8} hexpand>
                     {dndToggleBtn}

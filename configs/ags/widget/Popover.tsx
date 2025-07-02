@@ -1,4 +1,4 @@
-import { Astal, Gdk, Gtk, Widget } from "ags/gtk4"
+import { Astal, Gdk, Gtk, Widget } from "astal/gtk3"
 
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
 
@@ -6,7 +6,7 @@ type PopoverProps = Pick<
     Widget.WindowProps,
     | "name"
     | "namespace"
-    | "class"
+    | "className"
     | "visible"
     | "child"
     | "marginBottom"

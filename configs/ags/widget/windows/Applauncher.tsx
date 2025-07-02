@@ -1,29 +1,28 @@
 import Apps from "gi://AstalApps"
-import { Astal, Gdk, Gtk } from "ags/gtk4"
-import app from "ags/gtk4/app"
-import { Variable } from "/usr/share/astal/gjs"
+import { App, Astal, Gdk, Gtk } from "astal/gtk3"
+import { Variable } from "astal"
 
 const MAX_ITEMS = 8
 
 function hide() {
-    app.get_window("launcher")!.hide()
+    App.get_window("launcher")!.hide()
 }
 
 function AppButton({ app }: { app: Apps.Application }) {
     return <button
-        class="AppButton"
+        className="AppButton"
         onClicked={() => { hide(); app.launch() }}>
         <box>
             <icon icon={app.iconName} />
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
-                    class="name"
+                    className="name"
                     truncate
                     xalign={0}
                     label={app.name}
                 />
                 {app.description && <label
-                    class="description"
+                    className="description"
                     wrap
                     xalign={0}
                     label={app.description}
@@ -63,9 +62,9 @@ export default function Applauncher() {
             <eventbox widthRequest={width(w => w / 2)} expand onClick={hide} />
             <box hexpand={false} vertical>
                 <eventbox heightRequest={100} onClick={hide} />
-                <box widthRequest={500} class="Applauncher" vertical>
+                <box widthRequest={500} className="Applauncher" vertical>
                     <entry
-                        class="search"
+                        className="search"
                         placeholderText="Search"
                         text={text()}
                         onChanged={self => text.set(self.text)}
@@ -78,7 +77,7 @@ export default function Applauncher() {
                     </box>
                     <box
                         halign={CENTER}
-                        class="not-found"
+                        className="not-found"
                         vertical
                         visible={list.as(l => l.length === 0)}>
                         <icon icon="system-search-symbolic" />

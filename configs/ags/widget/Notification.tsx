@@ -1,7 +1,7 @@
-import { Gtk, Astal } from "ags/gtk4"
-import { type EventBox } from "ags/gtk4/widget"
+import { GLib } from "astal"
+import { Gtk, Astal } from "astal/gtk3"
+import { type EventBox } from "astal/gtk3/widget"
 import Notifd from "gi://AstalNotifd"
-import { GLib } from "/usr/share/astal/gjs"
 
 const isIcon = (icon: string) =>
     !!Astal.Icon.lookup_icon(icon)
@@ -36,43 +36,43 @@ export default function Notification(props: Props) {
 
     if (n.appName === "Hyprshot") {
         return <eventbox
-            class={`Notification font-victor ${urgency(n)}`}
+            className={`Notification font-victor ${urgency(n)}`}
             setup={setup}>
             <box vertical>
-                <box class="header">
+                <box className="header">
                     {(n.desktopEntry) && <icon
-                        class="app-icon"
+                        className="app-icon"
                         visible={Boolean(n.desktopEntry)}
                         icon={n.desktopEntry}
                     />}
                     <label
-                        class="app-name font-orbitron"
+                        className="app-name font-orbitron"
                         halign={START}
                         truncate
                         label={n.appName || "Unknown"}
                     />
                     <label
-                        class="time"
+                        className="time"
                         hexpand
                         halign={END}
                         label={time(n.time)}
                     />
-                    <button class="bg-transparent bx-none" onClicked={() => n.dismiss()}>
+                    <button className="bg-transparent bx-none" onClicked={() => n.dismiss()}>
                         <icon icon="window-close-symbolic" />
                     </button>
                 </box>
                 <Gtk.Separator visible />
-                <box class="content">
+                <box className="content">
                     <box vertical>
                         <label
-                            class="summary"
+                            className="summary"
                             halign={START}
                             xalign={0}
                             label={n.summary}
                             truncate
                         />
                         {n.body && <label
-                            class="body"
+                            className="body"
                             wrap
                             useMarkup
                             halign={START}
@@ -82,17 +82,17 @@ export default function Notification(props: Props) {
                         />}
                     </box>
                 </box>
-                <box class="content full-image">
+                <box className="content full-image">
                     {n.appIcon && fileExists(n.appIcon) && <box
                         valign={CENTER}
-                        class="image"
+                        className="image"
                         css={`background-image: url('${n.appIcon}')`}
                     />}
                 </box>
-                {n.get_actions().length > 0 && <box class="actions">
+                {n.get_actions().length > 0 && <box className="actions">
                     {n.get_actions().map(({ label, id }) => (
                         <button
-                            class="bx-none"
+                            className="bx-none"
                             hexpand
                             onClicked={() => {n.invoke(id); n.dismiss();}}>
                             <label label={label} halign={CENTER} hexpand />
@@ -104,54 +104,54 @@ export default function Notification(props: Props) {
     }
 
     return <eventbox
-        class={`Notification font-victor ${urgency(n)}`}
+        className={`Notification font-victor ${urgency(n)}`}
         setup={setup}>
         <box vertical>
-            <box class="header">
+            <box className="header">
                 {(n.appIcon || n.desktopEntry) && <icon
-                    class="app-icon"
+                    className="app-icon"
                     visible={Boolean(n.appIcon || n.desktopEntry)}
                     icon={n.appIcon || n.desktopEntry}
                 />}
                 <label
-                    class="app-name font-orbitron"
+                    className="app-name font-orbitron"
                     halign={START}
                     truncate
                     label={n.appName || "Unknown"}
                 />
                 <label
-                    class="time"
+                    className="time"
                     hexpand
                     halign={END}
                     label={time(n.time)}
                 />
-                <button class="bg-transparent bx-none" onClicked={() => n.dismiss()}>
+                <button className="bg-transparent bx-none" onClicked={() => n.dismiss()}>
                     <icon icon="window-close-symbolic" />
                 </button>
             </box>
             <Gtk.Separator visible />
-            <box class="content">
+            <box className="content">
                 {n.image && fileExists(n.image) && <box
                     valign={START}
-                    class="image"
+                    className="image"
                     css={`background-image: url('${n.image}')`}
                 />}
                 {n.image && isIcon(n.image) && <box
                     expand={false}
                     valign={START}
-                    class="icon-image">
+                    className="icon-image">
                     <icon icon={n.image} expand halign={CENTER} valign={CENTER} />
                 </box>}
                 <box vertical>
                     <label
-                        class="summary"
+                        className="summary"
                         halign={START}
                         xalign={0}
                         label={n.summary}
                         truncate
                     />
                     {n.body && <label
-                        class="body"
+                        className="body"
                         wrap
                         useMarkup
                         halign={START}
@@ -161,10 +161,10 @@ export default function Notification(props: Props) {
                     />}
                 </box>
             </box>
-            {n.get_actions().length > 0 && <box class="actions">
+            {n.get_actions().length > 0 && <box className="actions">
                 {n.get_actions().map(({ label, id }) => (
                     <button
-                        class="bx-none"
+                        className="bx-none"
                         hexpand
                         onClicked={() => {n.invoke(id); n.dismiss();}}>
                         <label label={label} halign={CENTER} hexpand />

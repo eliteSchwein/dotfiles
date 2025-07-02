@@ -1,6 +1,5 @@
-import { Gdk } from "ags/gtk4"
-import app from "ags/gtk4/app"
-import { exec } from "ags/process"
+import { App, Gdk } from "astal/gtk3"
+import { exec } from "astal/process"
 import Bar from "./widget/Bar"
 import NotificationPopups from "./widget/NotificationPopups"
 import OpenApplauncherRequest from "./request/OpenApplauncherRequest";
@@ -22,15 +21,15 @@ for(const monitorPath of monitorPaths) {
         async () => {
             exec("sass ./style.scss /tmp/style.css")
 
-            app.reset_css()
+            App.reset_css()
 
-            app.apply_css('/tmp/style.css')
-            app.apply_css('/tmp/theme.css')
+            App.apply_css('/tmp/style.css')
+            App.apply_css('/tmp/theme.css')
         }
     )
 }
 
-app.start({
+App.start({
     css: "/tmp/style.css",
     async requestHandler(request: string, res: (response: any) => void) {
         await (new OpenApplauncherRequest()).execute(request, res);
@@ -43,15 +42,15 @@ app.start({
 
         //NotificationCenter()
 
-        app.get_monitors().map(registerMonitor)
+        App.get_monitors().map(registerMonitor)
 
-        app.connect('monitor-added', (app: app, monitor: Gdk.Monitor) => {
+        App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
             registerMonitor(monitor)
 
             hypr.dispatch("vdeskreset", ``);
         });
 
-        app.connect("monitor-removed", () => {
+        App.connect("monitor-removed", () => {
             hypr.dispatch("vdeskreset", ``);
 
             restartAgs()
@@ -71,4 +70,4 @@ export function restartAgs() {
     ])
 }
 
-app.apply_css('/tmp/theme.css')
+App.apply_css('/tmp/theme.css')
