@@ -26,26 +26,9 @@ paru -S --noconfirm \
 
 # Astal
 paru -S --noconfirm \
-  aylurs-gtk-shell-git \
-  libastal-4-git \
-  libastal-apps-git \
-  libastal-auth-git \
-  libastal-battery-git \
-  libastal-bluetooth-git \
-  libastal-cava-git \
-  libastal-git \
-  libastal-gjs-git \
-  libastal-greetd-git \
-  libastal-hyprland-git \
-  libastal-io-git \
+  aylurs-gtk-shell \
   libastal-meta \
-  libastal-mpris-git \
-  libastal-network-git \
-  libastal-notifd-git \
-  libastal-powerprofiles-git \
-  libastal-river-git \
-  libastal-tray-git \
-  libastal-wireplumber-git
+  libastal-gjs
 
 # Social Media stuff
 paru -S --noconfirm \

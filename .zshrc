@@ -126,3 +126,6 @@ alias ssh="TERM=xterm-256color ssh"
 #unset __conda_setup
 # <<< conda initialize <<<
 
+
+# Created by `pipx` on 2025-07-02 15:43:51
+export PATH="$PATH:/home/tludwig/.local/bin"
