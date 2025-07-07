@@ -4,6 +4,7 @@ BAT=$(echo /sys/class/power_supply/BAT*)
 BAT_STATUS="$BAT/status"
 BAT_CAP="$BAT/capacity"
 LOW_BAT_PERCENT=20
+HIGH_BAT_PERCENT=90
 
 AC_PROFILE="performance"
 BAT_PROFILE="balanced"
@@ -17,8 +18,13 @@ prev=0
 
 while true; do
 	# read the current state
-	if [[ $(cat "$BAT_STATUS") == "Discharging" ]]; then
-		if [[ $(cat "$BAT_CAP") -gt $LOW_BAT_PERCENT ]]; then
+	status=$(cat "$BAT_STATUS")
+	capacity=$(cat "$BAT_CAP")
+
+	if [[ "$status" == "Discharging" ]]; then
+		if [[ $capacity -gt $HIGH_BAT_PERCENT ]]; then
+			profile=$AC_PROFILE
+		elif [[ $capacity -gt $LOW_BAT_PERCENT ]]; then
 			profile=$BAT_PROFILE
 		else
 			profile=$LOW_BAT_PROFILE
