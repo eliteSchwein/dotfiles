@@ -22,7 +22,8 @@ paru -S --noconfirm \
 paru -S --noconfirm \
   firefox \
   legcord-git \
-  ungoogled-chromium-bin
+  ungoogled-chromium-bin \
+  tauon-music-box
 
 # Astal
 paru -S --noconfirm \
