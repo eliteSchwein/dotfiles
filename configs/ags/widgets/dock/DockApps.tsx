@@ -209,7 +209,7 @@ export default function DockApps() {
       <Gtk.Separator orientation={Gtk.Orientation.VERTICAL} />
       <AppButton
         app={{ iconName: "user-trash" } as AstalApps.Application}
-        onClicked={"nautilus trash:///"}
+        onClicked={"thunar trash:///"}
         term={""}
       />
     </box>
