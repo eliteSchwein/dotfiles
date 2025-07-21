@@ -36,9 +36,6 @@ IMAGES=(
   "$WALLPAPER_DIR/HighResScreenShot_2024-08-18_18-41-35.png"
 )
 
-# Delay to allow system to settle
-sleep 2
-
 # Function to apply background color, wallpaper, and theme color
 set_theme() {
   local index=$1
