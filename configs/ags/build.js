@@ -56,4 +56,4 @@ try {
   exit(0);
 }
 
-await import(`file://${outfile}`).catch(console.error);
+//await import(`file://${outfile}`).catch(console.error);
