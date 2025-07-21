@@ -1,73 +1,42 @@
-import { App, Gdk } from "astal/gtk3"
-import { exec } from "astal/process"
-import Bar from "./widget/Bar"
-import NotificationPopups from "./widget/NotificationPopups"
-import OpenApplauncherRequest from "./request/OpenApplauncherRequest";
-import ThemeColorRequest from "./request/ThemeColorRequest";
-import {execAsync, GLib, monitorFile, readFile, Variable} from "/usr/share/astal/gjs";
-import Hyprland from "gi://AstalHyprland";
-import {NotificationCenter} from "./widget/windows/NotificationCenter";
+import { App } from "astal/gtk4";
+import windows from "./windows";
+import request from "./request";
+import initStyles from "./utils/styles";
+import initHyprland from "./utils/hyprland";
+import Bar from "../agsbck/widget/Bar";
+import NotificationPopups from "../agsbck/widget/NotificationPopups";
+import {execAsync} from "astal";
 
-exec("sass ./style.scss /tmp/style.css")
-
-const monitorPaths = [
-    "./style/",
-    "./style.scss"
-]
-
-for(const monitorPath of monitorPaths) {
-    monitorFile(
-        monitorPath,
-        async () => {
-            exec("sass ./style.scss /tmp/style.css")
-
-            App.reset_css()
-
-            App.apply_css('/tmp/style.css')
-            App.apply_css('/tmp/theme.css')
-        }
-    )
-}
+initStyles();
 
 App.start({
-    css: "/tmp/style.css",
-    async requestHandler(request: string, res: (response: any) => void) {
-        await (new OpenApplauncherRequest()).execute(request, res);
-        await (new ThemeColorRequest()).execute(request, res);
+  requestHandler(req, res) {
+    request(req, res);
+  },
+  main() {
+    windows.map((win) => App.get_monitors().map(win));
 
-        res('unknown command');
-    },
-    main() {
-        const hypr = Hyprland.get_default();
+    initHyprland();
 
-        //NotificationCenter()
+    App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
+      hypr.dispatch("vdeskreset", ``);
 
-        App.get_monitors().map(registerMonitor)
+      restartAgs()
+    });
 
-        App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
-            registerMonitor(monitor)
+    App.connect("monitor-removed", () => {
+      hypr.dispatch("vdeskreset", ``);
 
-            hypr.dispatch("vdeskreset", ``);
-        });
-
-        App.connect("monitor-removed", () => {
-            hypr.dispatch("vdeskreset", ``);
-
-            restartAgs()
-        });
-    },
-})
-
-function registerMonitor(monitor: Gdk.Monitor) {
-    Bar(monitor);
-    NotificationPopups(monitor);
-}
+      restartAgs()
+    });
+  },
+});
 
 export function restartAgs() {
-    execAsync([
-        "bash", "-c",
-        "ags quit && ags run $HOME/.config/ags/app.ts"
-    ])
+  execAsync([
+    "bash", "-c",
+    "ags quit && ags run --gtk4 -d $HOME/.config/ags/app.ts"
+  ])
 }
 
 App.apply_css('/tmp/theme.css')

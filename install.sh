@@ -35,7 +35,10 @@ paru -S --noconfirm \
 paru -S --noconfirm \
   legcord-git
 
-ags init --gtk 3
+# AGS Node Packages
+sudo npm i dart-sass esbuild --global
+
+ags init --gtk 4
 
 sudo cp -r ./configs/hypr/gtk-themes/* $THEME_PATH
 
