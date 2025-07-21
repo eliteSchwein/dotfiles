@@ -141,3 +141,11 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
       );
   border-radius: $window-border-radius;
 }
+
+.ml-1 {
+  margin-left: 10px;
+}
+
+.mr-1 {
+  margin-right: 10px;
+}

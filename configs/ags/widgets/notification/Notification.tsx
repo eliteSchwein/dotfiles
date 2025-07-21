@@ -45,7 +45,7 @@ export default function Notification({
         <box cssClasses={["header"]}>
           {(n.appIcon || n.desktopEntry) && (
             <image
-              cssClasses={["app-icon"]}
+              cssClasses={["app-icon", "mr-1"]}
               visible={!!(n.appIcon || n.desktopEntry)}
               iconName={n.appIcon || n.desktopEntry}
             />
