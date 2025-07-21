@@ -8,18 +8,29 @@ export default function NetworkSpeedPanelButton() {
         <label
           cssClasses={["label"]}
           label={networkSpeed((value) => {
-            const downloadSpeed = value.download;
-            const uploadSpeed = value.upload;
-            const higherSpeed =
-              downloadSpeed >= uploadSpeed ? downloadSpeed : uploadSpeed;
+              const downloadSpeed = value.download; // in KB/s
+              const uploadSpeed = value.upload;     // in KB/s
+              const higherSpeed = Math.max(downloadSpeed, uploadSpeed); // KB/s
 
-            const speed = (higherSpeed / 1000).toFixed(2);
+              const kbitSpeed = higherSpeed * 8; // Convert KB/s to kbit/s
+              const mbitSpeed = kbitSpeed / 1000; // Convert kbit/s to Mbit/s
 
-            const symbol = downloadSpeed >= uploadSpeed ? "" : "";
-
-            return `${speed} MB/s ${symbol}`;
+              if (mbitSpeed >= 0.5) {
+                  return `${mbitSpeed.toFixed(2)} Mbit/s`;
+              } else {
+                  return `${kbitSpeed.toFixed(2)} kbit/s`;
+              }
           })}
+
         />
+          <image
+              cssClasses={["ml-1"]}
+              iconName={networkSpeed((value) => {
+              const downloadSpeed = value.download;
+              const uploadSpeed = value.upload;
+
+              return downloadSpeed >= uploadSpeed ? "network-receive-symbolic" : "network-transmit-symbolic";
+          })} />
       </box>
     </PanelButton>
   );
