@@ -23,6 +23,8 @@ export function connectBluetoothDevice(device: any) {
         btAdapter.set_discoverable(true);
     }
 
+    console.log(device.data.get_address());
+
     device.data.connect_device(
         (result: boolean, error: Error | null) => {
             btAdapter.set_discoverable(false);
