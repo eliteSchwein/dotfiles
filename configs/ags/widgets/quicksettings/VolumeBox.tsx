@@ -7,8 +7,6 @@ export default function VolumeBox() {
   const speaker = AstalWp.get_default()?.audio!.defaultSpeaker!;
   const mic = AstalWp.get_default()?.audio!.defaultMicrophone!;
 
-  console.log(mic)
-
   return (
       <>
         <box
