@@ -20,6 +20,7 @@ import BatteryPage from "./pages/BatteryPage";
 import SpeakerPage from "./pages/SpeakerPage";
 import WifiPage from "./pages/WifiPage";
 import MicPage from "./pages/MicPage";
+import BluetoothPage from "./pages/BluetoothPage";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -166,6 +167,7 @@ function WifiArrowButton() {
 function WifiBluetooth() {
   const bluetooth = AstalBluetooth.get_default();
   const btAdapter = bluetooth.adapter;
+
   const deviceConnected = Variable.derive(
     [bind(bluetooth, "devices"), bind(bluetooth, "isConnected")],
     (d, _) => {
@@ -193,7 +195,12 @@ function WifiBluetooth() {
         title="Bluetooth"
         subtitle={deviceConnected()}
         onClicked={() => bluetooth.toggle()}
-        onArrowClicked={() => console.log("Will add bt page later")}
+        onArrowClicked={() => {
+            if(!btAdapter.get_discovering()) {
+                btAdapter.start_discovery();
+            }
+            qsPage.set("bluetooth");
+        }}
         connection={[btAdapter, "powered"]}
       />
     </box>
@@ -236,6 +243,7 @@ function QSWindow(_gdkmonitor: Gdk.Monitor) {
           <SpeakerPage />
           <WifiPage />
           <MicPage />
+          <BluetoothPage />
         </stack>
       </box>
     </PopupWindow>
