@@ -1,6 +1,7 @@
 import { App } from "astal/gtk4";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import options from "../options";
+import {restartAgs} from "../app";
 
 const hyprland = AstalHyprland.get_default();
 const { bar } = options;
@@ -47,5 +48,17 @@ export default function initHyprland() {
   hyprland.connect("config-reloaded", () => {
     windowAnimation();
     windowBlur();
+  });
+
+  hyprland.connect("monitor-removed", () => {
+    hyprland.dispatch("vdeskreset", ``);
+
+    restartAgs()
+  });
+
+  hyprland.connect('monitor-added', () => {
+    hyprland.dispatch("vdeskreset", ``);
+
+    restartAgs()
   });
 }

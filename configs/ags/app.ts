@@ -17,18 +17,6 @@ App.start({
     windows.map((win) => App.get_monitors().map(win));
 
     initHyprland();
-
-    App.connect('monitor-added', (app: App, monitor: Gdk.Monitor) => {
-      hypr.dispatch("vdeskreset", ``);
-
-      restartAgs()
-    });
-
-    App.connect("monitor-removed", () => {
-      hypr.dispatch("vdeskreset", ``);
-
-      restartAgs()
-    });
   },
 });
 
