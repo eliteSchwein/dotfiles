@@ -11,6 +11,7 @@ export default function NotificationPopup(gdkmonitor: Gdk.Monitor) {
   return (
     <window
       namespace={"notification-popup"}
+      className={"notification-popup"}
       setup={(self) => {
         sendBatch([`layerrule animation slide top, ${self.namespace}`]);
         const notificationQueue: number[] = [];
