@@ -19,6 +19,7 @@ import AstalBluetooth from "gi://AstalBluetooth";
 import BatteryPage from "./pages/BatteryPage";
 import SpeakerPage from "./pages/SpeakerPage";
 import WifiPage from "./pages/WifiPage";
+import MicPage from "./pages/MicPage";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -234,6 +235,7 @@ function QSWindow(_gdkmonitor: Gdk.Monitor) {
           <BatteryPage />
           <SpeakerPage />
           <WifiPage />
+          <MicPage />
         </stack>
       </box>
     </PopupWindow>
