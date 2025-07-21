@@ -9,27 +9,31 @@ export default function ColorPickerQS() {
   return (
     <QSButton
       onClicked={() => {
-        const wlCopy = (color: string) =>
-          execAsync(["wl-copy", color]).catch(console.error);
-
         App.toggle_window(WINDOW_NAME);
         timeout(200, () => {
-          execAsync("hyprpicker")
-            .then((color) => {
-              if (!color) return;
-
-              wlCopy(color);
-              notifySend({
-                appName: "Hyprpicker",
-                summary: "Color Picker",
-                body: `${color} copied to clipboard`,
-              });
-            })
-            .catch(console.error);
+          void launchPicker()
         });
       }}
       iconName={"color-select-symbolic"}
       label={"Color Picker"}
     />
   );
+}
+
+export async function launchPicker() {
+    const wlCopy = (color: string) =>
+        execAsync(["wl-copy", color]).catch(console.error);
+
+    execAsync("hyprpicker")
+        .then((color) => {
+            if (!color) return;
+
+            wlCopy(color);
+            notifySend({
+                appName: "Hyprpicker",
+                summary: "Color Picker",
+                body: `${color} copied to clipboard`,
+            });
+        })
+        .catch(console.error);
 }

@@ -58,7 +58,7 @@ export default class ScreenRecord extends GObject.Object {
     this.#interval?.cancel();
 
     notifySend({
-      icon: "folder-videos-symbolic",
+      appIcon: "folder-videos-symbolic",
       appName: "Screen Recorder",
       summary: "Screen recording saved",
       body: `Available in ${this.#recordings}`,
@@ -74,7 +74,7 @@ export default class ScreenRecord extends GObject.Object {
 
     ensureDirectory(this.#screenshots);
     if (full) {
-      await sh(`wayshot -f ${file}`);
+      await sh(`hyprshot -f ${file}`);
     } else {
       const size = await sh("slurp -b#00000066 -w 0");
       if (!size) return;
@@ -85,7 +85,7 @@ export default class ScreenRecord extends GObject.Object {
     bash(`wl-copy < ${file}`);
 
     notifySend({
-      image: file,
+      appIcon: file,
       appName: "Screenshot",
       summary: "Screenshot saved",
       body: `Available in ${this.#screenshots}`,

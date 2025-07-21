@@ -1,5 +1,6 @@
 import ScreenRecord from "./utils/screenrecord";
 import {App} from "astal/gtk4";
+import {launchPicker} from "./widgets/quicksettings/buttons/ColorPickerQS";
 
 export default function requestHandler(
   request: string,
@@ -11,17 +12,13 @@ export default function requestHandler(
       res("ok");
       App.get_window("applauncher")?.set_visible(true);
       break;
+    case "pickColor":
+      res("ok");
+      void launchPicker()
+      break;
     case "screen-record":
       res("ok");
       screenRecord.start();
-      break;
-    case "screenshot":
-      res("ok");
-      screenRecord.screenshot(true);
-      break;
-    case "screenshot-select":
-      res("ok");
-      screenRecord.screenshot();
       break;
     default:
       res("not ok");

@@ -62,7 +62,7 @@ export function notifySend({
     [
       "notify-send",
       `-u ${urgency}`,
-      appIcon && `-i ${appIcon}`,
+      appIcon && `--icon="${appIcon}"`,
       `-h "string:image-path:${!!icon ? icon : image}"`,
       `"${summary ?? ""}"`,
       `"${body ?? ""}"`,

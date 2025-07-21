@@ -16,14 +16,15 @@ paru -S --noconfirm \
   power-profiles-daemon \
   seahorse wl-clipboard phinger-cursors zsh \
   brightnessctl playerctl inotify-tools \
-  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp
+  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp wf-recorder
 
 # Utilities
 paru -S --noconfirm \
   firefox \
   legcord-git \
   ungoogled-chromium-bin \
-  tauon-music-box
+  tauon-music-box \
+  vlc vlc-plugins-all
 
 # Astal
 paru -S --noconfirm \

@@ -44,10 +44,7 @@ function QSButtons() {
       rowSpacing={6}
       columnSpacing={6}
     >
-      <DarkModeQS />
       <ColorPickerQS />
-      <ScreenshotQS />
-      <MicQS />
       <DontDisturbQS />
       <RecordQS />
     </FlowBox>
