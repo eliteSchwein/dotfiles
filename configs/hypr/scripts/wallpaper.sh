@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 5
+
 # Directory containing wallpapers
 WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
 

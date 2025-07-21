@@ -13,7 +13,7 @@ export default [
   Dock,
   Bar,
   DateMenu,
-  DesktopClock,
+  //DesktopClock,
   Applauncher,
   NotificationPopup,
   NotificationWindow,
