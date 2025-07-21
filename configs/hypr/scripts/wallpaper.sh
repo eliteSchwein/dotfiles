@@ -29,7 +29,7 @@ BACKGROUND_COLORS=(
 
 # List of wallpapers to rotate
 IMAGES=(
-  "$WALLPAPER_DIR/blue-nebula-37911-3840x2160.png"
+  "$WALLPAPER_DIR/BlueNebula.png"
   "$WALLPAPER_DIR/HighResScreenShot_2023-11-16_22-23-34.png"
   "$WALLPAPER_DIR/HighResScreenShot_2024-05-03_19-53-37.png"
   "$WALLPAPER_DIR/HighResScreenShot_2024-05-24_20-52-31.png"
@@ -57,7 +57,7 @@ set_theme() {
 set_theme 0
 
 # Unload temporary start wallpaper if it exists
-hyprctl hyprpaper unload "$WALLPAPER_DIR/start.png"
+hyprctl hyprpaper unload "$WALLPAPER_DIR/BlueNebula.png"
 
 # Main loop for rotating wallpapers and themes
 while true; do
