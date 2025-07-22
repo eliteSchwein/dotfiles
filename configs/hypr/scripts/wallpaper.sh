@@ -7,14 +7,14 @@ WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
 
 # Theme colors (used with astal)
 THEME_COLORS=(
-  "0856cf"
+  "0c62e8"
   "9CCC65"
   "FFB300"
   "F4511E"
   "FFB300"
-  "0D47A1"
+  "0c62e8"
   "F4511E"
-  "7B1FA2"
+  "8914ba"
 )
 
 # Gradient background colors for active border
