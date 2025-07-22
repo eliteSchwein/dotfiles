@@ -3,8 +3,6 @@ import windows from "./windows";
 import request from "./request";
 import initStyles from "./utils/styles";
 import initHyprland from "./utils/hyprland";
-import Bar from "../agsbck/widget/Bar";
-import NotificationPopups from "../agsbck/widget/NotificationPopups";
 import {execAsync} from "astal";
 
 initStyles();

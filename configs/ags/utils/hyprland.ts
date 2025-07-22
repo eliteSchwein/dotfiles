@@ -2,6 +2,7 @@ import { App } from "astal/gtk4";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import options from "../options";
 import {restartAgs} from "../app";
+import styles from "./styles";
 
 const hyprland = AstalHyprland.get_default();
 const { bar } = options;

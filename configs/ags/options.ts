@@ -1,6 +1,5 @@
 import { execAsync, GLib } from "astal";
 import { mkOptions, opt } from "./utils/option";
-import { gsettings } from "./utils";
 
 const options = mkOptions(
   `${GLib.get_user_config_dir()}/epik-shell/config.json`,
@@ -16,7 +15,7 @@ const options = mkOptions(
     },
     dock: {
       position: opt("bottom"),
-      pinned: opt(["firefox", "Alacritty", "org.gnome.Nautilus", "localsend"]),
+      pinned: opt(["firefox"]),
     },
     bar: {
       position: opt("top"),
@@ -99,7 +98,7 @@ const options = mkOptions(
         red: opt("#cc241d"),
       },
       dark: {
-        bg: opt("#282828"),
+        bg: opt("#000000"),
         fg: opt("#ebdbb2"),
         accent: opt("#ebdbb2"),
         red: opt("#cc241d"),
