@@ -64,10 +64,10 @@ export default function NotifPanelButton() {
                     const icon = substitute[e.app_name] ?? fallback;
                     return <image iconName={icon} />;
                   }),
-                  <label
+                  <image
                     visible={n.length > 3}
                     cssClasses={["circle"]}
-                    label={""}
+                    iconName={"feather-more-horizontal-symbolic"}
                   />,
                 ];
               }

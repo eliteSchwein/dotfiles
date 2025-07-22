@@ -12,6 +12,24 @@ export function createBluetoothDevice(device: any) {
   }
 }
 
+export function pairBluetoothDevice(device: any) {
+    const bluetooth = AstalBluetooth.get_default();
+    const btAdapter = bluetooth.adapter;
+
+    if(btAdapter.get_discovering()) {
+        btAdapter.stop_discovery();
+    }
+    if(!btAdapter.get_discoverable()) {
+        btAdapter.set_discoverable(true);
+    }
+
+    console.log(device.data.get_address());
+
+    const pairResult = device.data.pair()
+
+    console.log("pairResult", pairResult);
+}
+
 export function connectBluetoothDevice(device: any) {
     const bluetooth = AstalBluetooth.get_default();
     const btAdapter = bluetooth.adapter;
@@ -57,7 +75,7 @@ function BluetoothButton(device: any) {
         {
           device.data.get_paired()
             ? <button
-                  iconName={device.data.get_connected() ? "bluetooth-active-symbolic" : "bluetooth-disconnected-symbolic"}
+                  iconName={device.data.get_connected() ? "bluetooth-disconnected-symbolic" : "bluetooth-active-symbolic"}
                   halign={Gtk.Align.CENTER}
                   valign={Gtk.Align.CENTER}
                   onClicked={() => {
@@ -72,7 +90,7 @@ function BluetoothButton(device: any) {
                   valign={Gtk.Align.CENTER}
                   onClicked={() => {
                     console.log("clicked pair");
-                    connectBluetoothDevice(device);
+                    pairBluetoothDevice(device);
                   }}
               >
               </button>
