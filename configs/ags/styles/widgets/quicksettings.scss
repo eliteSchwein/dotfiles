@@ -166,7 +166,13 @@
       padding-top: 0;
     }
 
-    .bt-button {
+    .wifi-button {
+      entry {
+        margin-bottom: 5px;
+      }
+    }
+
+    .bt-button, .wifi-button {
       button {
         image {
           margin-left: 5px;

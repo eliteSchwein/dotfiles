@@ -18,7 +18,7 @@ import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth";
 import BatteryPage from "./pages/BatteryPage";
 import SpeakerPage from "./pages/SpeakerPage";
-import WifiPage from "./pages/WifiPage";
+import WifiPage, {currentActiveWifiInput, currentWifiPassword} from "./pages/WifiPage";
 import MicPage from "./pages/MicPage";
 import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 
@@ -166,6 +166,8 @@ function WifiArrowButton() {
       subtitle={wifiSsid()}
       onClicked={() => wifi.set_enabled(!wifi.get_enabled())}
       onArrowClicked={() => {
+          currentWifiPassword.set("")
+          currentActiveWifiInput.set("")
         wifi.scan();
         qsPage.set("wifi");
       }}

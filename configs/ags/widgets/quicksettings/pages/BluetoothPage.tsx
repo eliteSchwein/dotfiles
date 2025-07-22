@@ -129,7 +129,7 @@ function BluetoothButton(device: any) {
               </>
             : <>
                   <button
-                      iconName="bluetooth-paired-symbolic"
+                      iconName="link-symbolic"
                       halign={Gtk.Align.CENTER}
                       valign={Gtk.Align.CENTER}
                       onClicked={() => {

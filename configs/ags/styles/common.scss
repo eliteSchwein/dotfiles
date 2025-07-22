@@ -149,3 +149,19 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
 .mr-1 {
   margin-right: 10px;
 }
+
+entry {
+  box-shadow: 0 0 0 $window-border-width $window-border-color;
+  outline: none;
+
+  image {
+    -gtk-icon-size: 1.5rem;
+  }
+
+  text {
+    font-size: 1.2rem;
+    placeholder {
+      font-size: 1.2rem;
+    }
+  }
+}

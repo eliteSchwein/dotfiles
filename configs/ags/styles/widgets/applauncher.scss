@@ -8,27 +8,11 @@
 
   .background-entry {
     border-radius: $window-border-radius;
-    box-shadow: 0 0 0 $window-border-width $window-border-color;
   }
 
   > overlay {
     margin: $window-padding;
     margin-bottom: 6px;
-    entry {
-      outline: none;
-      padding: $window-padding;
-
-      image {
-        -gtk-icon-size: 1.5rem;
-      }
-
-      text {
-        font-size: 1.2rem;
-        placeholder {
-          font-size: 1.2rem;
-        }
-      }
-    }
   }
 
   .entry-overlay {
