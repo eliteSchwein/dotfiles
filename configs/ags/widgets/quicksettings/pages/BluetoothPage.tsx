@@ -4,10 +4,24 @@ import { Gtk } from "astal/gtk4";
 import {bind, GLib} from "astal";
 import {bash, notifySend} from "../../../utils";
 
+export function scanBluetoothDevices() {
+    const bluetooth = AstalBluetooth.get_default();
+    const btAdapter = bluetooth.adapter;
+
+    if(btAdapter.get_discovering()) return;
+
+    btAdapter.start_discovery();
+
+    setTimeout(() => {
+        btAdapter.stop_discovery();
+    }, 10_000)
+}
+
 export function createBluetoothDevice(device: any) {
   return {
     label: device.get_name() || device.get_address(),
     icon: (device.get_icon()) ? `${device.get_icon()}-symbolic` : null,
+    connected: device.get_connected(),
     data: device,
   }
 }
@@ -22,17 +36,37 @@ export function pairBluetoothDevice(device: any) {
     if(!btAdapter.get_discoverable()) {
         btAdapter.set_discoverable(true);
     }
+    if(!btAdapter.get_pairable()) {
+        btAdapter.set_pairable(true);
+    }
 
-    console.log(device.data.get_address());
+    device.data.pair()
 
-    const pairResult = device.data.pair()
-
-    console.log("pairResult", pairResult);
+    btAdapter.set_discoverable(false);
+    btAdapter.set_pairable(false);
 }
 
 export function connectBluetoothDevice(device: any) {
     const bluetooth = AstalBluetooth.get_default();
     const btAdapter = bluetooth.adapter;
+
+    if(device.data.get_connected()) {
+        device.data.disconnect_device(
+            (result: boolean, error: Error | null) => {
+                btAdapter.set_discoverable(false);
+                btAdapter.set_pairable(false);
+                if (error && error.message) {
+                    notifySend({
+                        urgency: "critical",
+                        appIcon: "bluetooth-active-symbolic",
+                        appName: "Bluetooth",
+                        summary: `Disconnecting ${device.label} failed`,
+                        body: error.message,
+                    });
+                }
+            });
+        return;
+    }
 
     if(btAdapter.get_discovering()) {
         btAdapter.stop_discovery();
@@ -40,13 +74,15 @@ export function connectBluetoothDevice(device: any) {
     if(!btAdapter.get_discoverable()) {
         btAdapter.set_discoverable(true);
     }
-
-    console.log(device.data.get_address());
+    if(!btAdapter.get_pairable()) {
+        btAdapter.set_pairable(true);
+    }
 
     device.data.connect_device(
         (result: boolean, error: Error | null) => {
             btAdapter.set_discoverable(false);
-            if (error) {
+            btAdapter.set_pairable(false);
+            if (error && error.message) {
                 notifySend({
                     urgency: "critical",
                     appIcon: "bluetooth-active-symbolic",
@@ -54,9 +90,6 @@ export function connectBluetoothDevice(device: any) {
                     summary: `Connection ${device.label} failed`,
                     body: error.message,
                 });
-                console.error("Connection failed:", error.message);
-            } else {
-                console.log("Connected successfully:", result);
             }
         }
     );
@@ -74,26 +107,46 @@ function BluetoothButton(device: any) {
         <Gtk.Separator />
         {
           device.data.get_paired()
-            ? <button
-                  iconName={device.data.get_connected() ? "bluetooth-disconnected-symbolic" : "bluetooth-active-symbolic"}
-                  halign={Gtk.Align.CENTER}
-                  valign={Gtk.Align.CENTER}
-                  onClicked={() => {
-                    console.log("clicked connect");
-                      connectBluetoothDevice(device);
-                  }}
-              >
-              </button>
-            : <button
-                  iconName="bluetooth-paired-symbolic"
-                  halign={Gtk.Align.CENTER}
-                  valign={Gtk.Align.CENTER}
-                  onClicked={() => {
-                    console.log("clicked pair");
-                    pairBluetoothDevice(device);
-                  }}
-              >
-              </button>
+            ? <>
+                  <button
+                      iconName={device.data.get_connected() ? "bluetooth-disconnected-symbolic" : "bluetooth-active-symbolic"}
+                      halign={Gtk.Align.CENTER}
+                      valign={Gtk.Align.CENTER}
+                      onClicked={() => {
+                          connectBluetoothDevice(device);
+                      }}
+                  >
+                  </button>
+                  <button
+                      iconName="trash-symbolic"
+                      halign={Gtk.Align.CENTER}
+                      valign={Gtk.Align.CENTER}
+                      onClicked={() => {
+                          bash(`bluetoothctl remove ${device.data.get_address()}`);
+                      }}
+                  >
+                  </button>
+              </>
+            : <>
+                  <button
+                      iconName="bluetooth-paired-symbolic"
+                      halign={Gtk.Align.CENTER}
+                      valign={Gtk.Align.CENTER}
+                      onClicked={() => {
+                          pairBluetoothDevice(device);
+                      }}
+                  >
+                  </button>
+                  <button
+                      iconName="action-unavailable-symbolic"
+                      halign={Gtk.Align.CENTER}
+                      valign={Gtk.Align.CENTER}
+                      onClicked={() => {
+                          device.data.set_blocked(true);
+                      }}
+                  >
+                  </button>
+              </>
         }
       </box>
     </centerbox>
@@ -127,7 +180,7 @@ export default function BluetoothPage() {
           return (
               <button
                   onClicked={() => {
-                    state ? btAdapter.stop_discovery() : btAdapter.start_discovery()
+                    state ? btAdapter.stop_discovery() : scanBluetoothDevices()
                   }}
               >
                 <box>
@@ -161,11 +214,10 @@ export default function BluetoothPage() {
 
             const discoveredDevices = devices
                 .map((device) => (createBluetoothDevice(device)))
-                .filter((d) => !d.data.get_paired());
+                .filter((d) => !d.data.get_paired() && !d.data.get_blocked());
 
             return (
                 <>
-
                   <Gtk.ScrolledWindow vexpand>
                     <box vertical spacing={6}>
                       {pairedDevices.length > 0 ? (

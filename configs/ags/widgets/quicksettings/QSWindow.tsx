@@ -20,7 +20,7 @@ import BatteryPage from "./pages/BatteryPage";
 import SpeakerPage from "./pages/SpeakerPage";
 import WifiPage from "./pages/WifiPage";
 import MicPage from "./pages/MicPage";
-import BluetoothPage from "./pages/BluetoothPage";
+import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -196,9 +196,7 @@ function WifiBluetooth() {
         subtitle={deviceConnected()}
         onClicked={() => bluetooth.toggle()}
         onArrowClicked={() => {
-            if(!btAdapter.get_discovering()) {
-                btAdapter.start_discovery();
-            }
+            scanBluetoothDevices()
             qsPage.set("bluetooth");
         }}
         connection={[btAdapter, "powered"]}
