@@ -8,6 +8,13 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
 .bar-container {
   margin: $bar-margin;
 
+  .tray-container {
+    menubutton {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+  }
+
   .bar-box {
     background-color: color.adjust(
                     $bar-button-bg-color,

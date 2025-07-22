@@ -21,6 +21,7 @@ const panelButton = {
   workspace: () => <WorkspacesPanelButton />,
   time: () => <TimePanelButton />,
   notification: () => <NotifPanelButton />,
+  tray: () => <TrayPanelButton />,
   network_speed: () => <NetworkSpeedPanelButton />,
   quicksetting: () => <QSPanelButton />,
 };

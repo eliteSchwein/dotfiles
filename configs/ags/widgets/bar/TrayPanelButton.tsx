@@ -5,7 +5,7 @@ import AstalTray from "gi://AstalTray?version=0.1";
 export default function TrayPanelButton() {
   const tray = AstalTray.get_default();
   return (
-    <box>
+    <box cssClasses={["tray-container"]}>
       {bind(tray, "items").as((items) =>
         items.map((item) => (
           <menubutton
