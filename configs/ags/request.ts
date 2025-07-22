@@ -1,7 +1,7 @@
 import ScreenRecord from "./utils/screenrecord";
 import {App} from "astal/gtk4";
 import {launchPicker} from "./widgets/quicksettings/buttons/ColorPickerQS";
-import styles from "./utils/styles";
+import styles, {loadThemeColor} from "./utils/styles";
 
 export default function requestHandler(
   request: string,
@@ -12,7 +12,7 @@ export default function requestHandler(
   switch (params[0]) {
     case "changeThemeColor":
       res("ok");
-      styles(params[1]);
+      loadThemeColor(params[1])
       break;
     case "openAppLauncher":
       res("ok");

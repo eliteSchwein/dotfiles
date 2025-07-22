@@ -1,4 +1,4 @@
-import { GLib } from "astal";
+import {GLib, readFileAsync} from "astal";
 import { writeFileAsync } from "astal";
 import options from "../options";
 import { bash, gsettings } from ".";
@@ -124,16 +124,33 @@ function defineVar(opt: Opt, type = "string", slice = 2, arrayLength = 4) {
   return `$${key}: ${modifiedVal};`;
 }
 
-async function initScss(mode: ThemeMode, fg: string|undefined = undefined) {
+export async function loadThemeColor(fg: string | undefined = undefined) {
+  if (!fg) return;
+
+  const targetDir = `${SRC}/styles/variables.scss`;
+  const scss = `${SRC}/styles/styles.scss`;
+  const css = `${GLib.get_tmp_dir()}/styles.css`;
+
+  // Read the SCSS file
+  let content = await readFileAsync(targetDir);
+
+  // Replace hex colors in $fg and $accent lines
+  content = content.replace(/^\$fg:\s*#([a-fA-F0-9]{3,6});/gm, `$fg: #${fg};`);
+  content = content.replace(/^\$accent:\s*#([a-fA-F0-9]{3,6});/gm, `$accent: #${fg};`);
+
+  // Write updated content back to file
+  await writeFileAsync(targetDir, content);
+
+  // Compile SCSS and apply CSS
+  await bash(`sass ${scss} ${css}`);
+  App.apply_css(css, true);
+}
+
+async function initScss(mode: ThemeMode) {
   const targetDir = `${SRC}/styles/variables.scss`;
   const scss = `${SRC}/styles/styles.scss`;
   const css = `${GLib.get_tmp_dir()}/styles.css`;
   const colors = theme[mode];
-
-  if(fg) {
-    colors.fg.set(`#${fg}`)
-    colors.accent.set(`#${fg}`)
-  }
 
   const scssVar = [
     defineVar(colors.bg, "string", 1),
@@ -185,14 +202,14 @@ async function initScss(mode: ThemeMode, fg: string|undefined = undefined) {
   App.apply_css(css, true);
 }
 
-export default async function (fg: string|undefined = undefined) {
+export default async function () {
   options.handler(["theme", "bar.position", "bar.separator"], async () => {
     const mode = options.theme.mode.get() as ThemeMode;
     await initGtk(mode, true).catch(console.error);
-    await initScss(mode, fg).catch(console.error);
+    await initScss(mode).catch(console.error);
   });
 
   const mode = options.theme.mode.get() as ThemeMode;
   await initGtk(mode).catch(console.error);
-  await initScss(mode, fg).catch(console.error);
+  await initScss(mode).catch(console.error);
 }

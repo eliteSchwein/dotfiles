@@ -53,18 +53,10 @@ export default function QSPanelButton() {
           visible={bind(bluetooth, "isPowered")}
           iconName={"bluetooth-symbolic"}
         />
-        {bind(battery, "batteryIconName").as((icon) => {
-          if(icon !== "battery-missing-symbolic") {
-            return (
-                <image
-                    visible={bind(battery, "isPresent")}
-                    iconName={bind(battery, "batteryIconName")}
-                />
-            )
-          }
-
-          return (<></>)
-        })}
+        <image
+            visible={bind(battery, "isPresent")}
+            iconName={bind(battery, "batteryIconName")}
+        />
         <image iconName={bind(speaker, "volumeIcon")} />
         <image
           visible={bind(powerprofile, "activeProfile").as(
