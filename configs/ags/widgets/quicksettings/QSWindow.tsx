@@ -60,30 +60,40 @@ function Header() {
     <box hexpand={false} cssClasses={["header"]} spacing={6}>
       <label label={"Quick Setting"} hexpand xalign={0} />
       <button
-        onClicked={() => {
-          App.toggle_window(WINDOW_NAME);
-          toggleWallpaperPicker();
-        }}
-        iconName={"preferences-desktop-wallpaper-symbolic"}
-      />
-      <button
         cssClasses={["battery"]}
         onClicked={() => {
           qsPage.set("battery");
         }}
       >
-        <box spacing={2}>
-          <image
-            iconName={bind(battery, "batteryIconName")}
-            iconSize={Gtk.IconSize.NORMAL}
-            cssClasses={["icon"]}
-          />
-          <label
-            label={bind(battery, "percentage").as(
-              (p) => `${Math.floor(p * 100)}%`,
-            )}
-          />
-        </box>
+
+          {bind(battery, "batteryIconName").as((icon) => {
+              if(icon === "battery-missing-symbolic") {
+                  return (
+                      <box spacing={2}>
+                          <image
+                              iconName="power-symbolic"
+                              iconSize={Gtk.IconSize.NORMAL}
+                              cssClasses={["icon"]}
+                          />
+                      </box>
+                  )
+              }
+
+              return (
+                  <box spacing={2}>
+                      <image
+                          iconName={bind(battery, "batteryIconName")}
+                          iconSize={Gtk.IconSize.NORMAL}
+                          cssClasses={["icon"]}
+                      />
+                      <label
+                          label={bind(battery, "percentage").as(
+                              (p) => `${Math.floor(p * 100)}%`,
+                          )}
+                      />
+                  </box>
+              )
+          })}
       </button>
       <button
         cssClasses={["powermenu"]}
