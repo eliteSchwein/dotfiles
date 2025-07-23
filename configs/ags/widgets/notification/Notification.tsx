@@ -1,6 +1,7 @@
 import {Gtk} from "astal/gtk4";
 import {GLib} from "astal";
 import Pango from "gi://Pango";
+import AstalApps from "gi://AstalApps";
 import AstalNotifd from "gi://AstalNotifd";
 
 const time = (time: number, format = "%H:%M") =>
@@ -27,6 +28,20 @@ const urgency = (n: AstalNotifd.Notification) => {
     }
 };
 
+export const substitute = {
+    Screenshot: "screenshooter-symbolic",
+    Hyprpicker: "color-select-symbolic",
+};
+
+export function getFallback(appName: string) {
+    const apps = new AstalApps.Apps();
+    const getApp = apps.fuzzy_query(appName);
+    if (getApp.length != 0) {
+        return getApp[0].get_icon_name();
+    }
+    return "unknown";
+};
+
 export default function Notification({
                                          n,
                                          showActions = true,
@@ -34,6 +49,11 @@ export default function Notification({
     n: AstalNotifd.Notification;
     showActions?: boolean;
 }) {
+    const fallback =
+        n.app_icon.trim() === ""
+            ? getFallback(n.app_name)
+            : n.app_icon;
+    const icon = substitute[n.app_name] ?? fallback;
     return (
         <box
             name={n.id.toString()}
@@ -47,7 +67,7 @@ export default function Notification({
                         <image
                             cssClasses={["app-icon", "mr-1"]}
                             visible={!!(n.appIcon || n.desktopEntry)}
-                            iconName={n.appIcon || n.desktopEntry}
+                            iconName={icon}
                         />
                     )}
                     <label

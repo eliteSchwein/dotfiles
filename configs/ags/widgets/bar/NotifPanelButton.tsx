@@ -2,8 +2,8 @@ import AstalNotifd from "gi://AstalNotifd";
 import PanelButton from "../common/PanelButton";
 import {App} from "astal/gtk4";
 import {bind, Variable} from "astal";
-import AstalApps from "gi://AstalApps";
 import {WINDOW_NAME} from "../notification/NotificationWindow";
+import {getFallback, substitute} from "../notification/Notification";
 
 const notifd = AstalNotifd.get_default();
 
@@ -30,12 +30,6 @@ function NotifIcon() {
 }
 
 export default function NotifPanelButton() {
-    const apps = new AstalApps.Apps();
-    const substitute = {
-        Screenshot: "screenshooter-symbolic",
-        Hyprpicker: "color-select-symbolic",
-    };
-
     return (
         <PanelButton
             window={WINDOW_NAME}
@@ -50,13 +44,6 @@ export default function NotifPanelButton() {
                             if (n.length > 0) {
                                 return [
                                     ...n.slice(0, 3).map((e) => {
-                                        const getFallback = (appName: string) => {
-                                            const getApp = apps.fuzzy_query(appName);
-                                            if (getApp.length != 0) {
-                                                return getApp[0].get_icon_name();
-                                            }
-                                            return "unknown";
-                                        };
                                         const fallback =
                                             e.app_icon.trim() === ""
                                                 ? getFallback(e.app_name)
