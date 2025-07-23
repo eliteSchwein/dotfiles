@@ -10,6 +10,7 @@
       min-height: 45px;
       border-radius: $window-border-radius;
       background-color: color.adjust($fg, $alpha: -0.65);
+
       &.filled {
         background-color: $fg;
       }

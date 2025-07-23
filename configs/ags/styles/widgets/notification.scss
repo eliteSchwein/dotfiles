@@ -5,11 +5,13 @@
 .notifications-container {
   min-width: 400px;
   min-height: 420px;
+
   separator {
     margin: $window-padding;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
   }
+
   .window-header {
     padding: $window-padding;
     padding-bottom: 0;
@@ -52,6 +54,7 @@
     .not-found label {
       font-size: 1rem;
     }
+
     margin: $window-padding;
     margin-top: 1px;
   }
@@ -113,6 +116,7 @@
 
   .actions {
     margin-top: 0.5rem;
+
     button {
       padding: 0.1rem 0;
       background-color: color.adjust($fg, $alpha: -0.85);

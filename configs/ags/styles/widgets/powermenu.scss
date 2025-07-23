@@ -8,6 +8,7 @@
   .title {
     font-size: 1.2rem;
   }
+
   .body {
     font-weight: 400;
   }
@@ -16,9 +17,11 @@
     button {
       background-color: color.adjust($fg, $alpha: -0.9);
       padding: 0.2rem;
+
       &:focus {
         outline-color: $fg;
       }
+
       &:hover {
         background-color: color.adjust($fg, $alpha: -0.65);
       }
@@ -48,6 +51,7 @@
     background-color: color.adjust($fg, $alpha: -0.9);
     padding: 0.7rem;
     border-radius: $window-border-radius;
+
     &:selected {
       background-color: red;
     }
@@ -55,6 +59,7 @@
     &:focus {
       outline-color: $fg;
     }
+
     &:hover {
       background-color: color.adjust($fg, $alpha: -0.65);
     }

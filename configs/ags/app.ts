@@ -1,4 +1,4 @@
-import { App } from "astal/gtk4";
+import {App} from "astal/gtk4";
 import windows from "./windows";
 import request from "./request";
 import initStyles from "./utils/styles";
@@ -8,21 +8,21 @@ import {execAsync} from "astal";
 initStyles();
 
 App.start({
-  requestHandler(req, res) {
-    request(req, res);
-  },
-  main() {
-    windows.map((win) => App.get_monitors().map(win));
+    requestHandler(req, res) {
+        request(req, res);
+    },
+    main() {
+        windows.map((win) => App.get_monitors().map(win));
 
-    initHyprland();
-  },
+        initHyprland();
+    },
 });
 
 export function restartAgs() {
-  execAsync([
-    "bash", "-c",
-    "ags quit && ags run --gtk4 -d $HOME/dotfiles/configs/ags"
-  ])
+    execAsync([
+        "bash", "-c",
+        "ags quit && ags run --gtk4 -d $HOME/dotfiles/configs/ags"
+    ])
 }
 
 App.apply_css('/tmp/theme.css')

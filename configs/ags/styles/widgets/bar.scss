@@ -29,14 +29,11 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
   }
 
   .workspace-container {
-    box-shadow:
-      0 0 0 $bar-button-border-width $bar-button-border-color,
-      $bar-button-shadow-offset $bar-button-shadow-blur
-        $bar-button-shadow-spread
-        color.adjust(
-          $bar-button-shadow-color,
-          $alpha: calc($bar-button-shadow-opacity - 1)
-        );
+    box-shadow: 0 0 0 $bar-button-border-width $bar-button-border-color,
+    $bar-button-shadow-offset $bar-button-shadow-blur $bar-button-shadow-spread color.adjust(
+                    $bar-button-shadow-color,
+            $alpha: calc($bar-button-shadow-opacity - 1)
+    );
 
     color: $bar-button-fg-color;
     border-radius: calc(nth($bar-button-border-radius, 1) / 2);
@@ -56,6 +53,7 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
 
       &:hover {
         background-color: $bar-button-fg-color;
+
         &.occupied {
           background-color: $bar-button-fg-color;
         }
@@ -70,6 +68,7 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
       &.occupied {
         box-shadow: unset;
         background-color: $bar-button-fg-color;
+
         &.active {
           background-color: $accent;
         }

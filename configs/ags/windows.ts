@@ -10,14 +10,14 @@ import VerificationWindow from "./widgets/powermenu/VerificationWindow.jsx";
 import QSWindow from "./widgets/quicksettings/QSWindow.jsx";
 
 export default [
-  Dock,
-  Bar,
-  DateMenu,
-  DesktopClock,
-  Applauncher,
-  NotificationPopup,
-  NotificationWindow,
-  QSWindow,
-  PowerMenu,
-  VerificationWindow,
+    Dock,
+    Bar,
+    DateMenu,
+    DesktopClock,
+    Applauncher,
+    NotificationPopup,
+    NotificationWindow,
+    QSWindow,
+    PowerMenu,
+    VerificationWindow,
 ];

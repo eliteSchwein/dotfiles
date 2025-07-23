@@ -1,65 +1,65 @@
-import { App } from "astal/gtk4";
+import {App} from "astal/gtk4";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import options from "../options";
 import {restartAgs} from "../app";
 import styles from "./styles";
 
 const hyprland = AstalHyprland.get_default();
-const { bar } = options;
+const {bar} = options;
 
 export const sendBatch = (batch: string[]) => {
-  const cmd = batch
-    .filter((x) => !!x)
-    .map((x) => `keyword ${x}`)
-    .join("; ");
+    const cmd = batch
+        .filter((x) => !!x)
+        .map((x) => `keyword ${x}`)
+        .join("; ");
 
-  hyprland.message(`[[BATCH]]/${cmd}`);
+    hyprland.message(`[[BATCH]]/${cmd}`);
 };
 
 export function windowAnimation() {
-  sendBatch(
-    App.get_windows()
-      .filter(({ animation }: any) => !!animation)
-      .map(
-        ({ animation, namespace }: any) =>
-          `layerrule animation ${namespace == "dock" ? `slide ${options.dock.position.get()}` : animation == "slide top" ? `slide ${bar.position.get()}` : animation}, ${namespace}`,
-      ),
-  );
+    sendBatch(
+        App.get_windows()
+            .filter(({animation}: any) => !!animation)
+            .map(
+                ({animation, namespace}: any) =>
+                    `layerrule animation ${namespace == "dock" ? `slide ${options.dock.position.get()}` : animation == "slide top" ? `slide ${bar.position.get()}` : animation}, ${namespace}`,
+            ),
+    );
 }
 
 function windowBlur() {
-  const noIgnorealpha = ["verification", "powermenu"];
+    const noIgnorealpha = ["verification", "powermenu"];
 
-  sendBatch(
-    App.get_windows().flatMap(({ namespace }: any) => {
-      return [
-        `layerrule blur, ${namespace}`,
-        noIgnorealpha.some((skip) => namespace?.includes(skip))
-          ? ""
-          : `layerrule ignorealpha 0.3, ${namespace}`,
-      ];
-    }),
-  );
+    sendBatch(
+        App.get_windows().flatMap(({namespace}: any) => {
+            return [
+                `layerrule blur, ${namespace}`,
+                noIgnorealpha.some((skip) => namespace?.includes(skip))
+                    ? ""
+                    : `layerrule ignorealpha 0.3, ${namespace}`,
+            ];
+        }),
+    );
 }
 
 export default function initHyprland() {
-  windowAnimation();
-  windowBlur();
-
-  hyprland.connect("config-reloaded", () => {
     windowAnimation();
     windowBlur();
-  });
 
-  hyprland.connect("monitor-removed", () => {
-    hyprland.dispatch("vdeskreset", ``);
+    hyprland.connect("config-reloaded", () => {
+        windowAnimation();
+        windowBlur();
+    });
 
-    restartAgs()
-  });
+    hyprland.connect("monitor-removed", () => {
+        hyprland.dispatch("vdeskreset", ``);
 
-  hyprland.connect('monitor-added', () => {
-    hyprland.dispatch("vdeskreset", ``);
+        restartAgs()
+    });
 
-    restartAgs()
-  });
+    hyprland.connect('monitor-added', () => {
+        hyprland.dispatch("vdeskreset", ``);
+
+        restartAgs()
+    });
 }

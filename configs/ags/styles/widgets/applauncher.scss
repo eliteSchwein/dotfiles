@@ -18,6 +18,7 @@
   .entry-overlay {
     box-shadow: 0 0 0 $window-border-width $fg;
     border-radius: $window-border-radius;
+
     scrolledwindow viewport picture {
       border-radius: $window-border-radius;
     }
@@ -26,6 +27,7 @@
   > scrolledwindow viewport {
     padding: $window-padding;
     padding-top: $window-border-width;
+
     box {
       outline-width: $window-border-width;
 
@@ -39,6 +41,7 @@
     -gtk-icon-size: 2rem;
     padding: 0.4rem 0.8rem;
     background-color: color.adjust($fg, $alpha: -0.8);
+
     image {
       margin-right: 6px;
     }
@@ -56,9 +59,11 @@
     &:focus {
       outline-color: $accent;
     }
+
     &:hover {
       background-color: color.adjust($fg, $alpha: -0.75);
     }
+
     .description {
       font-size: 0.85rem;
       font-weight: 400;

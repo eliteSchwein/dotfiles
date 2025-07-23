@@ -11,14 +11,17 @@
 scale {
   margin: 0;
   padding: 0;
+
   trough {
     border-radius: calc(nth($window-border-radius, 1) * 99);
+
     highlight {
       background-color: $accent;
       min-height: 25px;
       // min-width: 25px;
       border-radius: calc(nth($window-border-radius, 1) * 99);
     }
+
     slider {
       box-shadow: none;
       outline: unset;
@@ -29,6 +32,7 @@ scale {
 
 menubutton {
   padding: 0;
+
   button {
     padding: unset;
     margin: unset;
@@ -60,6 +64,7 @@ button {
 
 window {
   background-color: transparent;
+
   .button-padding {
     background-color: transparent;
   }
@@ -85,16 +90,14 @@ $shadow-h: nth($bar-button-shadow-offset, 1);
 $shadow-v: nth($bar-button-shadow-offset, 2);
 .panel-button {
   background-color: color.adjust(
-    $bar-button-bg-color,
-    $alpha: calc($bar-button-opacity - 1)
+                  $bar-button-bg-color,
+          $alpha: calc($bar-button-opacity - 1)
   );
-  box-shadow:
-    0 0 0 $bar-button-border-width $bar-button-border-color,
-    $bar-button-shadow-offset $bar-button-shadow-blur $bar-button-shadow-spread
-      color.adjust(
-        $bar-button-shadow-color,
-        $alpha: calc($bar-button-shadow-opacity - 1)
-      );
+  box-shadow: 0 0 0 $bar-button-border-width $bar-button-border-color,
+  $bar-button-shadow-offset $bar-button-shadow-blur $bar-button-shadow-spread color.adjust(
+                  $bar-button-shadow-color,
+          $alpha: calc($bar-button-shadow-opacity - 1)
+  );
   color: $bar-button-fg-color;
   border-radius: calc(nth($bar-button-border-radius, 1) / 2);
   padding: $bar-button-padding;
@@ -103,12 +106,12 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
   margin-bottom: if($shadow-v > 0, $shadow-v, 0);
   margin-top: if($shadow-v <= 0, $shadow-v, 0);
 
-  transition:
-    background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out,
+  color 0.2s ease-in-out;
 
   &.notifications {
     color: $bar-button-fg-color;
+
     .circle {
       border-radius: 99px;
     }
@@ -116,9 +119,9 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
 
   &:hover {
     background-color: if(
-      $bar-opacity < 1,
-      $bar-button-bg-color,
-      color.adjust($bar-button-fg-color, $alpha: -0.9)
+                    $bar-opacity < 1,
+                    $bar-button-bg-color,
+                    color.adjust($bar-button-fg-color, $alpha: -0.9)
     );
   }
 
@@ -132,13 +135,11 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
   background-color: color.adjust($bg, $alpha: calc($window-opacity - 1));
   color: $fg;
   margin: $window-margin;
-  box-shadow:
-    0 0 0 $window-border-width $window-border-color,
-    $window-shadow-offset $window-shadow-blur $window-shadow-spread
-      color.adjust(
-        $window-shadow-color,
-        $alpha: calc($window-shadow-opacity - 1)
-      );
+  box-shadow: 0 0 0 $window-border-width $window-border-color,
+  $window-shadow-offset $window-shadow-blur $window-shadow-spread color.adjust(
+                  $window-shadow-color,
+          $alpha: calc($window-shadow-opacity - 1)
+  );
   border-radius: $window-border-radius;
 }
 
@@ -160,6 +161,7 @@ entry {
 
   text {
     font-size: 1.2rem;
+
     placeholder {
       font-size: 1.2rem;
     }

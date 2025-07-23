@@ -1,46 +1,45 @@
-import GObject, { property, register } from "astal/gobject";
-import { App } from "astal/gtk4";
+import GObject, {property, register} from "astal/gobject";
+import {App} from "astal/gtk4";
 
 const options = {
-  sleep: "systemctl suspend",
-  reboot: "systemctl reboot",
-  logout: "pkill Hyprland",
-  shutdown: "shutdown now",
+    sleep: "systemctl suspend",
+    reboot: "systemctl reboot",
+    logout: "pkill Hyprland",
+    shutdown: "shutdown now",
 };
 
-@register({ GTypeName: "Powermenu" })
+@register({GTypeName: "Powermenu"})
 export default class Powermenu extends GObject.Object {
-  static instance: Powermenu;
+    static instance: Powermenu;
+    #title = "";
+    #cmd = "";
 
-  static get_default() {
-    if (!this.instance) this.instance = new Powermenu();
-    return this.instance;
-  }
+    @property(String)
+    get title() {
+        return this.#title;
+    }
 
-  #title = "";
-  #cmd = "";
+    @property(String)
+    get cmd() {
+        return this.#cmd;
+    }
 
-  @property(String)
-  get title() {
-    return this.#title;
-  }
+    static get_default() {
+        if (!this.instance) this.instance = new Powermenu();
+        return this.instance;
+    }
 
-  @property(String)
-  get cmd() {
-    return this.#cmd;
-  }
+    action(action: string) {
+        [this.#cmd, this.#title] = {
+            sleep: [options.sleep, "Sleep"],
+            reboot: [options.reboot, "Reboot"],
+            logout: [options.logout, "Log Out"],
+            shutdown: [options.shutdown, "Shutdown"],
+        }[action]!;
 
-  action(action: string) {
-    [this.#cmd, this.#title] = {
-      sleep: [options.sleep, "Sleep"],
-      reboot: [options.reboot, "Reboot"],
-      logout: [options.logout, "Log Out"],
-      shutdown: [options.shutdown, "Shutdown"],
-    }[action]!;
-
-    this.notify("cmd");
-    this.notify("title");
-    App.get_window("powermenu")?.hide();
-    App.get_window("verification")?.show();
-  }
+        this.notify("cmd");
+        this.notify("title");
+        App.get_window("powermenu")?.hide();
+        App.get_window("verification")?.show();
+    }
 }
