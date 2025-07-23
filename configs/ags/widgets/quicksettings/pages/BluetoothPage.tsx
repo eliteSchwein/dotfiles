@@ -197,6 +197,7 @@ export default function BluetoothPage() {
                         <button
                             onClicked={() => {
                                 btAdapter.set_discoverable(!state)
+                                btAdapter.set_pairable(!state)
                             }}
                         >
                             <box>
