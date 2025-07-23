@@ -37,9 +37,10 @@ menubutton {
     padding: unset;
     margin: unset;
     border-radius: calc(nth($window-border-radius, 1) / 2);
+    background-color: color.adjust($fg, $alpha: -0.9);
 
     &:hover {
-      background-color: color.adjust($fg, $alpha: -0.85);
+      background-color: color.adjust($fg, $alpha: -0.7);
     }
   }
 }
