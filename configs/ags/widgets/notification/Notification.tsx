@@ -28,19 +28,35 @@ const urgency = (n: AstalNotifd.Notification) => {
     }
 };
 
-export const substitute = {
-    Screenshot: "screenshooter-symbolic",
-    Hyprpicker: "color-select-symbolic",
-};
-
 export function getFallback(appName: string) {
     const apps = new AstalApps.Apps();
-    const getApp = apps.fuzzy_query(appName);
+    let getApp = apps.fuzzy_query(appName);
     if (getApp.length != 0) {
         return getApp[0].get_icon_name();
     }
+
+    getApp = apps.fuzzy_query(appName.split(" ")[0]);
+    if (getApp.length != 0) {
+        return getApp[0].get_icon_name();
+    }
+
     return "unknown";
-};
+}
+
+export function getNotificationIcon(notification: AstalNotifd.Notification) {
+    const substitute = {
+        Screenshot: "screenshooter-symbolic",
+        Hyprpicker: "color-select-symbolic",
+        "Tauon Music Box": "emblem-music-symbolic"
+    };
+
+    const fallback =
+        notification.app_icon.trim() === ""
+            ? getFallback(notification.app_name)
+            : notification.app_icon;
+
+    return substitute[notification.app_name] ?? fallback
+}
 
 export default function Notification({
                                          n,
@@ -49,11 +65,7 @@ export default function Notification({
     n: AstalNotifd.Notification;
     showActions?: boolean;
 }) {
-    const fallback =
-        n.app_icon.trim() === ""
-            ? getFallback(n.app_name)
-            : n.app_icon;
-    const icon = substitute[n.app_name] ?? fallback;
+    const icon = getNotificationIcon(n);
     return (
         <box
             name={n.id.toString()}

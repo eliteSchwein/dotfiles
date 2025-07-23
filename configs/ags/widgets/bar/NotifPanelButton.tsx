@@ -3,7 +3,7 @@ import PanelButton from "../common/PanelButton";
 import {App} from "astal/gtk4";
 import {bind, Variable} from "astal";
 import {WINDOW_NAME} from "../notification/NotificationWindow";
-import {getFallback, substitute} from "../notification/Notification";
+import {getFallback, getNotificationIcon, substitute} from "../notification/Notification";
 
 const notifd = AstalNotifd.get_default();
 
@@ -44,11 +44,7 @@ export default function NotifPanelButton() {
                             if (n.length > 0) {
                                 return [
                                     ...n.slice(0, 3).map((e) => {
-                                        const fallback =
-                                            e.app_icon.trim() === ""
-                                                ? getFallback(e.app_name)
-                                                : e.app_icon;
-                                        const icon = substitute[e.app_name] ?? fallback;
+                                        const icon = getNotificationIcon(e);
                                         return <image iconName={icon}/>;
                                     }),
                                     <image
