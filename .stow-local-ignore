@@ -1,0 +1,11 @@
+.git
+.idea
+scripts
+fonts
+install.sh
+install_fonts.sh
+LICENSE
+link.sh
+README.md
+.STM32CubeProgrammer
+.gitignore

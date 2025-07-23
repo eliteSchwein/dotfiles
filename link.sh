@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd $HOME
-stow .
+stow --adopt -R .
 
 echo "🎉 Dotfiles install complete!"
