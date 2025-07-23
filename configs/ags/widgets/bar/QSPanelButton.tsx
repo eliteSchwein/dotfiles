@@ -57,7 +57,16 @@ export default function QSPanelButton() {
             visible={bind(battery, "isPresent")}
             iconName={bind(battery, "batteryIconName")}
         />
-        <image iconName={bind(speaker, "volumeIcon")} />
+        <image
+            onScroll={(image, idk, direction) => {
+              if(direction === -1) {
+                speaker.volume += 0.02
+                return
+              }
+              speaker.volume -= 0.02
+            }}
+            iconName={bind(speaker, "volumeIcon")}
+        />
         <image
           visible={bind(powerprofile, "activeProfile").as(
             (p) => p === "power-saver",
