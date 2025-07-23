@@ -28,11 +28,14 @@
         }
       }
 
-      &:hover {
-        background-color: color.adjust($fg, $alpha: -0.7);
-      }
       label {
         font-size: 0.95rem;
+      }
+    }
+
+    button {
+      &:hover {
+        background-color: color.adjust($fg, $alpha: -0.7);
       }
     }
 
@@ -76,8 +79,12 @@
 
     button {
       padding: 0 0.3rem;
-      background-color: color.adjust($fg, $alpha: -0.9);
+      background-color: transparent;
       border-radius: calc(nth($window-border-radius, 1) / 2);
+
+      &:hover {
+        background-color: color.adjust($fg, $alpha: -0.75);
+      }
     }
   }
 
@@ -108,8 +115,12 @@
     margin-top: 0.5rem;
     button {
       padding: 0.1rem 0;
-      background-color: color.adjust($fg, $alpha: -0.9);
+      background-color: color.adjust($fg, $alpha: -0.85);
       border-radius: calc(nth($window-border-radius, 1) / 2);
+
+      &:hover {
+        background-color: color.adjust($fg, $alpha: -0.75);
+      }
     }
   }
 }

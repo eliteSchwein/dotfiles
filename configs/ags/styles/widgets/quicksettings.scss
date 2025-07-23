@@ -72,7 +72,7 @@
 
   .qs-button {
     border-radius: $window-border-radius;
-    background-color: color.adjust($fg, $alpha: -0.9);
+    background-color: color.adjust($fg, $alpha: -0.8);
     outline-color: $fg;
     padding: 1rem 0;
 
