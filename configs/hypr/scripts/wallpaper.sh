@@ -1,9 +1,10 @@
 #!/bin/bash
 
-sleep 5
-
 # Directory containing wallpapers
 WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
+
+# Path to store last used index
+INDEX_FILE="/tmp/WALLPAPER_INDEX"
 
 # Theme colors (used with astal)
 THEME_COLORS=(
@@ -56,21 +57,24 @@ set_theme() {
   astal changeThemeColor "$theme_color" > /dev/null &
 }
 
-# Set initial wallpaper and theme
-set_theme 0
 
-# Unload temporary start wallpaper if it exists
-hyprctl hyprpaper unload "$WALLPAPER_DIR/BlueNebula.png"
+# Load last index if it exists
+last_index=-1
+if [[ -f "$INDEX_FILE" ]]; then
+  last_index=$(<"$INDEX_FILE")
+fi
 
-# Main loop for rotating wallpapers and themes
-while true; do
-  for i in "${!BACKGROUND_COLORS[@]}"; do
-    # Pause if screen is locked
-    while pgrep -x hyprlock > /dev/null; do
-      sleep 5
-    done
-
-    set_theme "$i"
-    sleep 600
-  done
+# Generate a new random index that's different
+new_index=$((RANDOM % ${#IMAGES[@]}))
+while [[ "$new_index" -eq "$last_index" ]]; do
+  new_index=$((RANDOM % ${#IMAGES[@]}))
 done
+
+# Save the new index
+echo "$new_index" > "$INDEX_FILE"
+
+# Apply the new theme
+set_theme "$new_index"
+
+# Optionally unload the initial startup wallpaper
+hyprctl hyprpaper unload "$WALLPAPER_DIR/BlueNebula.png"

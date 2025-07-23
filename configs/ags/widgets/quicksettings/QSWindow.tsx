@@ -22,6 +22,7 @@ import WifiPage, {currentActiveWifiInput, currentWifiPassword} from "./pages/Wif
 import MicPage from "./pages/MicPage";
 import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";
+import WallpaperQS from "./buttons/WallpaperQS";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -41,7 +42,7 @@ const layout = Variable.derive(
 function QSButtons() {
     return (
         <FlowBox
-            maxChildrenPerLine={3}
+            maxChildrenPerLine={4}
             activateOnSingleClick={false}
             homogeneous
             rowSpacing={6}
@@ -50,6 +51,7 @@ function QSButtons() {
             <ColorPickerQS/>
             <DontDisturbQS/>
             <RecordQS/>
+            <WallpaperQS/>
         </FlowBox>
     );
 }
