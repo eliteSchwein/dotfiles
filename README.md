@@ -13,7 +13,7 @@ mkdir hypr
 cp hyprbck/hyprland.conf hypr/
 rm -rf hyprbck
 cd $HOME/dotfiles/
-bash link,sh
+bash link.sh
 hyprctl reload
 ```
 
