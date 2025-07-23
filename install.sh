@@ -21,7 +21,6 @@ paru -S --noconfirm \
 # Utilities
 paru -S --noconfirm \
   firefox \
-  legcord-git \
   ungoogled-chromium-bin \
   tauon-music-box \
   vlc vlc-plugins-all
