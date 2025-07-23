@@ -14,7 +14,7 @@ THEME_COLORS=(
   "FFB300"
   "3b83f5"
   "F4511E"
-  "8914ba"
+  "bd4aed"
 )
 
 # Gradient background colors for active border

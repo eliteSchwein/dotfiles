@@ -71,7 +71,7 @@ export default function QSPanelButton() {
                     visible={bind(powerprofile, "activeProfile").as(
                         (p) => p === "power-saver",
                     )}
-                    iconName={`power-profile-power-saver-symbolic`}
+                    iconName={`battery-profile-powersave-symbolic`}
                 />
                 <image
                     visible={wp?.defaultMicrophone && bind(wp.default_microphone, "mute")}

@@ -21,6 +21,7 @@ import SpeakerPage from "./pages/SpeakerPage";
 import WifiPage, {currentActiveWifiInput, currentWifiPassword} from "./pages/WifiPage";
 import MicPage from "./pages/MicPage";
 import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
+import AstalPowerProfiles from "gi://AstalPowerProfiles";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -55,6 +56,7 @@ function QSButtons() {
 
 function Header() {
     const battery = AstalBattery.get_default();
+    const powerprofile = AstalPowerProfiles.get_default();
 
     return (
         <box hexpand={false} cssClasses={["header"]} spacing={6}>
@@ -67,17 +69,28 @@ function Header() {
             >
 
                 {bind(battery, "batteryIconName").as((icon) => {
-                    if (icon === "battery-missing-symbolic") {
+                    //if (icon === "battery-missing-symbolic") {
                         return (
                             <box spacing={2}>
                                 <image
-                                    iconName="power-symbolic"
+                                    iconName={bind(powerprofile, "activeProfile").as(
+                                        (p) => {
+                                            switch (p) {
+                                                case "power-saver":
+                                                    return "battery-profile-powersave-symbolic"
+                                                case "performance":
+                                                    return "power-symbolic"
+                                                default:
+                                                    return "power-profile-balanced-symbolic"
+                                            }
+                                        },
+                                    )}
                                     iconSize={Gtk.IconSize.NORMAL}
                                     cssClasses={["icon"]}
                                 />
                             </box>
                         )
-                    }
+                    //}
 
                     return (
                         <box spacing={2}>
