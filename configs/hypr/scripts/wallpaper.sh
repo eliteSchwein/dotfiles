@@ -7,12 +7,12 @@ WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
 
 # Theme colors (used with astal)
 THEME_COLORS=(
-  "0c62e8"
+  "3b83f5"
   "9CCC65"
   "FFB300"
   "F4511E"
   "FFB300"
-  "0c62e8"
+  "3b83f5"
   "F4511E"
   "8914ba"
 )
