@@ -8,7 +8,7 @@ run this:
 ```shell
 cd $HOME/.config
 cp -r hypr hyprbck
-rm -rf rm -rf kitty/kitty.conf legcord/quickCss.css satty/config.toml systemd/user/auto_power_profile.service xfce4 hypr
+rm -rf rm -rf kitty/kitty.conf legcord/quickCss.css satty/config.toml systemd/user/auto_power_profile.service xfce4 hypr ags agsbck
 mkdir hypr
 cp hyprbck/hyprland.conf hypr/
 rm -rf hyprbck
