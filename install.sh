@@ -23,7 +23,8 @@ paru -S --noconfirm \
   firefox \
   ungoogled-chromium-bin \
   tauon-music-box \
-  vlc vlc-plugins-all
+  vlc vlc-plugins-all \
+  stow
 
 # Astal
 paru -S --noconfirm \
