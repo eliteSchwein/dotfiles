@@ -1,4 +1,4 @@
 .idea
 
-configs/hypr/hyprland.conf
-configs/ags/node_modules
+.config/hypr/hyprland.conf
+.config/ags/node_modules
