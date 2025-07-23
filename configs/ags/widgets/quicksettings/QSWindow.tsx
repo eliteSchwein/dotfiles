@@ -69,7 +69,7 @@ function Header() {
             >
 
                 {bind(battery, "batteryIconName").as((icon) => {
-                    //if (icon === "battery-missing-symbolic") {
+                    if (icon === "battery-missing-symbolic") {
                         return (
                             <box spacing={2}>
                                 <image
@@ -90,7 +90,7 @@ function Header() {
                                 />
                             </box>
                         )
-                    //}
+                    }
 
                     return (
                         <box spacing={2}>
