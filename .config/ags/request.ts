@@ -18,6 +18,10 @@ export default function requestHandler(
             res("ok");
             App.get_window("applauncher")?.set_visible(true);
             break;
+        case "openPowerMenu":
+            res("ok");
+            App.get_window("powermenu")?.set_visible(true);
+            break;
         case "pickColor":
             res("ok");
             void launchPicker()
