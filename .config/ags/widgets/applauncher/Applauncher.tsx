@@ -7,7 +7,6 @@ import {Gio} from "astal";
 import options from "../../options";
 import Picture from "../common/Picture";
 
-const {wallpaper} = options;
 const apps = new AstalApps.Apps();
 const text = Variable("");
 
@@ -58,11 +57,6 @@ function SearchEntry() {
     return (
         <overlay cssClasses={["entry-overlay"]} heightRequest={25}>
             <Gtk.ScrolledWindow heightRequest={25}>
-                <Picture
-                    file={wallpaper.current((w) => Gio.file_new_for_path(w))}
-                    contentFit={Gtk.ContentFit.COVER}
-                    overflow={Gtk.Overflow.HIDDEN}
-                />
             </Gtk.ScrolledWindow>
             <entry
                 type="overlay"

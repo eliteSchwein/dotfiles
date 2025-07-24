@@ -13,7 +13,6 @@ import {WINDOW_NAME as POWERMENU_WINDOW} from "../powermenu/PowerMenu";
 import {bind, Binding, GObject, Variable} from "astal";
 import options from "../../options";
 import AstalBattery from "gi://AstalBattery";
-import {toggleWallpaperPicker} from "../wallpaperpicker/WallpaperPicker";
 import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth";
 import BatteryPage from "./pages/BatteryPage";

@@ -4,15 +4,6 @@ import {mkOptions, opt} from "./utils/option";
 const options = mkOptions(
     `${GLib.get_user_config_dir()}/epik-shell/config.json`,
     {
-        wallpaper: {
-            folder: opt(GLib.get_home_dir(), {cached: true}),
-            current: opt(
-                await execAsync("swww query")
-                    .then((out) => out.split("image:")[1].trim())
-                    .catch(() => ""),
-                {cached: true},
-            ),
-        },
         dock: {
             position: opt("bottom"),
             pinned: opt(["firefox"]),
