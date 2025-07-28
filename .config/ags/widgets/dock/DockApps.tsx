@@ -201,9 +201,9 @@ function MediaPlayer({player}) {
 
 export default function DockApps() {
     const mpris = AstalMpris.get_default();
+    // <AppsList/>
     return (
         <box cssClasses={["window-content", "dock-container"]} hexpand={false}>
-            <AppsList/>
             {bind(mpris, "players").as((players) => (
                 <MediaPlayer player={players[0]}/>
             ))}
