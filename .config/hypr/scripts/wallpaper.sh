@@ -55,6 +55,14 @@ set_theme() {
   hyprctl hyprpaper preload "/tmp/wallpaper.png"
   hyprctl hyprpaper wallpaper ",/tmp/wallpaper.png"
   astal changeThemeColor "$theme_color" > /dev/null &
+
+  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
+  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
+
+  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/equibop/settings/quickCss.css"
+  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/equibop/settings/quickCss.css"
+
+  bash $HOME/.config/hypr/scripts/reloadEquibop.sh
 }
 
 
