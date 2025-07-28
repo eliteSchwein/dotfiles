@@ -1,10 +1,7 @@
 import PopupWindow from "../common/PopupWindow";
-import DarkModeQS from "./buttons/DarkModeQS";
 import ColorPickerQS from "./buttons/ColorPickerQS";
-import ScreenshotQS from "./buttons/ScreenshotQS";
 import DontDisturbQS from "./buttons/DontDisturbQS";
 import RecordQS from "./buttons/RecordQS";
-import MicQS from "./buttons/MicQS";
 import BrightnessBox from "./BrightnessBox";
 import VolumeBox from "./VolumeBox";
 import {FlowBox} from "../common/FlowBox";
@@ -22,6 +19,7 @@ import MicPage from "./pages/MicPage";
 import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";
 import WallpaperQS from "./buttons/WallpaperQS";
+import RestartQS from "./buttons/RestartQS";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -41,7 +39,7 @@ const layout = Variable.derive(
 function QSButtons() {
     return (
         <FlowBox
-            maxChildrenPerLine={4}
+            maxChildrenPerLine={3}
             activateOnSingleClick={false}
             homogeneous
             rowSpacing={6}
@@ -51,6 +49,7 @@ function QSButtons() {
             <DontDisturbQS/>
             <RecordQS/>
             <WallpaperQS/>
+            <RestartQS/>
         </FlowBox>
     );
 }

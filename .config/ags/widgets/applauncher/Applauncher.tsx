@@ -3,17 +3,19 @@ import {Variable} from "astal";
 import Pango from "gi://Pango";
 import AstalApps from "gi://AstalApps";
 import PopupWindow from "../common/PopupWindow";
-import {Gio} from "astal";
-import options from "../../options";
-import Picture from "../common/Picture";
-
-const apps = new AstalApps.Apps();
 const text = Variable("");
+
+let apps = new AstalApps.Apps();
 
 export const WINDOW_NAME = "applauncher";
 
 function hide() {
     App.get_window(WINDOW_NAME)?.set_visible(false);
+}
+
+export function showAppLauncher() {
+    apps = new AstalApps.Apps()
+    App.get_window(WINDOW_NAME)?.set_visible(true)
 }
 
 function AppButton({app}: { app: AstalApps.Application }) {

@@ -2,6 +2,8 @@ import ScreenRecord from "./utils/screenrecord";
 import {App} from "astal/gtk4";
 import {launchPicker} from "./widgets/quicksettings/buttons/ColorPickerQS";
 import styles, {loadThemeColor} from "./utils/styles";
+import {showAppLauncher} from "./widgets/applauncher/Applauncher";
+import {restartAgs} from "./app";
 
 export default function requestHandler(
     request: string,
@@ -16,7 +18,11 @@ export default function requestHandler(
             break;
         case "openAppLauncher":
             res("ok");
-            App.get_window("applauncher")?.set_visible(true);
+            showAppLauncher()
+            break;
+        case "restart":
+            res("ok");
+            restartAgs()
             break;
         case "openPowerMenu":
             res("ok");
