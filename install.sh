@@ -7,7 +7,7 @@ paru -S --noconfirm \
   qt5-wayland qt6-wayland hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr xdg-desktop-portal \
   hypridle hyprlock hyprpaper hyprpicker hyprpolkitagent \
-  hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc
+  hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype
 
 # Addons
 paru -S --noconfirm \
