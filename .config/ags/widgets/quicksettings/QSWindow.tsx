@@ -20,6 +20,7 @@ import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";
 import WallpaperQS from "./buttons/WallpaperQS";
 import RestartQS from "./buttons/RestartQS";
+import MediaBox from "./MediaBox";
 
 export const WINDOW_NAME = "quicksettings";
 export const qsPage = Variable("main");
@@ -239,6 +240,7 @@ function MainPage() {
             <QSButtons/>
             <BrightnessBox/>
             <VolumeBox/>
+            <MediaBox/>
         </box>
     );
 }

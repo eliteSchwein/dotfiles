@@ -4,6 +4,25 @@
 .qs-container {
   min-width: 300px;
 
+  .media-player {
+    margin-top: 0.5rem;
+    min-width: 180px;
+    background-color: color.adjust($fg, $alpha: -0.75);
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: $window-border-radius;
+
+    .media-app-icon {
+      margin-top: -2rem;
+      margin-right: -0.2rem;
+    }
+
+    .cover {
+      border-radius: $window-border-radius;
+      margin-right: 0.3rem;
+    }
+  }
+
   button {
     outline-color: $fg;
   }

@@ -182,6 +182,14 @@ function MediaPlayer({player}) {
             <button
                 halign={Gtk.Align.END}
                 valign={Gtk.Align.CENTER}
+                onClicked={() => player.next()}
+                visible={bind(player, "canGoBack")}
+            >
+                <image iconName="media-skip-backward-symbolic" pixelSize={24}/>
+            </button>
+            <button
+                halign={Gtk.Align.END}
+                valign={Gtk.Align.CENTER}
                 onClicked={() => player.play_pause()}
                 visible={bind(player, "canControl")}
             >
