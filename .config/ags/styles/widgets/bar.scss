@@ -8,6 +8,11 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
 .bar-container {
   margin: $bar-margin;
 
+  .time-container {
+    margin-top: 4px;
+    font-size: 1.3rem;
+  }
+
   .tray-container {
     menubutton {
       margin-left: 3px;
