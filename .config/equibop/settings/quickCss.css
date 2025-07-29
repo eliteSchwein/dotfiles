@@ -5,30 +5,30 @@
 @import url("https://refact0r.github.io/system24/src/main.css");
 
 body {
-  font-family: "Victor Mono", monospace !important;
+  font-family: "VictorMono", monospace !important;
 }
 
 * {
-  font-family: "Victor Mono", monospace !important;
+  font-family: "VictorMono", monospace !important;
 }
 
 
 :root {
-  --accent-1: #bd4aed;
-  --accent-2: #bd4aed;
-  --accent-3: #bd4aed;
-  --accent-4: #bd4aed;
-  --accent-5: #bd4aed;
-  --accent-new: #bd4aed;
+  --accent-1: #3b83f5;
+  --accent-2: #3b83f5;
+  --accent-3: #3b83f5;
+  --accent-4: #3b83f5;
+  --accent-5: #3b83f5;
+  --accent-new: #3b83f5;
   --red-1: #EF5350;
   --red-2: #E53935;
   --red-3: #D32F2F;
   --red-4: #B71C1C;
   --red-5: #791313;
   /* system24 */
-  --font-secondary: "Victor Mono"; /* UI font name. it must be installed on your system. */
-  --font-primary: "Victor Mono"; /* UI font name. it must be installed on your system. */
-  --font: "Victor Mono"; /* UI font name. it must be installed on your system. */
+  --font-secondary: "VictorMono"; /* UI font name. it must be installed on your system. */
+  --font-primary: "VictorMono"; /* UI font name. it must be installed on your system. */
+  --font: "VictorMono"; /* UI font name. it must be installed on your system. */
   letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
   font-weight: 300; /* UI font weight. */
   --label-font-weight: 500; /* font weight for panel labels. */
