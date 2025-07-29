@@ -2,6 +2,10 @@
 
 THEME_PATH="/usr/share/themes/"
 
+# System Elements
+paru -S --noconfirm \
+  mold
+
 # Hyprland Core
 paru -S --noconfirm \
   qt5-wayland qt6-wayland hyprland \
