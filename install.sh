@@ -4,7 +4,7 @@ THEME_PATH="/usr/share/themes/"
 
 # System Elements
 paru -S --noconfirm \
-  mold
+  mold pigz lbzip2 plzip
 
 # Hyprland Core
 paru -S --noconfirm \
