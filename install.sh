@@ -25,7 +25,7 @@ paru -S --noconfirm \
 # Utilities
 paru -S --noconfirm \
   firefox \
-  ungoogled-chromium-bin \
+  thorium-browser-bin \
   tauon-music-box \
   vlc vlc-plugins-all \
   stow
