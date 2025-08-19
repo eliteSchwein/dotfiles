@@ -106,8 +106,6 @@ export LD_LIBRARY_PATH=/opt/cuda/lib64
 
 alias kys="shutdown -h now"
 alias ree="reboot"
-alias vpn_up='f() { wg-quick up /home/tludwig/vpn/$1.conf; }; f'
-alias vpn_down='f() { wg-quick down /home/tludwig/vpn/$1.conf; }; f'
 alias levelup="paru -Syyu && hyprpm update"
 alias ssh="TERM=xterm-256color ssh"
 
