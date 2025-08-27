@@ -60,9 +60,9 @@ set_theme() {
 
   hyprctl hyprpaper unload all
   hyprctl keyword general:col.active_border "$bg_color"
+  hyprctl hyprpaper preload "$image"
+  hyprctl hyprpaper wallpaper ",$image"
   cp -r "$image" "/tmp/wallpaper.png"
-  hyprctl hyprpaper preload "/tmp/wallpaper.png"
-  hyprctl hyprpaper wallpaper ",/tmp/wallpaper.png"
   astal changeThemeColor "$theme_color" > /dev/null &
 
   sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
