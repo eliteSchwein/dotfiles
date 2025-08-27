@@ -22,6 +22,7 @@ THEME_COLORS=(
   "00897B"
   "E64A19"
   "388E3C"
+  "039BE5"
 )
 
 # Gradient background colors for active border
@@ -40,6 +41,7 @@ BACKGROUND_COLORS=(
   "rgba(00897BEE) rgba(00695CEE) 45deg"
   "rgba(E64A19EE) rgba(D84315EE) 45deg"
   "rgba(388E3CEE) rgba(1B5E20EE) 45deg"
+  "rgba(039BE5EE) rgba(0277BDEE) 45deg"
 )
 
 # List of wallpapers to rotate
@@ -58,6 +60,7 @@ IMAGES=(
   "$WALLPAPER_DIR/LagoonSpaceship.png"
   "$WALLPAPER_DIR/Vulcano.png"
   "$WALLPAPER_DIR/JungleTreeHouses.png"
+  "$WALLPAPER_DIR/CloudCities.png"
 )
 
 # Function to apply background color, wallpaper, and theme color
