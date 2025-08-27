@@ -16,7 +16,6 @@
   }
 
   .entry-overlay {
-    box-shadow: 0 0 0 $window-border-width $fg;
     border-radius: $window-border-radius;
 
     scrolledwindow viewport picture {
@@ -38,6 +37,7 @@
   }
 
   .app-button {
+    border-radius: $window-border-radius;
     -gtk-icon-size: 2rem;
     padding: 0.4rem 0.8rem;
     background-color: color.adjust($fg, $alpha: -0.8);

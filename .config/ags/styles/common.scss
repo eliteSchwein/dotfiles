@@ -136,11 +136,7 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
   background-color: color.adjust($bg, $alpha: calc($window-opacity - 1));
   color: $fg;
   margin: $window-margin;
-  box-shadow: 0 0 0 $window-border-width $window-border-color,
-  $window-shadow-offset $window-shadow-blur $window-shadow-spread color.adjust(
-                  $window-shadow-color,
-          $alpha: calc($window-shadow-opacity - 1)
-  );
+  border: $window-border-width solid $window-border-color;
   border-radius: $window-border-radius;
 }
 

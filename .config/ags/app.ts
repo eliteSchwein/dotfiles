@@ -1,9 +1,9 @@
 import {App} from "astal/gtk4";
 import windows from "./windows";
 import request from "./request";
-import initStyles from "./utils/styles";
+import initStyles, {loadThemeColor} from "./utils/styles";
 import initHyprland from "./utils/hyprland";
-import {execAsync} from "astal";
+import {execAsync, readFile} from "astal";
 
 initStyles();
 
@@ -15,6 +15,10 @@ App.start({
         windows.map((win) => App.get_monitors().map(win));
 
         initHyprland();
+
+        setTimeout(() => {
+            loadThemeFromFile()
+        }, 100)
     },
 });
 
@@ -26,3 +30,15 @@ export function restartAgs() {
 }
 
 App.apply_css('/tmp/theme.css')
+
+export function loadThemeFromFile() {
+    try {
+        const themeColor = readFile('/tmp/THEME_COLOR')
+
+        if(!themeColor && themeColor === "") return
+
+        loadThemeColor(themeColor)
+    } catch (e) {
+
+    }
+}

@@ -34,12 +34,6 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
   }
 
   .workspace-container {
-    box-shadow: 0 0 0 $bar-button-border-width $bar-button-border-color,
-    $bar-button-shadow-offset $bar-button-shadow-blur $bar-button-shadow-spread color.adjust(
-                    $bar-button-shadow-color,
-            $alpha: calc($bar-button-shadow-opacity - 1)
-    );
-
     color: $bar-button-fg-color;
     border-radius: calc(nth($bar-button-border-radius, 1) / 2);
     padding: $bar-button-padding;

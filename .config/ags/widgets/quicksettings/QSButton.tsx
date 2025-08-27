@@ -17,7 +17,12 @@ export function QSMenuButton({
                                  setup,
                              }: QSMenuButtonProps) {
     return (
-        <menubutton setup={setup} tooltipText={label} cssClasses={["qs-button"]}>
+        <menubutton
+            popover={Gtk.PopoverMenu.new_from_model(item.menuModel)}
+            setup={setup}
+            tooltipText={label}
+            cssClasses={["qs-button"]}
+        >
             <image halign={Gtk.Align.CENTER} iconName={iconName}/>
             {child}
         </menubutton>

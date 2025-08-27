@@ -9,6 +9,7 @@ export default function TrayPanelButton() {
             {bind(tray, "items").as((items) =>
                 items.map((item) => (
                     <menubutton
+                        popover={Gtk.PopoverMenu.new_from_model(item.menuModel)}
                         setup={(self) => {
                             self.insert_action_group("dbusmenu", item.actionGroup);
                         }}
