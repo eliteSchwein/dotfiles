@@ -16,6 +16,8 @@ THEME_COLORS=(
   "3b83f5"
   "F4511E"
   "bd4aed"
+  "C62828"
+  "FBC02D"
 )
 
 # Gradient background colors for active border
@@ -28,6 +30,8 @@ BACKGROUND_COLORS=(
   "rgba(0D47A1EE) rgba(0D47A1EE) 45deg"
   "rgba(F4511EEE) rgba(BF360CEE) 45deg"
   "rgba(7B1FA2EE) rgba(6A1B9AEE) 45deg"
+  "rgba(C62828EE) rgba(B71C1CEE) 45deg"
+  "rgba(FBC02DEE) rgba(F9A825EE) 45deg"
 )
 
 # List of wallpapers to rotate
@@ -40,6 +44,8 @@ IMAGES=(
   "$WALLPAPER_DIR/HighResScreenShot_2024-08-07_19-26-10.png"
   "$WALLPAPER_DIR/HighResScreenShot_2024-08-18_18-41-35.png"
   "$WALLPAPER_DIR/PurpleNebulaStation.png"
+  "$WALLPAPER_DIR/HighResScreenShot_2025-08-19_19-05-56.png"
+  "$WALLPAPER_DIR/PantherStation.png"
 )
 
 # Function to apply background color, wallpaper, and theme color
