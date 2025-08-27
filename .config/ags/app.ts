@@ -37,7 +37,7 @@ export function loadThemeFromFile() {
 
         if(!themeColor && themeColor === "") return
 
-        loadThemeColor(themeColor)
+        loadThemeColor(themeColor.trim())
     } catch (e) {
 
     }

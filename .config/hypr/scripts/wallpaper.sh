@@ -58,11 +58,11 @@ set_theme() {
   local theme_color="${THEME_COLORS[index]}"
   local image="${IMAGES[index]}"
 
-  hyprctl hyprpaper unload all  > /dev/null
+  hyprctl hyprpaper unload all > /dev/null
   hyprctl keyword general:col.active_border "$bg_color" > /dev/null
-  hyprctl hyprpaper preload "$image"  > /dev/null
-  hyprctl hyprpaper wallpaper ",$image"  > /dev/null
-  cp -r "$image" "/tmp/wallpaper.png"
+  hyprctl hyprpaper preload "$image" > /dev/null
+  hyprctl hyprpaper wallpaper ",$image" > /dev/null
+  cp -r "$image" "/tmp/wallpaper.png" > /dev/null
   astal changeThemeColor "$theme_color" > /dev/null &
 
   sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
@@ -73,7 +73,7 @@ set_theme() {
 
   echo "$theme_color" > /tmp/THEME_COLOR
 
-  bash $HOME/.config/hypr/scripts/reloadEquibop.sh
+  bash $HOME/.config/hypr/scripts/reloadEquibop.sh > /dev/null
 }
 
 

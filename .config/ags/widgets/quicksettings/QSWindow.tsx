@@ -157,7 +157,7 @@ function ArrowButton<T extends GObject.Object>({
                     </box>
                 </box>
             </button>
-            <button iconName={"go-next-symbolic"} onClicked={onArrowClicked}/>
+            <button cssClasses={["arrow-button-next"]} iconName={"go-next-symbolic"} onClicked={onArrowClicked}/>
         </box>
     );
 }

@@ -4,6 +4,12 @@
 .qs-container {
   min-width: 300px;
 
+  .arrow-button-next {
+    &:hover {
+      background-color: color.adjust($fg, $lightness: -10%);
+    }
+  }
+
   .media-player {
     margin-top: 0.5rem;
     min-width: 180px;

@@ -14,7 +14,7 @@ export function scanBluetoothDevices() {
 
     setTimeout(() => {
         btAdapter.stop_discovery();
-    }, 10_000)
+    }, 20_000)
 }
 
 export function createBluetoothDevice(device: any) {

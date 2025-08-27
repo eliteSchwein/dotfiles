@@ -2,9 +2,6 @@
 @use "sass:math";
 @use "../variables.scss" as *;
 
-$shadow-h: nth($bar-button-shadow-offset, 1);
-$shadow-v: nth($bar-button-shadow-offset, 2);
-
 .bar-container {
   margin: $bar-margin;
 
@@ -37,10 +34,6 @@ $shadow-v: nth($bar-button-shadow-offset, 2);
     color: $bar-button-fg-color;
     border-radius: calc(nth($bar-button-border-radius, 1) / 2);
     padding: $bar-button-padding;
-    margin-right: if($shadow-h > 0, $shadow-h, 0);
-    margin-left: if($shadow-h <= 0, $shadow-h, 0);
-    margin-bottom: if($shadow-v > 0, $shadow-v, 0);
-    margin-top: if($shadow-v <= 0, $shadow-v, 0);
 
     .workspace-button {
       background-color: color.adjust($bar-button-fg-color, $alpha: -0.55);

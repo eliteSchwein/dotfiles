@@ -13,31 +13,31 @@ export default function requestHandler(
     const params = request.split(" ")
     switch (params[0]) {
         case "changeThemeColor":
-            res("ok");
+            res("ok")
             loadThemeColor(params[1])
-            break;
+            break
         case "openAppLauncher":
             res("ok");
             showAppLauncher()
-            break;
+            break
         case "restart":
-            res("ok");
+            res("ok")
             restartAgs()
-            break;
+            break
         case "openPowerMenu":
-            res("ok");
+            res("ok")
             App.get_window("powermenu")?.set_visible(true);
-            break;
+            break
         case "pickColor":
-            res("ok");
+            res("ok")
             void launchPicker()
-            break;
+            break
         case "screen-record":
-            res("ok");
+            res("ok")
             screenRecord.start();
-            break;
+            break
         default:
-            res("not ok");
-            break;
+            res("not ok")
+            break
     }
 }
