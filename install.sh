@@ -20,7 +20,7 @@ paru -S --noconfirm \
   power-profiles-daemon \
   seahorse wl-clipboard phinger-cursors zsh \
   brightnessctl playerctl inotify-tools \
-  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp wf-recorder
+  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp wf-recorder udiskie
 
 # Utilities
 paru -S --noconfirm \
