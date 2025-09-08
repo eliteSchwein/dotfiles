@@ -105,7 +105,7 @@ export PATH=/opt/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/opt/cuda/lib64
 
 alias kys="ddev poweroff && shutdown -h now"
-alias ree="reboot"
+alias ree="ddev poweroff && reboot"
 alias levelup="paru -Syyu && hyprpm update"
 alias ssh="TERM=xterm-256color ssh"
 
