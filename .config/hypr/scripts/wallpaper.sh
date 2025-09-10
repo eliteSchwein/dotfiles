@@ -71,7 +71,10 @@ set_theme() {
   local image="${IMAGES[index]}"
 
   hyprctl hyprpaper unload all > /dev/null
-  hyprctl keyword general:col.active_border "$bg_color" > /dev/null
+
+  echo "general:col.active_border=$bg_color" > "$HOME/.config/hypr/theme_custom.conf"
+  #=hyprctl keyword general:col.active_border "$bg_color" > /dev/null
+
   hyprctl hyprpaper preload "$image" > /dev/null
   hyprctl hyprpaper wallpaper ",$image" > /dev/null
   cp -r "$image" "/tmp/wallpaper.png" > /dev/null
