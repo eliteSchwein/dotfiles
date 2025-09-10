@@ -35,4 +35,5 @@ source = ./configs/workspaces.conf
 # Start Exec
 source = ./configs/startexec.conf
 
-source = /tmp/HYPR_THEME_CUSTOM.conf
+# Theme Colors
+source = ./theme_custom.conf
