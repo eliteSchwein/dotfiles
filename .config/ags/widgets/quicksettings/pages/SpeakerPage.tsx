@@ -36,7 +36,7 @@ export default function SpeakerPage() {
                         }}
                     >
                         <box>
-                            <image iconName={speaker.volumeIcon}/>
+                            <image iconName={bind(speaker, "volumeIcon")}/>
                             <label label={speaker.description}/>
                         </box>
                     </button>

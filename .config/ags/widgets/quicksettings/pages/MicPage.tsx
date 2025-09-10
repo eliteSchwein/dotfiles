@@ -36,7 +36,7 @@ export default function MicPage() {
                         }}
                     >
                         <box>
-                            <image iconName={mic.volumeIcon}/>
+                            <image iconName={bind(mic, "volumeIcon")}/>
                             <label label={mic.description}/>
                         </box>
                     </button>
