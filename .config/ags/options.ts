@@ -82,12 +82,6 @@ const options = mkOptions(
                     opacity: opt(1),
                 },
             },
-            light: {
-                bg: opt("#fbf1c7"),
-                fg: opt("#3c3836"),
-                accent: opt("#3c3836"),
-                red: opt("#cc241d"),
-            },
             dark: {
                 bg: opt("#000000"),
                 fg: opt("#ebdbb2"),

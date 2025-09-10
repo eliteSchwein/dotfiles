@@ -39,6 +39,7 @@ export default function QSPanelButton() {
     const wp = AstalWp.get_default();
     const speaker = wp?.audio.defaultSpeaker!;
     const powerprofile = AstalPowerProfiles.get_default();
+    const microphone = wp?.defaultMicrophone!;
 
     return (
         <PanelButton
@@ -68,14 +69,20 @@ export default function QSPanelButton() {
                     iconName={bind(speaker, "volumeIcon")}
                 />
                 <image
+                    onScroll={(image, idk, direction) => {
+                        if (direction === -1) {
+                            microphone.volume += 0.02
+                            return
+                        }
+                        microphone.volume -= 0.02
+                    }}
+                    iconName={bind(microphone, "volumeIcon")}
+                />
+                <image
                     visible={bind(powerprofile, "activeProfile").as(
                         (p) => p === "power-saver",
                     )}
                     iconName={`battery-profile-powersave-symbolic`}
-                />
-                <image
-                    visible={wp?.defaultMicrophone && bind(wp.default_microphone, "mute")}
-                    iconName="microphone-disabled-symbolic"
                 />
             </box>
         </PanelButton>

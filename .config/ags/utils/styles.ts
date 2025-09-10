@@ -8,7 +8,7 @@ import {Opt} from "./option";
 const {theme} = options;
 const {window, bar} = theme;
 
-type ThemeMode = "dark" | "light";
+type ThemeMode = "dark";
 type ShorthandProperty = {
     top: number;
     right: number;
