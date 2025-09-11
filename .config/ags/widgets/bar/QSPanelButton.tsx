@@ -55,10 +55,6 @@ export default function QSPanelButton() {
                     iconName={"bluetooth-symbolic"}
                 />
                 <image
-                    visible={bind(battery, "isPresent")}
-                    iconName={bind(battery, "batteryIconName")}
-                />
-                <image
                     onScroll={(image, idk, direction) => {
                         if (direction === -1) {
                             speaker.volume += 0.02
@@ -83,6 +79,10 @@ export default function QSPanelButton() {
                         (p) => p === "power-saver",
                     )}
                     iconName={`battery-profile-powersave-symbolic`}
+                />
+                <image
+                    visible={bind(battery, "isPresent")}
+                    iconName={bind(battery, "batteryIconName")}
                 />
             </box>
         </PanelButton>
