@@ -1,4 +1,4 @@
-import {App} from "astal/gtk4";
+import {App, Gtk} from "astal/gtk4";
 import PanelButton from "../common/PanelButton";
 import {WINDOW_NAME} from "../quicksettings/QSWindow";
 import AstalBattery from "gi://AstalBattery";
@@ -48,15 +48,11 @@ export default function QSPanelButton() {
                 App.toggle_window(WINDOW_NAME);
             }}
         >
-            <box spacing={6}>
+            <box spacing={5}>
                 <NetworkIcon/>
                 <image
                     visible={bind(bluetooth, "isPowered")}
                     iconName={"bluetooth-symbolic"}
-                />
-                <image
-                    visible={bind(battery, "isPresent")}
-                    iconName={bind(battery, "batteryIconName")}
                 />
                 <image
                     onScroll={(image, idk, direction) => {
@@ -83,6 +79,10 @@ export default function QSPanelButton() {
                         (p) => p === "power-saver",
                     )}
                     iconName={`battery-profile-powersave-symbolic`}
+                />
+                <image
+                    visible={bind(battery, "isPresent")}
+                    iconName={bind(battery, "batteryIconName")}
                 />
             </box>
         </PanelButton>

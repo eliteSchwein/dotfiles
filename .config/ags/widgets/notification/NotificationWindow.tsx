@@ -58,9 +58,9 @@ function DNDButton() {
                 const classes = ["dnd"];
                 dnd && classes.push("active");
                 return classes;
-            })}
-            label={"DND"}
-        />
+            })}>
+            <image iconName={"notification-disabled-symbolic"}/>
+        </button>
     );
 }
 
@@ -73,7 +73,7 @@ function ClearButton() {
             }}
             sensitive={bind(notifd, "notifications").as((n) => n.length > 0)}
         >
-            <image iconName={"user-trash-full-symbolic"}/>
+            <image iconName={"user-trash-symbolic"}/>
         </button>
     );
 }
