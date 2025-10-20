@@ -44,7 +44,7 @@ for pid in "${capture_pids[@]}"; do wait "$pid"; done
       work="/tmp/${output}-lockscreen.work.png"
 
       # run effect to a work file (silent), then swap atomically
-      bash "$HOME/.config/hypr/scripts/utils/spots.sh" -s 8 "$tmp" "$work" > /dev/null 2>&1
+      bash "$HOME/.config/hypr/scripts/utils/spots.sh" -s 15 "$tmp" "$work" > /dev/null 2>&1
       mv -f -- "$work" "$final"
       rm -f -- "$tmp"
     ) & effect_pids+=("$!")
