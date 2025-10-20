@@ -20,8 +20,12 @@ else
   exit 1
 fi
 
-# Make executable and move into place
+# Replace 'convert' commands with 'magick' (word-boundary safe)
+# (GNU sed: \< and \> match word boundaries)
+sed -i 's/\<convert\>/magick/g' "$tmp"
+
+# Make executable and move into place atomically
 chmod +x "$tmp"
 mv -f "$tmp" "$DEST"
 
-echo "Installed spots.sh -> $DEST"
+echo "Installed spots.sh -> $DEST (converted 'convert' -> 'magick')"

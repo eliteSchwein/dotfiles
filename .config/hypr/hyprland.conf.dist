@@ -29,6 +29,7 @@ source = ./configs/env/nvidia.conf
 source = ./configs/env/wayland.conf
 source = ./configs/env/firefox.conf
 source = ./configs/env/wine.conf
+source = ./configs/env/misc.conf
 
 # Workspaces
 source = ./configs/workspaces.conf
