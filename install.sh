@@ -38,7 +38,7 @@ paru -S --noconfirm \
 
 # Social Media stuff
 paru -S --noconfirm \
-  legcord-git
+  bun-bin equibop-git
 
 # AGS Node Packages
 sudo npm i dart-sass esbuild --global
