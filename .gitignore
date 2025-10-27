@@ -2,6 +2,7 @@
 
 .config/hypr/theme_custom.conf
 .config/hypr/hyprland.conf
+.config/hypr/hypridle.conf
 .config/ags/node_modules
 .uuid
 .config/hypr/scripts/utils
