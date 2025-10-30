@@ -67,10 +67,10 @@ IMAGES=(
   "$WALLPAPER_DIR/CloudCities.png"
 )
 
-# --- Convert hex (with/without #) to decimal 0xRRGGBB ---
+# Convert hex (with/without #) to decimal (supports RRGGBB or AARRGGBB)
 hex_to_decimal() {
   local hex="${1#\#}"  # strip leading # if present
-  if [[ "$hex" =~ ^[0-9A-Fa-f]{6}$ ]]; then
+  if [[ "$hex" =~ ^([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$ ]]; then
     echo $((16#$hex))
   else
     echo "0"
@@ -106,10 +106,13 @@ set_theme() {
 
   echo "$theme_color" > /tmp/THEME_COLOR
 
-  # --- NEW: write decimal accent value to hyprtoolkit.conf ---
+  # --- NEW: add AA=FF before converting to decimal (AARRGGBB) ---
+  local theme_color_a="FF${theme_color#\#}"
+
+  # --- write decimal accent value to hyprtoolkit.conf ---
   mkdir -p "$(dirname "$HYPRTK")"
   local color_deci
-  color_deci="$(hex_to_decimal "$theme_color")"
+  color_deci="$(hex_to_decimal "$theme_color_a")"
 
   # If an 'accent =' line exists (with any number), replace it; else append one.
   if [[ -f "$HYPRTK" ]] && grep -qE '^[[:space:]]*accent[[:space:]]*=[[:space:]]*[0-9]+([[:space:]]*#.*)?$' "$HYPRTK"; then
