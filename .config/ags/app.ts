@@ -25,7 +25,7 @@ App.start({
 export function restartAgs() {
     execAsync([
         "bash", "-c",
-        "ags quit && ags run --gtk4 -d $HOME/.config/ags"
+        "ags quit && ags run --gtk 4 -d $HOME/.config/ags"
     ])
 }
 

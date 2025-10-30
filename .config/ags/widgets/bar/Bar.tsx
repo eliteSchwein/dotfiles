@@ -3,7 +3,6 @@ import TimePanelButton from "./TimePanelButton";
 import WorkspacesPanelButton from "./WorkspacesPanelButton";
 import NetworkSpeedPanelButton from "./NetworkSpeedPanelButton";
 import RecordIndicatorPanelButton from "./RecordIndicatorPanelButton";
-import LauncherPanelButton from "./LauncherPanelButton";
 import NotifPanelButton from "./NotifPanelButton";
 import QSPanelButton from "./QSPanelButton";
 import {separatorBetween} from "../../utils";
@@ -17,7 +16,6 @@ const {bar} = options;
 const {start, center, end} = bar;
 
 const panelButton = {
-    launcher: () => <LauncherPanelButton/>,
     workspace: () => <WorkspacesPanelButton/>,
     time: () => <TimePanelButton/>,
     notification: () => <NotifPanelButton/>,

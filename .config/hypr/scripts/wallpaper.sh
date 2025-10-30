@@ -1,10 +1,14 @@
 #!/bin/bash
+set -euo pipefail
 
 # Directory containing wallpapers
 WALLPAPER_DIR="$HOME/.config/hypr/wallpapers"
 
 # Path to store last used index
 INDEX_FILE="/tmp/WALLPAPER_INDEX"
+
+# Where to write the decimal accent value
+HYPRTK="$HOME/.config/hypr/hyprtoolkit.conf"
 
 # Theme colors (used with astal)
 THEME_COLORS=(
@@ -63,34 +67,60 @@ IMAGES=(
   "$WALLPAPER_DIR/CloudCities.png"
 )
 
+# --- Convert hex (with/without #) to decimal 0xRRGGBB ---
+hex_to_decimal() {
+  local hex="${1#\#}"  # strip leading # if present
+  if [[ "$hex" =~ ^[0-9A-Fa-f]{6}$ ]]; then
+    echo $((16#$hex))
+  else
+    echo "0"
+    return 1
+  fi
+}
+
 # Function to apply background color, wallpaper, and theme color
 set_theme() {
   local index=$1
-  local bg_color="${BACKGROUND_COLORS[index]}"
-  local theme_color="${THEME_COLORS[index]}"
-  local image="${IMAGES[index]}"
+  local bg_color="${BACKGROUND_COLORS[$index]}"
+  local theme_color="${THEME_COLORS[$index]}"
+  local image="${IMAGES[$index]}"
 
+  # Hyprpaper: clear then set new wallpaper
   hyprctl hyprpaper unload all > /dev/null
-
   echo "general:col.active_border=$bg_color" > "$HOME/.config/hypr/theme_custom.conf"
-  #=hyprctl keyword general:col.active_border "$bg_color" > /dev/null
+  # hyprctl keyword general:col.active_border "$bg_color" > /dev/null
 
   hyprctl hyprpaper preload "$image" > /dev/null
   hyprctl hyprpaper wallpaper ",$image" > /dev/null
-  cp -r "$image" "/tmp/wallpaper.png" > /dev/null
+  cp "$image" "/tmp/wallpaper.png" > /dev/null || true
+
+  # astal color (hex)
   astal changeThemeColor "$theme_color" > /dev/null &
 
-  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
-  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css"
+  # CSS accents (hex)
+  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/legcord/quickCss.css" || true
+  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g"        "$HOME/.config/legcord/quickCss.css" || true
 
-  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/equibop/settings/quickCss.css"
-  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/equibop/settings/quickCss.css"
+  sed -i -E "s/(--accent-[0-9]+: )#[0-9A-Fa-f]+;/\1#$theme_color;/g" "$HOME/.config/equibop/settings/quickCss.css" || true
+  sed -i -E "s/(--accent-new: )#[0-9A-Fa-f]+;/\1#$theme_color;/g"        "$HOME/.config/equibop/settings/quickCss.css" || true
 
   echo "$theme_color" > /tmp/THEME_COLOR
 
-  bash $HOME/.config/hypr/scripts/reloadEquibop.sh > /dev/null
-}
+  # --- NEW: write decimal accent value to hyprtoolkit.conf ---
+  mkdir -p "$(dirname "$HYPRTK")"
+  local color_deci
+  color_deci="$(hex_to_decimal "$theme_color")"
 
+  # If an 'accent =' line exists (with any number), replace it; else append one.
+  if [[ -f "$HYPRTK" ]] && grep -qE '^[[:space:]]*accent[[:space:]]*=[[:space:]]*[0-9]+([[:space:]]*#.*)?$' "$HYPRTK"; then
+    sed -i -E "s/^[[:space:]]*accent[[:space:]]*=[[:space:]]*[0-9]+([[:space:]]*#.*)?$/accent = ${color_deci}/" "$HYPRTK"
+  else
+    echo "accent = ${color_deci}" >> "$HYPRTK"
+  fi
+
+  # Reload anything that depends on it
+  bash "$HOME/.config/hypr/scripts/reloadEquibop.sh" > /dev/null || true
+}
 
 # Load last index if it exists
 last_index=-1
@@ -111,4 +141,4 @@ echo "$new_index" > "$INDEX_FILE"
 set_theme "$new_index"
 
 # Optionally unload the initial startup wallpaper
-hyprctl hyprpaper unload "$WALLPAPER_DIR/BlueNebula.png"
+hyprctl hyprpaper unload "$WALLPAPER_DIR/BlueNebula.png" || true

@@ -11,7 +11,7 @@ const options = mkOptions(
         bar: {
             position: opt("top"),
             separator: opt(true),
-            start: opt(["launcher", "workspace"]),
+            start: opt(["workspace"]),
             center: opt(["time", "notification"]),
             end: opt(["network_speed", "tray", "quicksetting"]),
         },

@@ -1,4 +1,3 @@
-import Applauncher from "./widgets/applauncher/Applauncher.jsx";
 import Bar from "./widgets/bar/Bar.jsx";
 import DateMenu from "./widgets/datemenu/DateMenu.jsx";
 import NotificationPopup from "./widgets/notification/NotificationPopup.jsx";
@@ -10,7 +9,6 @@ import QSWindow from "./widgets/quicksettings/QSWindow.jsx";
 export default [
     Bar,
     DateMenu,
-    Applauncher,
     NotificationPopup,
     NotificationWindow,
     QSWindow,

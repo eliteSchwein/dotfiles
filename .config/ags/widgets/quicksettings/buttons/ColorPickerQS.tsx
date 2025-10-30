@@ -21,19 +21,6 @@ export default function ColorPickerQS() {
 }
 
 export async function launchPicker() {
-    const wlCopy = (color: string) =>
-        execAsync(["wl-copy", color]).catch(console.error);
-
-    execAsync("hyprpicker")
-        .then((color) => {
-            if (!color) return;
-
-            wlCopy(color);
-            notifySend({
-                appName: "Hyprpicker",
-                summary: "Color Picker",
-                body: `${color} copied to clipboard`,
-            });
-        })
+    execAsync("hyprpicker -a -n")
         .catch(console.error);
 }

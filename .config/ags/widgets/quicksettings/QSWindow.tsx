@@ -1,7 +1,4 @@
 import PopupWindow from "../common/PopupWindow";
-import ColorPickerQS from "./buttons/ColorPickerQS";
-import DontDisturbQS from "./buttons/DontDisturbQS";
-import RecordQS from "./buttons/RecordQS";
 import BrightnessBox from "./BrightnessBox";
 import VolumeBox from "./VolumeBox";
 import {FlowBox} from "../common/FlowBox";
@@ -18,8 +15,6 @@ import WifiPage, {currentActiveWifiInput, currentWifiPassword} from "./pages/Wif
 import MicPage from "./pages/MicPage";
 import BluetoothPage, {scanBluetoothDevices} from "./pages/BluetoothPage";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";
-import WallpaperQS from "./buttons/WallpaperQS";
-import RestartQS from "./buttons/RestartQS";
 import MediaBox from "./MediaBox";
 
 export const WINDOW_NAME = "quicksettings";
@@ -36,24 +31,6 @@ const layout = Variable.derive(
         return `${pos}_center`;
     },
 );
-
-function QSButtons() {
-    return (
-        <FlowBox
-            maxChildrenPerLine={3}
-            activateOnSingleClick={false}
-            homogeneous
-            rowSpacing={6}
-            columnSpacing={6}
-        >
-            <ColorPickerQS/>
-            <DontDisturbQS/>
-            <RecordQS/>
-            <WallpaperQS/>
-            <RestartQS/>
-        </FlowBox>
-    );
-}
 
 function Header() {
     const battery = AstalBattery.get_default();
@@ -237,7 +214,6 @@ function MainPage() {
             <Header/>
             <Gtk.Separator/>
             <WifiBluetooth/>
-            <QSButtons/>
             <BrightnessBox/>
             <VolumeBox/>
             <MediaBox/>
