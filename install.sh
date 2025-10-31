@@ -39,11 +39,6 @@ paru -S --noconfirm dms-shell-bin \
 paru -S --noconfirm \
   bun-bin equibop-bin
 
-# AGS Node Packages
-sudo npm i dart-sass esbuild --global
-
-ags init --gtk 4
-
 sudo cp -r ./configs/hypr/gtk-themes/* $THEME_PATH
 
 gsettings set org.gnome.desktop.interface gtk-theme 'Flat-Remix-GTK-Blue-Darkest-Solid'
