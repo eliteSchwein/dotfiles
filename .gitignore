@@ -7,3 +7,4 @@
 .config/ags/node_modules
 .uuid
 .config/hypr/scripts/utils
+.config/DankMaterialShell/firefox.css

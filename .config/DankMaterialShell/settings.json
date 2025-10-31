@@ -99,7 +99,11 @@
   "dankBarLeftWidgets": [
     "launcherButton",
     "workspaceSwitcher",
-    "focusedWindow"
+    "focusedWindow",
+    {
+      "id": "music",
+      "enabled": true
+    }
   ],
   "dankBarCenterWidgets": [
     {
@@ -134,10 +138,6 @@
     },
     {
       "id": "controlCenterButton",
-      "enabled": true
-    },
-    {
-      "id": "music",
       "enabled": true
     },
     {

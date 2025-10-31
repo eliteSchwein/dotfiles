@@ -11,3 +11,8 @@ output_path = '~/.config/equibop/settings/quickCss.css'
 [templates.legcord]
 input_path = '~/.config/matugen/templates/discord.css'
 output_path = '~/.config/legcord/quickCss.css'
+
+[templates.pywalfox]
+input_path = '~/.config/matugen/templates/pywalfox.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox update'
