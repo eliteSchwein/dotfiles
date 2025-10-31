@@ -305,6 +305,7 @@ foreignObject
 }
 
 /* Nuke Useless Stuff */
+.chatGradient__36d07,
 .footer__214dc,
 button[aria-label="Start An Activity"],
 button[aria-label="Send a gift"],
@@ -395,6 +396,23 @@ div[data-list-id="profile-288633425303437312"]
 
 .form_f75fb0 {
     padding-left: 0!important;
+}
+
+/* Custom Inputs */
+.searchBar__97492,
+.button__201d5{
+    background: transparent!important;
+    border: var(--border-thickness) solid var(--border-subtle)!important;
+    transition: border-color var(--border-hover-transition)!important;
+}
+
+.buttons__37e49 button {
+    border: none!important;
+}
+
+.searchBar__97492:hover,
+.button__201d5:hover{
+    border-color: var(--border-hover)!important;
 }
 
 .content__5e434 {
