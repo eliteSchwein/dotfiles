@@ -207,7 +207,7 @@
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
-  "notificationPopupPosition": 0,
+  "notificationPopupPosition": -1,
   "osdAlwaysShowValue": false,
   "powerActionConfirm": true,
   "customPowerActionLock": "",
