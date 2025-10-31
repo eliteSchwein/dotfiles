@@ -29,8 +29,8 @@ if hyprshot -s -zm region -o "$screenshot_dir" -f "$file_name"; then
 
         sleep 0.5
 
-        notify-send --app-name=Hyprshot --icon="screenshooter-symbolic" \
-            "Screenshot saved" "Screenshot saved at ${screenshot_file}"
+        #notify-send --app-name=Hyprshot --icon="screenshooter-symbolic" \
+        #    "Screenshot saved" "Screenshot saved at ${screenshot_file}"
 
         # Open screenshot editor
         bash "$HOME/.config/hypr/scripts/screenshotEdit.sh" "$screenshot_file" "$pid_file" &
@@ -52,7 +52,7 @@ if hyprshot -s -zm region -o "$screenshot_dir" -f "$file_name"; then
 
         hyprctl dispatch movetoworkspace "special:screenshot, pid:$drawing_pid"
     else
-        notify-send --icon="screenshooter-symbolic" --app-name=Hyprshot "Screenshot canceled"
+        #notify-send --icon="screenshooter-symbolic" --app-name=Hyprshot "Screenshot canceled"
         exit 1
     fi
 else
