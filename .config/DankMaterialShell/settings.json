@@ -183,7 +183,7 @@
   "dankBarOpenOnOverview": false,
   "dankBarVisible": true,
   "dankBarSpacing": 7,
-  "dankBarBottomGap": 0,
+  "dankBarBottomGap": -8,
   "dankBarInnerPadding": 8,
   "dankBarSquareCorners": false,
   "dankBarNoBackground": false,
