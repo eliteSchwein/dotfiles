@@ -104,16 +104,37 @@
   "dankBarCenterWidgets": [
     "music",
     "clock",
-    "weather"
+    "weather",
+    {
+      "id": "notificationButton",
+      "enabled": true
+    }
   ],
   "dankBarRightWidgets": [
-    "systemTray",
-    "clipboard",
-    "cpuUsage",
-    "memUsage",
-    "notificationButton",
-    "battery",
-    "controlCenterButton"
+    {
+      "id": "systemTray",
+      "enabled": true
+    },
+    {
+      "id": "cpuUsage",
+      "enabled": true
+    },
+    {
+      "id": "memUsage",
+      "enabled": true
+    },
+    {
+      "id": "battery",
+      "enabled": true
+    },
+    {
+      "id": "controlCenterButton",
+      "enabled": true
+    },
+    {
+      "id": "clipboard",
+      "enabled": true
+    }
   ],
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
