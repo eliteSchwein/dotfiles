@@ -241,7 +241,7 @@
   "batterySuspendTimeout": 0,
   "batteryHibernateTimeout": 0,
   "lockBeforeSuspend": false,
-  "loginctlLockIntegration": true,
+  "loginctlLockIntegration": false,
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "configVersion": 1
