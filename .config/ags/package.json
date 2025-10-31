@@ -1,8 +1,0 @@
-{
-  "name": "astal-shell",
-  "dependencies": {
-    "astal": "/usr/share/astal/gjs",
-    "dart-sass": "^1.25.0",
-    "esbuild": "^0.25.5"
-  }
-}

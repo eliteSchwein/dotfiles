@@ -31,11 +31,8 @@ paru -S --noconfirm \
   vlc vlc-plugins-all \
   stow
 
-# Astal
-paru -S --noconfirm \
-  aylurs-gtk-shell \
-  libastal-meta \
-  libastal-gjs
+# Quickshell
+paru -S --noconfirm dms-shell-bin
 
 # Social Media stuff
 paru -S --noconfirm \
