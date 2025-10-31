@@ -11,7 +11,6 @@ paru -S --noconfirm \
   qt5-wayland qt6-wayland hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr xdg-desktop-portal \
   hypridle hyprlock hyprpaper hyprpicker hyprpolkitagent \
-  hyprlauncher \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype
 
 # Addons
@@ -32,7 +31,9 @@ paru -S --noconfirm \
   stow
 
 # Quickshell
-paru -S --noconfirm dms-shell-bin
+paru -S --noconfirm dms-shell-bin \
+  cava wl-clipboard cliphist brightnessctl qt6-multimedia accountsservice \
+  matugen-bin dgop
 
 # Social Media stuff
 paru -S --noconfirm \

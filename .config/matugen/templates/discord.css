@@ -14,12 +14,12 @@ body {
 
 
 :root {
-    --accent-1: #F4511E;
-    --accent-2: #F4511E;
-    --accent-3: #F4511E;
-    --accent-4: #F4511E;
-    --accent-5: #F4511E;
-    --accent-new: #F4511E;
+    --accent-1: {{colors.tertiary.default.hex}};            /* links */
+    --accent-2: {{colors.primary.default.hex}};             /* general unread/mention elements, some icons when active */
+    --accent-3: {{colors.primary.default.hex}};             /* accent buttons */
+    --accent-4: {{colors.surface_bright.default.hex}};      /* accent buttons when hovered */
+    --accent-5: {{colors.primary_fixed_dim.default.hex}};   /* accent buttons when clicked */
+    --accent-new: {{colors.primary.default.hex}};            /* refresh? */
     --red-1: #EF5350;
     --red-2: #E53935;
     --red-3: #D32F2F;

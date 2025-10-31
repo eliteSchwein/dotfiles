@@ -1,0 +1,13 @@
+[config]
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland.conf'
+output_path = '~/.config/hypr/theme_custom.conf'
+
+[templates.equibop]
+input_path = '~/.config/matugen/templates/discord.css'
+output_path = '~/.config/equibop/settings/quickCss.css'
+
+[templates.legcord]
+input_path = '~/.config/matugen/templates/discord.css'
+output_path = '~/.config/legcord/quickCss.css'
