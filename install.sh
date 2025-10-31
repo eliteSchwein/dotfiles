@@ -33,7 +33,7 @@ paru -S --noconfirm \
 # Quickshell
 paru -S --noconfirm dms-shell-bin \
   cava wl-clipboard cliphist brightnessctl qt6-multimedia accountsservice \
-  matugen-bin dgop
+  matugen-bin
 
 # Social Media stuff
 paru -S --noconfirm \
