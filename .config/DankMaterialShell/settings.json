@@ -102,9 +102,14 @@
     "focusedWindow"
   ],
   "dankBarCenterWidgets": [
-    "music",
-    "clock",
-    "weather",
+    {
+      "id": "weather",
+      "enabled": true
+    },
+    {
+      "id": "clock",
+      "enabled": true
+    },
     {
       "id": "notificationButton",
       "enabled": true
@@ -129,6 +134,10 @@
     },
     {
       "id": "controlCenterButton",
+      "enabled": true
+    },
+    {
+      "id": "music",
       "enabled": true
     },
     {
