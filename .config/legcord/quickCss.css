@@ -5,140 +5,140 @@
 @import url("https://refact0r.github.io/system24/src/main.css");
 
 body {
-  font-family: "VictorMono", monospace !important;
+    font-family: "VictorMono", monospace !important;
 }
 
 * {
-  font-family: "VictorMono", monospace !important;
+    font-family: "VictorMono", monospace !important;
 }
 
 
 :root {
-  --accent-1: #F4511E;
-  --accent-2: #F4511E;
-  --accent-3: #F4511E;
-  --accent-4: #F4511E;
-  --accent-5: #F4511E;
-  --accent-new: #F4511E;
-  --red-1: #EF5350;
-  --red-2: #E53935;
-  --red-3: #D32F2F;
-  --red-4: #B71C1C;
-  --red-5: #791313;
-  /* system24 */
-  --font-secondary: "VictorMono"; /* UI font name. it must be installed on your system. */
-  --font-primary: "VictorMono"; /* UI font name. it must be installed on your system. */
-  --font: "VictorMono"; /* UI font name. it must be installed on your system. */
-  letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
-  font-weight: 300; /* UI font weight. */
-  --label-font-weight: 500; /* font weight for panel labels. */
-  --corner-text: ""; /* custom text to display in the corner. only works on windows. */
-  --pad: 16px; /* padding between panels. */
-  --txt-pad: 10px; /* padding inside panels to prevent labels from clipping */
-  --panel-roundness: 0px; /* corner roundness of panels. ONLY WORKS IF unrounding.css IS REMOVED (see above). */
+    --accent-1: #F4511E;
+    --accent-2: #F4511E;
+    --accent-3: #F4511E;
+    --accent-4: #F4511E;
+    --accent-5: #F4511E;
+    --accent-new: #F4511E;
+    --red-1: #EF5350;
+    --red-2: #E53935;
+    --red-3: #D32F2F;
+    --red-4: #B71C1C;
+    --red-5: #791313;
+    /* system24 */
+    --font-secondary: "VictorMono"; /* UI font name. it must be installed on your system. */
+    --font-primary: "VictorMono"; /* UI font name. it must be installed on your system. */
+    --font: "VictorMono"; /* UI font name. it must be installed on your system. */
+    letter-spacing: -0.05ch; /* decreases letter spacing for better readability. */
+    font-weight: 300; /* UI font weight. */
+    --label-font-weight: 500; /* font weight for panel labels. */
+    --corner-text: ""; /* custom text to display in the corner. only works on windows. */
+    --pad: 16px; /* padding between panels. */
+    --txt-pad: 10px; /* padding inside panels to prevent labels from clipping */
+    --panel-roundness: 0px; /* corner roundness of panels. ONLY WORKS IF unrounding.css IS REMOVED (see above). */
 
-  /* background colors */
-  --bg-0: oklch(19% 0 0); /* main background color. */
-  --bg-0-t: oklch(0 0 0 / 0.4); /* main background color. */
-  --bg-1: oklch(
-          23% 0 0
-  ); /* background color for secondary elements like code blocks, embeds, etc. */
-  --bg-2: oklch(27% 0 0); /* color of neutral buttons. */
-  --bg-3: oklch(31% 0 0); /* color of neutral buttons when hovered. */
+    /* background colors */
+    --bg-0: oklch(19% 0 0); /* main background color. */
+    --bg-0-t: oklch(0 0 0 / 0.4); /* main background color. */
+    --bg-1: oklch(
+            23% 0 0
+    ); /* background color for secondary elements like code blocks, embeds, etc. */
+    --bg-2: oklch(27% 0 0); /* color of neutral buttons. */
+    --bg-3: oklch(31% 0 0); /* color of neutral buttons when hovered. */
 
-  /* state modifiers */
-  --hover: oklch(54% 0 0 / 0.1); /* color of hovered elements. */
-  --active: oklch(54% 0 0 / 0.2); /* color of elements when clicked. */
-  --selected: var(--active); /* color of selected elements. */
+    /* state modifiers */
+    --hover: oklch(54% 0 0 / 0.1); /* color of hovered elements. */
+    --active: oklch(54% 0 0 / 0.2); /* color of elements when clicked. */
+    --selected: var(--active); /* color of selected elements. */
 
-  /* text colors */
-  --txt-dark: var(--bg-0); /* color of dark text on colored backgrounds. */
-  --txt-link: var(--cyan); /* color of links. */
-  --txt-0: oklch(90% 0 0); /* color of bright/white text. */
-  --txt-1: oklch(80% 0 0); /* main text color. */
-  --txt-2: oklch(60% 0 0); /* color of secondary text like channel list. */
-  --txt-3: oklch(40% 0 0); /* color of muted text. */
+    /* text colors */
+    --txt-dark: var(--bg-0); /* color of dark text on colored backgrounds. */
+    --txt-link: var(--cyan); /* color of links. */
+    --txt-0: oklch(90% 0 0); /* color of bright/white text. */
+    --txt-1: oklch(80% 0 0); /* main text color. */
+    --txt-2: oklch(60% 0 0); /* color of secondary text like channel list. */
+    --txt-3: oklch(40% 0 0); /* color of muted text. */
 
-  /* accent colors */
-  --acc-0: var(--pink); /* main accent color. */
-  --acc-1: var(--pink-1); /* color of accent buttons when hovered. */
-  --acc-2: var(--pink-2); /* color of accent buttons when clicked. */
+    /* accent colors */
+    --acc-0: var(--pink); /* main accent color. */
+    --acc-1: var(--pink-1); /* color of accent buttons when hovered. */
+    --acc-2: var(--pink-2); /* color of accent buttons when clicked. */
 
-  /* borders */
-  --border-width: 2px; /* panel border thickness. */
-  --border-color: var(--bg-3); /* panel border color. */
-  --border-hover-color: var(--acc-0); /* panel border color when hovered. */
-  --border-transition: 0.2s ease; /* panel border transition. */
+    /* borders */
+    --border-width: 2px; /* panel border thickness. */
+    --border-color: var(--bg-3); /* panel border color. */
+    --border-hover-color: var(--acc-0); /* panel border color when hovered. */
+    --border-transition: 0.2s ease; /* panel border transition. */
 
-  /* status dot colors */
-  --online-dot: var(--green); /* color of online dot. */
-  --dnd-dot: var(--pink); /* color of do not disturb dot. */
-  --idle-dot: var(--yellow); /* color of idle dot. */
-  --streaming-dot: var(--purple); /* color of streaming dot. */
+    /* status dot colors */
+    --online-dot: var(--green); /* color of online dot. */
+    --dnd-dot: var(--pink); /* color of do not disturb dot. */
+    --idle-dot: var(--yellow); /* color of idle dot. */
+    --streaming-dot: var(--purple); /* color of streaming dot. */
 
-  /* mention/ping and message colors */
-  --mention-txt: var(--acc-0); /* color of mention text. */
-  --mention-bg: color-mix(
-          in oklch,
-          var(--acc-0),
-          transparent 90%
-  ); /* background highlight of mention text. */
-  --mention-overlay: color-mix(
-          in oklch,
-          var(--acc-0),
-          transparent 90%
-  ); /* overlay color of messages that mention you. */
-  --mention-hover-overlay: color-mix(
-          in oklch,
-          var(--acc-0),
-          transparent 95%
-  ); /* overlay color of messages that mention you when hovered. */
-  --reply-overlay: var(
-          --active
-  ); /* overlay color of message you are replying to. */
-  --reply-hover-overlay: var(
-          --hover
-  ); /* overlay color of message you are replying to when hovered. */
+    /* mention/ping and message colors */
+    --mention-txt: var(--acc-0); /* color of mention text. */
+    --mention-bg: color-mix(
+            in oklch,
+            var(--acc-0),
+            transparent 90%
+    ); /* background highlight of mention text. */
+    --mention-overlay: color-mix(
+            in oklch,
+            var(--acc-0),
+            transparent 90%
+    ); /* overlay color of messages that mention you. */
+    --mention-hover-overlay: color-mix(
+            in oklch,
+            var(--acc-0),
+            transparent 95%
+    ); /* overlay color of messages that mention you when hovered. */
+    --reply-overlay: var(
+            --active
+    ); /* overlay color of message you are replying to. */
+    --reply-hover-overlay: var(
+            --hover
+    ); /* overlay color of message you are replying to when hovered. */
 
-  /* color shades */
-  --pink: oklch(73% 0.12 0);
-  --pink-1: oklch(63% 0.12 0);
-  --pink-2: oklch(53% 0.12 0);
-  --purple: oklch(73% 0.12 300);
-  --purple-1: oklch(63% 0.12 300);
-  --purple-2: oklch(53% 0.12 300);
-  --cyan: oklch(73% 0.12 200);
-  --yellow: oklch(78% 0.12 80);
-  --green: oklch(73% 0.12 160);
-  --green-1: oklch(63% 0.12 160);
-  --green-2: oklch(53% 0.12 160);
+    /* color shades */
+    --pink: oklch(73% 0.12 0);
+    --pink-1: oklch(63% 0.12 0);
+    --pink-2: oklch(53% 0.12 0);
+    --purple: oklch(73% 0.12 300);
+    --purple-1: oklch(63% 0.12 300);
+    --purple-2: oklch(53% 0.12 300);
+    --cyan: oklch(73% 0.12 200);
+    --yellow: oklch(78% 0.12 80);
+    --green: oklch(73% 0.12 160);
+    --green-1: oklch(63% 0.12 160);
+    --green-2: oklch(53% 0.12 160);
 
-  /* Radial Status */
-  --rs-small-spacing: 2px; /* Gap between avatar and status for members list/dms | MUST end in px */
-  --rs-medium-spacing: 3px; /* Gap between avatar and status for User popout | MUST end in px */
-  --rs-large-spacing: 4px; /* Gap between avatar and status for User profiles | MUST end in px */
+    /* Radial Status */
+    --rs-small-spacing: 2px; /* Gap between avatar and status for members list/dms | MUST end in px */
+    --rs-medium-spacing: 3px; /* Gap between avatar and status for User popout | MUST end in px */
+    --rs-large-spacing: 4px; /* Gap between avatar and status for User profiles | MUST end in px */
 
-  --rs-small-width: 2px; /* Thickness of status border for members list/dms | MUST end in px */
-  --rs-medium-width: 3px; /* Thickness of status border for User popout | MUST end in px */
-  --rs-large-width: 4px; /* Thickness of status border for User profile | MUST end in px */
+    --rs-small-width: 2px; /* Thickness of status border for members list/dms | MUST end in px */
+    --rs-medium-width: 3px; /* Thickness of status border for User popout | MUST end in px */
+    --rs-large-width: 4px; /* Thickness of status border for User profile | MUST end in px */
 
-  --rs-avatar-shape: 10%; /* 50% for round - 0% for square */
+    --rs-avatar-shape: 10%; /* 50% for round - 0% for square */
 
-  --rs-online-color: #43b581; /* Colour for online status */
-  --rs-idle-color: #faa61a; /* Colour for idle status */
-  --rs-dnd-color: #f04747; /* Colour for dnd status */
-  --rs-offline-color: #636b75; /* Colour for offline status */
-  --rs-streaming-color: #643da7; /* Colour for streaming status */
-  --rs-invisible-color: #747f8d; /* Colour for invisible status - Note: this will only show for your own invisibility */
-  --rs-phone-color: var(
-          --rs-online-color
-  ); /* Colour of the ring and phone icon when a user is on their phone |  */
+    --rs-online-color: #43b581; /* Colour for online status */
+    --rs-idle-color: #faa61a; /* Colour for idle status */
+    --rs-dnd-color: #f04747; /* Colour for dnd status */
+    --rs-offline-color: #636b75; /* Colour for offline status */
+    --rs-streaming-color: #643da7; /* Colour for streaming status */
+    --rs-invisible-color: #747f8d; /* Colour for invisible status - Note: this will only show for your own invisibility */
+    --rs-phone-color: var(
+            --rs-online-color
+    ); /* Colour of the ring and phone icon when a user is on their phone |  */
 
-  --rs-phone-visible: block; /* Visibility of the phone icon next to a users avatar. | block = visible | none = hidden */
+    --rs-phone-visible: block; /* Visibility of the phone icon next to a users avatar. | block = visible | none = hidden */
 
-  /* Horizontal Server List */
-  --HSL-server-direction: column; /* Direction of the server list. | OPTIONS: column, column-reverse | DEFAULT: column */
-  --HSL-server-alignment: flex-start; /* Alignment of the server list. | OPTIONS: flex-start, center, flex-end | DEFAULT: flex-start */
+    /* Horizontal Server List */
+    --HSL-server-direction: column; /* Direction of the server list. | OPTIONS: column, column-reverse | DEFAULT: column */
+    --HSL-server-alignment: flex-start; /* Alignment of the server list. | OPTIONS: flex-start, center, flex-end | DEFAULT: flex-start */
 }
 
 /* Any custom CSS below here */
@@ -147,109 +147,109 @@ body {
 .pill_e5445c,
 .pill__1f388,
 .pill_ed9a5f {
-  transform: scaleX(-1);
-  left: -.1em;
+    transform: scaleX(-1);
+    left: -.1em;
 }
 
 /* change dot color */
 .item__58105 {
-  background: var(--accent-new);
+    background: var(--accent-new);
 }
 
 /* make transparent */
-.content_c48ade .privateChannels__35e86,
-.content_c48ade .container__2637a,
-.scroller__99e7c, .searchBar__35e86,
+.content__5e434 .privateChannels_e6b769,
+.content__5e434 .container__2637a,
+.scroller__99e7c, .searchBar_e6b769,
 .members_c8ffbb,
 .member_c8ffbb {
-  background: rgba(0, 0, 0, 0)!important;
+    background: rgba(0, 0, 0, 0)!important;
 }
 
 /* HSL Server length */
 .wrapper_ef3116 {
-  max-height: calc(100vw - var(--gap) - var(--gap)) !important;
-  padding-right: 2px;
+    max-height: calc(100vw - var(--gap) - var(--gap)) !important;
+    padding-right: 2px;
 }
 .wrapper_ef3116 ul {
-  max-height: calc(100vw - var(--gap) - var(--gap) - var(--gap) - var(--gap));
+    max-height: calc(100vw - var(--gap) - var(--gap) - var(--gap) - var(--gap));
 }
 .visual-refresh .scroller_ef3116 {
-  padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* Bigger Picker */
 .positionLayer__08434 {
-  height: 80vh;
+    height: 80vh;
 }
 .drawerSizingWrapper__08434 {
-  width: 600px !important;
+    width: 600px !important;
 }
 
 /* Radial Chat Avatrs */
 .avatar_c19a55 {
-  border-radius: 10%;
+    border-radius: 10%;
 }
 
 /* Remove Titelbar Fix */
 .bar_c38106 {
-  display: none;
-  min-height: 0;
-  padding: 0;
+    display: none;
+    min-height: 0;
+    padding: 0;
 }
-.base_c48ade .content_c48ade {
-  margin-top: 4.4em!important;
+.base__5e434 .content__5e434 {
+    margin-top: 4.4em!important;
 }
 
-.panels_c48ade:not([aria-label="User area"]) {
-  background: transparent !important;
-  padding: unset !important;
-  left: calc(var(--space-xs) - -1.4em) !important;
-  bottom: calc(var(--space-xs) - 0.4em) !important;
+.panels__5e434:not([aria-label="User area"]) {
+    background: transparent !important;
+    padding: unset !important;
+    left: calc(var(--space-xs) - -1.4em) !important;
+    bottom: calc(var(--space-xs) - 0.4em) !important;
 }
 
 /* Visual Refresh System24 Padding Fixes */
 .visual-refresh .form_f75fb0 {
-  margin: 0;
+    margin: 0;
 }
-.sidebarList_c48ade,
-.page_c48ade {
-  margin-top: var(--gap);
+.sidebarList__5e434,
+.page__5e434 {
+    margin-top: var(--gap);
 }
 .content_f75fb0 {
-  margin-bottom: var(--gap);
+    margin-bottom: var(--gap);
 }
 .tabBody__133bf {
-  margin-bottom: var(--gap);
+    margin-bottom: var(--gap);
 }
 
 /* Sus */
 @keyframes sus {
-  0% {
-    background-position: -22vw -5vh;
-  }
-  100% {
-    background-position: -12vw -5vh;
-  }
+    0% {
+        background-position: -22vw -5vh;
+    }
+    100% {
+        background-position: -12vw -5vh;
+    }
 }
 @-webkit-keyframes sus {
-  0% {
-    background-position: -22vw -5vh;
-  }
-  100% {
-    background-position: -12vw -5vh;
-  }
+    0% {
+        background-position: -22vw -5vh;
+    }
+    100% {
+        background-position: -12vw -5vh;
+    }
 }
 .sidebarRegionScroller__23e6b {
-  background-image: url(https://i.imgur.com/FVKnrlz.png) !important;
-  background-color: var(--color1) !important;
-  background-repeat: no-repeat !important;
-  background-size: 25vw !important;
-  -webkit-animation-duration: 4s !important;
-  animation-duration: 4s !important;
-  -webkit-animation-name: sus !important;
-  animation-name: sus !important;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+    background-image: url(https://i.imgur.com/FVKnrlz.png) !important;
+    background-color: var(--color1) !important;
+    background-repeat: no-repeat !important;
+    background-size: 25vw !important;
+    -webkit-animation-duration: 4s !important;
+    animation-duration: 4s !important;
+    -webkit-animation-name: sus !important;
+    animation-name: sus !important;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 /* Home Button */
@@ -276,7 +276,7 @@ foreignObject
 svg
 defs
 rect:nth-child(3) {
-  display: none;
+    display: none;
 }
 .scroller_ef3116
 .listItemWrapper__91816
@@ -285,23 +285,23 @@ svg
 foreignObject
 .wrapper__6e9f8
 .childWrapper__6e9f8 {
-  border-radius: 10px;  background-image: url(https://i.pinimg.com/736x/c4/86/1e/c4861efe61bdc5573810bfd899629865.jpg);
-  background-color: transparent;
-  background-size: var(--guildbar-avatar-size);
-  background-repeat: no-repeat;
-  background-position: 0px 0px;
+    border-radius: 10px;  background-image: url(https://i.pinimg.com/736x/c4/86/1e/c4861efe61bdc5573810bfd899629865.jpg);
+    background-color: transparent;
+    background-size: var(--guildbar-avatar-size);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
 }
 
 /* Nuke Avatar Decor and stuff */
 .avatarDecoration_c19a55,
 .avatarDecoration__44b0c {
-  display: none;
+    display: none;
 }
 .profileEffects__01370 {
-  display: none;
+    display: none;
 }
 .container__4bbc6.noFade__4bbc6 {
-  display: none;
+    display: none;
 }
 
 /* Nuke Useless Stuff */
@@ -317,13 +317,13 @@ button[aria-label="Send a gift"],
 .overlay_c0bea0
 div[data-list-id="profile-288633425303437312"]
 .menuDivider_ce8328,
-.inner_c0bea0 .wrapper_da5890 > button,
+.inner_c0bea0 .wrapper__4106a > button,
 .channelAppLauncher_e6e74f,
 .gradientBackground__11664,
 .stack_dbd263 .tutorialContainer__650eb,
 .stack_dbd263 .tutorialContainer__650eb ~ .listItem__650eb:nth-last-child(2),
 .stack_dbd263 .tutorialContainer__650eb ~ .listItem__650eb:nth-last-child(3) {
-  display: none !important;
+    display: none !important;
 }
 
 /* system24 fixes*/body,
@@ -334,24 +334,24 @@ div[data-list-id="profile-288633425303437312"]
                    .chat_f75fb0,
                    .chatContent_f75fb0,
                    .bg__960e4,
-                   .sidebarList_c48ade,
-                   .panels_c48ade,
+                   .sidebarList__5e434,
+                   .panels__5e434,
                    .container__37e49,
                    .themedBackground__74017,
-                   .sidebar_c48ade {
-                     background: transparent !important;
+                   .sidebar__5e434 {
+                       background: transparent !important;
                    }
 .messagesWrapper__36d07,
 .peopleColumn__133bf,
 .subtitleContainer_f75fb0,
 .container__9293f:not([aria-label="Channel header"]),
-.panels_c48ade,
-.privateChannels__35e86:not([aria-label="Private channels"]),
+.panels__5e434,
+.privateChannels_e6b769:not([aria-label="Private channels"]),
 .container__2637a:not([aria-label*="server"]),
 .container_c8ffbb,
 .layer__960e4,
-.sidebarList_c48ade,
-.guilds_c48ade,
+.sidebarList__5e434,
+.guilds__5e434,
 .container__7d20c,
 .outer_c0bea0,
 .container_f369db,
@@ -361,38 +361,38 @@ div[data-list-id="profile-288633425303437312"]
 .embedWrapper_b7e1cb:not(.fileWrapper__0ccae),
 .channelTextArea_f75fb0,
 .file__0ccae {
-  background: var(--bg-0-t) !important;
+    background: var(--bg-0-t) !important;
 }
-.guilds_c48ade {
-  max-height: calc(98vw - var(--pad));
-  z-index: 1;
+.guilds__5e434 {
+    max-height: calc(98vw - var(--pad));
+    z-index: 1;
 }
-.guilds_c48ade::after {
-  position: absolute;
-  top: 20px;
-  left: 48px;
-  rotate: 90deg;
-  padding: 0 4px;
-  z-index: 100;
+.guilds__5e434::after {
+    position: absolute;
+    top: 20px;
+    left: 48px;
+    rotate: 90deg;
+    padding: 0 4px;
+    z-index: 100;
 }
 
 .app_a3002d {
-  color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
 }
 
 /* radial fixes */
 #app-mount .wrapper__44b0c rect[fill="#43a25a"] {
-  stroke: var(--rs-online-color);
+    stroke: var(--rs-online-color);
 }
 
 #app-mount .wrapper__44b0c rect[fill="#ca9654"] {
-  stroke: var(--rs-idle-color);
+    stroke: var(--rs-idle-color);
 }
 
 #app-mount .wrapper__44b0c rect[fill="#d83a42"] {
-  stroke: var(--rs-dnd-color);
+    stroke: var(--rs-dnd-color);
 }
 
 .form_f75fb0 {
-  padding-left: 0!important;
+    padding-left: 0!important;
 }
