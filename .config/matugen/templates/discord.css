@@ -406,6 +406,14 @@ div[data-list-id="profile-288633425303437312"]
     transition: border-color var(--border-hover-transition)!important;
 }
 
+.button__201d5 {
+    color: var(--button-secondary-text)!important;
+}
+
+.colorable_f1ceac.disconnect_f1ceac {
+    background: var(--status-danger-background)!important;
+}
+
 .buttons__37e49 button {
     border: none!important;
 }
