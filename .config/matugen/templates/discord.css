@@ -25,6 +25,8 @@ body {
     --red-3: #D32F2F;
     --red-4: #B71C1C;
     --red-5: #791313;
+    --custom-info-color: #00b5e8;
+    --custom-background-surface-high: rgba(0, 0, 0, 0.33);
     /* system24 */
     --font-secondary: "VictorMono"; /* UI font name. it must be installed on your system. */
     --font-primary: "VictorMono"; /* UI font name. it must be installed on your system. */
@@ -410,6 +412,20 @@ div[data-list-id="profile-288633425303437312"]
     color: var(--button-secondary-text)!important;
 }
 
+.button__201d5.lookFilled__201d5.colorRed__201d5 {
+    background-color: color-mix(in srgb, var(--button-danger-background) 20%, transparent) !important;
+}
+.button__201d5.lookFilled__201d5.colorRed__201d5:hover {
+    border-color: var(--button-danger-background)!important;
+}
+
+.button__201d5.lookFilled__201d5.colorBrand__201d5 {
+    background-color: color-mix(in srgb, var(--custom-info-color) 20%, transparent) !important;
+}
+.button__201d5.lookFilled__201d5.colorBrand__201d5:hover {
+    border-color: var(--custom-info-color)!important;
+}
+
 .colorable_f1ceac.disconnect_f1ceac {
     background: var(--status-danger-background)!important;
 }
@@ -465,4 +481,9 @@ div[data-list-id="profile-288633425303437312"]
 }
 .container__5e434 > div[style]:not(.base__5e434) + .base__5e434 .content__5e434 {
     margin-top: calc(var(--custom-guild-list-width) * 2);
+}
+
+/* cleaner embeds */
+.embedFull__623de {
+    background: var(--custom-background-surface-high)!important;
 }
