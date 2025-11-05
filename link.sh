@@ -1,6 +1,6 @@
 #!/bin/bash
 
-stow -v --adopt -R . --ignore='^root(/|$)'
+stow -v --adopt -R . --ignore='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
 
 sudo stow -v -R -t / root
 
