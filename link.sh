@@ -1,6 +1,8 @@
 #!/bin/bash
 
-stow -v --adopt -R .
+stow -v --adopt -R . --ignore='^root(/|$)'
+
+sudo stow -v -R -t / root
 
 cp $HOME/.local/share/TauonMusicBox/theme/Schw31n.ttheme $HOME/.local/share/TauonMusicBox/theme/Schw31nFIX.ttheme
 
