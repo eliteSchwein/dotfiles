@@ -28,7 +28,7 @@ paru -S --noconfirm \
   thorium-browser-avx2-bin \
   tauon-music-box \
   vlc vlc-plugins-all \
-  stow
+  stow power-profiles-hooks-fixed
 
 # Quickshell
 paru -S --noconfirm dms-shell-bin \
