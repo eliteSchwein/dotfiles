@@ -2,6 +2,8 @@
 
 THEME_PATH="/usr/share/themes/"
 
+bash install_paru.sh
+
 # System Elements
 paru -S --noconfirm \
   mold pigz lbzip2 plzip
@@ -58,3 +60,4 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 bash install_utils.sh
 bash link.sh
+bash activate_services.sh

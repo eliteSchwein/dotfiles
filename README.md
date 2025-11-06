@@ -2,7 +2,7 @@
 
 this is based of [Dank Material Shell](https://github.com/AvengeMedia/DankMaterialShell), the images are made ingame or with ai.
 
-how to install:
+## how to install:
 
 ```shell
 bash install.sh
@@ -16,3 +16,28 @@ Dank Material Shell steps:
 Firefox steps:
 
 install this: https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
+
+## keybinds
+| SUPER + 1-5                 | switch virtual desktop                     |
+|-----------------------------|--------------------------------------------|
+| SUPER + SHIFT + 1-5         | move window to virtual desktop             |
+| SUPER + ALT + Arrow         | Change Window Size                         |
+| SUPER + SHIFT + ALT + Arrow | Fast Change Window Size                    |
+| SUPER + Q                   | Open Terminal (Kitty)                      |
+| SUPER + C                   | Close Window                               |
+| SUPER + M                   | Exit                                       |
+| SUPER + SHIFT + C           | Open Clipboard                             |
+| SUPER + E                   | Open File Manager (thunar)                 |
+| SUPER + V                   | Toggle Window Floating                     |
+| SUPER + P                   | Pin Floating Window                        |
+| SUPER + J                   | Switch Split (from horizontal to vertical) |
+| SUPER + F                   | Toggle Fullscreen                          |
+| SUPER + SHIFT + P           | Make Screenshot                            |
+| SUPER + SHIFT + S           | Open Color Picker                          |
+| SUPER + W                   | Open Wallpaper Chooser                     |
+| SUPER + Arrow               | Change Focus of Window                     |
+| SUPER + F12                 | Hard Reset Hyprland, Plugins and DMS       |
+| SUPER + Right Mouse Key     | Resize Window                              |
+| SUPER + Left Mouse Key      | Move Window                                |
+| SUPER + .                   | Opens Emote Menu                           |
+| SUPER + L                   | Lockscreen                                 |
