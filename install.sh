@@ -6,7 +6,7 @@ bash install_paru.sh
 
 # System Elements
 paru -S --noconfirm \
-  mold pigz lbzip2 plzip
+  mold pigz lbzip2 plzip greetd tuigreet
 
 # Hyprland Core
 paru -S --noconfirm \
