@@ -18,8 +18,9 @@ Firefox steps:
 install this: https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
 
 ## keybinds
-| SUPER + 1-5                 | switch virtual desktop                     |
+| Key Combo                   | Description                                |
 |-----------------------------|--------------------------------------------|
+| SSUPER + 1-5                | switch virtual desktop                     |
 | SUPER + SHIFT + 1-5         | move window to virtual desktop             |
 | SUPER + ALT + Arrow         | Change Window Size                         |
 | SUPER + SHIFT + ALT + Arrow | Fast Change Window Size                    |
