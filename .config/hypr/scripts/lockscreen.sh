@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# --- abort if already locked (hyprlock running) ------------------------------
+if pgrep -x hyprlock >/dev/null 2>&1; then
+  # already locked, nothing to do
+  exit 0
+fi
+
 CONF="$HOME/.config/hypr/hyprlock.conf"
 
 # --- outputs via hyprctl ---
@@ -54,6 +60,8 @@ for pid in "${capture_pids[@]}"; do wait "$pid"; done
   # single reload after all images are ready
   pkill -USR2 hyprlock 2>/dev/null || true
 ) &
+
+sleep .5
 
 # --- lock now; then clean AUTO section (foreground) --------------------------
 loginctl lock-session
