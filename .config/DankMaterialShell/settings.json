@@ -36,9 +36,14 @@
   "showNotificationButton": true,
   "showBattery": true,
   "showControlCenterButton": true,
+  "showCapsLockIndicator": true,
   "controlCenterShowNetworkIcon": true,
   "controlCenterShowBluetoothIcon": true,
   "controlCenterShowAudioIcon": true,
+  "showPrivacyButton": true,
+  "privacyShowMicIcon": false,
+  "privacyShowCameraIcon": false,
+  "privacyShowScreenShareIcon": false,
   "controlCenterWidgets": [
     {
       "id": "volumeSlider",
@@ -150,6 +155,14 @@
       "enabled": true
     },
     {
+      "id": "privacyIndicator",
+      "enabled": true
+    },
+    {
+      "id": "capsLockIndicator",
+      "enabled": true
+    },
+    {
       "id": "clipboard",
       "enabled": true
     }
@@ -158,12 +171,13 @@
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
+  "appLauncherGridColumns": 4,
   "weatherLocation": "New York, NY",
   "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "auto",
-  "vpnLastConnected": "c61b675b-4f91-457c-982a-80f02dd8dabe",
+  "vpnLastConnected": "be73ea69-7b0a-4dcc-8ca2-392270bc5cab",
   "iconTheme": "Papirus",
   "launcherLogoMode": "apps",
   "launcherLogoCustomPath": "",
@@ -201,9 +215,14 @@
   "loginctlLockIntegration": false,
   "launchPrefix": "",
   "brightnessDevicePins": {},
+  "wifiNetworkPins": {},
+  "bluetoothDevicePins": {},
+  "audioInputDevicePins": {},
+  "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
+  "terminalsAlwaysDark": false,
   "showDock": true,
   "dockAutoHide": true,
   "dockGroupByApp": true,
@@ -216,6 +235,7 @@
   "dockIndicatorStyle": "circle",
   "notificationOverlayEnabled": false,
   "dankBarAutoHide": false,
+  "dankBarAutoHideDelay": 250,
   "dankBarOpenOnOverview": false,
   "dankBarVisible": true,
   "dankBarSpacing": 7,
@@ -250,6 +270,7 @@
     "lock"
   ],
   "powerMenuDefaultAction": "poweroff",
+  "powerMenuGridLayout": false,
   "customPowerActionLock": "$HOME/.config/hypr/scripts/lockscreen.sh",
   "customPowerActionLogout": "",
   "customPowerActionSuspend": "",
