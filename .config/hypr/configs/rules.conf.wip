@@ -1,0 +1,29 @@
+# Ignore maximize requests from apps. You'll probably like this.
+windowrule = match:class .*, suppress_event maximize
+
+# Fix some dragging issues with XWayland
+windowrule = match:class ^$, match:float 1, match:fullscreen 0, match:pin 0, match:title ^$, match:xwayland 1, no_focus on
+
+windowrule = match:class ^emote$, stayfocused
+
+windowrule = match:title .*, idle_inhibit fullscreen
+
+# Jetbrains
+windowrule = match:class ^jetbrains-.+$, match:float 1, tag +jb
+windowrule = match:tag jb, no_initial_focus on, stayfocused
+windowrule = match:class ^jetbrains_\d+$, center on, no_blur on
+
+# Steam
+windowrule = match:class ^vrmonitor, center on, no_blur on
+windowrule = match:class ^vrwebhelper, center on, float on
+windowrule = match:class ^steam, no_blur on
+windowrule = match:class ^steam_app_\d+$, no_blur on
+windowrule = match:title Steam, tile
+
+# No Blur
+windowrule = match:class ^(firefox|Firefox\ Beta)$, no_blur on
+windowrule = match:class ^edhm-ui-v3, no_blur on
+windowrule = match:class ^heroic, no_blur on
+windowrule = match:class ^thunderbird, no_blur on
+windowrule = match:class ^org.gajim.Gajim, no_blur on
+windowrule = match:class ^Vmware, no_blur on

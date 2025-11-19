@@ -176,7 +176,7 @@
   "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
   "weatherEnabled": true,
-  "networkPreference": "auto",
+  "networkPreference": "ethernet",
   "vpnLastConnected": "be73ea69-7b0a-4dcc-8ca2-392270bc5cab",
   "iconTheme": "Papirus",
   "launcherLogoMode": "apps",
