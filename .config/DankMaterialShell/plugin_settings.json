@@ -1,0 +1,8 @@
+{
+  "wallpaperBing": {
+    "enabled": true
+  },
+  "linuxWallpaperEngine": {
+    "enabled": false
+  }
+}
