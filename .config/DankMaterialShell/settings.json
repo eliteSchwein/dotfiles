@@ -151,19 +151,15 @@
       "enabled": true
     },
     {
+      "id": "wallpaperBing",
+      "enabled": true
+    },
+    {
       "id": "controlCenterButton",
       "enabled": true
     },
     {
       "id": "privacyIndicator",
-      "enabled": true
-    },
-    {
-      "id": "capsLockIndicator",
-      "enabled": true
-    },
-    {
-      "id": "clipboard",
       "enabled": true
     }
   ],
@@ -232,7 +228,7 @@
   "dockBottomGap": 0,
   "dockMargin": 0,
   "dockIconSize": 40,
-  "dockIndicatorStyle": "circle",
+  "dockIndicatorStyle": "line",
   "notificationOverlayEnabled": false,
   "dankBarAutoHide": false,
   "dankBarAutoHideDelay": 250,
@@ -263,6 +259,13 @@
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": -1,
   "osdAlwaysShowValue": false,
+  "osdPosition": 5,
+  "osdVolumeEnabled": true,
+  "osdBrightnessEnabled": true,
+  "osdIdleInhibitorEnabled": true,
+  "osdMicMuteEnabled": true,
+  "osdCapsLockEnabled": true,
+  "osdPowerProfileEnabled": true,
   "powerActionConfirm": true,
   "powerMenuActions": [
     "reboot",
@@ -280,6 +283,7 @@
   "updaterUseCustomCommand": false,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
+  "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "configVersion": 1
