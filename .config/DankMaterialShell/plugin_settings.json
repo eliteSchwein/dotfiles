@@ -1,8 +1,6 @@
 {
-  "wallpaperBing": {
-    "enabled": true
-  },
-  "linuxWallpaperEngine": {
-    "enabled": false
+  "dankBatteryAlerts": {
+    "enabled": true,
+    "warningThreshold": 25
   }
 }
