@@ -637,7 +637,7 @@ foreignObject
 
 
 
-      /* Nuke Avatar Decor and stuff */
+/* Nuke Avatar Decor and stuff */
 .avatarDecoration_c19a55,
 .avatarDecoration__44b0c {
     display: none;
@@ -663,7 +663,7 @@ button[aria-label="Send a gift"],
 .overlay_c0bea0
 div[data-list-id="profile-288633425303437312"]
 .menuDivider_ce8328,
-.inner_c0bea0 .wrapper__4106a > button,
+.inner_c0bea0 .wrapper__0d1ef > button,
 .channelAppLauncher_e6e74f,
 .gradientBackground__11664,
 .stack_dbd263 .tutorialContainer__650eb,
