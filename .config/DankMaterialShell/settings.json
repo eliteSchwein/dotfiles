@@ -60,6 +60,16 @@
       "width": 50
     },
     {
+      "id": "audioOutput",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "audioInput",
+      "enabled": true,
+      "width": 50
+    },
+    {
       "id": "wifi",
       "enabled": true,
       "width": 50
@@ -76,16 +86,6 @@
     },
     {
       "id": "idleInhibitor",
-      "enabled": true,
-      "width": 50
-    },
-    {
-      "id": "audioOutput",
-      "enabled": true,
-      "width": 50
-    },
-    {
-      "id": "audioInput",
       "enabled": true,
       "width": 50
     },
