@@ -130,6 +130,9 @@
     /* Horizontal Server List */
     --HSL-server-direction: column; /* Direction of the server list. | OPTIONS: column, column-reverse | DEFAULT: column */
     --HSL-server-alignment: flex-start; /* Alignment of the server list. | OPTIONS: flex-start, center, flex-end | DEFAULT: flex-start */
+
+    --notices-height: 36px;
+    --serverlist-offset: var(--custom-guild-list-width);
 }
 
 /* external: Discolored */
@@ -782,9 +785,13 @@ div[data-list-id="profile-288633425303437312"]
     border-color: var(--border-hover)!important;
 }
 
-._5e434347c823b592-content {
-    margin-top: var(--custom-guild-list-width);
+._5e434347c823b592-base[data-fullscreen=false] ._5e434347c823b592-content {
+    margin-top: var(--serverlist-offset);
     overflow: visible !important;
+}
+
+:fullscreen .content__5e434 {
+    margin: 0 !important;
 }
 
 #app-mount ._5e434347c823b592-sidebar {
@@ -802,20 +809,31 @@ div[data-list-id="profile-288633425303437312"]
 #app-mount .ef3116c2da186559-tree {
     padding-top: var(--HSL-top-padding, var(--size-sm));
 }
-#app-mount .cc5dd25190031396-wrapper {
+#app-mount ._6e9f8dce4cc18de3-wrapper,
+#app-mount ._48112cbe77dc5022-folderPreview,
+#app-mount ._48112cbe77dc5022-folderIconWrapper {
     rotate: 90deg;
+}
+#app-mount ._6e9f8dce4cc18de3-childWrapper {
+    rotate: 0deg;
 }
 #app-mount .ef3116c2da186559-itemsContainer,
 #app-mount .dbd2630aec71879b-stack {
     flex-direction: var(--HSL-server-direction);
     justify-content: var(--HSL-server-alignment);
 }
+#app-mount ._6e2b9359c6f84cfd-notice {
+    height: var(--notices-height);
+}
+#app-mount ._6e2b9359c6f84cfd-notice + ._5e434347c823b592-content {
+    --serverlist-offset: calc(var(--notices-height) + var(--custom-guild-list-width));
+}
 
 ._5e434347c823b592-container > div[style]:not(._5e434347c823b592-base) {
     width: 100vw !important;
-    height: var(--custom-guild-list-width) !important;
+    height: var(--serverlist-offset) !important;
     position: absolute;
-    top: calc(var(--custom-guild-list-width) + var(--custom-app-top-bar-height));
+    top: calc(var(--serverlist-offset) + var(--custom-app-top-bar-height));
     pointer-events: none;
     z-index: 1;
 }
@@ -823,10 +841,5 @@ div[data-list-id="profile-288633425303437312"]
     pointer-events: all;
 }
 ._5e434347c823b592-container > div[style]:not(._5e434347c823b592-base) + ._5e434347c823b592-base ._5e434347c823b592-content {
-    margin-top: calc(var(--custom-guild-list-width) * 2);
-}
-
-/* cleaner embeds */
-._623de82e76ad7f82-embedFull {
-    background: var(--custom-background-surface-high)!important;
+    margin-top: calc(var(--serverlist-offset) * 2);
 }
