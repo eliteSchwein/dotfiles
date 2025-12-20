@@ -205,7 +205,7 @@
     --title-color: hsl(from var(--accent-2) h 25% 70%);        /* icon buttons and channels */
     --title-color-hover: hsl(from var(--accent-2) h 45% 95%);  /* muted channels/chats and timestamps */
     --code-font: "Share Tech";
-    --write-dots: oklch(0.767 0 89.876);
+    --write-dots: oklch(1 0 89.876);
     --font-tooltip: "Doto";
 }
 
