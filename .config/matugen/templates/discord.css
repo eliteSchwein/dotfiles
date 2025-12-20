@@ -425,7 +425,7 @@ body {
 }
 ._133bf5eea8e33a34-container /* friends page group outer */,
 ._5e434347c823b592-page {
-    padding-bottom: var(--gap);
+    padding-bottom: 0;
     padding-right: var(--gap);
     border: none !important;
     background: none;
@@ -3127,7 +3127,7 @@ div[data-list-id="profile-288633425303437312"]
 
 /* Horizontal Server List */
 ._5e434347c823b592-base[data-fullscreen=false] ._5e434347c823b592-content {
-    margin-top: var(--serverlist-offset);
+    margin-top: calc(var(--serverlist-offset) - 4px)!important;
     overflow: visible !important;
 }
 
