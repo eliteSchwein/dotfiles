@@ -2217,19 +2217,27 @@ body {
 }
 
 /* external: Radial Status */
-#app-mount ._44b0c28be7879b7b-wrapper {
-    border-radius: var(--rs-avatar-shape);
+#app-mount ._44b0c28be7879b7b-wrapper,
+#app-mount ._1ce5d425feffd32a-container {
+    border-radius: var(--rs-avatar-shape)!important;
 }
-#app-mount ._44b0c28be7879b7b-wrapper svg:not(:root) {
+#app-mount ._44b0c28be7879b7b-wrapper svg:not(:root),
+#app-mount ._1ce5d425feffd32a-container svg{
     overflow: visible;
     contain: none;
 }
-#app-mount ._44b0c28be7879b7b-wrapper svg:not(:root) g[transform] {
+#app-mount ._44b0c28be7879b7b-wrapper svg:not(:root) g[transform],
+#app-mount ._1ce5d425feffd32a-container svg g[transform]{
     transform: scale(1) !important;
 }
-#app-mount ._44b0c28be7879b7b-wrapper foreignObject {
+#app-mount ._44b0c28be7879b7b-wrapper foreignObject,
+#app-mount ._1ce5d425feffd32a-container foreignObject{
     -webkit-mask: none;
     mask: none;
+}
+
+._1ce5d425feffd32a-circularImage {
+    border-radius: var(--rs-avatar-shape)!important;
 }
 
 #app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle {
@@ -2239,10 +2247,10 @@ body {
 #app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(1) {
     cx: 4 !important;
 }
-#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(2) {
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(2){
     cx: 12 !important;
 }
-#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(3) {
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(3){
     cx: 20 !important;
 }
 #app-mount ._44b0c28be7879b7b-wrapper ._44b0c28be7879b7b-mask > rect[x="22"] {
@@ -2267,14 +2275,14 @@ body {
     x: 0;
     y: 0;
 }
-#app-mount ._44b0c28be7879b7b-wrapper img, #app-mount ._44b0c28be7879b7b-wrapper._91a9d7f7e5248a56-avatar {
+#app-mount ._44b0c28be7879b7b-wrapper img, #app-mount ._44b0c28be7879b7b-wrapper._91a9d7f7e5248a56-avatar{
     border-radius: var(--rs-avatar-shape);
 }
 #app-mount ._44b0c28be7879b7b-wrapper svg[width="25"][height="15"] > rect {
     rx: calc(var(--rs-avatar-shape) * 2) !important;
     ry: calc(var(--rs-avatar-shape) * 2) !important;
 }
-#app-mount ._44b0c28be7879b7b-wrapper[style*="80px"] svg._44b0c28be7879b7b-cursorDefault rect, #app-mount ._44b0c28be7879b7b-wrapper[style*="120px"] svg._44b0c28be7879b7b-cursorDefault rect {
+#app-mount ._44b0c28be7879b7b-wrapper[style*="80px"] svg._44b0c28be7879b7b-cursorDefault rect, #app-mount ._44b0c28be7879b7b-wrapper[style*="120px"] svg._44b0c28be7879b7b-cursorDefault rect{
     ry: calc(var(--rs-avatar-shape) * 3.3)!important;
     rx: calc(var(--rs-avatar-shape) * 3.3)!important;
 }
@@ -2461,6 +2469,10 @@ body {
 #app-mount ._2debea61131de3de-info ._2debea61131de3de-line:last-child:after {
     content: "RadialStatus " var(--rs-version);
     display: block;
+}
+#app-mount ._1ce5d425feffd32a-container .a423bdd721ddcc83-mask{
+    top:0!important;
+    left:0!important;
 }
 
 /* external: Discolored */
@@ -3204,4 +3216,8 @@ div[data-list-id="profile-288633425303437312"]
 ._752971923a1e6683-codeContainer,
 ._752971923a1e6683-codeContainer *{
     font-family: var(--font-code)!important;
+}
+
+#app-mount .a423bdd721ddcc83-status {
+    display: none !important;
 }
