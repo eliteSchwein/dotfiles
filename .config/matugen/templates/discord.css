@@ -785,6 +785,10 @@ div[data-list-id="profile-288633425303437312"]
     border-color: var(--border-hover)!important;
 }
 
+._67645e1530f1195d-button {
+    color: var(--icon-subtle)!important;
+}
+
 /* Horizontal Server List */
 ._5e434347c823b592-base[data-fullscreen=false] ._5e434347c823b592-content {
     margin-top: var(--serverlist-offset);
