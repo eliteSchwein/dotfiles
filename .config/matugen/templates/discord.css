@@ -1623,12 +1623,6 @@ body {
         color: var(--text-3);
     }
 
-    ._37e49614b9f110a9-container /* user panel buttons */,
-    ._2b1f52e43a8f1c02-numberBadge  /* unread number badge */,
-    ._9293f6b2fc12398a-toolbar /* toolbar button strikethroughs */ {
-        --status-danger: var(--accent-new);
-    }
-
     ._37e49614b9f110a9-container ._67645e1530f1195d-button._67645e1530f1195d-redGlow /* user panel button backgrounds*/ {
         background-color: color-mix(in hsl, var(--accent-new), transparent 90%);
     }
