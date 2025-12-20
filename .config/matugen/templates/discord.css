@@ -206,6 +206,7 @@
     --title-color-hover: hsl(from var(--accent-2) h 45% 95%);  /* muted channels/chats and timestamps */
     --code-font: "Share Tech";
     --write-dots: oklch(0.767 0 89.876);
+    --font-tooltip: "Doto";
 }
 
 body {
@@ -3200,7 +3201,6 @@ div[data-list-id="profile-288633425303437312"]
 ._972a0d22c8afa7f0-overflowTooltip
 {
     color: var(--title-color)!important;
-    font-family: var(--font-title)!important;
 }
 
 .c19a557985eb7793-username:hover,
@@ -3221,4 +3221,16 @@ div[data-list-id="profile-288633425303437312"]
 
 #app-mount .a423bdd721ddcc83-status {
     display: none !important;
+}
+
+._4e35b986167c457d-tooltip,
+.c1e9c47c23f12ca3-menu {
+    background: var(--accent-4)!important;
+}
+._4e35b986167c457d-tooltip *{
+    font-family: var(--font-tooltip)!important;
+}
+._5bc6a0adc149eda0-caret svg{
+    fill: var(--accent-4)!important;
+    stroke: var(--accent-4)!important;
 }
