@@ -2218,7 +2218,8 @@ body {
 
 /* external: Radial Status */
 #app-mount ._44b0c28be7879b7b-wrapper,
-#app-mount ._1ce5d425feffd32a-container {
+#app-mount ._1ce5d425feffd32a-container,
+._55bab3f0b2555838-userAvatar{
     border-radius: var(--rs-avatar-shape)!important;
 }
 #app-mount ._44b0c28be7879b7b-wrapper svg:not(:root),
