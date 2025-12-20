@@ -3190,8 +3190,8 @@ div[data-list-id="profile-288633425303437312"]
 ._972a0d22c8afa7f0-username,
 ._972a0d22c8afa7f0-overflowTooltip
 {
-    font-family: var(--font-title);
-    color: var(--title-color)!important;
+    font-family: var(--font-title)!important;
+    color: var(--title-color);
 }
 
 .c19a557985eb7793-username:hover,
@@ -3202,7 +3202,7 @@ div[data-list-id="profile-288633425303437312"]
 ._972a0d22c8afa7f0-interactive:hover ._972a0d22c8afa7f0-overflowTooltip,
 ._972a0d22c8afa7f0-channel:hover ._20a53846fe2e8513-content
 {
-    color: var(--title-color-hover)!important;
+    color: var(--title-color-hover);
 }
 
 ._752971923a1e6683-codeContainer,
