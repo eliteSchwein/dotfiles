@@ -9,6 +9,7 @@
     --accent-4: {{colors.surface_bright.default.hex}};      /* accent buttons when hovered */
     --accent-5: {{colors.primary_fixed_dim.default.hex}};   /* accent buttons when clicked */
     --accent-new: {{colors.primary.default.hex}};            /* refresh? */
+    --accent-6: hsl(from var(--accent-2) h 15% 60%);;   /* custom */
     --red-1: #EF5350;
     --red-2: #E53935;
     --red-3: #D32F2F;
@@ -292,12 +293,6 @@ body {
 }
 
 .visual-refresh {
-    ._960e4207cea8323e-bg {
-        background: var(--background-base-low);
-    }
-    ._01ae244280823725-container {
-        background-color: var(--background-base-low);
-    }
     ._37e49614b9f110a9-container {
         padding: 8px 12px;
     }
@@ -3194,7 +3189,9 @@ div[data-list-id="profile-288633425303437312"]
     color: var(--title-color);
 }
 
-.b0dfc2ed9c57037d-overflow {
+.b0dfc2ed9c57037d-overflow,
+.faa96b2163f6a142-headerText span,
+._703b91fc872193e8-username{
      font-family: var(--font-title)!important;
  }
 
@@ -3228,6 +3225,15 @@ div[data-list-id="profile-288633425303437312"]
 ._5bc6a0adc149eda0-caret svg{
     fill: var(--accent-4)!important;
     stroke: var(--accent-4)!important;
+}
+
+._740174f3d6a2c8fe-textArea {
+    color: var(--title-color);
+}
+
+._1b31f471f0bb10ab-placeholder {
+    font-family: var(--font-title)!important;
+    color: var(--accent-6);
 }
 
 #app-mount {
