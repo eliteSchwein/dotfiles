@@ -1980,9 +1980,6 @@ body {
         box-sizing: border-box;
         margin: 0;
     }
-    ._9293f6b2fc12398a-toolbar {
-        padding-right: var(--top-bar-right-margin);
-    }
     ._8a7fc664acf53af6-headerBar {
         padding-right: calc(var(--top-bar-right-margin) + var(--space-sm));
     }
@@ -3013,7 +3010,7 @@ div[data-list-id="profile-288633425303437312"]
                    ._5e434347c823b592-panels,
                    ._37e49614b9f110a9-container,
                    ._740174f3d6a2c8fe-themedBackground,
-                   ._5e434347c823b592-sidebar {
+                   ._133bf5eea8e33a34-tabBody {
                        background: transparent !important;
                    }
 ._36d072eab2b2e737-messagesWrapper,
@@ -3241,4 +3238,8 @@ div[data-list-id="profile-288633425303437312"]
     width: 100vw;
     margin: 0;
     padding: 0;
+}
+
+._7d20cf18f8a2784c-container {
+    border-radius: 15px!important;
 }
