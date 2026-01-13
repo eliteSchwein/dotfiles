@@ -8,3 +8,5 @@
 .uuid
 .config/hypr/scripts/utils
 .config/DankMaterialShell/firefox.css
+.stow-backups
+matugen/scripts/lib/__pycache__/
