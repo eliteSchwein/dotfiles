@@ -9,4 +9,6 @@
 .config/hypr/scripts/utils
 .config/DankMaterialShell/firefox.css
 .stow-backups
-matugen/scripts/lib/__pycache__/
+.config/matugen/scripts/lib/__pycache__/
+/.config/DankMaterialShell/.firstlaunch
+/.config/DankMaterialShell/.changelog-1.*

@@ -9,31 +9,72 @@ source "$SCRIPT_DIR/logger.sh"
 
 log_info "Link: starting"
 
-# ---- 1) Stow dotfiles into $HOME (adopt existing files) ----
 cd "$ROOT_DIR"
-log_info "Stow (adopt) dotfiles into \$HOME"
-stow -v --adopt -R . --ignore='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
+
+# ---- 1) Stow dotfiles into $HOME (NO adopt) + backup conflicts ----
+HOME_BACKUP_DIR="$ROOT_DIR/.stow-backups-home/$(date +%F-%H%M%S)"
+IGNORE_RE='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
+
+backup_home_target_if_not_symlink() {
+  local pkg_path="$1"        # e.g. ./zsh/.zshrc (or ./<something>/...)
+  local rel="${pkg_path#./}" # strip leading ./
+  local tgt="$HOME/$rel"
+  local dest="$HOME_BACKUP_DIR/$rel"
+
+  # nothing to do
+  if [[ ! -e "$tgt" && ! -L "$tgt" ]]; then
+    return 0
+  fi
+
+  # leave symlinks alone
+  if [[ -L "$tgt" ]]; then
+    return 0
+  fi
+
+  log_info "Backup (home): $tgt -> $dest"
+  mkdir -p "$(dirname "$dest")"
+  cp -a "$tgt" "$dest"
+
+  log_info "Remove (home): $tgt"
+  if [[ -d "$tgt" ]]; then
+    rm -rf "$tgt"
+  else
+    rm -f "$tgt"
+  fi
+}
+
+# Backup/remove home targets that would conflict with stow links
+# (ignore root + installer scripts)
+while IFS= read -r -d '' pkg; do
+  rel="${pkg#./}"
+  if [[ "$rel" =~ $IGNORE_RE ]]; then
+    continue
+  fi
+  backup_home_target_if_not_symlink "$pkg"
+done < <(find . -mindepth 1 \( -type f -o -type l \) -print0)
+
+if [[ -d "$HOME_BACKUP_DIR" ]]; then
+  log_ok "Home conflicts backed up to: $HOME_BACKUP_DIR"
+fi
+
+log_info "Stow dotfiles into \$HOME"
+stow -v -R . --ignore="$IGNORE_RE"
 
 # ---- 2) Root stow package: backup conflicts, then stow to / ----
 PKG_DIR="$ROOT_DIR/root"
 BACKUP_DIR="$ROOT_DIR/.stow-backups/$(date +%F-%H%M%S)"
 
 if [[ -d "$PKG_DIR" ]]; then
-  # Ensure sudo is available up-front
   sudo -v
 
   backup_and_remove_if_target_not_symlink() {
-    local src="$1"      # full path inside PKG_DIR
-    local rel="$2"      # relative path inside PKG_DIR
+    local rel="$1"      # relative path inside PKG_DIR
     local tgt="/$rel"   # target on filesystem
-    local dest="$BACKUP_DIR$tgt"
+    local dest="$BACKUP_DIR/$rel"
 
-    # nothing to do if target doesn't exist
     if [[ ! -e "$tgt" && ! -L "$tgt" ]]; then
       return 0
     fi
-
-    # leave symlinks alone
     if [[ -L "$tgt" ]]; then
       return 0
     fi
@@ -50,17 +91,17 @@ if [[ -d "$PKG_DIR" ]]; then
     fi
   }
 
-  # Handle FILES/LINKS
+  # FILES/LINKS
   while IFS= read -r -d '' src; do
     rel="${src#$PKG_DIR/}"
-    backup_and_remove_if_target_not_symlink "$src" "$rel"
+    backup_and_remove_if_target_not_symlink "$rel"
   done < <(find "$PKG_DIR" -mindepth 1 \( -type f -o -type l \) -print0)
 
-  # Handle DIRECTORIES (blocking files)
+  # DIRECTORIES (blocking files)
   while IFS= read -r -d '' srcdir; do
     rel="${srcdir#$PKG_DIR/}"
     tgt="/$rel"
-    dest="$BACKUP_DIR$tgt"
+    dest="$BACKUP_DIR/$rel"
 
     if [[ -L "$tgt" || -d "$tgt" ]]; then
       continue
