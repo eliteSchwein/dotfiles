@@ -17,7 +17,7 @@ SCRIPTS_DIR="$ROOT_DIR/scripts"
 LOGDIR="$(mktemp -d -t installer.XXXXXX)"
 MASTER_LOG="$LOGDIR/full.log"
 mkdir -p "$LOGDIR"
-: > "$MASTER_LOG"              # always create (truncate if exists)
+: > "$MASTER_LOG"              # <-- always create (truncate if exists)
 chmod 600 "$MASTER_LOG" || true
 
 export LOG_FILE="$MASTER_LOG"
@@ -93,39 +93,22 @@ render_statuses() {
   local C_GREEN='\033[32m'
   local C_RED='\033[31m'
   local C_YELLOW='\033[33m'
-  local C_CYAN='\033[36m'
 
   for i in "${!STEP_NAMES[@]}"; do
-    local color="$C_GRAY"
-    local label="... "
-    local name="${STEP_NAMES[$i]}"
-
     case "${STATUSES[$i]}" in
       OK)
-        color="$C_GREEN"
-        label="OK   "
+        printf "${C_GREEN}[%s] %s${C_RESET}\n" "OK   Step $i" "${STEP_NAMES[$i]}"
         ;;
       FAIL)
-        color="$C_RED"
-        label="FAIL "
+        printf "${C_RED}[%s] %s${C_RESET}\n" "FAIL Step $i" "${STEP_NAMES[$i]}"
         ;;
       SKIP)
-        color="$C_YELLOW"
-        label="SKIP "
+        printf "${C_YELLOW}[%s] %s${C_RESET}\n" "SKIP Step $i" "${STEP_NAMES[$i]}"
         ;;
       *)
-        color="$C_GRAY"
-        label="... "
+        printf "${C_GRAY}[%s] %s${C_RESET}\n" "... Step $i" "${STEP_NAMES[$i]}"
         ;;
     esac
-
-    # Mark current (running) step in cyan (only when status is PENDING and CURRENT_STEP matches)
-    if [[ "${CURRENT_STEP:-}" == "$i" && "${STATUSES[$i]}" == "PENDING" ]]; then
-      color="$C_CYAN"
-      label="RUN  "
-    fi
-
-    printf "%b[%s Step %s] %s%b\n" "$color" "$label" "$i" "$name" "$C_RESET"
   done
   echo
 }
@@ -182,22 +165,16 @@ run_step() {
 
 # ---- Execute ----
 clear_console
-CURRENT_STEP=""   # used by render_statuses to color the running step
 render_statuses
 log_info "Master log: $MASTER_LOG"
 echo
 
 for i in "${!STEP_NAMES[@]}"; do
-  CURRENT_STEP="$i"
-  clear_console
-  render_statuses
-
   echo "⏳ START: ${STEP_NAMES[$i]}"
   echo
 
   if run_step "$i"; then
     STATUSES[$i]="OK"
-    CURRENT_STEP=""
 
     if [[ "$CLEAR_AFTER_STEP" == "1" ]]; then
       clear_console
@@ -206,8 +183,6 @@ for i in "${!STEP_NAMES[@]}"; do
     render_statuses
   else
     STATUSES[$i]="FAIL"
-    CURRENT_STEP=""
-
     for j in $(seq $((i+1)) $((${#STEP_NAMES[@]}-1))); do
       STATUSES[$j]="SKIP"
     done
