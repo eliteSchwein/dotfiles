@@ -10,7 +10,7 @@ log_info "Greetd Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Greetd"
-sudo pacman -S greetd greetd-dms-greeter-git "${PACMAN_FLAGS[@]}"
+sudo paru -S greetd greetd-dms-greeter-git "${PACMAN_FLAGS[@]}"
 
 log_info "Copy Greetd Config"
 sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
