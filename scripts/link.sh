@@ -10,22 +10,31 @@ source "$SCRIPT_DIR/logger.sh"
 log_info "Link: starting"
 cd "$ROOT_DIR"
 
-# ---- 1) Stow dotfiles into $HOME (NO adopt) + backup conflicts (NO REMOVAL) ----
+# ---- 1) Stow dotfiles into $HOME + backup conflicts + remove conflicts (HOME ONLY) ----
 HOME_BACKUP_DIR="$ROOT_DIR/.stow-backups-home/$(date +%F-%H%M%S)"
-IGNORE_RE='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
+IGNORE_RE='^(root(/|$)|scripts(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
 
-backup_home_target_if_exists_and_not_symlink() {
-  local pkg_path="$1"        # e.g. ./zsh/.zshrc
-  local rel="${pkg_path#./}" # strip leading ./
+backup_and_remove_home_conflict() {
+  local rel="$1"          # e.g. zsh/.zshrc
   local tgt="$HOME/$rel"
   local dest="$HOME_BACKUP_DIR/$rel"
+
+  # Never touch your repo itself (e.g. $HOME/dotfiles/*)
+  # Compare realpaths to be safe with symlinks.
+  local tgt_real root_real
+  tgt_real="$(realpath -m "$tgt")"
+  root_real="$(realpath -m "$ROOT_DIR")"
+  if [[ "$tgt_real" == "$root_real" || "$tgt_real" == "$root_real/"* ]]; then
+    log_info "Skip (inside repo): $tgt"
+    return 0
+  fi
 
   # nothing to do
   if [[ ! -e "$tgt" && ! -L "$tgt" ]]; then
     return 0
   fi
 
-  # Only backup if NOT a symlink
+  # If already a symlink, don't delete (stow will manage/replace it)
   if [[ -L "$tgt" ]]; then
     return 0
   fi
@@ -33,25 +42,38 @@ backup_home_target_if_exists_and_not_symlink() {
   log_info "Backup (home): $tgt -> $dest"
   mkdir -p "$(dirname "$dest")"
   cp -a "$tgt" "$dest"
+
+  log_info "Remove conflict (home): $tgt"
+  rm -rf "$tgt"
 }
 
-# Backup home targets that would conflict with stow links
-# (ignore root + installer scripts)
-while IFS= read -r -d '' pkg; do
-  rel="${pkg#./}"
-  if [[ "$rel" =~ $IGNORE_RE ]]; then
-    continue
+# Build list of stow "packages" (top-level dirs) excluding root/scripts
+packages=()
+while IFS= read -r -d '' d; do
+  pkg="$(basename "$d")"
+  [[ "$pkg" == "root" || "$pkg" == "scripts" ]] && continue
+  packages+=("$pkg")
+done < <(find . -mindepth 1 -maxdepth 1 -type d -print0)
+
+if ((${#packages[@]} == 0)); then
+  log_info "No stow packages found for \$HOME (skipping home stow)"
+else
+  # For each package, remove only the exact conflicting targets it would link
+  for pkg in "${packages[@]}"; do
+    while IFS= read -r -d '' src; do
+      rel_inside_pkg="${src#./$pkg/}"
+      [[ -z "$rel_inside_pkg" ]] && continue
+      backup_and_remove_home_conflict "$pkg/$rel_inside_pkg"
+    done < <(find "./$pkg" \( -type f -o -type l \) -print0)
+  done
+
+  if [[ -d "$HOME_BACKUP_DIR" ]]; then
+    log_ok "Home conflicts backed up to: $HOME_BACKUP_DIR"
   fi
-  backup_home_target_if_exists_and_not_symlink "$pkg"
-done < <(find . -mindepth 1 \( -type f -o -type l \) -print0)
 
-if [[ -d "$HOME_BACKUP_DIR" ]]; then
-  log_ok "Home conflicts backed up to: $HOME_BACKUP_DIR"
+  log_info "Stow dotfiles into \$HOME"
+  stow -v -R "${packages[@]}" --ignore="$IGNORE_RE"
 fi
-
-log_info "Stow dotfiles into \$HOME"
-# This may still fail if conflicts exist (since we no longer remove them)
-stow -v -R . --ignore="$IGNORE_RE"
 
 # ---- 2) Root stow package: NO backup, NO removal, just stow to / ----
 PKG_DIR="$ROOT_DIR/root"
