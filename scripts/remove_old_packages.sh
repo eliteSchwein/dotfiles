@@ -10,7 +10,7 @@ log_info "Old Packages Removal: starting"
 PACMAN_FLAGS=(--noconfirm)
 
 log_info "Remove old packages (only if installed)"
-to_remove=(hypridle hyprlock greetd-tuigreet)
+to_remove=(hypridle hyprlock greetd-tuigreet bun-bin)
 
 installed=()
 for p in "${to_remove[@]}"; do
