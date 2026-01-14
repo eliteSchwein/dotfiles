@@ -9,8 +9,23 @@ log_info "Old Packages Removal: starting"
 
 PACMAN_FLAGS=(--noconfirm)
 
-log_info "Remove old packages"
-paru -Rns \
-  hypridle hyprlock greetd-tuigreet "${PACMAN_FLAGS[@]}"
+log_info "Remove old packages (only if installed)"
+to_remove=(hypridle hyprlock greetd-tuigreet)
+
+installed=()
+for p in "${to_remove[@]}"; do
+  if pacman -Qq "$p" >/dev/null 2>&1; then
+    installed+=("$p")
+  else
+    log_info "Package not installed; skipping: $p"
+  fi
+done
+
+if ((${#installed[@]})); then
+  paru -Rns "${installed[@]}" "${PACMAN_FLAGS[@]}"
+  log_ok "Removed packages: ${installed[*]}"
+else
+  log_info "No matching packages installed; nothing to remove."
+fi
 
 log_ok "Old Packages Removal: done"
