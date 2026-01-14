@@ -64,4 +64,33 @@ install_plugin_if_missing "dankDesktopWeather" "Weather Plugin"
 install_plugin_if_missing "dankBatteryAlerts"  "Battery Alert Plugin"
 install_plugin_if_missing "desktopCommand"     "Console Widget Plugin"
 
+log_info "Make empty DMS Hyprland settings"
+
+log_info "Make empty DMS Hyprland settings"
+
+HYPR_DMS_DIR=".config/hypr/dms"
+
+# Ensure directory exists
+if [[ -d "$HYPR_DMS_DIR" ]]; then
+  log_info "Directory exists: $HYPR_DMS_DIR"
+else
+  log_info "Creating directory: $HYPR_DMS_DIR"
+  mkdir -p "$HYPR_DMS_DIR"
+fi
+
+ensure_file() {
+  local f="$1"
+  if [[ -e "$f" ]]; then
+    log_info "File exists: $f (leaving as-is)"
+  else
+    log_info "Creating empty file: $f"
+    : > "$f"   # create empty file
+  fi
+}
+
+ensure_file "$HYPR_DMS_DIR/outputs.conf"
+ensure_file "$HYPR_DMS_DIR/cursor.conf"
+ensure_file "$HYPR_DMS_DIR/layout.conf"
+
+
 log_ok "DMS Install: done"
