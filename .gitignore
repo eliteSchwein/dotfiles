@@ -12,3 +12,5 @@
 .config/matugen/scripts/lib/__pycache__/
 /.config/DankMaterialShell/.firstlaunch
 /.config/DankMaterialShell/.changelog-1.*
+/.config/hypr/dms/layout.conf
+/.config/hypr/dms/colors.conf
