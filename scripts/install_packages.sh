@@ -12,7 +12,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 log_info "Install Core Packages"
 paru -S \
   pciutils mold pigz lbzip2 plzip tar bzip2 \
-  qt5-wayland qt6-wayland qt5ct qt6ct hyprqt6engine hyprland \
+  hyprqt6engine hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
   xdg-desktop-portal hyprpicker hyprpolkitagent \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
@@ -33,11 +33,6 @@ paru -S \
   tauon-music-box \
   vlc vlc-plugins-all \
   stow "${PACMAN_FLAGS[@]}"
-
-log_info "Install Shell Packages"
-paru -S dms-shell-bin \
-  cava wl-clipboard i2c-tools qt6-wayland cliphist brightnessctl qt6-multimedia accountsservice \
-  matugen-bin python-pywalfox quickshell-git "${PACMAN_FLAGS[@]}"
 
 log_info "Install Social Media Packages"
 paru -S \

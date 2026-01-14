@@ -11,6 +11,6 @@ PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Remove old packages"
 paru -Rns \
-  hypridle hyprlock qt6ct-kde greetd-tuigreet "${PACMAN_FLAGS[@]}"
+  hypridle hyprlock greetd-tuigreet "${PACMAN_FLAGS[@]}"
 
 log_ok "Old Packages Removal: done"
