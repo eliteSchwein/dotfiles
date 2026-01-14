@@ -38,9 +38,6 @@ source = ./configs/workspaces.conf
 # Start Exec
 source = ./configs/startexec.conf
 
-# Theme Colors
-source = ./theme_custom.conf
-
 # Dank Material Shell
 source = ./dms/outputs.conf
 source = ./dms/cursor.conf
