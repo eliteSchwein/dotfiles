@@ -11,7 +11,6 @@ log_info "Link: starting"
 cd "$ROOT_DIR"
 
 HOME_BACKUP_DIR="$ROOT_DIR/.stow-backups-home/$(date +%F-%H%M%S)"
-IGNORE_RE='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
 
 backup_target_if_needed() {
   local tgt="$1"  # absolute target path
@@ -71,7 +70,7 @@ while true; do
   fi
 
   set +e
-  stow_out="$(stow -v -R . --ignore="$IGNORE_RE" 2>&1)"
+  stow_out="$(stow -v -R . 2>&1)"
   rc=$?
   set -e
 
