@@ -90,6 +90,7 @@ ensure_file() {
 
 ensure_file "$HYPR_DMS_DIR/outputs.conf"
 ensure_file "$HYPR_DMS_DIR/cursor.conf"
+ensure_file "$HYPR_DMS_DIR/colors.conf"
 ensure_file "$HYPR_DMS_DIR/layout.conf"
 
 
