@@ -34,15 +34,12 @@ install_amd_stack() {
   # mesa provides OpenGL + VA-API (radeonsi); vulkan-radeon is RADV; libva-utils for testing.
   log_info "Installing AMD GPU userspace stack (Mesa/VA-API/Vulkan)"
   paru -S \
-    mesa lib32-mesa \
-    vulkan-radeon lib32-vulkan-radeon \
-    libva-mesa-driver lib32-libva-mesa-driver \
-    mesa-vdpau lib32-mesa-vdpau \
-    libva-utils vulkan-tools \
-    "${PACMAN_FLAGS[@]}"
-
-  # Optional: ROCm OpenCL runtime (only if you want OpenCL compute; can be heavy)
-  # paru -S rocm-opencl-runtime "${PACMAN_FLAGS[@]}" || true
+    vulkan-radeon vulkan-tools \
+    mesa-utils libva-utils \
+    lib32-mesa \
+    egl-wayland egl-gbm \
+    amdgpu_top rocm-smi-lib \
+    amf-amdgpu-pro "${PACMAN_FLAGS[@]}"
 
   log_ok "AMD userspace stack installed"
 }
