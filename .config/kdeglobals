@@ -1,3 +1,9 @@
 [General]
 TerminalApplication=kitty
-TerminalService=kitty.desktop
+
+[KDE]
+ShowDeleteCommand=false
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=true
+MaximumRemoteSize=0
