@@ -91,10 +91,10 @@ done
 render_statuses() {
   for i in "${!STEP_NAMES[@]}"; do
     case "${STATUSES[$i]}" in
-      OK)   echo "✅ ${STEP_NAMES[$i]}" ;;
-      FAIL) echo "❌ ${STEP_NAMES[$i]}" ;;
-      SKIP) echo "⏭  ${STEP_NAMES[$i]}" ;;
-      *)    echo "❎ ${STEP_NAMES[$i]}" ;;
+      OK)   echo "✅ [Step $i] ${STEP_NAMES[$i]}" ;;
+      FAIL) echo "❌ [Step $i] ${STEP_NAMES[$i]}" ;;
+      SKIP) echo "⏭️ [Step $i] ${STEP_NAMES[$i]}" ;;
+      *)    echo "⌛️ [Step $i] ${STEP_NAMES[$i]}" ;;
     esac
   done
   echo
@@ -185,6 +185,9 @@ for i in "${!STEP_NAMES[@]}"; do
 done
 
 INSTALL_OK=1
+
 echo "✅ All steps completed successfully."
-echo "Logs kept in: $LOGDIR"
-echo "Master log: $MASTER_LOG"
+if [[ "${KEEP_LOGS:-0}" -eq 1 ]]; then
+  echo "Logs kept in: $LOGDIR"
+  echo "Master log: $MASTER_LOG"
+fi
