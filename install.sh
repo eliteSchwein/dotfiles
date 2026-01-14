@@ -74,6 +74,7 @@ add_step() {
 
 add_step "root link" "$SCRIPTS_DIR/root_link.sh"
 add_step "paru install" "$SCRIPTS_DIR/install_paru.sh"
+add_step "old packages uninstall" "$SCRIPTS_DIR/remove_old_packages.sh"
 add_step "greetd install" "$SCRIPTS_DIR/install_greetd.sh"
 add_step "package install" "$SCRIPTS_DIR/install_packages.sh"
 add_step "hyprland config" "$SCRIPTS_DIR/make_hyprland_config.sh"
