@@ -11,11 +11,43 @@ log_info "Link: starting"
 
 cd "$ROOT_DIR"
 
+# ---- Dotfiles path guard (do NOT delete targets already symlinked into this repo) ----
+# Prefer the repo's real path; also tolerate the common "$HOME/dotfiles" path.
+DOTFILES_REAL="$(realpath -m "$ROOT_DIR")"
+DOTFILES_HOME_REAL="$(realpath -m "$HOME/dotfiles")"
+
+resolve_symlink_target() {
+  local link="$1"
+  local raw
+  raw="$(readlink "$link")" || return 1
+
+  # If relative symlink, resolve relative to link's directory
+  if [[ "$raw" != /* ]]; then
+    raw="$(cd "$(dirname "$link")" && realpath -m "$raw")"
+  else
+    raw="$(realpath -m "$raw")"
+  fi
+
+  printf '%s\n' "$raw"
+}
+
+is_symlink_into_dotfiles() {
+  local link="$1"
+  [[ -L "$link" ]] || return 1
+
+  local resolved
+  resolved="$(resolve_symlink_target "$link" 2>/dev/null || true)"
+  [[ -n "$resolved" ]] || return 1
+
+  # "linked to $HOME/dotfiles" (and also to this repo root)
+  [[ "$resolved" == "$DOTFILES_REAL"* || "$resolved" == "$DOTFILES_HOME_REAL"* ]]
+}
+
 # ---- 1) Stow dotfiles into $HOME (NO adopt) + backup conflicts ----
 HOME_BACKUP_DIR="$ROOT_DIR/.stow-backups-home/$(date +%F-%H%M%S)"
 IGNORE_RE='^(root(/|$)|install_utils\.sh$|install\.sh$|link\.sh$)'
 
-backup_home_target_if_not_symlink() {
+backup_home_target_if_not_managed_link() {
   local pkg_path="$1"        # e.g. ./zsh/.zshrc (or ./<something>/...)
   local rel="${pkg_path#./}" # strip leading ./
   local tgt="$HOME/$rel"
@@ -26,17 +58,18 @@ backup_home_target_if_not_symlink() {
     return 0
   fi
 
-  # leave symlinks alone
-  if [[ -L "$tgt" ]]; then
+  # If it's a symlink into dotfiles, keep it
+  if [[ -L "$tgt" ]] && is_symlink_into_dotfiles "$tgt"; then
     return 0
   fi
 
+  # Backup whatever is there (file/dir/symlink not into dotfiles)
   log_info "Backup (home): $tgt -> $dest"
   mkdir -p "$(dirname "$dest")"
   cp -a "$tgt" "$dest"
 
   log_info "Remove (home): $tgt"
-  if [[ -d "$tgt" ]]; then
+  if [[ -d "$tgt" && ! -L "$tgt" ]]; then
     rm -rf "$tgt"
   else
     rm -f "$tgt"
@@ -50,7 +83,7 @@ while IFS= read -r -d '' pkg; do
   if [[ "$rel" =~ $IGNORE_RE ]]; then
     continue
   fi
-  backup_home_target_if_not_symlink "$pkg"
+  backup_home_target_if_not_managed_link "$pkg"
 done < <(find . -mindepth 1 \( -type f -o -type l \) -print0)
 
 if [[ -d "$HOME_BACKUP_DIR" ]]; then
@@ -67,7 +100,7 @@ BACKUP_DIR="$ROOT_DIR/.stow-backups/$(date +%F-%H%M%S)"
 if [[ -d "$PKG_DIR" ]]; then
   sudo -v
 
-  backup_and_remove_if_target_not_symlink() {
+  backup_and_remove_root_target_if_not_managed_link() {
     local rel="$1"      # relative path inside PKG_DIR
     local tgt="/$rel"   # target on filesystem
     local dest="$BACKUP_DIR/$rel"
@@ -75,7 +108,9 @@ if [[ -d "$PKG_DIR" ]]; then
     if [[ ! -e "$tgt" && ! -L "$tgt" ]]; then
       return 0
     fi
-    if [[ -L "$tgt" ]]; then
+
+    # If it's a symlink into dotfiles, keep it
+    if [[ -L "$tgt" ]] && is_symlink_into_dotfiles "$tgt"; then
       return 0
     fi
 
@@ -84,7 +119,7 @@ if [[ -d "$PKG_DIR" ]]; then
     sudo cp -a "$tgt" "$dest"
 
     log_info "Remove: $tgt"
-    if [[ -d "$tgt" ]]; then
+    if [[ -d "$tgt" && ! -L "$tgt" ]]; then
       sudo rm -rf "$tgt"
     else
       sudo rm -f "$tgt"
@@ -94,25 +129,30 @@ if [[ -d "$PKG_DIR" ]]; then
   # FILES/LINKS
   while IFS= read -r -d '' src; do
     rel="${src#$PKG_DIR/}"
-    backup_and_remove_if_target_not_symlink "$rel"
+    backup_and_remove_root_target_if_not_managed_link "$rel"
   done < <(find "$PKG_DIR" -mindepth 1 \( -type f -o -type l \) -print0)
 
-  # DIRECTORIES (blocking files)
+  # DIRECTORIES (blocking files/links)
   while IFS= read -r -d '' srcdir; do
     rel="${srcdir#$PKG_DIR/}"
     tgt="/$rel"
     dest="$BACKUP_DIR/$rel"
 
-    if [[ -L "$tgt" || -d "$tgt" ]]; then
+    # If target is a directory, fine; if it's a symlink into dotfiles, keep it
+    if [[ -d "$tgt" && ! -L "$tgt" ]]; then
+      continue
+    fi
+    if [[ -L "$tgt" ]] && is_symlink_into_dotfiles "$tgt"; then
       continue
     fi
 
-    if [[ -e "$tgt" ]]; then
-      log_info "Backup blocking file for dir: $tgt -> $dest"
+    # If a file or a symlink (not into dotfiles) blocks the directory, back up + remove it
+    if [[ -e "$tgt" || -L "$tgt" ]]; then
+      log_info "Backup blocking path for dir: $tgt -> $dest"
       sudo mkdir -p "$(dirname "$dest")"
       sudo cp -a "$tgt" "$dest"
 
-      log_info "Remove blocking file: $tgt"
+      log_info "Remove blocking path: $tgt"
       sudo rm -f "$tgt"
     fi
   done < <(find "$PKG_DIR" -mindepth 1 -type d -print0)

@@ -10,14 +10,16 @@ log_info "DMS Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Shell Packages"
-paru -S dms-shell-bin qt5ct qt6ct-kde  \
+paru -S dms-shell-bin qt5ct qt6ct-kde \
   cava wl-clipboard i2c-tools qt5-wayland qt6-wayland cliphist brightnessctl qt6-multimedia accountsservice \
   matugen-bin python-pywalfox quickshell-git "${PACMAN_FLAGS[@]}"
 
-cd .config/DankMaterialShell
 DMS_DIR=".config/DankMaterialShell"
 CONF="$DMS_DIR/settings.json"
 DIST="$DMS_DIR/settings.json.dist"
+
+# Ensure we operate from home regardless of where the script is called
+cd "$HOME"
 
 if [[ -e "$CONF" ]]; then
   log_info "Removing existing $CONF"
@@ -30,21 +32,36 @@ if [[ ! -e "$DIST" ]]; then
 fi
 
 log_info "Copying $DIST -> $CONF"
-cp -r "$DIST" "$CONF"
+cp -f "$DIST" "$CONF"
 
 log_info "Fetch current DMS"
-dms plugin browse
+dms plugins browse
 
-log_info "Install Desktop Media Player Plugin"
-dms plugin install mediaPlayer
+# ---- Plugin install: only install if missing ----
+log_info "Checking installed plugins"
+plugins_list="$(dms plugins list 2>/dev/null || true)"
 
-log_info "Install Weather Plugin"
-dms plugin install dankDesktopWeather
+has_plugin_id() {
+  local id="$1"
+  # Match "ID: <id>" lines; tolerate spacing
+  grep -Eq "^[[:space:]]*ID:[[:space:]]*$id([[:space:]]*)$" <<<"$plugins_list"
+}
 
-log_info "Install Battery Alert Plugin"
-dms plugin install dankBatteryAlerts
+install_plugin_if_missing() {
+  local id="$1"
+  local name="$2"
 
-log_info "Install Console Widget Plugin"
-dms plugin install desktopCommand
+  if has_plugin_id "$id"; then
+    log_info "$name already installed (ID: $id); skipping"
+  else
+    log_info "Installing $name (ID: $id)"
+    dms plugins install "$id"
+  fi
+}
+
+install_plugin_if_missing "mediaPlayer"        "Desktop Media Player Plugin"
+install_plugin_if_missing "dankDesktopWeather" "Weather Plugin"
+install_plugin_if_missing "dankBatteryAlerts"  "Battery Alert Plugin"
+install_plugin_if_missing "desktopCommand"     "Console Widget Plugin"
 
 log_ok "DMS Install: done"
