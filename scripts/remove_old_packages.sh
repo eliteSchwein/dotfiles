@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/logger.sh"
 
 log_info "Old Packages Removal: starting"
 
-PACMAN_FLAGS=(--noconfirm --needed)
+PACMAN_FLAGS=(--noconfirm)
 
 log_info "Remove old packages"
 paru -Rns \
