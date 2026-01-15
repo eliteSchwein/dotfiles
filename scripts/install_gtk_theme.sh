@@ -20,4 +20,31 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'phinger-cursors-dark'
 
+log_info "Link GTK 3.0 Theme"
+mkdir -p "$HOME/.config/gtk-3.0"
+ln -sf "dank-colors.css" "$HOME/.config/gtk-3.0/gtk.css"
+
+log_info "Generate GTK 4.0 Theme"
+mkdir -p "$HOME/.config/gtk-4.0"
+printf '%s\n' '@import url("dank-colors.css");' > "$HOME/.config/gtk-4.0/gtk.css"
+
+write_qtct_conf() {
+  local qtver="$1"                    # 5 or 6
+  local dir="$HOME/.config/qt${qtver}ct"
+  local conf="$dir/qt${qtver}ct.conf"
+  local scheme="$HOME/.local/share/color-schemes/DankMatugen.colors"
+
+  log_info "Generate QT${qtver} Theme"
+  mkdir -p "$dir"
+  cat > "$conf" <<EOF
+[Appearance]
+color_scheme_path=$scheme
+custom_palette=true
+icon_theme=Papirus
+EOF
+}
+
+write_qtct_conf 6
+write_qtct_conf 5
+
 log_ok "GTK Theme Install: done"
