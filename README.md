@@ -2,6 +2,9 @@
 
 this is based of [Dank Material Shell](https://github.com/AvengeMedia/DankMaterialShell), the images are made ingame or with ai.
 
+> [!IMPORTANT]  
+> It is highly recommended that you run the install script in a blank tty session without a WM or Desktop open!
+
 ## how to install:
 
 ```shell
