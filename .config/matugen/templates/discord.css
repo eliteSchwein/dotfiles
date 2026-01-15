@@ -12,6 +12,7 @@
     --accent-5: {{colors.primary_fixed_dim.default.hex}};   /* accent buttons when clicked */
     --accent-new: {{colors.primary.default.hex}};            /* refresh? */
     --accent-6: hsl(from var(--accent-2) h 15% 60%);;   /* custom */
+    --accent-7: hsl(from var(--accent-4) h 15% 15%);;   /* custom */
     --red-1: #EF5350;
     --red-2: #E53935;
     --red-3: #D32F2F;
@@ -37,8 +38,12 @@
     --bg-1: oklch(
             23% 0 0
     ); /* background color for secondary elements like code blocks, embeds, etc. */
+    --bg-1-t: oklch(23% 0 0 / 0.4);  /* background color for secondary elements like code blocks, embeds, etc. */
+    --bg-1-t-1: oklch(23% 0 0 / 0.6);  /* background color for secondary elements like code blocks, embeds, etc. */
     --bg-2: oklch(27% 0 0); /* color of neutral buttons. */
+    --bg-2-t: oklch(23% 0 0 / 0.4);  /* color of neutral buttons. */
     --bg-3: oklch(31% 0 0); /* color of neutral buttons when hovered. */
+    --bg-3-t: oklch(31% 0 0 / 0.4); /* color of neutral buttons when hovered. */
 
 
     /* text colors */
@@ -133,7 +138,7 @@
 
 
     /* text colors */
-    --text-0: var(--bg-4); /* text on colored elements */
+    --text-0: hsl(from var(--accent-2) h 15% 50%); /* text on colored elements */
     --text-1: hsl(from var(--accent-2) h 45% 95%);
     --text-2: hsl(from var(--accent-2) h 25% 70%);
     --text-3: hsl(from var(--accent-2) h 20% 60%);
@@ -326,7 +331,7 @@ body {
 .f391e3680aff100a-container > .f75fb00fb7356cbe-content /* message requests */,
 ._6db1d32c47b6ad72-shop /* shop */,
 .f75fb00fb7356cbe-content > aside > .c0bea05627c5dc35-outer /* dm user panel */,
-.a9e7064fdee8e9b0-searchResultsWrap /* search results */,
+.a98f3b020416ad54-searchResultsWrap /* search results */,
 .f369dba7416c67f0-container /* forum */,
 .fb64c9a451c49797-chat /* new thread panel */,
 .a592e1970a0ce22c-container /* server discovery */,
@@ -530,7 +535,7 @@ body {
     background-size: 100% calc(100% + 2 * var(--border-thickness));
 }
 
-.a9e7064fdee8e9b0-searchResultsWrap /* search results */ {
+.a98f3b020416ad54-searchResultsWrap /* search results */ {
     margin-left: var(--gap);
 }
 
@@ -1368,10 +1373,6 @@ body {
         --text-muted: var(--text-5);
         --text-overlay-dark: magenta;
         --text-overlay-light: red;
-        --text-status-dnd: yellow;
-        --text-status-idle: lime;
-        --text-status-offline: blue;
-        --text-status-online: magenta;
         --text-strong: var(--text-2);
         --text-subtle: var(--text-4);
         --textbox-markdown-syntax: var(--text-4);
@@ -1699,7 +1700,7 @@ body {
     }
 
     ._8a031a135bfcb9ba-container /* modal background */ {
-        background-color: var(--bg-4);
+        background-color: transparent;
     }
 
     ._034365f2217df5de-flash[data-flash='true'] /* reply message flash */ {
@@ -2230,7 +2231,7 @@ body {
 }
 
 /* 🔎💥 Broken magnifying glass */
-:root .a9e7064fdee8e9b0-errorImage {
+:root .a98f3b020416ad54-errorImage {
     background: url("https://nyri4.github.io/Discolored/assets/broken.svg")
     center/cover;
 }
@@ -2359,7 +2360,7 @@ body {
 }
 
 /* 🔎 No results search bar*/
-:root .a9e7064fdee8e9b0-noResultsImage {
+:root .a98f3b020416ad54-noResultsImage {
     background-image: url("https://nyri4.github.io/Discolored/assets/no_results.svg");
 }
 
@@ -2394,8 +2395,8 @@ body {
 }
 
 /* 🔎 Searching */
-.theme-dark .e1fee6c31193b9d5-searchIndexBackground,
-.theme-light .e1fee6c31193b9d5-searchIndexBackground {
+.theme-dark ._8a209ef208b74f7a-searchIndexBackground,
+.theme-light ._8a209ef208b74f7a-searchIndexBackground {
     background-image: url("https://nyri4.github.io/Discolored/assets/searching.svg");
 }
 
@@ -2637,21 +2638,23 @@ body {
 /* Sus */
 @keyframes sus {
     0% {
-        background-position: -22vw -5vh;
+        background-position: -22vw 0vh;
     }
     100% {
-        background-position: -12vw -5vh;
+        background-position: -12vw 0vh;
     }
 }
 @-webkit-keyframes sus {
     0% {
-        background-position: -22vw -5vh;
+        background-position: -22vw 0vh;
     }
     100% {
-        background-position: -12vw -5vh;
+        background-position: -12vw 0vh;
     }
 }
-._23e6b439306f125a-sidebarRegionScroller {
+
+._23e6b439306f125a-sidebarRegionScroller,
+.e9e3ed8b8badfe05-content {
     background-image: url(https://i.imgur.com/FVKnrlz.png) !important;
     background-color: var(--color1) !important;
     background-repeat: no-repeat !important;
@@ -2818,7 +2821,7 @@ div[data-list-id="profile-288633425303437312"]
     background: transparent !important;
 }
 
-._974928fe84ca9647-searchBar,
+.c322aadb96ff59c9-searchBar,
 ._201d5e8a3c09670a-button,
 .f1ceaca61b18918e-attachedCaret,
 .a22cb0c66246f5d3-button{
@@ -2860,14 +2863,14 @@ div[data-list-id="profile-288633425303437312"]
     border: none!important;
 }
 
-._974928fe84ca9647-searchBar:hover,
+.c322aadb96ff59c9-searchBar:hover,
 ._201d5e8a3c09670a-button:hover,
 .f1ceaca61b18918e-attachedCaret:hover,
 .a22cb0c66246f5d3-button:hover{
     border-color: var(--border-hover)!important;
     color: var(--button-secondary-text-hover)!important;
 }
-._974928fe84ca9647-searchBar:hover svg :not(defs *)[stroke][stroke-opacity] ,
+.c322aadb96ff59c9-searchBar:hover svg :not(defs *)[stroke][stroke-opacity] ,
 ._201d5e8a3c09670a-button:hover svg :not(defs *)[stroke][stroke-opacity] ,
 .f1ceaca61b18918e-attachedCaret:hover svg :not(defs *)[stroke][stroke-opacity] {
     fill: var(--button-secondary-text-hover)!important;
@@ -2957,8 +2960,8 @@ div[data-list-id="profile-288633425303437312"]
 .b0dfc2ed9c57037d-overflow,
 .faa96b2163f6a142-headerText span,
 ._703b91fc872193e8-username{
-     font-family: var(--font-title)!important;
- }
+    font-family: var(--font-title)!important;
+}
 
 .c19a557985eb7793-username:hover,
 ._972a0d22c8afa7f0-username:hover,
@@ -2981,8 +2984,20 @@ div[data-list-id="profile-288633425303437312"]
 }
 
 ._4e35b986167c457d-tooltip,
-.c1e9c47c23f12ca3-menu {
+.c1e9c47c23f12ca3-menu,
+.user-profile-popout {
     background: var(--accent-4)!important;
+}
+._409aa1aeee28d5f7-sidebar {
+    background: color-mix(in srgb, var(--accent-7) 65%, transparent) !important;
+    backdrop-filter: blur(3px);
+}
+.e9e3ed8b8badfe05-content,
+.e9e3ed8b8badfe05-contentHeader{
+    background-color: var(--accent-7)!important;
+}
+._409aa1aeee28d5f7-fixedContent::after {
+    display: none!important;
 }
 ._4e35b986167c457d-tooltip *{
     font-family: var(--font-tooltip)!important;
@@ -3010,4 +3025,63 @@ div[data-list-id="profile-288633425303437312"]
 
 ._7d20cf18f8a2784c-container {
     border-radius: 15px!important;
+}
+
+/* Radial Status Fixes */
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle {
+    cy: 9 !important;
+    fill: var(--write-dots) !important;
+}
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(1) {
+    cx: 4 !important;
+}
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(2){
+    cx: 12 !important;
+}
+#app-mount ._44b0c28be7879b7b-wrapper ._5ad890d06f24286d-dots circle:nth-child(3){
+    cx: 20 !important;
+}
+#app-mount ._44b0c28be7879b7b-wrapper ._44b0c28be7879b7b-mask > rect[x="22"] {
+    x: 0;
+    y: 0;
+}
+#app-mount ._44b0c28be7879b7b-wrapper ._44b0c28be7879b7b-pointerEvents[x="14.5"] {
+    fill: rgba(0, 0, 0, 0.5) !important;
+    width: var(--rs-members-width, 30px);
+    height: var(--rs-members-width, 30px);
+    /*
+    x: calc(var(--rs-members-width, 30px) / 2 / -1 + 2px);
+    y: calc(var(--rs-members-width, 30px) / 2 / -1);
+     */
+    x: 0;
+    y: 0;
+}
+
+#app-mount ._44b0c28be7879b7b-wrapper[style*="40px"] > svg > svg rect {
+    width: 40px;
+    height: 40px;
+    /*
+    x: -19;
+    y: -20;
+     */
+    ry: calc(var(--rs-avatar-shape) * 3.3);
+    rx: calc(var(--rs-avatar-shape) * 3.3);
+    x: 0;
+    y: 0;
+}
+#app-mount ._44b0c28be7879b7b-wrapper[style*="80px"] svg._44b0c28be7879b7b-cursorDefault rect {
+    /*
+    x: -48;
+    y: -52;
+     */
+    x: 0;
+    y: 0;
+}
+#app-mount ._44b0c28be7879b7b-wrapper[style*="120px"] svg._44b0c28be7879b7b-cursorDefault rect {
+    /*
+    x: -70;
+    y: -76;
+     */
+    x: 0;
+    y: 0;
 }
