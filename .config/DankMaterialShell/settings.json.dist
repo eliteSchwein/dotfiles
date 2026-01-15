@@ -252,7 +252,7 @@
   "runDmsMatugenTemplates": true,
   "matugenTemplateGtk": true,
   "matugenTemplateNiri": false,
-  "matugenTemplateHyprland": false,
+  "matugenTemplateHyprland": true,
   "matugenTemplateMangowc": false,
   "matugenTemplateQt5ct": true,
   "matugenTemplateQt6ct": true,
