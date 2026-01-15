@@ -66,8 +66,6 @@ install_plugin_if_missing "desktopCommand"     "Console Widget Plugin"
 
 log_info "Make empty DMS Hyprland settings"
 
-log_info "Make empty DMS Hyprland settings"
-
 HYPR_DMS_DIR=".config/hypr/dms"
 
 # Ensure directory exists
@@ -92,6 +90,20 @@ ensure_file "$HYPR_DMS_DIR/outputs.conf"
 ensure_file "$HYPR_DMS_DIR/cursor.conf"
 ensure_file "$HYPR_DMS_DIR/colors.conf"
 ensure_file "$HYPR_DMS_DIR/layout.conf"
+
+log_info "Generate initial DMS Session"
+
+mkdir -p "$HOME/.local/state/DankMaterialShell"
+
+cat > "$HOME/.local/state/DankMaterialShell/session.json" <<EOF
+{
+  "wallpaperPath": "$HOME/wallpapers/HighResScreenShot_2023-11-16_22-23-34.png",
+  "wallpaperTransition": "stripes",
+  "perModeWallpaper": false,
+  "isLightMode": false
+}
+EOF
+
 
 
 log_ok "DMS Install: done"
