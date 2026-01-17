@@ -3102,6 +3102,7 @@ div[data-list-id="profile-288633425303437312"]
 ._3b95d7d910416e54-bar,
 ._2b1f52e43a8f1c02-textBadge,
 ._2b1f52e43a8f1c02-numberBadge,
-._7aaec78b97ff00f7-mentionsBar ._7aaec78b97ff00f7-barText{
+._7aaec78b97ff00f7-mentionsBar ._7aaec78b97ff00f7-barText,
+._650eb104245d257b-isCurrentUserConnected{
     color: var(--black-1)!important;
 }

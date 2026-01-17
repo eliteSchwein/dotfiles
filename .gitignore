@@ -10,6 +10,7 @@
 .config/DankMaterialShell/.firstlaunch
 .config/DankMaterialShell/.changelog-*
 .config/DankMaterialShell/settings.json
+.config/DankMaterialShell/plugins
 
 .config/hypr/dms
 
