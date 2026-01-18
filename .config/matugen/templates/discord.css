@@ -2832,11 +2832,6 @@ div[data-list-id="profile-288633425303437312"]
     transition: border-color var(--border-hover-transition)!important;
 }
 
-._201d5e8a3c09670a-button,
-.f1ceaca61b18918e-attachedCaret{
-    color: var(--button-secondary-text)!important;
-}
-
 ._201d5e8a3c09670a-button._201d5e8a3c09670a-colorRed {
     background-color: color-mix(in srgb, var(--red-5) 20%, transparent) !important;
     color: color-mix(in srgb, var(--red-2) 50%, transparent) !important;
