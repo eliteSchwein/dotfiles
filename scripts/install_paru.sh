@@ -12,10 +12,14 @@ PACMAN_FLAGS=(--noconfirm --needed)
 log_info "Updating pacman"
 sudo pacman -Syu "${PACMAN_FLAGS[@]}"
 
+log_info "Installing build Packages"
+sudo pacman -S mold pigz lbzip2 lzip tar bzip2 zstd "${PACMAN_FLAGS[@]}"
+
 log_info "Installing rustup"
 sudo pacman -S rustup "${PACMAN_FLAGS[@]}"
 
 rustup default stable
+rustup update
 
 log_info "Install Paru Dependencies"
 sudo pacman -S base-devel "${PACMAN_FLAGS[@]}"

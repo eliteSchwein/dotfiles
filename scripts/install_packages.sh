@@ -11,7 +11,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Core Packages"
 paru -S \
-  pciutils mold pigz lbzip2 plzip tar bzip2 \
+  pciutils \
   hyprqt6engine hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
   xdg-desktop-portal hyprpicker hyprpolkitagent \
