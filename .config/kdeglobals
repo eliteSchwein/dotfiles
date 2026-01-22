@@ -2,8 +2,8 @@
 TerminalApplication=kitty
 
 [KDE]
-ShowDeleteCommand=false
+ShowDeleteCommand=true
 
 [PreviewSettings]
 EnableRemoteFolderThumbnail=true
-MaximumRemoteSize=0
+MaximumRemoteSize=268435456

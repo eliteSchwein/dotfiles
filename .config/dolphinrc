@@ -1,3 +1,6 @@
+[ContextMenu]
+ShowCopyMoveMenu=true
+
 [General]
 Version=202
 ViewPropsTimestamp=2026,1,14,18,33,44.243
@@ -10,4 +13,4 @@ Places Icons Static Size=22
 MenuBar=Disabled
 
 [PreviewSettings]
-Plugins=exrthumbnail,opendocumentthumbnail,comicbookthumbnail,svgthumbnail,imagethumbnail,appimagethumbnail,djvuthumbnail,directorythumbnail,cursorthumbnail,audiothumbnail,kraorathumbnail,windowsimagethumbnail,jpegthumbnail,ebookthumbnail,windowsexethumbnail,glycin-image-rs,glycin-svg,glycin-heif,glycin-jxl
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,glycin-svg,svgthumbnail
