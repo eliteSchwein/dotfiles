@@ -219,6 +219,7 @@
     --font-tooltip: "Doto";
     --button-secondary-text: hsl(from var(--accent-2) h 25% 30%);
     --button-secondary-text-hover: var(--accent-2);
+    --transparent-twitch: color-mix(in hsl, var(--twitch), transparent 40%);
 }
 
 body {
@@ -986,17 +987,13 @@ body {
         --chat-background-default: var(--bg-3);
         --chat-border: lime;
         --chat-text-muted: var(--text-5);
-        --checkbox-background-active: blue;
-        --checkbox-background-default: var(--bg-2);
-        --checkbox-background-hover: red;
+        --checkbox-background-active: var(--accent-2);
         --checkbox-background-selected-default: var(--accent-2);
-        --checkbox-background-selected-hover: lime;
+        --checkbox-background-selected-hover: var(--accent-6);
         --checkbox-border-active: blue;
         --checkbox-border-default: var(--border);
-        --checkbox-border-hover: red;
-        --checkbox-border-selected-default: yellow;
-        --checkbox-border-selected-hover: lime;
-        --checkbox-icon-active: blue;
+        --checkbox-border-hover: var(--accent-6);
+        --checkbox-icon-active: black;
         --chip-blurple-dark-background: magenta;
         --chip-blurple-dark-text: red;
         --chip-blurple-light-background: yellow;
@@ -1269,20 +1266,7 @@ body {
         --profile-gradient-role-pill-background: blue;
         --profile-gradient-role-pill-border: magenta;
         --profile-gradient-section-box: red;
-        --radio-background-active: yellow;
-        --radio-background-default: lime;
-        --radio-background-hover: blue;
-        --radio-background-selected-default: magenta;
-        --radio-background-selected-hover: red;
-        --radio-border-active: yellow;
-        --radio-border-default: lime;
-        --radio-border-hover: blue;
-        --radio-border-selected-default: magenta;
-        --radio-border-selected-hover: red;
-        --radio-foreground-active: yellow;
-        --radio-foreground-default: lime;
-        --radio-foreground-hover: blue;
-        --radio-thumb-background-active: magenta;
+        --radio-thumb-background-active: black;
         --redesign-button-active-background: red;
         --redesign-button-active-pressed-background: yellow;
         --redesign-button-active-text: lime;
@@ -1699,10 +1683,6 @@ body {
 
     ._034365f2217df5de-flash[data-flash=true] /* reply message flash */ {
         background: var(--background-message-highlight);
-    }
-
-    ._8a031a135bfcb9ba-container /* modal background */ {
-        background-color: transparent;
     }
 
     ._034365f2217df5de-flash[data-flash='true'] /* reply message flash */ {
@@ -2826,10 +2806,21 @@ div[data-list-id="profile-288633425303437312"]
 .c322aadb96ff59c9-searchBar,
 ._201d5e8a3c09670a-button,
 .f1ceaca61b18918e-attachedCaret,
-.a22cb0c66246f5d3-button{
+.a22cb0c66246f5d3-button,
+.ac6cb02cd15b4b3b-input{
     background: transparent!important;
     border: var(--border-thickness) solid var(--border-subtle)!important;
     transition: border-color var(--border-hover-transition)!important;
+}
+
+.ac6cb02cd15b4b3b-input,
+.ac6cb02cd15b4b3b-input::-webkit-input-placeholder {
+    font-family: var(--font-title)!important;
+}
+
+.ac6cb02cd15b4b3b-input {
+    height: 50px;
+    font-size: 20px;
 }
 
 ._201d5e8a3c09670a-button._201d5e8a3c09670a-colorRed {
@@ -2863,7 +2854,8 @@ div[data-list-id="profile-288633425303437312"]
 .c322aadb96ff59c9-searchBar:hover,
 ._201d5e8a3c09670a-button:hover,
 .f1ceaca61b18918e-attachedCaret:hover,
-.a22cb0c66246f5d3-button:hover{
+.a22cb0c66246f5d3-button:hover,
+.ac6cb02cd15b4b3b-input:hover{
     border-color: var(--border-hover)!important;
     color: var(--button-secondary-text-hover)!important;
 }
@@ -2985,7 +2977,8 @@ div[data-list-id="profile-288633425303437312"]
 .user-profile-popout {
     background: var(--accent-4)!important;
 }
-._409aa1aeee28d5f7-sidebar {
+._409aa1aeee28d5f7-sidebar,
+._8a031a135bfcb9ba-container {
     background: color-mix(in srgb, var(--accent-7) 65%, transparent) !important;
     backdrop-filter: blur(3px);
 }
@@ -3104,4 +3097,9 @@ div[data-list-id="profile-288633425303437312"]
 }
 ._3e3b0b1c0f688f9e-childContainer path{
     fill: var(--black-1)!important;
+}
+._6e2b9359c6f84cfd-colorStreamerMode {
+    --custom-notice-background: var(--transparent-twitch);
+    --custom-notice-text: black;
+    --custom-notice-button-hover: var(--twitch);
 }
