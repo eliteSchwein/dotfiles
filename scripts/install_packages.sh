@@ -14,7 +14,7 @@ paru -S \
   pciutils \
   hyprqt6engine hyprland \
   xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
-  xdg-desktop-portal hyprpicker hyprpolkitagent \
+  xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
 
 log_info "Install Addon Packages"
@@ -38,5 +38,8 @@ paru -S \
 log_info "Install Social Media Packages"
 paru -S \
   bun equibop-bin "${PACMAN_FLAGS[@]}"
+
+log_info "Symlink some dependencies Configurations"
+sudo ln -s /etc/xdg/menus/arch-applications.menu /etc/xdg/menus/applications.menu
 
 log_ok "Packages Install: done"
