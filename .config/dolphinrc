@@ -2,6 +2,7 @@
 ShowCopyMoveMenu=true
 
 [General]
+ShowFullPath=true
 Version=202
 ViewPropsTimestamp=2026,1,14,18,33,44.243
 

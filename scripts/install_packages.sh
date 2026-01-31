@@ -19,7 +19,7 @@ paru -S \
 
 log_info "Install Addon Packages"
 paru -S \
-  ark dolphin-plugins kio-extras \
+  ark dolphin-plugins kio-extras kio-fuse \
   ydotool emote papirus-icon-theme-git satty \
   gimp clipse jq imagemagick \
   power-profiles-daemon \
