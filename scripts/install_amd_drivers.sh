@@ -30,8 +30,6 @@ install_amd_stack() {
   require_cmd paru
   sudo -v
 
-  # Core AMD stack for Wayland + VAAPI + Vulkan
-  # mesa provides OpenGL + VA-API (radeonsi); vulkan-radeon is RADV; libva-utils for testing.
   log_info "Installing AMD GPU userspace stack (Mesa/VA-API/Vulkan)"
   paru -S \
     vulkan-radeon vulkan-tools \
@@ -44,6 +42,18 @@ install_amd_stack() {
   log_ok "AMD userspace stack installed"
 }
 
+install_amd_hibernate() {
+  require_cmd paru
+  sudo -v
+  log_info "Installing AMD GPU userspace hibernate service"
+  paru -S \
+    memreserver-git "${PACMAN_FLAGS[@]}"
+
+  sudo systemctl enable --now memreserver
+
+  log_ok "AMD userspace hibernate service installed"
+}
+
 main() {
   if ! has_amd_gpu; then
     log_info "No AMD GPU detected; skipping AMD setup"
@@ -53,6 +63,7 @@ main() {
 
   log_info "AMD GPU detected; installing Mesa/VA-API/Vulkan stack"
   install_amd_stack
+  install_amd_hibernate
 
   log_ok "AMD (AMF) Setup: done"
 }
