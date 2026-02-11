@@ -22,7 +22,7 @@ paru -S \
   ark dolphin-plugins kio-extras kio-fuse \
   ydotool emote papirus-icon-theme-git satty \
   gimp clipse jq imagemagick \
-  power-profiles-daemon \
+  power-profiles-daemon hypridle \
   seahorse wl-clipboard phinger-cursors \
   brightnessctl playerctl inotify-tools \
   thunar gvfs gvfs-smb gvfs-afc gvfs-mtp wf-recorder udiskie "${PACMAN_FLAGS[@]}"
