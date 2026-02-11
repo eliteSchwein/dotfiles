@@ -58,6 +58,7 @@
   "controlCenterShowMicPercent": false,
   "controlCenterShowBatteryIcon": false,
   "controlCenterShowPrinterIcon": false,
+  "controlCenterShowScreenSharingIcon": true,
   "showPrivacyButton": true,
   "privacyShowMicIcon": false,
   "privacyShowCameraIcon": false,
@@ -325,9 +326,11 @@
   "powerMenuActions": [
     "reboot",
     "poweroff",
-    "lock"
+    "lock",
+    "hibernate",
+    "suspend"
   ],
-  "powerMenuDefaultAction": "poweroff",
+  "powerMenuDefaultAction": "hibernate",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
@@ -339,7 +342,7 @@
   "updaterUseCustomCommand": false,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
-  "displayNameMode": "model",
+  "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "niriOutputSettings": {},
