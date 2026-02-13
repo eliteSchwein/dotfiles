@@ -13,7 +13,7 @@ log_info "Install Core Packages"
 paru -S \
   pciutils \
   hyprqt6engine hyprland \
-  xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
+  xdg-desktop-portal-hyprland \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
 
