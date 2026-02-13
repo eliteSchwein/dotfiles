@@ -33,7 +33,7 @@ install_amd_stack() {
   log_info "Installing AMD GPU userspace stack (Mesa/VA-API/Vulkan)"
   paru -S \
     vulkan-radeon vulkan-tools \
-    mesa-utils libva-utils \
+    mesa-utils libva-utils opencl-mesa \
     lib32-mesa \
     egl-wayland egl-gbm \
     amdgpu_top rocm-smi-lib amdsmi \

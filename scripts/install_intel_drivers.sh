@@ -59,7 +59,7 @@ install_intel_stack() {
   # libvdpau-va-gl: VDPAU->VAAPI bridge (helps some apps)
   paru -S \
     mesa lib32-mesa \
-    vulkan-intel lib32-vulkan-intel \
+    vulkan-intel lib32-vulkan-intel opencl-mesa \
     intel-media-driver \
     libva-utils vulkan-tools \
     intel-gpu-tools \
