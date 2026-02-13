@@ -25,7 +25,7 @@ paru -S \
   power-profiles-daemon hypridle \
   seahorse wl-clipboard phinger-cursors \
   brightnessctl playerctl inotify-tools \
-  thunar gvfs gvfs-smb gvfs-afc gvfs-mtp wf-recorder udiskie "${PACMAN_FLAGS[@]}"
+  wf-recorder udiskie "${PACMAN_FLAGS[@]}"
 
 log_info "Install Utilities Packages"
 paru -S \
