@@ -13,7 +13,7 @@ log_info "Updating pacman"
 sudo pacman -Syu "${PACMAN_FLAGS[@]}"
 
 log_info "Installing build Packages"
-sudo pacman -S mold pigz lbzip2 lzip tar bzip2 zstd "${PACMAN_FLAGS[@]}"
+sudo pacman -S stow mold pigz lbzip2 lzip tar bzip2 zstd "${PACMAN_FLAGS[@]}"
 
 log_info "Installing rustup"
 sudo pacman -S rustup "${PACMAN_FLAGS[@]}"
