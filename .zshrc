@@ -108,7 +108,7 @@ export VISUAL=$EDITOR
 export PATH=/opt/cuda/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/opt/cuda/lib64
 
-alias kys='command -v ddev >/dev/null 2>&1 && ddev poweroff; dms ipc call powermenu toggle'
+alias kys='command -v ddev >/dev/null 2>&1 && ddev poweroff; shutdown -h now'
 alias ree='command -v ddev >/dev/null 2>&1 && ddev poweroff; reboot'
 alias levelup="paru -Syyu && rustup update && hyprpm update -f -v"
 alias ssh="TERM=xterm-256color ssh"
