@@ -42,18 +42,6 @@ install_amd_stack() {
   log_ok "AMD userspace stack installed"
 }
 
-install_amd_hibernate() {
-  require_cmd paru
-  sudo -v
-  log_info "Installing AMD GPU userspace hibernate service"
-  paru -S \
-    memreserver-git "${PACMAN_FLAGS[@]}"
-
-  sudo systemctl enable --now memreserver
-
-  log_ok "AMD userspace hibernate service installed"
-}
-
 main() {
   if ! has_amd_gpu; then
     log_info "No AMD GPU detected; skipping AMD setup"
@@ -63,7 +51,6 @@ main() {
 
   log_info "AMD GPU detected; installing Mesa/VA-API/Vulkan stack"
   install_amd_stack
-  install_amd_hibernate
 
   log_ok "AMD (AMF) Setup: done"
 }
