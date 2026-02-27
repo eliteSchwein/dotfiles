@@ -37,7 +37,7 @@ install_amd_stack() {
     lib32-mesa \
     egl-wayland egl-gbm \
     amdgpu_top rocm-smi-lib amdsmi \
-    amf-amdgpu-pro "${PACMAN_FLAGS[@]}"
+    amf-headers "${PACMAN_FLAGS[@]}"
 
   log_ok "AMD userspace stack installed"
 }
