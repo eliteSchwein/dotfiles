@@ -14,7 +14,9 @@ paru -S greetd sysc-greet-hyprland "${PACMAN_FLAGS[@]}"
 
 log_info "Copy Greetd Configs"
 sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
+sudo mkdir -p /var/lib/greeter/.cache
 sudo cp -af no-stow-root/var/lib/greeter/.cache/sysc-greeter /var/lib/greeter/.cache/sysc-greeter
+sudo chown -R greeter:greeter /var/lib/greeter/.cache/sysc-greeter
 
 log_info "Enable Greetd"
 sudo systemctl enable greetd
