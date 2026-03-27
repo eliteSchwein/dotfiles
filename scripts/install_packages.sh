@@ -11,7 +11,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Core Packages"
 paru -S \
-  pciutils \
+  pciutils cups \
   hyprqt6engine hyprland uwsm \
   xdg-desktop-portal-hyprland hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
