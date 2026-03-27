@@ -38,6 +38,5 @@ TTYVTDisallocate=true
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl restart greetd
 
 log_ok "Greetd Install: done"
