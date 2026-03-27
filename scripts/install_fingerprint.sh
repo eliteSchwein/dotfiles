@@ -108,6 +108,7 @@ for finger in \
 do
     log_info "Enrolling $finger"
     sudo fprintd-enroll -f "$finger" "$USER"
+    sleep .5
 done
 
 log_ok "Fingerprint Reader Install: done"
