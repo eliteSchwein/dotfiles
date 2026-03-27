@@ -12,7 +12,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 log_info "Install Core Packages"
 paru -S \
   pciutils cups \
-  hyprqt6engine hyprland uwsm \
+  hyprqt6engine hyprland uwsm hyprland-preview-share-picker xdg-desktop-portal-kde \
   xdg-desktop-portal-hyprland hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
@@ -42,5 +42,13 @@ paru -S \
 log_info "Symlink some dependencies Configurations"
 sudo rm -rf /etc/xdg/menus/applications.menu
 sudo ln -s /etc/xdg/menus/arch-applications.menu /etc/xdg/menus/applications.menu
+
+log_info "Generate XDG Desktop Portal Configuration"
+mkdir -p ~/.config/xdg-desktop-portal
+cat > ~/.config/xdg-desktop-portal/hyprland-portals.conf <<'EOF'
+[preferred]
+default = hyprland;gtk
+org.freedesktop.impl.portal.FileChooser = kde
+EOF
 
 log_ok "Packages Install: done"

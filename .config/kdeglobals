@@ -7,3 +7,6 @@ ShowDeleteCommand=true
 [PreviewSettings]
 EnableRemoteFolderThumbnail=true
 MaximumRemoteSize=268435456
+
+[UiSettings]
+ColorScheme=DankMatugen
