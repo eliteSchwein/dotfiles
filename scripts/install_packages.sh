@@ -12,7 +12,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 log_info "Install Core Packages"
 paru -S \
   pciutils cups \
-  hyprqt6engine hyprland uwsm hyprland-preview-share-picker-git xdg-desktop-portal-kde \
+  hyprqt6engine hyprland hyr hyprland-preview-share-picker-git xdg-desktop-portal-kde \
   xdg-desktop-portal-hyprland hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
   hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
@@ -50,5 +50,12 @@ cat > ~/.config/xdg-desktop-portal/hyprland-portals.conf <<'EOF'
 default = hyprland;gtk
 org.freedesktop.impl.portal.FileChooser = kde
 EOF
+
+log_info "Install Hyprland Plugins"
+hyprpm add https://github.com/zakk4223/hyprland-easymotion
+hyprpm enable hyprEasymotion
+
+hyprpm add https://github.com/levnikmyskin/hyprland-virtual-desktops
+hyprpm enable virtual-desktops
 
 log_ok "Packages Install: done"
