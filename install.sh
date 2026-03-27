@@ -71,6 +71,7 @@ add_step "dms install" "$SCRIPTS_DIR/install_dms.sh"
 add_step "gtk theme install" "$SCRIPTS_DIR/install_gtk_theme.sh"
 add_step "zsh install" "$SCRIPTS_DIR/install_zsh.sh"
 add_step "power profiles install" "$SCRIPTS_DIR/install_powerprofiles.sh"
+add_step "fingerprint reader install" "$SCRIPTS_DIR/install_fingerprint.sh"
 add_step "link" "$SCRIPTS_DIR/link.sh"
 
 for i in "${!STEP_NAMES[@]}"; do
