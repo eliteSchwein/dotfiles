@@ -104,6 +104,7 @@ cat > "$HOME/.local/state/DankMaterialShell/session.json" <<EOF
 }
 EOF
 
-
+log_info "Enable User DMS Service"
+systemctl --user enable dms
 
 log_ok "DMS Install: done"
