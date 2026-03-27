@@ -8,7 +8,8 @@ vt = 2
 
 # `agreety` is the bundled agetty/login-lookalike. You can replace `/bin/sh`
 # with whatever you want started, such as `sway`.
-command = "tuigreet -r --cmd start-hyprland -g 'if you want to die, touch my PC.'"
+# command = "tuigreet -r --cmd start-hyprland -g 'if you want to die, touch my PC.'"
+command = "start-hyprland -- -c /etc/greetd/hyprland-greeter-config.conf"
 
 # The user to run the command as. The privileges this user must have depends
 # on the greeter. A graphical greeter may for example require the user to be
