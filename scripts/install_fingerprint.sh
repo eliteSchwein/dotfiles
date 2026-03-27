@@ -100,14 +100,14 @@ ensure_pam_fprintd /etc/pam.d/login
 log_ok "Enroll fingerprints (both index fingers, in case one finger gets injured)"
 
 # Remove old enrolled fingerprints if any.
-fprintd-delete "$USER" 2>/dev/null || true
+sudo fprintd-delete "$USER" 2>/dev/null || true
 
 for finger in \
     left-index-finger \
     right-index-finger
 do
     log_info "Enrolling $finger"
-    fprintd-enroll -f "$finger" "$USER"
+    sudo fprintd-enroll -f "$finger" "$USER"
 done
 
 log_ok "Fingerprint Reader Install: done"
