@@ -20,7 +20,7 @@ sudo systemctl enable greetd
 
 #source is https://github.com/apognu/tuigreet/issues/68#issuecomment-1586359960
 log_info "Patch Greetd Service"
-dir="/etc/systemd/system/greetd.d"
+dir="/etc/systemd/system/greetd.service.d"
 file="$dir/no_spam.conf"
 
 sudo install -d -m 0755 "$dir"
@@ -38,5 +38,6 @@ TTYVTDisallocate=true
 EOF
 
 sudo systemctl daemon-reload
+sudo systemctl restart greetd
 
 log_ok "Greetd Install: done"
