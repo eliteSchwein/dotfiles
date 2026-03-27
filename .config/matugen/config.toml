@@ -5,6 +5,10 @@ input_path = '~/.config/matugen/templates/discord.css'
 output_path = '~/.config/equibop/settings/quickCss.css'
 post_hook = 'python ~/dotfiles/.config/matugen/scripts/discord_updater.py ~/.config/equibop/settings/quickCss.css'
 
+[templates.sharepicker]
+input_path = '~/.config/matugen/templates/sharepicker.css'
+output_path = '~/.config/hyprland-preview-share-picker/sharepicker.css'
+
 [templates.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox.json'
 output_path = '~/.cache/wal/colors.json'

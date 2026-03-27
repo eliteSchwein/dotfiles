@@ -12,6 +12,8 @@
 .config/DankMaterialShell/settings.json
 .config/DankMaterialShell/plugins
 
+.config/hyprland-preview-share-picker/sharepicker.css
+
 .config/hypr/dms
 
 .stow-backups

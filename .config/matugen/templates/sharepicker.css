@@ -1,0 +1,89 @@
+* {
+    all: unset;
+    font-family: Doto;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.window {
+    border-radius: 15px;
+    background-color: {{colors.background.default.hex}};
+    border: solid 2px {{colors.primary.default.hex}};
+    margin: 2px;
+}
+
+tabs {
+    padding: .75rem;
+}
+
+tabs > tab {
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
+.tab-label {
+    color: {{colors.primary_fixed_dim.default.hex}};
+    transition: all 0.2s ease;
+}
+
+tabs > tab:checked, tabs > tab:active {
+    background-color: {{colors.primary.default.hex}};
+}
+
+tabs > tab:checked > .tab-label, tabs > tab:active > .tab-label {
+    color: {{colors.on_primary.default.hex}};
+}
+
+tabs > tab:focus > .tab-label {
+    color: {{colors.on_primary.default.hex}};
+}
+
+.page {
+    padding: 1rem;
+}
+
+.image-label {
+    font-family: Orbitron;
+    font-size: 12px;
+    padding: 0.25rem;
+    margin-top: 0.5rem;
+    font-weight: normal;
+    color: {{colors.primary.default.hex}};
+}
+
+flowboxchild > .card, button > .card {
+    transition: all 0.2s ease;
+    border: solid 2px transparent;
+    border-color: {{colors.on_secondary.default.hex}};
+    border-radius: 5px;
+    background-color: {{colors.on_secondary.default.hex}};
+    padding: 5px;
+}
+
+flowboxchild:active > .card, flowboxchild:selected > .card, button:active > .card, button:selected > .card, button:focus > .card {
+    border: solid 2px {{colors.primary.default.hex}};
+}
+
+.image {
+    border-radius: 10px;
+}
+
+.region-button,
+.restore-button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: {{colors.primary.default.hex}};
+    color: {{colors.on_primary.default.hex}};
+    transition: all 0.2s ease;
+}
+
+.region-button:not(:disabled):hover, .region-button:not(:disabled):focus {
+    background-color: {{colors.primary_container.default.hex}};
+    color: {{colors.on_primary_container.default.hex}};
+}
+
+.region-button:disabled {
+    background-color: {{colors.outline.default.hex}};
+    color: {{colors.outline_variant.default.hex}};
+}
