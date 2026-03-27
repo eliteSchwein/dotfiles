@@ -18,14 +18,24 @@ sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
 log_info "Enable Greetd"
 sudo systemctl enable greetd
 
-#source is https://github.com/apognu/tuigreet/issues/68#issuecomment-1586359960
 log_info "Patch Greetd Service"
 dir="/etc/systemd/system/greetd.service.d"
-file="$dir/no_spam.conf"
 
 sudo install -d -m 0755 "$dir"
 
-sudo tee "$file" > /dev/null <<'EOF'
+sudo tee "$dir/quite.conf" > /dev/null <<'EOF'
+[Unit]
+After=getty@tty2.service
+
+[Service]
+Type=idle
+StandardInput=tty
+TTYPath=/dev/tty2
+TTYReset=yes
+TTYVHangup=yes
+EOF
+
+sudo tee "$dir/stfu.conf" > /dev/null <<'EOF'
 [Service]
 Type=idle
 StandardOutput=tty
