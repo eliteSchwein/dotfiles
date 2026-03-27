@@ -13,10 +13,34 @@ log_info "Check for Fingerprint Hardware"
 
 pattern='finger|fingerprint|biometric|validity|synaptics|goodix|elan|authentec|upek'
 
-if ! {
-    lsusb 2>/dev/null | tr '[:upper:]' '[:lower:]'
-    lspci 2>/dev/null | tr '[:upper:]' '[:lower:]'
-} | grep -Eiq "$pattern"; then
+usb_output="$(lsusb 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
+pci_output="$(lspci 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
+
+usb_match=0
+pci_match=0
+
+if grep -Eiq "$pattern" <<<"$usb_output"; then
+    usb_match=1
+fi
+
+if grep -Eiq "$pattern" <<<"$pci_output"; then
+    pci_match=1
+fi
+
+log_info "lsusb matched: $usb_match"
+log_info "lspci matched: $pci_match"
+
+if [[ "$usb_match" -eq 1 ]]; then
+    log_info "Matching lsusb lines:"
+    grep -Ei "$pattern" <<<"$usb_output" || true
+fi
+
+if [[ "$pci_match" -eq 1 ]]; then
+    log_info "Matching lspci lines:"
+    grep -Ei "$pattern" <<<"$pci_output" || true
+fi
+
+if [[ "$usb_match" -eq 0 && "$pci_match" -eq 0 ]]; then
     log_warn "No fingerprint reader hardware detected, skipping install"
     exit 0
 fi
