@@ -96,6 +96,7 @@ ensure_pam_fprintd() {
 
 ensure_pam_fprintd /etc/pam.d/system-local-login
 ensure_pam_fprintd /etc/pam.d/login
+ensure_pam_fprintd /etc/pam.d/sudo
 
 log_ok "Enroll fingerprints (both index fingers, in case one finger gets injured)"
 
