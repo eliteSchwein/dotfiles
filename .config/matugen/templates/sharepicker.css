@@ -13,7 +13,7 @@
 }
 
 tabs {
-    padding: .75rem;
+    padding: .75rem .75rem 0;
 }
 
 tabs > tab {
@@ -40,7 +40,7 @@ tabs > tab:focus > .tab-label {
 }
 
 .page {
-    padding: 1rem;
+    padding: 0.75rem 1rem 1rem;
 }
 
 .image-label {
