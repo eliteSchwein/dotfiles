@@ -10,7 +10,7 @@ log_info "DMS Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Shell Packages"
-paru -S dms-shell-bin qt5ct khal qt6ct-kde kimageformats cups-pk-helper \
+paru -S dms-shell-hyprland qt5ct khal qt6ct-kde kimageformats cups-pk-helper \
   cava wl-clipboard i2c-tools qt5-wayland qt6-wayland cliphist brightnessctl qt6-multimedia accountsservice \
   matugen python-pywalfox "${PACMAN_FLAGS[@]}"
 
