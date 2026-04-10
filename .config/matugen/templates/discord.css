@@ -543,7 +543,8 @@ body {
 }
 
 .notice__6e2b9 /* notice banner */ {
-    margin: 0 var(--gap) var(--gap) 0;
+    --custom-notice-text: black;
+    margin: var(--gap) var(--gap) var(--gap) 0;
     border-radius: var(--radius-md);
     box-sizing: border-box;
     height: 40px;
@@ -977,8 +978,6 @@ body {
         --button-outline-primary-text: red;
         --card-background-default: var(--bg-3);
         --card-primary-pressed-bg: lime;
-        --card-secondary-bg: blue;
-        --card-secondary-pressed-bg: magenta;
         --channel-icon: var(--text-4);
         --channel-text-area-placeholder: var(--text-5);
         --channels-default: var(--text-4);
@@ -1323,19 +1322,15 @@ body {
         --status-warning: var(--yellow-2);
         --status-warning-background: red;
         --status-warning-text: yellow;
-        --switch-background-active: lime;
-        --switch-background-default: blue;
-        --switch-background-hover: magenta;
-        --switch-background-selected-default: red;
-        --switch-background-selected-hover: yellow;
-        --switch-border-default: lime;
-        --switch-border-hover: blue;
-        --switch-border-selected-default: magenta;
-        --switch-border-selected-hover: red;
-        --switch-thumb-background-default: yellow;
-        --switch-thumb-background-selected-default: lime;
-        --switch-thumb-icon-active: blue;
-        --switch-thumb-icon-default: magenta;
+        --switch-background-active: transparent;
+        --switch-background-default: var(--accent-4);
+        --switch-background-hover: var(--accent-6);
+        --switch-background-selected-default:  var(--accent-2);
+        --switch-background-selected-hover: var(--accent-6);
+        --switch-border-default: transparent;
+        --switch-border-hover: transparent;
+        --switch-border-selected-default: transparent;
+        --switch-border-selected-hover: transparent;
         --text-brand: var(--accent-1);
         --text-code: red;
         --text-code-addition: yellow;
@@ -1491,13 +1486,9 @@ body {
     }
 
     .container__3f21e /* settings checkbutton background */,
-    .vc-switch-container {
-        background-color: var(--bg-1) !important;
+    .vc-switch-container,
+    .switchIndicator_a28278 {
         transition: background-color 0.2s ease;
-    }
-    .container__3f21e.checked__3f21e /* settings checkbutton background */,
-    .vc-switch-container.vc-switch-checked {
-        background-color: var(--accent-2) !important;
     }
     .container__3f21e .slider__3f21e > svg > path /* settings checkbutton check */,
     .vc-switch-container .vc-switch-slider > svg > path {
@@ -1520,6 +1511,18 @@ body {
 
     .refreshIcon__88a69 /* settings radiobutton center */ {
         fill: var(--text-0);
+    }
+
+    .switchIndicator_a28278 {
+        background-color: var(--switch-background-default)!important;
+    }
+
+    .switchIndicator_a28278:hover {
+        background-color: var(--switch-background-hover)!important;
+    }
+
+    .switchIndicator_a28278[style*="background-color: rgb(88, 101, 242)"] {
+        background-color: var(--switch-background-selected-default) !important;
     }
 
     .categoryText_d02962 /* gif chooser category names */,
@@ -2779,6 +2782,10 @@ div[data-list-id="profile-288633425303437312"]
 
 .app_a3002d {
     color: rgba(0, 0, 0, 0);
+}
+
+.vc-shc-channel-list-icon {
+    color: var(--channel-icon)!important;
 }
 
 /* radial fixes */
