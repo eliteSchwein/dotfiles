@@ -1,6 +1,7 @@
 .idea
 
 .config/hypr/hyprland.conf
+.config/uwsm/env
 .config/hypr/hyprtoolkit.conf
 .config/ags/node_modules
 .uuid

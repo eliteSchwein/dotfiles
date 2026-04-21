@@ -23,3 +23,6 @@ scripts
 ^scripts(/|$)
 ^root(/|$)
 ^\.STM32CubeProgrammer(/|$)
+
+
+.config/uwsm/env.dist
