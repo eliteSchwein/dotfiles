@@ -51,13 +51,28 @@ remove_target_if_not_symlink() {
 
 extract_conflict_target() {
   # Reads stow stderr/stdout text and prints a single conflicting target (relative to $HOME)
-  # Supports the exact format you pasted.
-  local out="$1"
   # Example:
   # cannot stow dotfiles/.config/.../settings.json over existing target .config/.../settings.json since ...
+  local out="$1"
   sed -nE 's/^.*over existing target ([^ ]+) since.*$/\1/p' <<<"$out" | head -n1
 }
 
+prepare_explicit_home_target() {
+  local rel="$1"
+  local tgt="$HOME/$rel"
+
+  if [[ -e "$tgt" || -L "$tgt" ]]; then
+    log_info "Preparing explicit target: $tgt"
+    backup_target_if_needed "$tgt" "$rel"
+    remove_target_if_not_symlink "$tgt"
+  fi
+}
+
+# ---- 0) Explicit pre-stow handling for uwsm env files ----
+prepare_explicit_home_target ".config/uwsm/env"
+prepare_explicit_home_target ".config/uwsm/env-hyprland"
+
+# ---- 1) Stow dotfiles into $HOME with auto-fix conflicts ----
 log_info "Stow dotfiles into \$HOME (auto-fix conflicts)"
 max_rounds=25
 round=0

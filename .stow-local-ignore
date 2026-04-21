@@ -25,4 +25,4 @@ scripts
 ^\.STM32CubeProgrammer(/|$)
 
 
-.config/uwsm/env.dist
+.config/uwsm
