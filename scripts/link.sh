@@ -51,8 +51,6 @@ remove_target_if_not_symlink() {
 
 extract_conflict_target() {
   # Reads stow stderr/stdout text and prints a single conflicting target (relative to $HOME)
-  # Example:
-  # cannot stow dotfiles/.config/.../settings.json over existing target .config/.../settings.json since ...
   local out="$1"
   sed -nE 's/^.*over existing target ([^ ]+) since.*$/\1/p' <<<"$out" | head -n1
 }
@@ -68,9 +66,26 @@ prepare_explicit_home_target() {
   fi
 }
 
-# ---- 0) Explicit pre-stow handling for uwsm env files ----
-prepare_explicit_home_target ".config/uwsm/env"
-prepare_explicit_home_target ".config/uwsm/env-hyprland"
+copy_explicit_home_file() {
+  local rel="$1"
+  local src="$ROOT_DIR/$rel"
+  local tgt="$HOME/$rel"
+
+  if [[ ! -f "$src" ]]; then
+    log_warn "Explicit source file not found, skipping: $src"
+    return 0
+  fi
+
+  prepare_explicit_home_target "$rel"
+
+  log_info "Copy explicit file: $src -> $tgt"
+  cp -f "$src" "$tgt"
+}
+
+# ---- 0) Explicit uwsm env files: backup/remove/copy ----
+mkdir -p "$HOME/.config/uwsm"
+copy_explicit_home_file ".config/uwsm/env"
+copy_explicit_home_file ".config/uwsm/env-hyprland"
 
 # ---- 1) Stow dotfiles into $HOME with auto-fix conflicts ----
 log_info "Stow dotfiles into \$HOME (auto-fix conflicts)"
