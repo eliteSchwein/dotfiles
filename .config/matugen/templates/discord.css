@@ -208,6 +208,7 @@
     --panel-backdrop-filter: none;
 
     /* SCHW31N Edits */
+    --twitch: #6441a5;
     --font-title: "Doto";
     --title-color: hsl(from var(--accent-2) h 25% 70%);        /* icon buttons and channels */
     --title-color-hover: hsl(from var(--accent-2) h 45% 95%);  /* muted channels/chats and timestamps */
