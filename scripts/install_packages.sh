@@ -9,6 +9,10 @@ log_info "Packages Install: starting"
 
 PACMAN_FLAGS=(--noconfirm --needed)
 
+log_info "Add keys for extra repos"
+sudo pacman-key --recv-keys 313F5ABD
+sudo pacman-key --lsign-key 313F5ABD
+
 log_info "Install Core Packages"
 paru -S \
   pciutils cups \
