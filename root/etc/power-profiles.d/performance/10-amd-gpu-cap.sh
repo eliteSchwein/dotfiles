@@ -8,18 +8,28 @@ if [[ "$EUID" -ne 0 ]]; then
   exit 1
 fi
 
-found_amd=false
+found_gpu=false
 
 for card in /sys/class/drm/card[0-9]*; do
   [[ -d "$card/device" ]] || continue
   dev="$card/device"
 
-  # Check vendor (AMD = 0x1002)
   [[ -f "$dev/vendor" ]] || continue
   vendor=$(< "$dev/vendor")
-  [[ "$vendor" == "0x1002" ]] || continue
 
-  found_amd=true
+  case "$vendor" in
+    0x1002)
+      vendor_name="AMD"
+      ;;
+    0x8086)
+      vendor_name="Intel"
+      ;;
+    *)
+      continue
+      ;;
+  esac
+
+  found_gpu=true
 
   hwmon_glob=( "$dev"/hwmon/hwmon* )
   hwmon_dir="${hwmon_glob[0]:-}"
@@ -28,12 +38,20 @@ for card in /sys/class/drm/card[0-9]*; do
     continue
   fi
 
-  cap_file="$hwmon_dir/power1_cap"
-  max_file="$hwmon_dir/power1_cap_max"
-  min_file="$hwmon_dir/power1_cap_min"
+  if [[ "$vendor" == "0x1002" ]]; then
+    cap_file="$hwmon_dir/power1_cap"
+    max_file="$hwmon_dir/power1_cap_max"
+    min_file="$hwmon_dir/power1_cap_min"
+  else
+    cap_file="$hwmon_dir/power1_max"
+    max_file="$hwmon_dir/power1_rated_max"
+    min_file="$hwmon_dir/power1_min"
+
+    [[ -f "$max_file" ]] || max_file="$cap_file"
+  fi
 
   if [[ ! -f "$cap_file" ]]; then
-    echo "No power1_cap for $(basename "$card"); skipping."
+    echo "No power cap file for $(basename "$card") ($vendor_name); skipping."
     continue
   fi
 
@@ -49,13 +67,36 @@ for card in /sys/class/drm/card[0-9]*; do
       if (( max_cap > 0 )); then
         new_cap=$max_cap
       else
-        echo "No power1_cap_max for $(basename "$card"); skipping."
+        echo "No max cap for $(basename "$card"); skipping."
         continue
       fi
+      ;;
+    min)
+      if (( min_cap > 0 )); then
+        new_cap=$min_cap
+      else
+        echo "No min cap for $(basename "$card"); skipping."
+        continue
+      fi
+      ;;
+    balanced)
+      if (( max_cap > 0 && min_cap > 0 )); then
+        new_cap=$(( min_cap + (max_cap - min_cap) / 2 ))
+      elif (( max_cap > 0 )); then
+        new_cap=$(( max_cap * 80 / 100 ))
+      else
+        echo "No usable cap values for $(basename "$card"); skipping."
+        continue
+      fi
+      ;;
+    *)
+      echo "Invalid MODE: $MODE" >&2
+      exit 1
       ;;
   esac
 
   echo "Card: $(basename "$card")"
+  echo "  Vendor: $vendor_name"
   (( max_cap > 0 )) && echo "  HW max: $(( max_cap / 1000000 )) W"
   (( min_cap > 0 )) && echo "  HW min: $(( min_cap / 1000000 )) W"
   echo "  Mode: $MODE"
@@ -64,7 +105,7 @@ for card in /sys/class/drm/card[0-9]*; do
   echo "$new_cap" > "$cap_file"
 done
 
-if ! $found_amd; then
-  echo "No AMD GPUs (vendor 0x1002) found under /sys/class/drm."
+if ! $found_gpu; then
+  echo "No AMD or Intel GPUs found under /sys/class/drm."
   exit 1
 fi
