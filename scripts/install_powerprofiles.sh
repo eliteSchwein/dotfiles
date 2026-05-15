@@ -7,6 +7,9 @@ source "$SCRIPT_DIR/logger.sh"
 
 log_info "Power Profiles Install: starting"
 
+log_info "Unlink Power Profiles Folder"
+sudo unlink /etc/power-profiles.d
+
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Power Profiles Daemon"
