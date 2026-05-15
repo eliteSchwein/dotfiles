@@ -15,7 +15,7 @@ BACKUP_DIR="$ROOT_DIR/.stow-backups/$(date +%F-%H%M%S)"
 # Ensure sudo is available up-front (optional but nice UX)
 sudo -v
 
-sudo pacman -S stow
+sudo pacman -S stow --noconfirm --needed
 
 backup_and_remove_if_target_not_symlink() {
   local src="$1"      # full path inside PKG_DIR (unused but kept for signature)
