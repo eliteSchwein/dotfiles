@@ -63,7 +63,7 @@ install_intel_stack() {
     intel-media-driver \
     libva-utils vulkan-tools \
     intel-gpu-tools \
-    libvdpau-va-gl lib32-libvdpau-va-gl \
+    libvdpau-va-gl \
     "${PACMAN_FLAGS[@]}"
 
   # Legacy VA-API for older iGPUs (i965). Install only when we suspect legacy.
