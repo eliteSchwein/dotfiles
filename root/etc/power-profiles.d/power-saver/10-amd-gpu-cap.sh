@@ -2,19 +2,32 @@
 set -euo pipefail
 
 MODE="min"  # max|min|balanced
+INTEL_CONF="/etc/power-profiles.d/intel-gpu-power.conf"
 
-if [[ "$EUID" -ne 0 ]]; then
+[[ "$EUID" -eq 0 ]] || {
   echo "This script must be run as root." >&2
   exit 1
-fi
+}
+
+get_intel_conf_value() {
+  local pci_id="$1" wanted="$2"
+
+  [[ -f "$INTEL_CONF" ]] || return 1
+
+  awk -v pci="$pci_id" -v wanted="$wanted" '
+    $1 == pci {
+      if (wanted == "min") print $2
+      if (wanted == "max") print $3
+    }
+  ' "$INTEL_CONF"
+}
 
 found_gpu=false
 
 for card in /sys/class/drm/card[0-9]*; do
-  [[ -d "$card/device" ]] || continue
-  dev="$card/device"
+  [[ -d "$card/device" && -f "$card/device/vendor" ]] || continue
 
-  [[ -f "$dev/vendor" ]] || continue
+  dev="$card/device"
   vendor=$(< "$dev/vendor")
 
   case "$vendor" in
@@ -28,16 +41,14 @@ for card in /sys/class/drm/card[0-9]*; do
   hwmon_glob=( "$dev"/hwmon/hwmon* )
   hwmon_dir="${hwmon_glob[0]:-}"
 
-  if [[ -z "$hwmon_dir" || ! -d "$hwmon_dir" ]]; then
+  [[ -d "$hwmon_dir" ]] || {
     echo "No hwmon directory for $(basename "$card"); skipping."
     continue
-  fi
+  }
 
   if [[ "$vendor" == "0x1002" ]]; then
     cap_files=( "$hwmon_dir/power1_cap" )
   else
-    # Intel Arc / Xe / i915
-    # Use exact powerN_max files only. Avoid power1_max_interval.
     cap_files=()
 
     for f in "$hwmon_dir"/power[0-9]*_max; do
@@ -47,55 +58,55 @@ for card in /sys/class/drm/card[0-9]*; do
     done
   fi
 
-  if (( ${#cap_files[@]} == 0 )); then
-    echo "No power cap file for $(basename "$card") ($vendor_name); skipping."
-    continue
-  fi
-
   for cap_file in "${cap_files[@]}"; do
-    if [[ ! -f "$cap_file" ]]; then
-      echo "No power cap file for $(basename "$card") ($vendor_name); skipping."
+    [[ -f "$cap_file" ]] || continue
+    [[ -w "$cap_file" ]] || {
+      echo "Not writable: $cap_file"
       continue
-    fi
-
-    if [[ ! -w "$cap_file" ]]; then
-      echo "Power cap file is not writable: $cap_file"
-      continue
-    fi
-
-    if [[ "$vendor" == "0x1002" ]]; then
-      max_file="$hwmon_dir/power1_cap_max"
-      min_file="$hwmon_dir/power1_cap_min"
-    else
-      num="${cap_file##*/power}"
-      num="${num%%_max}"
-
-      rated_file="$hwmon_dir/power${num}_rated_max"
-      min_file="$hwmon_dir/power${num}_min"
-
-      # Intel Arc usually has no real min file.
-      # Use current writable powerN_max as fallback reference.
-      max_file="$cap_file"
-      [[ -f "$rated_file" ]] && max_file="$rated_file"
-    fi
+    }
 
     cur_cap=$(< "$cap_file")
     max_cap=0
     min_cap=0
 
-    [[ -f "$max_file" ]] && max_cap=$(< "$max_file")
-    [[ -f "$min_file" ]] && min_cap=$(< "$min_file")
+    if [[ "$vendor" == "0x1002" ]]; then
+      [[ -f "$hwmon_dir/power1_cap_max" ]] && max_cap=$(< "$hwmon_dir/power1_cap_max")
+      [[ -f "$hwmon_dir/power1_cap_min" ]] && min_cap=$(< "$hwmon_dir/power1_cap_min")
+    else
+      pci_id="$(basename "$(readlink -f "$dev")")"
 
-    new_cap=0
+      conf_min="$(get_intel_conf_value "$pci_id" min || true)"
+      conf_max="$(get_intel_conf_value "$pci_id" max || true)"
+
+      [[ "$conf_min" =~ ^[0-9]+$ ]] && min_cap="$conf_min"
+      [[ "$conf_max" =~ ^[0-9]+$ ]] && max_cap="$conf_max"
+
+      num="${cap_file##*/power}"
+      num="${num%%_max}"
+      rated_file="$hwmon_dir/power${num}_rated_max"
+
+      if (( max_cap <= 0 )) && [[ -f "$rated_file" ]]; then
+        max_cap=$(< "$rated_file")
+      fi
+    fi
+
+    if (( max_cap <= 0 )); then
+      echo "No max cap for $(basename "$card"); skipping."
+      continue
+    fi
 
     case "$MODE" in
+      max)
+        new_cap="$max_cap"
+        ;;
+      balanced)
+        new_cap=$(( max_cap * 80 / 100 ))
+        ;;
       min)
         if (( min_cap > 0 )); then
-          new_cap=$min_cap
-        elif (( max_cap > 0 )); then
-          new_cap=$(( max_cap / 4 ))
+          new_cap="$min_cap"
         else
-          echo "No min/max power cap for $(basename "$card"); skipping."
+          echo "No min cap for $(basename "$card"); skipping."
           continue
         fi
         ;;
@@ -107,9 +118,10 @@ for card in /sys/class/drm/card[0-9]*; do
 
     echo "Card: $(basename "$card")"
     echo "  Vendor: $vendor_name"
+    [[ "$vendor" == "0x8086" ]] && echo "  PCI ID: $pci_id"
     echo "  Current: $(( cur_cap / 1000000 )) W"
-    (( max_cap > 0 )) && echo "  HW/ref max: $(( max_cap / 1000000 )) W"
-    (( min_cap > 0 )) && echo "  HW min: $(( min_cap / 1000000 )) W"
+    echo "  Max: $(( max_cap / 1000000 )) W"
+    (( min_cap > 0 )) && echo "  Min: $(( min_cap / 1000000 )) W"
     echo "  Mode: $MODE"
     echo "  New cap: $(( new_cap / 1000000 )) W -> $cap_file"
 
