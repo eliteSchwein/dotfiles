@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODE="max"  # max|min|balanced
+MODE="balanced"  # max|min|balanced
 INTEL_CONF="/etc/power-profiles.d/intel-gpu-power.conf"
 
 [[ "$EUID" -eq 0 ]] || {
