@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODE="balanced"  # max|min|balanced
+MODE="max"  # max|min|balanced
 INTEL_CONF="/etc/power-profiles.d/intel-gpu-power.conf"
 
 [[ "$EUID" -eq 0 ]] || {
@@ -37,8 +37,6 @@ log "Intel config: $INTEL_CONF"
 
 if [[ -f "$INTEL_CONF" ]]; then
   log "Intel config exists: yes"
-  log "Intel config content:"
-  sed 's/^/[gpu-power]   /' "$INTEL_CONF"
 else
   log "Intel config exists: no"
 fi
@@ -62,7 +60,6 @@ for card in /sys/class/drm/card[0-9]*; do
   log "Vendor: $vendor_name ($vendor)"
   log "Device path: $dev"
   log "Resolved PCI path: $(readlink -f "$dev")"
-  log "Detected PCI ID: $(basename "$(readlink -f "$dev")")"
 
   hwmon_glob=( "$dev"/hwmon/hwmon* )
   hwmon_dir="${hwmon_glob[0]:-}"
@@ -81,23 +78,15 @@ for card in /sys/class/drm/card[0-9]*; do
 
     for f in "$hwmon_dir"/power[0-9]*_max; do
       [[ -e "$f" ]] || continue
-      [[ "$f" =~ /power[0-9]+_max$ ]] || {
-        log "Ignoring non-cap Intel file: $f"
-        continue
-      }
+      [[ "$f" =~ /power[0-9]+_max$ ]] || continue
       cap_files+=( "$f" )
     done
   fi
 
   if (( ${#cap_files[@]} == 0 )); then
-    log "No cap files found for $(basename "$card") ($vendor_name); skipping."
+    log "No power cap files found for $(basename "$card") ($vendor_name); skipping."
     continue
   fi
-
-  log "Cap files:"
-  for f in "${cap_files[@]}"; do
-    log "  $f"
-  done
 
   for cap_file in "${cap_files[@]}"; do
     [[ -f "$cap_file" ]] || {
@@ -114,67 +103,29 @@ for card in /sys/class/drm/card[0-9]*; do
     max_cap=0
     min_cap=0
 
-    log "Processing cap file: $cap_file"
-    log "Current raw cap: $cur_cap"
-    log "Current cap: $(( cur_cap / 1000000 )) W"
-
     if [[ "$vendor" == "0x1002" ]]; then
       max_file="$hwmon_dir/power1_cap_max"
       min_file="$hwmon_dir/power1_cap_min"
-
-      log "AMD max file: $max_file"
-      log "AMD min file: $min_file"
 
       [[ -f "$max_file" ]] && max_cap=$(< "$max_file")
       [[ -f "$min_file" ]] && min_cap=$(< "$min_file")
     else
       pci_id="$(basename "$(readlink -f "$dev")")"
 
-      log "Looking up Intel config for PCI ID: $pci_id"
-
       conf_min="$(get_intel_conf_value "$pci_id" min || true)"
       conf_max="$(get_intel_conf_value "$pci_id" max || true)"
 
-      log "Config min raw: ${conf_min:-<empty>}"
-      log "Config max raw: ${conf_max:-<empty>}"
-
-      if [[ "$conf_min" =~ ^[0-9]+$ ]]; then
-        min_cap="$conf_min"
-        log "Using config min: $min_cap / $(( min_cap / 1000000 )) W"
-      else
-        log "Config min invalid or missing."
-      fi
-
-      if [[ "$conf_max" =~ ^[0-9]+$ ]]; then
-        max_cap="$conf_max"
-        log "Using config max: $max_cap / $(( max_cap / 1000000 )) W"
-      else
-        log "Config max invalid or missing."
-      fi
+      [[ "$conf_min" =~ ^[0-9]+$ ]] && min_cap="$conf_min"
+      [[ "$conf_max" =~ ^[0-9]+$ ]] && max_cap="$conf_max"
 
       num="${cap_file##*/power}"
       num="${num%%_max}"
       rated_file="$hwmon_dir/power${num}_rated_max"
 
-      log "Intel power index: $num"
-      log "Intel rated max file: $rated_file"
-
-      if [[ -f "$rated_file" ]]; then
-        rated_cap=$(< "$rated_file")
-        log "Intel rated max raw: $rated_cap"
-        log "Intel rated max: $(( rated_cap / 1000000 )) W"
-      else
-        log "Intel rated max file missing."
-      fi
-
       if (( max_cap <= 0 )) && [[ -f "$rated_file" ]]; then
         max_cap=$(< "$rated_file")
-        log "Fallback: using rated max as max_cap: $max_cap / $(( max_cap / 1000000 )) W"
       fi
     fi
-
-    log "Final min_cap raw: $min_cap"
-    log "Final max_cap raw: $max_cap"
 
     if (( max_cap <= 0 )); then
       log "No max cap for $(basename "$card"); skipping."
@@ -202,15 +153,18 @@ for card in /sys/class/drm/card[0-9]*; do
         ;;
     esac
 
-    log "Selected mode: $MODE"
-    log "New cap raw: $new_cap"
-    log "New cap: $(( new_cap / 1000000 )) W"
-    log "Writing: echo $new_cap > $cap_file"
+    log "Card: $(basename "$card")"
+    log "Vendor: $vendor_name"
+    [[ "$vendor" == "0x8086" ]] && log "PCI ID: $pci_id"
+    log "Current: $(( cur_cap / 1000000 )) W"
+    log "Max: $(( max_cap / 1000000 )) W"
+    (( min_cap > 0 )) && log "Min: $(( min_cap / 1000000 )) W"
+    log "Mode: $MODE"
+    log "New cap: $(( new_cap / 1000000 )) W -> $cap_file"
 
     echo "$new_cap" > "$cap_file"
 
     verify_cap=$(< "$cap_file")
-    log "Verify raw cap after write: $verify_cap"
     log "Verify cap after write: $(( verify_cap / 1000000 )) W"
   done
 done
