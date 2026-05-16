@@ -99,31 +99,34 @@ for card in /sys/class/drm/card[0-9]*; do
       "$hwmon_dir/power1_cap_min"
   else
     # Intel Arc / Xe / i915
-    # Usually writable PL limit is power1_max or power2_max.
+    # Intel Arc usually exposes the writable limit directly as powerN_max.
+    # Avoid matching files like power1_max_interval.
     found_intel_cap=false
 
-    for cap_file in "$hwmon_dir"/power*_max; do
+    for cap_file in "$hwmon_dir"/power[0-9]*_max; do
       [[ -e "$cap_file" ]] || continue
+      [[ "$cap_file" =~ /power[0-9]+_max$ ]] || continue
       [[ -w "$cap_file" ]] || continue
 
+      # Use current powerN_max as reference.
+      # balanced = 80% of current limit
+      # min = 50% of current limit
+      # max = current limit unless no higher rated file exists
       num="${cap_file##*/power}"
       num="${num%%_max}"
 
       rated_file="$hwmon_dir/power${num}_rated_max"
-      min_file="$hwmon_dir/power${num}_min"
 
-      # Intel often has no *_min. rated_max is the best max/reference if present.
-      if [[ -f "$rated_file" ]]; then
-        max_file="$rated_file"
+      if [[ "$MODE" == "max" && -f "$rated_file" ]]; then
+        set_cap "$card" "$vendor_name" "$cap_file" "$rated_file" ""
       else
-        max_file="$cap_file"
+        set_cap "$card" "$vendor_name" "$cap_file" "$cap_file" ""
       fi
 
-      set_cap "$card" "$vendor_name" "$cap_file" "$max_file" "$min_file"
       found_intel_cap=true
     done
 
-    $found_intel_cap || echo "No writable Intel power*_max for $(basename "$card"); skipping."
+    $found_intel_cap || echo "No writable Intel powerN_max for $(basename "$card"); skipping."
   fi
 done
 
