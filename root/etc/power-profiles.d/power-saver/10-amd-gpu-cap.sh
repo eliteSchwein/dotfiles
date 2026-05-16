@@ -221,7 +221,7 @@ if ! $found_gpu; then
 fi#!/usr/bin/env bash
 set -euo pipefail
 
-MODE="min"  # max|min|balanced
+MODE="max"  # max|min|balanced
 INTEL_CONF="/etc/power-profiles.d/intel-gpu-power.conf"
 
 [[ "$EUID" -eq 0 ]] || {
