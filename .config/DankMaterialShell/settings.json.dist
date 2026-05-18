@@ -284,7 +284,7 @@
   "batteryProfileName": "",
   "batteryChargeLimit": 100,
   "lockBeforeSuspend": true,
-  "loginctlLockIntegration": false,
+  "loginctlLockIntegration": true,
   "fadeToLockEnabled": false,
   "fadeToLockGracePeriod": 5,
   "fadeToDpmsEnabled": true,
@@ -480,6 +480,12 @@
           "enabled": true,
           "selectedGpuIndex": 0,
           "pciId": "1002:744c"
+        },
+        {
+          "id": "gpuTemp",
+          "enabled": true,
+          "selectedGpuIndex": 1,
+          "pciId": "8086:a780"
         },
         {
           "id": "battery",
