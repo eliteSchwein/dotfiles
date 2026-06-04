@@ -1,0 +1,22 @@
+-- Converted from rules.conf to Hyprland Lua config style.
+
+hl.windowrule([[match:class .*, suppress_event maximize]])
+hl.windowrule([[match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_focus 1]])
+hl.windowrule([[match:class ^emote$, stay_focused 1]])
+hl.windowrule([[match:title .*, idle_inhibit fullscreen]])
+hl.windowrule([[no_initial_focus 1, match:class ^jetbrains_\\d+$ 1]])
+hl.windowrule([[match:class ^vrmonitor$, center 1]])
+hl.windowrule([[match:class ^vrwebhelper$, float 1, center 1]])
+hl.windowrule([[match:class ^(firefox|Firefox\\ Beta)$, no_blur 1]])
+hl.windowrule([[match:class ^jetbrains_\\d+$, no_blur 1]])
+hl.windowrule([[match:class ^steam$, no_blur 1]])
+hl.windowrule([[match:class ^vrmonitor$, no_blur 1]])
+hl.windowrule([[match:class ^steam_app_\\d+$, no_blur 1]])
+hl.windowrule([[match:class ^edhm-ui-v3$, no_blur 1preserve_split]])
+hl.windowrule([[match:class ^heroic$, no_blur 1]])
+hl.windowrule([[match:class ^thunderbird$, no_blur 1]])
+hl.windowrule([[match:class ^org.gajim.Gajim$, no_blur 1]])
+hl.windowrule([[match:class ^Vmware$, no_blur 1]])
+hl.windowrule([[match:title ^Steam$, tile 1]])
+
+hl.layerrule([[no_anim on, match:namespace ^(dms)$]])

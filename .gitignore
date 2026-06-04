@@ -1,6 +1,7 @@
 .idea
 
 .config/hypr/hyprland.conf
+.config/hypr/hyprland.lua
 .config/uwsm/env
 .config/hypr/hyprtoolkit.conf
 .config/ags/node_modules
