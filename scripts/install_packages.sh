@@ -58,8 +58,8 @@ hyprpm update -f
 #hyprpm add https://github.com/zakk4223/hyprland-easymotion -f
 #hyprpm enable hyprEasymotion -f
 
-hyprpm add https://github.com/levnikmyskin/hyprland-virtual-desktops -f
-hyprpm enable virtual-desktops -f
+#hyprpm add https://github.com/levnikmyskin/hyprland-virtual-desktops -f
+#hyprpm enable virtual-desktops -f
 set -e
 
 log_ok "Packages Install: done"
