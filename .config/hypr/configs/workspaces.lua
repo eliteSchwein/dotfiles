@@ -10,4 +10,7 @@ hl.config({
     },
 })
 
-hl.workspace_rule("special:screenshot", "on-created-empty:foot")
+hl.workspace_rule({
+    workspace = "special:screenshot",
+    on_created_empty = "foot",
+})
