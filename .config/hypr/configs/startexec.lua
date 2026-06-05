@@ -43,5 +43,5 @@ hl.on("hyprland.start", function()
 end)
 
 hl.on("hyprland.shutdown", function()
-    hl.exec_cmd([[bash -c 'kill -9 "$(cat /tmp/.hyprland-systemd-inhibit)"']])
+    hl.exec_cmd([[bash -c 'test -f /tmp/.hyprland-systemd-inhibit && kill -9 "$(cat /tmp/.hyprland-systemd-inhibit)"']])
 end)
