@@ -7,55 +7,55 @@
 ----------------
 -- Layout
 ----------------
-require("configs/layout")
+require("configs.layout")
 
 ----------------
 -- Decoration
 ----------------
-require("configs/decoration")
-require("configs/animation")
+require("configs.decoration")
+require("configs.animation")
 
 ----------------
 -- Input
 ----------------
-require("configs/input")
-require("configs/keybinds")
-require("configs/gestures")
+require("configs.input")
+require("configs.keybinds")
+require("configs.gestures")
 
 ----------------
 -- Rules
 ----------------
-require("configs/rules")
+require("configs.rules")
 
 ----------------
 -- Misc
 ----------------
-require("configs/misc")
+require("configs.misc")
 
 ----------------
 -- Env configs
 ----------------
 -- require("configs/env/cursor")
-require("configs/env/nvidia")
-require("configs/env/intel_igpu")
-require("configs/env/amdgpu")
--- require("configs/env/wayland")
--- require("configs/env/firefox")
--- require("configs/env/wine")
+require("configs.env.nvidia")
+require("configs.env.intel_igpu")
+require("configs.env.amdgpu")
+-- require("configs.env.wayland")
+-- require("configs.env.firefox")
+-- require("configs.env.wine")
 
 ----------------
 -- Workspaces
 ----------------
-require("configs/workspaces")
+require("configs.workspaces")
 
 ----------------
 -- Start Exec
 ----------------
-require("configs/startexec")
+require("configs.startexec")
 
 ----------------
 -- Dank Material Shell
 ----------------
-require("dms/outputs")
-require("dms/cursor")
-require("dms/colors")
+require("dms.outputs")
+require("dms.cursor")
+require("dms.colors")
