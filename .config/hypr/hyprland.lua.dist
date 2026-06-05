@@ -36,9 +36,7 @@ require("configs.misc")
 -- Env configs
 ----------------
 -- require("configs/env/cursor")
-require("configs.env.nvidia")
-require("configs.env.intel_igpu")
-require("configs.env.amdgpu")
+require("configs.env.gpu")
 -- require("configs.env.wayland")
 -- require("configs.env.firefox")
 -- require("configs.env.wine")

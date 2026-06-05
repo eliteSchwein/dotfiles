@@ -806,7 +806,8 @@
             "sortNewest": true,
             "ignoreWebhooks": false,
             "timeBasedCleanupMinutes": 0,
-            "clearLogsOnRestart": false
+            "clearLogsOnRestart": false,
+            "attachmentFileExtensions": "none"
         },
         "MessageTranslate": {
             "enabled": false
@@ -1132,7 +1133,8 @@
             "noBulletPoints": false,
             "accountStandingButton": false,
             "refreshSlashCommands": false,
-            "jsonGateway": false
+            "jsonGateway": false,
+            "hideVoiceIndicatorForMutedChannels": false
         },
         "RPCEditor": {
             "enabled": false
@@ -1319,7 +1321,8 @@
             "enabled": false
         },
         "Questify": {
-            "enabled": false
+            "enabled": false,
+            "migrationVersion": 1
         },
         "RecentDMSwitcher": {
             "enabled": false
@@ -1521,6 +1524,33 @@
         },
         "ConcatenatedModules": {
             "enabled": true
+        },
+        "NoMiddleClickPaste": {
+            "enabled": false
+        },
+        "ProfileSectionsAPI": {
+            "enabled": false
+        },
+        "BetterGifLoad": {
+            "enabled": false
+        },
+        "ClipUpload": {
+            "enabled": false
+        },
+        "DownloadAllAttachments": {
+            "enabled": false
+        },
+        "LimitlessScreenshare": {
+            "enabled": false
+        },
+        "MarkdownTables": {
+            "enabled": false
+        },
+        "Streaks": {
+            "enabled": false
+        },
+        "VoiceStats": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1534,7 +1564,7 @@
         "authenticated": false,
         "url": "https://cloud.equicord.org",
         "settingsSync": true,
-        "settingsSyncVersion": 1777796652065
+        "settingsSyncVersion": 1780672117086
     },
     "userCssVars": {},
     "ignoreResetWarning": false,
@@ -1548,5 +1578,6 @@
     "enableOnlineThemes": true,
     "pinnedThemes": [],
     "mainWindowFrameless": false,
-    "themeActivationModes": {}
+    "themeActivationModes": {},
+    "windowsMaterial": "none"
 }
