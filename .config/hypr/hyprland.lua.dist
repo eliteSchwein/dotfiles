@@ -42,11 +42,6 @@ require("configs.env.gpu")
 -- require("configs.env.wine")
 
 ----------------
--- Workspaces
-----------------
-require("configs.workspaces")
-
-----------------
 -- Start Exec
 ----------------
 require("configs.startexec")
@@ -57,3 +52,8 @@ require("configs.startexec")
 require("dms.outputs")
 require("dms.cursor")
 require("dms.colors")
+
+----------------
+-- Workspaces
+----------------
+require("configs.workspaces")
