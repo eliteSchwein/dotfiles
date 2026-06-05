@@ -3,6 +3,8 @@ hl.workspace_rule({
     on_created_empty = "foot",
 })
 
+local mainMod = "SUPER"
+
 local vdesk_count = 5
 local offset_step = 10
 
@@ -108,4 +110,18 @@ local function move_to_vdesk(vdesk_id)
             break
         end
     end
+end
+
+-- Switch virtual desktops with mainMod + [1-5]
+for i = 1, vdesk_count do
+    hl.bind(mainMod .. " + " .. i, function()
+        switch_vdesk(i)
+    end)
+end
+
+-- Move active window to a virtual desktop with mainMod + SHIFT + [1-5]
+for i = 1, vdesk_count do
+    hl.bind(mainMod .. " + SHIFT + " .. i, function()
+        move_to_vdesk(i)
+    end)
 end
