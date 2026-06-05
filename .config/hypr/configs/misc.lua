@@ -1,7 +1,7 @@
 -- Converted from misc.conf to Hyprland Lua config style.
 
 hl.monitor({
-    name = "",
+    output = "",
     resolution = "preferred",
     position = "auto",
     scale = 1,
