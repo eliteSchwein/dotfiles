@@ -1,22 +1,106 @@
 -- Converted from rules.conf to Hyprland Lua config style.
 
-hl.windowrule([[match:class .*, suppress_event maximize]])
-hl.windowrule([[match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_focus 1]])
-hl.windowrule([[match:class ^emote$, stay_focused 1]])
-hl.windowrule([[match:title .*, idle_inhibit fullscreen]])
-hl.windowrule([[no_initial_focus 1, match:class ^jetbrains_\\d+$ 1]])
-hl.windowrule([[match:class ^vrmonitor$, center 1]])
-hl.windowrule([[match:class ^vrwebhelper$, float 1, center 1]])
-hl.windowrule([[match:class ^(firefox|Firefox\\ Beta)$, no_blur 1]])
-hl.windowrule([[match:class ^jetbrains_\\d+$, no_blur 1]])
-hl.windowrule([[match:class ^steam$, no_blur 1]])
-hl.windowrule([[match:class ^vrmonitor$, no_blur 1]])
-hl.windowrule([[match:class ^steam_app_\\d+$, no_blur 1]])
-hl.windowrule([[match:class ^edhm-ui-v3$, no_blur 1preserve_split]])
-hl.windowrule([[match:class ^heroic$, no_blur 1]])
-hl.windowrule([[match:class ^thunderbird$, no_blur 1]])
-hl.windowrule([[match:class ^org.gajim.Gajim$, no_blur 1]])
-hl.windowrule([[match:class ^Vmware$, no_blur 1]])
-hl.windowrule([[match:title ^Steam$, tile 1]])
+hl.window_rule({
+    match = { class = ".*" },
+    suppress_event = "maximize",
+})
 
-hl.layerrule([[no_anim on, match:namespace ^(dms)$]])
+hl.window_rule({
+    match = {
+        class = "^$",
+        title = "^$",
+        xwayland = true,
+        float = true,
+        fullscreen = false,
+        pin = false,
+    },
+    no_focus = true,
+})
+
+hl.window_rule({
+    match = { class = "^emote$" },
+    stay_focused = true,
+})
+
+-- NOTE: idle_inhibit as a window rule was removed in newer Hyprland.
+-- Use hypridle rules/config instead.
+-- hl.window_rule({
+--     match = { title = ".*" },
+--     idle_inhibit = "fullscreen",
+-- })
+
+hl.window_rule({
+    match = { class = "^jetbrains_\\d+$" },
+    no_initial_focus = true,
+})
+
+hl.window_rule({
+    match = { class = "^vrmonitor$" },
+    center = true,
+})
+
+hl.window_rule({
+    match = { class = "^vrwebhelper$" },
+    float = true,
+    center = true,
+})
+
+hl.window_rule({
+    match = { class = "^(firefox|Firefox\\ Beta)$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^jetbrains_\\d+$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^steam$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^vrmonitor$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^steam_app_\\d+$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^edhm-ui-v3$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^heroic$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^thunderbird$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^org.gajim.Gajim$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { class = "^Vmware$" },
+    no_blur = true,
+})
+
+hl.window_rule({
+    match = { title = "^Steam$" },
+    tile = true,
+})
+
+hl.layer_rule({
+    match = { namespace = "^(dms)$" },
+    no_anim = true,
+})
