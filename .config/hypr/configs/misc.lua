@@ -1,8 +1,8 @@
 -- Converted from misc.conf to Hyprland Lua config style.
 
 hl.monitor({
-    output = "",
-    mode = "preferred",
+    name = "",
+    resolution = "preferred",
     position = "auto",
     scale = 1,
 })
@@ -31,9 +31,5 @@ hl.config({
         allow_workspace_cycles = true,
         scroll_event_delay = 0,
         hide_special_on_workspace_change = true,
-    },
-
-    plugin = {
-        -- easymotion block was commented out in the original config
     },
 })
