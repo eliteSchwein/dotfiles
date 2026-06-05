@@ -40,16 +40,6 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
--- Switch virtual desktops with mainMod + [1-5]
-for i = 1, 5 do
-    hl.bind(mainMod .. " + " .. i, hl.dsp.exec_cmd("hyprctl dispatch vdesk " .. i))
-end
-
--- Move active window to a virtual desktop with mainMod + SHIFT + [1-5]
-for i = 1, 5 do
-    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.exec_cmd("hyprctl dispatch movetodesk " .. i))
-end
-
 -- Resets V Desktop
 hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd([[sh -c 'hyprctl reload; sleep 0.5; hyprctl dispatch vdeskreset; killall dms; dms run --daemon']]))
 
