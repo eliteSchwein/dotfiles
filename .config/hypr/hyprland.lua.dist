@@ -52,6 +52,7 @@ require("configs.startexec")
 require("dms.outputs")
 require("dms.cursor")
 require("dms.colors")
+require("dms.windowrules")
 
 ----------------
 -- Workspaces
