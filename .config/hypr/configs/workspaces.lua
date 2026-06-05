@@ -109,17 +109,3 @@ local function move_to_vdesk(vdesk_id)
         end
     end
 end
-
--- Switch virtual desktops with mainMod + [1-5]
-for i = 1, vdesk_count do
-    hl.bind(mainMod .. " + " .. i, function()
-        switch_vdesk(i)
-    end)
-end
-
--- Move active window to a virtual desktop with mainMod + SHIFT + [1-5]
-for i = 1, vdesk_count do
-    hl.bind(mainMod .. " + SHIFT + " .. i, function()
-        move_to_vdesk(i)
-    end)
-end
