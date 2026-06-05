@@ -7,8 +7,17 @@ hl.config({
 
         border_size = 2,
 
-        ["col.active_border"] = "rgba(0D47A1EE) rgba(0D47A1EE) 45deg",
-        ["col.inactive_border"] = "rgba(595959aa)",
+        col = {
+            active_border = {
+                colors = {
+                    "rgba(0D47A1EE)",
+                    "rgba(0D47A1EE)",
+                },
+                angle = 45,
+            },
+
+            inactive_border = "rgba(595959aa)",
+        },
 
         resize_on_border = true,
         allow_tearing = true,
