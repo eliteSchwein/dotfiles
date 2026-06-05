@@ -28,8 +28,7 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("dms ipc call clipboard toggl
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
--- hl.bind(mainMod .. " + SHIFT + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg togglesplit"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(colorPicker))
@@ -42,7 +41,6 @@ hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Switch virtual desktops with mainMod + [1-5]
--- virtual-desktops plugin dispatchers are kept through hyprctl because they are plugin-specific.
 for i = 1, 5 do
     hl.bind(mainMod .. " + " .. i, hl.dsp.exec_cmd("hyprctl dispatch vdesk " .. i))
 end
@@ -60,8 +58,8 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd('bash "' .. scriptDir .. '/sc
 hl.bind("Print", hl.dsp.exec_cmd('bash "' .. scriptDir .. '/screenshot.sh"'))
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
