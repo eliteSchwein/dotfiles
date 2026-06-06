@@ -53,6 +53,8 @@ require("dms.outputs")
 require("dms.cursor")
 require("dms.colors")
 require("dms.windowrules")
+require("dms.binds")
+require("dms.binds-user")
 
 ----------------
 -- Workspaces
