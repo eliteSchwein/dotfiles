@@ -28,7 +28,7 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("dms ipc call clipboard toggl
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + J", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg togglesplit"))
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(colorPicker))
