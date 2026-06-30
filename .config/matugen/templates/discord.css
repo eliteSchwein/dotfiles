@@ -10,6 +10,7 @@
     --accent-new: {{colors.primary.default.hex}};            /* refresh? */
     --accent-6: hsl(from var(--accent-2) h 15% 60%);;   /* custom */
     --accent-7: hsl(from var(--accent-4) h 15% 15%);;   /* custom */
+    --accent-8: hsl(from var(--accent-4) h 15% 30%);;   /* custom */
     --red-1: #EF5350;
     --red-2: #E53935;
     --red-3: #D32F2F;
@@ -1357,7 +1358,7 @@ body {
         --textbox-markdown-syntax: var(--text-4);
         --thread-channel-spine: blue;
         --user-profile-activity-toolbar-background: magenta;
-        --user-profile-background-hover: red;
+        --user-profile-background-hover: var(--accent-8);
         --user-profile-border: var(--border);
         --user-profile-note-background-focus: lime;
         --user-profile-overlay-background: var(--bg-4);

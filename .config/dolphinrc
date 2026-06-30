@@ -1,3 +1,6 @@
+[CompactMode]
+PreviewSize=22
+
 [ContextMenu]
 ShowCopyMoveMenu=true
 

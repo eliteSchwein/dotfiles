@@ -168,7 +168,11 @@
             "enableStreamQualityBypass": true,
             "transformEmojis": true,
             "transformStickers": true,
-            "transformCompoundSentence": false
+            "transformCompoundSentence": false,
+            "emojiSize": 48,
+            "hyperLinkText": "{{NAME}}",
+            "useEmojiHyperLinks": true,
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": false
@@ -968,7 +972,8 @@
         },
         "Settings": {
             "enabled": true,
-            "settingsLocation": "aboveNitro"
+            "settingsLocation": "aboveNitro",
+            "includeVencordInfoWhenCopying": true
         },
         "SupportHelper": {
             "enabled": true
@@ -1272,9 +1277,6 @@
         "FastDeleteChannels": {
             "enabled": false
         },
-        "ForwardAnywhere": {
-            "enabled": false
-        },
         "FriendCloud": {
             "enabled": false
         },
@@ -1551,6 +1553,15 @@
         },
         "VoiceStats": {
             "enabled": false
+        },
+        "BetterForwards": {
+            "enabled": false
+        },
+        "GifMaker": {
+            "enabled": false
+        },
+        "StopAutoUnread": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1564,7 +1575,7 @@
         "authenticated": false,
         "url": "https://cloud.equicord.org",
         "settingsSync": true,
-        "settingsSyncVersion": 1780672117086
+        "settingsSyncVersion": 1781967493389
     },
     "userCssVars": {},
     "ignoreResetWarning": false,
