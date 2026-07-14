@@ -38,6 +38,8 @@ get_intel_conf_value() {
   ' "$INTEL_CONF"
 }
 
+sleep 2s
+
 found_gpu=false
 
 log "Mode: $MODE"
