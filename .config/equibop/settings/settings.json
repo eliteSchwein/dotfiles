@@ -230,9 +230,6 @@
         "KeepCurrentChannel": {
             "enabled": false
         },
-        "LastFMRichPresence": {
-            "enabled": false
-        },
         "LoadingQuotes": {
             "enabled": true,
             "replaceEvents": true,
@@ -1562,6 +1559,9 @@
         },
         "StopAutoUnread": {
             "enabled": false
+        },
+        "MusicRichPresence": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1575,7 +1575,7 @@
         "authenticated": false,
         "url": "https://cloud.equicord.org",
         "settingsSync": true,
-        "settingsSyncVersion": 1781967493389
+        "settingsSyncVersion": 1784725793124
     },
     "userCssVars": {},
     "ignoreResetWarning": false,

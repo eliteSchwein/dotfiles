@@ -22,11 +22,27 @@ local function refresh_monitor_config()
 end
 
 local function set_static_rules()
-    for i = 0, 4 do
-        local mon_name = "DP-" .. (i + 1)
-        for j = 1, vdesk_count do
-            local ws_id = tostring((i * vdesk_count) + j)
-            hl.workspace_rule({ workspace = ws_id, monitor = mon_name })
+    local monitor_prefixes = {
+        { prefix = "DP-", count = 6 },
+        { prefix = "HDMI-A-", count = 6 },
+    }
+
+    local monitor_index = 0
+
+    for _, monitor_type in ipairs(monitor_prefixes) do
+        for port = 1, monitor_type.count do
+            local mon_name = monitor_type.prefix .. port
+
+            for j = 1, vdesk_count do
+                local ws_id = tostring((monitor_index * vdesk_count) + j)
+
+                hl.workspace_rule({
+                    workspace = ws_id,
+                    monitor = mon_name,
+                })
+            end
+
+            monitor_index = monitor_index + 1
         end
     end
 end
