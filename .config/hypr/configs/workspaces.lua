@@ -3,14 +3,218 @@ hl.workspace_rule({
     on_created_empty = "foot",
 })
 
-hl.config({
-    plugin = {
-        ["virtual_desktops"] = {
-            names = "1:1, 2:2, 3:3, 4:4, 5:5",
-            cycleworkspaces = 0,
-            rememberlayout = "size",
-            notifyinit = 1,
-            verbose_logging = 0
-        },
-    }
-})
+local mainMod = "SUPER"
+local vdesk_count = 10
+local monitor_config = {}
+
+-- Helper to get sorted monitors (left to right) with dynamic coordinate overlap filtering
+local function get_sorted_monitors()
+    local raw_mons = hl.get_monitors()
+    local active_mons = {}
+
+    -- 1. Filter out disabled monitors and explicit API mirrors
+    for _, mon in ipairs(raw_mons) do
+        local is_disabled = (mon.disabled == true) or (mon.disabled == 1) or (mon.disabled == "true")
+        if mon.dpmsStatus == false or mon.dpmsStatus == 0 or mon.dpmsStatus == "false" then
+            is_disabled = true
+        end
+
+        local mirror_val = mon.mirrorOf or mon.mirror or mon.mirror_of
+        local is_mirror = false
+        if mirror_val ~= nil and mirror_val ~= false then
+            local m_str = tostring(mirror_val):lower():gsub("%s+", "")
+            if m_str ~= "" and m_str ~= "none" and m_str ~= "nil" and m_str ~= "0" and m_str ~= "false" then
+                is_mirror = true
+            end
+        end
+
+        if not is_disabled and not is_mirror and mon.name and mon.name ~= "" then
+            table.insert(active_mons, mon)
+        end
+    end
+
+    -- 2. Dynamic coordinate overlap check to bypass cold-boot IPC race conditions.
+    -- Any monitor sharing the exact same (x, y) position is inherently a mirror/duplicate.
+    local valid_mons = {}
+    local seen_coords = {}
+    for _, mon in ipairs(active_mons) do
+        local coord_key = tostring(mon.x or 0) .. "x" .. tostring(mon.y or 0)
+        if not seen_coords[coord_key] then
+            seen_coords[coord_key] = true
+            table.insert(valid_mons, mon)
+        end
+    end
+
+    table.sort(valid_mons, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    return valid_mons
+end
+
+local function refresh_monitor_config()
+    local mons = get_sorted_monitors()
+
+    monitor_config = {}
+    for i, mon in ipairs(mons) do
+        table.insert(monitor_config, {
+            name = mon.name,
+            offset = (i - 1) * vdesk_count
+        })
+    end
+end
+
+local function set_static_rules()
+    local mons = get_sorted_monitors()
+
+    for i, mon in ipairs(mons) do
+        local mon_idx = i - 1
+
+        for j = 1, vdesk_count do
+            local ws_id = tostring((mon_idx * vdesk_count) + j)
+
+            local rule = {
+                workspace = ws_id,
+                monitor = mon.name
+            }
+
+            if j == 1 then
+                rule.default = true
+            end
+
+            hl.workspace_rule(rule)
+        end
+    end
+end
+
+local function fix_startup_workspaces()
+    local raw_mons = hl.get_monitors()
+
+    for _, raw_mon in ipairs(raw_mons) do
+        local mon_conf = nil
+        for _, c in ipairs(monitor_config) do
+            if c.name == raw_mon.name then
+                mon_conf = c
+                break
+            end
+        end
+
+        if mon_conf and raw_mon.activeWorkspace then
+            local active_ws_id = tonumber(raw_mon.activeWorkspace.id) or tonumber(raw_mon.activeWorkspace.name)
+
+            if active_ws_id then
+                local expected_min = mon_conf.offset + 1
+                local expected_max = mon_conf.offset + vdesk_count
+
+                if active_ws_id < expected_min or active_ws_id > expected_max then
+                    local target_ws = tostring(expected_min)
+
+                    local windows = hl.get_workspace_windows(tostring(active_ws_id))
+                    if windows and #windows > 0 then
+                        for _, client in ipairs(windows) do
+                            hl.dispatch(hl.dsp.window.move({
+                                window = "address:" .. client.address,
+                                workspace = target_ws
+                            }))
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    for _, mon in ipairs(monitor_config) do
+        local base_ws = tostring(mon.offset + 1)
+        hl.dispatch(hl.dsp.focus({ workspace = base_ws }))
+    end
+
+    if monitor_config[1] then
+        hl.dispatch(hl.dsp.focus({ monitor = monitor_config[1].name }))
+    end
+end
+
+local function cleanup_orphans()
+    local max_allowed_ws = #monitor_config * vdesk_count
+    if max_allowed_ws == 0 then return end
+
+    for i = max_allowed_ws + 1, 50 do
+        local ws_name = tostring(i)
+        local windows = hl.get_workspace_windows(ws_name)
+        if windows and #windows > 0 then
+            local vdesk_id = ((i - 1) % vdesk_count) + 1
+            local new_ws = tostring(((#monitor_config - 1) * vdesk_count) + vdesk_id)
+            for _, client in ipairs(windows) do
+                hl.dispatch(hl.dsp.window.move({
+                    window = "address:" .. client.address,
+                    workspace = tostring(new_ws)
+                }))
+            end
+        end
+    end
+end
+
+local function handle_monitor_change()
+    os.execute("sleep 0.2")
+    refresh_monitor_config()
+    set_static_rules()
+    os.execute("sleep 0.2")
+    cleanup_orphans()
+end
+
+-- Event Listeners
+hl.on("monitor.added", handle_monitor_change)
+hl.on("monitor.removed", handle_monitor_change)
+
+-- Initial Setup & Startup Fixes
+refresh_monitor_config()
+set_static_rules()
+fix_startup_workspaces()
+
+local function switch_vdesk(vdesk_id)
+    local active_ws = hl.get_active_workspace()
+    if not active_ws then return end
+    local original_mon = (type(active_ws.monitor) == "table") and active_ws.monitor.name or active_ws.monitor
+
+    for _, mon in ipairs(monitor_config) do
+        local ws_id = tostring(mon.offset + vdesk_id)
+        hl.dispatch(hl.dsp.focus({ workspace = ws_id }))
+    end
+    if original_mon then
+        hl.dispatch(hl.dsp.focus({ monitor = original_mon }))
+    end
+end
+
+local function move_to_vdesk(vdesk_id)
+    local follow = true
+    local active_ws = hl.get_active_workspace()
+    if not active_ws then return end
+
+    local ws_num = tonumber(active_ws.id) or tonumber(active_ws.name)
+    if not ws_num then return end
+
+    local active_mon = active_ws.monitor
+    if type(active_mon) == "table" then active_mon = active_mon.name end
+
+    for _, mon in ipairs(monitor_config) do
+        if ws_num > mon.offset and ws_num <= (mon.offset + vdesk_count) then
+            local target_ws = tostring(mon.offset + vdesk_id)
+            hl.dispatch(hl.dsp.window.move({ workspace = target_ws, follow = follow }))
+
+            if follow then
+                for _, other_mon in ipairs(monitor_config) do
+                    if other_mon.name ~= active_mon then
+                        local other_ws = tostring(other_mon.offset + vdesk_id)
+                        hl.dispatch(hl.dsp.focus({ workspace = other_ws }))
+                    end
+                end
+                hl.dispatch(hl.dsp.focus({ monitor = active_mon }))
+            end
+            break
+        end
+    end
+end
+
+-- Keybindings
+for i = 1, vdesk_count do
+    local key = tostring(i)
+    if i == 10 then key = "0" end
+    hl.bind(mainMod .. " + " .. key, function() switch_vdesk(i) end)
+    hl.bind(mainMod .. " + SHIFT + " .. key, function() move_to_vdesk(i) end)
+end

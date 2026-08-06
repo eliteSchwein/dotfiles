@@ -78,21 +78,6 @@ hl.bind("XF86PowerOff", hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
 hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("emote"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 
--- Virtual Desktops
--- Switch virtual desktops (1-3)
-for i = 1, 5 do
-    hl.bind("SUPER + " .. i, function()
-        hl.plugin.virtual_desktops.vdesk(tostring(i))
-    end, { description = "Switch to vdesk " .. i })
-end
-
--- Move window to virtual desktops (1-3)
-for i = 1, 5 do
-    hl.bind("SUPER + SHIFT + " .. i, function()
-        hl.plugin.virtual_desktops.movetodesk(tostring(i))
-    end, { description = "Move window to vdesk " .. i })
-end
-
 -- Cycle virtual desktops
 hl.bind("CTRL + ALT + Left", function()
     hl.plugin.virtual_desktops.prevdesk()
