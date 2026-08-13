@@ -6,13 +6,12 @@ hl.workspace_rule({
 local mainMod = "SUPER"
 local vdesk_count = 10
 local monitor_config = {}
+local is_switching_vdesk = false
 
--- Helper to get sorted monitors (left to right) with dynamic coordinate overlap filtering
 local function get_sorted_monitors()
     local raw_mons = hl.get_monitors()
     local active_mons = {}
 
-    -- 1. Filter out disabled monitors and explicit API mirrors
     for _, mon in ipairs(raw_mons) do
         local is_disabled = (mon.disabled == true) or (mon.disabled == 1) or (mon.disabled == "true")
         if mon.dpmsStatus == false or mon.dpmsStatus == 0 or mon.dpmsStatus == "false" then
@@ -33,8 +32,6 @@ local function get_sorted_monitors()
         end
     end
 
-    -- 2. Dynamic coordinate overlap check to bypass cold-boot IPC race conditions.
-    -- Any monitor sharing the exact same (x, y) position is inherently a mirror/duplicate.
     local valid_mons = {}
     local seen_coords = {}
     for _, mon in ipairs(active_mons) do
@@ -158,27 +155,66 @@ local function handle_monitor_change()
     cleanup_orphans()
 end
 
--- Event Listeners
-hl.on("monitor.added", handle_monitor_change)
-hl.on("monitor.removed", handle_monitor_change)
+local function switch_vdesk(vdesk_id, original_mon)
+    if is_switching_vdesk then return end
 
--- Initial Setup & Startup Fixes
-refresh_monitor_config()
-set_static_rules()
-fix_startup_workspaces()
+    if not original_mon then
+        local active_mon = hl.get_active_monitor()
+        if not active_mon then return end
+        original_mon = active_mon.name
+    end
 
-local function switch_vdesk(vdesk_id)
-    local active_ws = hl.get_active_workspace()
-    if not active_ws then return end
-    local original_mon = (type(active_ws.monitor) == "table") and active_ws.monitor.name or active_ws.monitor
+    local cursor = hl.get_cursor_pos()
+    if not cursor then return end
+
+    local cursor_x = cursor.x
+    local cursor_y = cursor.y
+
+    is_switching_vdesk = true
 
     for _, mon in ipairs(monitor_config) do
         local ws_id = tostring(mon.offset + vdesk_id)
-        hl.dispatch(hl.dsp.focus({ workspace = ws_id }))
+
+        hl.dispatch(hl.dsp.focus({
+            monitor = mon.name
+        }))
+
+        hl.dispatch(hl.dsp.focus({
+            workspace = ws_id
+        }))
     end
-    if original_mon then
-        hl.dispatch(hl.dsp.focus({ monitor = original_mon }))
+
+    hl.dispatch(hl.dsp.focus({
+        monitor = original_mon
+    }))
+
+    hl.dispatch(hl.dsp.cursor.move({
+        x = cursor_x,
+        y = cursor_y
+    }))
+
+    is_switching_vdesk = false
+end
+
+local function handle_workspace_active(event_data)
+    if is_switching_vdesk then return end
+
+    local ws = event_data or hl.get_active_workspace()
+    if not ws then return end
+
+    local ws_num = tonumber(ws.id) or tonumber(ws.name)
+    if not ws_num then return end
+
+    local event_mon = ws.monitor
+    if type(event_mon) == "table" then
+        event_mon = event_mon.name
     end
+
+    if not event_mon then return end
+
+    local vdesk_id = ((ws_num - 1) % vdesk_count) + 1
+
+    switch_vdesk(vdesk_id, event_mon)
 end
 
 local function move_to_vdesk(vdesk_id)
@@ -201,6 +237,7 @@ local function move_to_vdesk(vdesk_id)
                 for _, other_mon in ipairs(monitor_config) do
                     if other_mon.name ~= active_mon then
                         local other_ws = tostring(other_mon.offset + vdesk_id)
+                        hl.dispatch(hl.dsp.focus({ monitor = other_mon.name }))
                         hl.dispatch(hl.dsp.focus({ workspace = other_ws }))
                     end
                 end
@@ -211,7 +248,14 @@ local function move_to_vdesk(vdesk_id)
     end
 end
 
--- Keybindings
+hl.on("monitor.added", handle_monitor_change)
+hl.on("monitor.removed", handle_monitor_change)
+hl.on("workspace.active", handle_workspace_active)
+
+refresh_monitor_config()
+set_static_rules()
+fix_startup_workspaces()
+
 for i = 1, vdesk_count do
     local key = tostring(i)
     if i == 10 then key = "0" end
