@@ -119,7 +119,8 @@ local function fix_startup_workspaces()
 
     for _, mon in ipairs(monitor_config) do
         local base_ws = tostring(mon.offset + 1)
-        hl.dispatch(hl.dsp.focus({ workspace = base_ws }))
+        hl.dispatch(hl.dsp.focus({ monitor = mon.name }))
+        hl.dispatch(hl.dsp.focus({ workspace = base_ws, on_current_monitor = true }))
     end
 
     if monitor_config[1] then
@@ -148,10 +149,8 @@ local function cleanup_orphans()
 end
 
 local function handle_monitor_change()
-    os.execute("sleep 0.2")
     refresh_monitor_config()
     set_static_rules()
-    os.execute("sleep 0.2")
     cleanup_orphans()
 end
 
@@ -180,7 +179,8 @@ local function switch_vdesk(vdesk_id, original_mon)
         }))
 
         hl.dispatch(hl.dsp.focus({
-            workspace = ws_id
+            workspace = ws_id,
+            on_current_monitor = true
         }))
     end
 
@@ -238,7 +238,10 @@ local function move_to_vdesk(vdesk_id)
                     if other_mon.name ~= active_mon then
                         local other_ws = tostring(other_mon.offset + vdesk_id)
                         hl.dispatch(hl.dsp.focus({ monitor = other_mon.name }))
-                        hl.dispatch(hl.dsp.focus({ workspace = other_ws }))
+                        hl.dispatch(hl.dsp.focus({
+                            workspace = other_ws,
+                            on_current_monitor = true
+                        }))
                     end
                 end
                 hl.dispatch(hl.dsp.focus({ monitor = active_mon }))
@@ -248,13 +251,15 @@ local function move_to_vdesk(vdesk_id)
     end
 end
 
-hl.on("monitor.added", handle_monitor_change)
-hl.on("monitor.removed", handle_monitor_change)
-hl.on("workspace.active", handle_workspace_active)
 
 refresh_monitor_config()
 set_static_rules()
 fix_startup_workspaces()
+
+hl.on("monitor.added", handle_monitor_change)
+hl.on("monitor.removed", handle_monitor_change)
+hl.on("config.reloaded", handle_monitor_change)
+hl.on("workspace.active", handle_workspace_active)
 
 for i = 1, vdesk_count do
     local key = tostring(i)
