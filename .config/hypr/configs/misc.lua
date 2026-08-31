@@ -10,10 +10,7 @@ hl.monitor({
 hl.config({
 	render = {
   		direct_scanout = 0,
-  		cm_enabled = 0,
   		send_content_type = 0,
-  		cm_auto_hdr = 0,
- 		non_shader_cm = 0,
 	},
 
     misc = {
