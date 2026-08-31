@@ -8,6 +8,14 @@ hl.monitor({
 })
 
 hl.config({
+	render = {
+  		direct_scanout = 0,
+  		cm_enabled = 0,
+  		send_content_type = 0,
+  		cm_auto_hdr = 0,
+ 		non_shader_cm = 0,
+	},
+
     misc = {
         font_family = "VictorMono",
         disable_splash_rendering = true,
@@ -16,6 +24,7 @@ hl.config({
         allow_session_lock_restore = true,
         initial_workspace_tracking = 0,
         anr_missed_pings = 10,
+        vrr = 0
     },
 
     debug = {
