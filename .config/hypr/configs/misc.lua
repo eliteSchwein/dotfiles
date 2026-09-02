@@ -8,6 +8,10 @@ hl.monitor({
 })
 
 hl.config({
+    quirks = {
+        skip_non_kms_dmabuf_formats = 1,
+    },
+
 	render = {
   		direct_scanout = 0,
   		send_content_type = 0,
