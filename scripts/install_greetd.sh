@@ -10,13 +10,10 @@ log_info "Greetd Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Greetd"
-paru -S greetd greetd-dms-greeter-bin acl "${PACMAN_FLAGS[@]}"
+paru -S greetd greetd-dms-greeter-git acl "${PACMAN_FLAGS[@]}"
 
 log_info "Copy Greetd Configs"
 sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
-sudo mkdir -p /var/lib/greeter/.cache/sysc-greet
-sudo cp -af no-stow-root/var/lib/greeter/.cache/sysc-greet/preferences /var/lib/greeter/.cache/sysc-greet/preferences
-sudo chown -R greeter:greeter /var/lib/greeter/.cache/sysc-greet
 
 log_info "Configure DankGreeter Theme Sync"
 sudo usermod -aG greeter "$USER"
