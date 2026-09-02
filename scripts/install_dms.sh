@@ -78,18 +78,25 @@ fi
 
 ensure_file() {
   local f="$1"
+
   if [[ -e "$f" ]]; then
     log_info "File exists: $f (leaving as-is)"
   else
     log_info "Creating empty file: $f"
-    : > "$f"   # create empty file
+    mkdir -p "$(dirname "$f")"
+    : > "$f"
   fi
 }
 
-ensure_file "$HYPR_DMS_DIR/outputs.conf"
-ensure_file "$HYPR_DMS_DIR/cursor.conf"
-ensure_file "$HYPR_DMS_DIR/colors.conf"
-ensure_file "$HYPR_DMS_DIR/layout.conf"
+ensure_file "$HYPR_DMS_DIR/binds/init.lua"
+ensure_file "$HYPR_DMS_DIR/binds.lua"
+ensure_file "$HYPR_DMS_DIR/binds-user/init.lua"
+ensure_file "$HYPR_DMS_DIR/binds-user.lua"
+ensure_file "$HYPR_DMS_DIR/colors.lua"
+ensure_file "$HYPR_DMS_DIR/cursor.lua"
+ensure_file "$HYPR_DMS_DIR/layout.lua"
+ensure_file "$HYPR_DMS_DIR/outputs.lua"
+ensure_file "$HYPR_DMS_DIR/windowrules.lua"
 
 log_info "Generate initial DMS Session"
 

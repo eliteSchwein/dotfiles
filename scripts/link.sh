@@ -100,7 +100,7 @@ while true; do
   fi
 
   set +e
-  stow_out="$(stow -v -R . 2>&1)"
+  stow_out="$(stow --no-folding -v -R . 2>&1)"
   rc=$?
   set -e
 
@@ -138,7 +138,7 @@ PKG_DIR="$ROOT_DIR/root"
 if [[ -d "$PKG_DIR" ]]; then
   sudo -v
   log_info "Stow root package into /"
-  sudo stow -v -R -t / root
+  sudo stow --no-folding -v -R -t / root
 else
   log_info "No root package directory found at: $PKG_DIR (skipping sudo stow)"
 fi
