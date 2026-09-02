@@ -7,8 +7,12 @@ source "$SCRIPT_DIR/logger.sh"
 
 log_info "Power Profiles Install: starting"
 
-log_info "Unlink Power Profiles Folder"
-sudo unlink /etc/power-profiles.d
+log_info "Remove existing Power Profiles Folder"
+if [[ -L /etc/power-profiles.d || -f /etc/power-profiles.d ]]; then
+    sudo rm -f -- /etc/power-profiles.d
+elif [[ -d /etc/power-profiles.d ]]; then
+    sudo rm -rf -- /etc/power-profiles.d
+fi
 
 PACMAN_FLAGS=(--noconfirm --needed)
 
