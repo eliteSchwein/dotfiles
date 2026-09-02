@@ -112,30 +112,34 @@ run_fprintd_with_retry() {
     local description="$1"
     shift
 
-    local attempt output rc
+    local attempt rc tmp
 
     for attempt in 1 2 3; do
+        tmp="$(mktemp)"
+
+        # Keep fprintd output live so scan/enrollment progress remains visible,
+        # while tee also gives us a copy for detecting retryable errors.
         set +e
-        output="$("$@" 2>&1)"
-        rc=$?
+        "$@" 2>&1 | tee "$tmp"
+        rc=${PIPESTATUS[0]}
         set -e
 
         if [[ "$rc" -eq 0 ]]; then
-            [[ -n "$output" ]] && printf '%s\n' "$output"
+            rm -f "$tmp"
             return 0
         fi
 
-        if grep -q 'net.reactivated.Fprint.Error.AlreadyInUse' <<<"$output"; then
+        if grep -q 'net.reactivated.Fprint.Error.AlreadyInUse' "$tmp"; then
+            rm -f "$tmp"
             log_warn "$description: fingerprint device is already claimed (attempt $attempt/3)"
             release_fprint_device
             continue
         fi
 
-        printf '%s\n' "$output" >&2
+        rm -f "$tmp"
         return "$rc"
     done
 
-    printf '%s\n' "$output" >&2
     log_warn "$description failed because the fingerprint device remains claimed"
     return 1
 }
