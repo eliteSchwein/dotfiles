@@ -100,15 +100,58 @@ ensure_pam_fprintd /etc/pam.d/sudo
 
 log_ok "Enroll fingerprints (both index fingers, in case one finger gets injured)"
 
-# Remove old enrolled fingerprints if any.
-sudo fprintd-delete "$USER" 2>/dev/null || true
+# A desktop/PAM client can leave the fprint device claimed. Restarting fprintd
+# clears stale claims; fprintd will be D-Bus activated again by the client below.
+release_fprint_device() {
+    log_info "Release fingerprint device"
+    sudo systemctl restart fprintd.service 2>/dev/null || true
+    sleep 1
+}
+
+run_fprintd_with_retry() {
+    local description="$1"
+    shift
+
+    local attempt output rc
+
+    for attempt in 1 2 3; do
+        set +e
+        output="$("$@" 2>&1)"
+        rc=$?
+        set -e
+
+        if [[ "$rc" -eq 0 ]]; then
+            [[ -n "$output" ]] && printf '%s\n' "$output"
+            return 0
+        fi
+
+        if grep -q 'net.reactivated.Fprint.Error.AlreadyInUse' <<<"$output"; then
+            log_warn "$description: fingerprint device is already claimed (attempt $attempt/3)"
+            release_fprint_device
+            continue
+        fi
+
+        printf '%s\n' "$output" >&2
+        return "$rc"
+    done
+
+    printf '%s\n' "$output" >&2
+    log_warn "$description failed because the fingerprint device remains claimed"
+    return 1
+}
+
+release_fprint_device
+
+# Remove old enrolled fingerprints if any. This is intentionally non-fatal when
+# there are no prints to delete.
+run_fprintd_with_retry "Delete old fingerprints" sudo fprintd-delete "$USER" || true
 
 for finger in \
     left-index-finger \
     right-index-finger
 do
     log_info "Enrolling $finger"
-    sudo fprintd-enroll -f "$finger" "$USER"
+    run_fprintd_with_retry "Enroll $finger" sudo fprintd-enroll -f "$finger" "$USER"
     sleep .5
 done
 
