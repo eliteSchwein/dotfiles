@@ -13,7 +13,11 @@ log_info "Install Greetd"
 paru -S greetd greetd-dms-greeter-git acl "${PACMAN_FLAGS[@]}"
 
 log_info "Copy Greetd Configs"
-sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
+sudo cp -af "$SCRIPT_DIR/no-stow-root/etc/greetd/config.toml" /etc/greetd/config.toml
+sudo cp -af "$SCRIPT_DIR/no-stow-root/etc/greetd/hypr.lua" /etc/greetd/hypr.lua
+
+USER_HOME="$HOME"
+sudo sed -i "s|\$HOME|$USER_HOME|g" /etc/greetd/hypr.lua
 
 log_info "Sync DankMaterialShell Greeter Configuration"
 DMS_PRIVESC=sudo dms-greeter sync
