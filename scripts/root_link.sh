@@ -78,6 +78,6 @@ done < <(find "$PKG_DIR" -mindepth 1 -type d -print0)
 log_ok "Conflicts cleaned (non-symlink targets backed up to: $BACKUP_DIR)"
 
 # Now stow to /
-sudo stow -v -R -t / root
+sudo stow --no-folding -v -R -t / root
 
 log_ok "Root Link: done"

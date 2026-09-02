@@ -58,7 +58,6 @@ add_step() {
   STEP_SCRIPTS+=("$2")
 }
 
-add_step "root link" "$SCRIPTS_DIR/root_link.sh"
 add_step "paru install" "$SCRIPTS_DIR/install_paru.sh"
 add_step "old packages uninstall" "$SCRIPTS_DIR/remove_old_packages.sh"
 add_step "nvidia install" "$SCRIPTS_DIR/install_nvidia_drivers.sh"
@@ -74,6 +73,7 @@ add_step "power profiles install" "$SCRIPTS_DIR/install_powerprofiles.sh"
 add_step "fingerprint reader install" "$SCRIPTS_DIR/install_fingerprint.sh"
 add_step "link" "$SCRIPTS_DIR/link.sh"
 add_step "greetd install" "$SCRIPTS_DIR/install_greetd.sh"
+add_step "root link" "$SCRIPTS_DIR/root_link.sh"
 
 for i in "${!STEP_NAMES[@]}"; do
   STATUSES[$i]="PENDING"
