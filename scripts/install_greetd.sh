@@ -10,7 +10,7 @@ log_info "Greetd Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Greetd"
-paru -S greetd sysc-greet-hyprland "${PACMAN_FLAGS[@]}"
+paru -S greetd greetd-dms-greeter-bin "${PACMAN_FLAGS[@]}"
 
 log_info "Copy Greetd Configs"
 sudo cp -af no-stow-root/etc/greetd/config.toml /etc/greetd/config.toml
