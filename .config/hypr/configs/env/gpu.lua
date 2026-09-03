@@ -27,7 +27,7 @@ end
 local pci = get_lspci()
 
 local has_nvidia = has_gpu(pci, "nvidia")
-local has_amd = has_gpu(pci, "amd") or has_gpu(pci, "ati")
+local has_amd = has_gpu(pci, "amd") or pci:match("%[1002:")
 local has_intel = has_gpu(pci, "intel")
 local has_arc = has_intel and has_intel_arc(pci)
 

@@ -21,7 +21,7 @@ gpu_lines() {
 }
 
 has_intel_gpu()  { gpu_lines | grep -Eqi 'Intel|\[8086:'; }
-has_amd_gpu()    { gpu_lines | grep -Eqi 'AMD|ATI|\[1002:'; }
+has_amd_gpu()    { gpu_lines | grep -Eqi 'AMD|\[1002:'; }
 has_nvidia_gpu() { gpu_lines | grep -Eqi 'NVIDIA|\[10de:'; }
 
 has_intel_arc() {
@@ -46,7 +46,7 @@ preferred_gpu_pci() {
   count="$(printf '%s\n' "$lines" | grep -c . || true)"
 
   nvidia="$(printf '%s\n' "$lines" | grep -Ei 'NVIDIA|\[10de:' | awk '{print $1}' | head -n1 || true)"
-  amd="$(printf '%s\n' "$lines" | grep -Ei 'AMD|ATI|\[1002:' | awk '{print $1}' | head -n1 || true)"
+  amd="$(printf '%s\n' "$lines" | grep -Ei 'AMD|\[1002:' | awk '{print $1}' | head -n1 || true)"
   arc="$(printf '%s\n' "$lines" | grep -Ei 'Intel|\[8086:' | grep -Ei 'Arc|DG2|Alchemist|Battlemage' | awk '{print $1}' | head -n1 || true)"
   intel="$(printf '%s\n' "$lines" | grep -Ei 'Intel|\[8086:' | awk '{print $1}' | head -n1 || true)"
 
