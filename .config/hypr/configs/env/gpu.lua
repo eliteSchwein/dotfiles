@@ -16,13 +16,32 @@ local function has_gpu(pci, vendor)
         or pci:match("display.-" .. vendor)
 end
 
+local function has_intel_arc(pci)
+    return pci:match("arc")
+        or pci:match("dg2")
+        or pci:match("alchemist")
+        or pci:match("battlemage")
+        or pci:match("bmg")
+end
+
 local pci = get_lspci()
 
 local has_nvidia = has_gpu(pci, "nvidia")
 local has_amd = has_gpu(pci, "amd") or has_gpu(pci, "ati")
 local has_intel = has_gpu(pci, "intel")
+local has_arc = has_intel and has_intel_arc(pci)
+
+-- Preference order:
+--   NVIDIA dGPU
+--   AMD dGPU
+--   Intel Arc
+--   Intel iGPU
+--
+-- Intel iGPU is only used as the global/default GPU when no other
+-- dedicated GPU is available.
 
 if has_nvidia then
+    -- NVIDIA dedicated GPU
     hl.env("LIBVA_DRIVER_NAME", "nvidia")
     hl.env("GBM_BACKEND", "nvidia-drm")
     hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
@@ -30,23 +49,21 @@ if has_nvidia then
     hl.env("NVD_BACKEND", "direct")
     hl.env("EGL_PLATFORM", "wayland")
 
-    -- Optional / risky:
-    -- hl.env("__EGL_VENDOR_LIBRARY_FILENAMES", "/usr/share/glvnd/egl_vendor.d/10_nvidia.json")
-    -- hl.env("LD_PRELOAD", "/usr/lib/libnvidia-glvkspirv.so")
-
 elseif has_amd then
+    -- AMD dedicated GPU
+    hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+    hl.env("__GLX_VENDOR_LIBRARY_NAME", "mesa")
     hl.env("AMD_USERQ", "1")
 
-    -- Optional:
-    -- hl.env("radv_zero_vram", "1")
-
-elseif has_intel then
+elseif has_arc then
+    -- Intel Arc dedicated GPU
     hl.env("LIBVA_DRIVER_NAME", "iHD")
     hl.env("__GLX_VENDOR_LIBRARY_NAME", "mesa")
     hl.env("__EGL_VENDOR_LIBRARY_FILENAMES", "/usr/share/glvnd/egl_vendor.d/50_mesa.json")
 
-    -- Optional:
-    -- hl.env("WLR_RENDER_DRM_DEVICE", "/dev/dri/renderD128")
-    -- hl.env("DXVK_FILTER_DEVICE_NAME", "Intel")
-    -- hl.env("VKD3D_FILTER_DEVICE_NAME", "Intel")
+elseif has_intel then
+    -- Intel-only system / Intel iGPU without another GPU
+    hl.env("LIBVA_DRIVER_NAME", "iHD")
+    hl.env("__GLX_VENDOR_LIBRARY_NAME", "mesa")
+    hl.env("__EGL_VENDOR_LIBRARY_FILENAMES", "/usr/share/glvnd/egl_vendor.d/50_mesa.json")
 end

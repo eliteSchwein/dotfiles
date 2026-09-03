@@ -254,7 +254,10 @@ write_gpu_preference() {
 
     case "$vendor" in
       1002)
+        # AMD is the preferred GPU. Keep Intel userspace installed for an iGPU,
+        # but never let libva auto-select iHD for the AMD render node.
         echo "DRI_PRIME=$dri_prime"
+        echo "LIBVA_DRIVER_NAME=radeonsi"
         ;;
       10de)
         echo "__NV_PRIME_RENDER_OFFLOAD=1"
@@ -265,8 +268,14 @@ write_gpu_preference() {
         echo "MOZ_DISABLE_RDD_SANDBOX=1"
         ;;
       8086)
-        # Mainly relevant for Intel Arc + another iGPU.
-        echo "DRI_PRIME=$dri_prime"
+        # Only make Intel the global media/render preference when either:
+        #   * an Intel Arc dGPU was selected, or
+        #   * Intel is the only GPU vendor in the machine.
+        # An Intel iGPU alongside AMD/NVIDIA must never set global Intel prefs.
+        if has_intel_arc || { ! has_amd_gpu && ! has_nvidia_gpu; }; then
+          echo "DRI_PRIME=$dri_prime"
+          echo "LIBVA_DRIVER_NAME=iHD"
+        fi
         ;;
     esac
 
