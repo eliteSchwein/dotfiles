@@ -4,6 +4,9 @@ PreviewSize=22
 [ContextMenu]
 ShowCopyMoveMenu=true
 
+[DetailsMode]
+PreviewSize=22
+
 [General]
 ShowFullPath=true
 Version=202

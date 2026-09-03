@@ -60,9 +60,7 @@ add_step() {
 
 add_step "paru install" "$SCRIPTS_DIR/install_paru.sh"
 add_step "old packages uninstall" "$SCRIPTS_DIR/remove_old_packages.sh"
-add_step "nvidia install" "$SCRIPTS_DIR/install_nvidia_drivers.sh"
-add_step "amd install" "$SCRIPTS_DIR/install_amd_drivers.sh"
-add_step "intel install" "$SCRIPTS_DIR/install_intel_drivers.sh"
+add_step "gpu drivers install" "$SCRIPTS_DIR/install_gpu_drivers.sh"
 add_step "package install" "$SCRIPTS_DIR/install_packages.sh"
 add_step "uwsm env" "$SCRIPTS_DIR/make_uwsm_env.sh"
 add_step "hyprland config" "$SCRIPTS_DIR/make_hyprland_config.sh"
