@@ -87,6 +87,29 @@ mkdir -p "$HOME/.config/uwsm"
 copy_explicit_home_file ".config/uwsm/env"
 copy_explicit_home_file ".config/uwsm/env-hyprland"
 
+# Explicit Hypr scripts directory: ensure it is linked as a directory
+HYPR_SCRIPTS_SRC="$ROOT_DIR/.config/hypr/scripts"
+HYPR_SCRIPTS_TGT="$HOME/.config/hypr/scripts"
+
+if [[ -d "$HYPR_SCRIPTS_SRC" ]]; then
+  mkdir -p "$HOME/.config/hypr"
+
+  if [[ -e "$HYPR_SCRIPTS_TGT" || -L "$HYPR_SCRIPTS_TGT" ]]; then
+    backup_target_if_needed "$HYPR_SCRIPTS_TGT" ".config/hypr/scripts"
+    remove_target_if_not_symlink "$HYPR_SCRIPTS_TGT"
+
+    # Recreate even an existing symlink so it always points at this repo.
+    if [[ -L "$HYPR_SCRIPTS_TGT" ]]; then
+      rm -f "$HYPR_SCRIPTS_TGT"
+    fi
+  fi
+
+  log_info "Link Hypr scripts: $HYPR_SCRIPTS_TGT -> $HYPR_SCRIPTS_SRC"
+  ln -s "$HYPR_SCRIPTS_SRC" "$HYPR_SCRIPTS_TGT"
+else
+  log_warn "Hypr scripts source not found, skipping: $HYPR_SCRIPTS_SRC"
+fi
+
 # ---- 1) Stow dotfiles into $HOME with auto-fix conflicts ----
 log_info "Stow dotfiles into \$HOME (auto-fix conflicts)"
 max_rounds=25
