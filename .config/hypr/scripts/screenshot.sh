@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name="$(date +%Y-%m-%d_%H-%M).png"
+file_name="$(date +%Y-%m-%d_%H-%M-%S).png"
 screenshot_dir="$HOME/Pictures/Screenshots"
 screenshot_file="$screenshot_dir/$file_name"
 pid_file="/tmp/screenshot_pid"
