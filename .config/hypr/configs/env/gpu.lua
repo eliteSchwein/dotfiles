@@ -24,6 +24,55 @@ local function has_intel_arc(pci)
         or pci:match("bmg")
 end
 
+local function get_gpu_pci_address(pci, vendor, vendor_id)
+    for line in pci:gmatch("[^\r\n]+") do
+        local is_display = line:match("vga")
+            or line:match("3d")
+            or line:match("display")
+
+        local is_vendor = line:match(vendor)
+            or (vendor_id and line:match("%[" .. vendor_id .. ":"))
+
+        if is_display and is_vendor then
+            local address = line:match("^(%S+)")
+            if address and not address:match("^%x%x%x%x:") then
+                address = "0000:" .. address
+            end
+            return address
+        end
+    end
+end
+
+local function get_render_node(pci_address)
+    if not pci_address then
+        return nil
+    end
+
+    local handle = io.popen(
+        "ls -1 /sys/bus/pci/devices/"
+        .. pci_address
+        .. "/drm/renderD* 2>/dev/null | head -n1"
+    )
+
+    if not handle then
+        return nil
+    end
+
+    local path = handle:read("*l")
+    handle:close()
+
+    if not path or path == "" then
+        return nil
+    end
+
+    local node = path:match("([^/]+)$")
+    if not node then
+        return nil
+    end
+
+    return "/dev/dri/" .. node
+end
+
 local pci = get_lspci()
 
 local has_nvidia = has_gpu(pci, "nvidia")
@@ -43,11 +92,17 @@ local has_arc = has_intel and has_intel_arc(pci)
 if has_nvidia then
     -- NVIDIA dedicated GPU
     hl.env("LIBVA_DRIVER_NAME", "nvidia")
-    hl.env("GBM_BACKEND", "nvidia-drm")
     hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+    hl.env("GBM_BACKEND", "nvidia-drm")
     hl.env("__NV_PRIME_RENDER_OFFLOAD", "1")
     hl.env("NVD_BACKEND", "direct")
     hl.env("EGL_PLATFORM", "wayland")
+    hl.env("__GLX_MAX_FRAMES_IN_FLIGHT", "1")
+
+    local render_node = get_render_node(get_gpu_pci_address(pci, "nvidia", "10de"))
+    if render_node then
+        hl.env("WLR_RENDER_DRM_DEVICE", render_node)
+    end
 
 elseif has_amd then
     -- AMD dedicated GPU
