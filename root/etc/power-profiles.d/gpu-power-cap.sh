@@ -38,6 +38,97 @@ get_intel_conf_value() {
   ' "$INTEL_CONF"
 }
 
+is_number() {
+  [[ "$1" =~ ^[0-9]+([.][0-9]+)?$ ]]
+}
+
+nvidia_power_cap() {
+  local card="$1" dev="$2"
+  local pci_id query cur_cap min_cap max_cap new_cap verify_cap
+
+  if ! command -v nvidia-smi >/dev/null 2>&1; then
+    log "NVIDIA GPU found at $(basename "$card"), but nvidia-smi is unavailable; skipping."
+    return
+  fi
+
+  pci_id="$(basename "$(readlink -f "$dev")")"
+
+  query="$(
+    nvidia-smi \
+      -i "$pci_id" \
+      --query-gpu=power.limit,power.min_limit,power.max_limit \
+      --format=csv,noheader,nounits \
+      2>/dev/null || true
+  )"
+
+  if [[ -z "$query" ]]; then
+    log "Could not query NVIDIA power limits for $pci_id; skipping."
+    return
+  fi
+
+  IFS=',' read -r cur_cap min_cap max_cap <<< "$query"
+
+  # Trim whitespace returned by nvidia-smi.
+  cur_cap="${cur_cap//[[:space:]]/}"
+  min_cap="${min_cap//[[:space:]]/}"
+  max_cap="${max_cap//[[:space:]]/}"
+
+  if ! is_number "$cur_cap" || ! is_number "$min_cap" || ! is_number "$max_cap"; then
+    log "NVIDIA power limits are unavailable for $pci_id; skipping."
+    return
+  fi
+
+  case "$MODE" in
+    max)
+      new_cap="$(awk -v max="$max_cap" 'BEGIN { printf "%.0f", max }')"
+      ;;
+    balanced)
+      new_cap="$(
+        awk -v max="$max_cap" -v min="$min_cap" '
+          BEGIN {
+            value = max * 0.80
+            if (value < min)
+              value = min
+            printf "%.0f", value
+          }
+        '
+      )"
+      ;;
+    min)
+      new_cap="$(awk -v min="$min_cap" 'BEGIN { printf "%.0f", min }')"
+      ;;
+  esac
+
+  log "Card: $(basename "$card")"
+  log "Vendor: NVIDIA"
+  log "PCI ID: $pci_id"
+  log "Current: $cur_cap W"
+  log "Max: $max_cap W"
+  log "Min: $min_cap W"
+  log "Mode: $MODE"
+  log "New cap: $new_cap W -> nvidia-smi"
+
+  if ! nvidia-smi -i "$pci_id" -pl "$new_cap" >/dev/null; then
+    log "Failed to set NVIDIA power limit for $pci_id."
+    return
+  fi
+
+  verify_cap="$(
+    nvidia-smi \
+      -i "$pci_id" \
+      --query-gpu=power.limit \
+      --format=csv,noheader,nounits \
+      2>/dev/null || true
+  )"
+  verify_cap="${verify_cap//[[:space:]]/}"
+
+  if is_number "$verify_cap"; then
+    log "Verify cap after write: $verify_cap W"
+  else
+    log "Could not verify NVIDIA power limit after write."
+  fi
+}
+
 sleep 2s
 
 found_gpu=false
@@ -55,10 +146,16 @@ for card in /sys/class/drm/card[0-9]*; do
   case "$vendor" in
     0x1002) vendor_name="AMD" ;;
     0x8086) vendor_name="Intel" ;;
+    0x10de) vendor_name="NVIDIA" ;;
     *) continue ;;
   esac
 
   found_gpu=true
+
+  if [[ "$vendor" == "0x10de" ]]; then
+    nvidia_power_cap "$card" "$dev"
+    continue
+  fi
 
   hwmon_glob=( "$dev"/hwmon/hwmon* )
   hwmon_dir="${hwmon_glob[0]:-}"
@@ -153,6 +250,6 @@ for card in /sys/class/drm/card[0-9]*; do
 done
 
 if ! $found_gpu; then
-  log "No AMD or Intel GPUs found under /sys/class/drm."
+  log "No AMD, Intel, or NVIDIA GPUs found under /sys/class/drm."
   exit 1
 fi
