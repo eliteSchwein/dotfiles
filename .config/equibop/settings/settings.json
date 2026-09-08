@@ -1574,8 +1574,8 @@
     "cloud": {
         "authenticated": false,
         "url": "https://cloud.equicord.org",
-        "settingsSync": true,
-        "settingsSyncVersion": 1788474689351
+        "settingsSync": false,
+        "settingsSyncVersion": 1788910969415
     },
     "userCssVars": {},
     "ignoreResetWarning": false,
