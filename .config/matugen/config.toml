@@ -7,9 +7,18 @@ output_path = '~/.config/hyprland-preview-share-picker/sharepicker.css'
 [templates.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox.json'
 output_path = '~/.cache/wal/colors.json'
-post_hook = 'pywalfox update'
+post_hook = 'setid pywalfox update >/dev/null 2>&1 &'
 
 [templates.equibop]
 input_path = '~/.config/matugen/templates/discord.css'
 output_path = '~/.config/equibop/settings/quickCss.css'
-post_hook = 'python ~/dotfiles/.config/matugen/scripts/discord_updater.py ~/.config/equibop/settings/quickCss.css'
+post_hook = 'setid python ~/dotfiles/.config/matugen/scripts/discord_updater.py ~/.config/equibop/settings/quickCss.css >/dev/null 2>&1 &'
+
+[templates.wine]
+input_path = '~/.config/matugen/templates/wine.reg'
+output_path = '/tmp/wine.reg'
+post_hook = 'setid wine regedit /tmp/wine.reg >/dev/null 2>&1 &'
+
+[templates.obs]
+input_path = '~/.config/matugen/templates/obs.obt'
+output_path = '~/.config/obs-studio/themes/matugen.obt'

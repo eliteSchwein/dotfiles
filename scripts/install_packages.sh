@@ -32,7 +32,7 @@ paru -S \
   firefox \
   thorium-browser-avx2-bin \
   tauon-music-box \
-  vlc vlc-plugins-all \
+  vlc vlc-plugins-all wine wine-mono \
   stow "${PACMAN_FLAGS[@]}"
 
 log_info "Install Social Media Packages"

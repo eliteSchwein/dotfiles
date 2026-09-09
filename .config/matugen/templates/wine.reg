@@ -1,0 +1,47 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Wine\X11 Driver]
+"Decorated"="N"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes]
+"AppsUseClassicTheme"=dword:00000001
+
+[HKEY_CURRENT_USER\Control Panel\Colors]
+"ActiveBorder"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ActiveTitle"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"AppWorkSpace"="{{ colors.surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"Background"="{{ colors.background.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"ButtonAlternativeFace"="{{ colors.primary.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonDkShadow"="{{ colors.surface_container_lowest.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonFace"="{{ colors.surface_container.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonHilight"="{{ colors.surface_bright.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonLight"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonShadow"="{{ colors.surface_container_low.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"ButtonText"="{{ colors.on_surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"GradientActiveTitle"="{{ colors.primary.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"GradientInactiveTitle"="{{ colors.surface_container.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"GrayText"="{{ colors.on_surface_variant.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"Hilight"="{{ colors.primary.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"HilightText"="{{ colors.on_primary.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"InactiveBorder"="{{ colors.surface_container.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"InactiveTitle"="{{ colors.surface_container.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"InactiveTitleText"="{{ colors.on_surface_variant.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"InfoText"="{{ colors.on_surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"InfoWindow"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"Menu"="{{ colors.surface_container.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"MenuBar"="{{ colors.surface_container_low.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"MenuHilight"="{{ colors.primary.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"MenuText"="{{ colors.on_surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"Scrollbar"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"TitleText"="{{ colors.on_surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+
+"Window"="{{ colors.surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"WindowFrame"="{{ colors.surface_container_high.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
+"WindowText"="{{ colors.on_surface.default.rgb | replace: "rgb(", "" | replace: ",", "" | replace: ")", "" }}"
