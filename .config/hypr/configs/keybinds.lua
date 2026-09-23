@@ -34,6 +34,10 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(colorPicker))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("dms ipc call dankdash wallpaper"))
 
+-- Hyprsunset
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("hyprctl hyprsunset identity"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("hyprctl hyprsunset temperature 3500"))
+
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))

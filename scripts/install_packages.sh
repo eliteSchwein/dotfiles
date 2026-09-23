@@ -15,7 +15,7 @@ paru -S \
   hyprqt6engine hyprland uwsm hyprland-preview-share-picker-git xdg-desktop-portal-gtk \
   xdg-desktop-portal-hyprland hyprpm hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
-  hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype "${PACMAN_FLAGS[@]}"
+  hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype hyprsunset "${PACMAN_FLAGS[@]}"
 
 log_info "Install Addon Packages"
 paru -S \
@@ -59,5 +59,8 @@ hyprpm update -f
 #hyprpm enable hyprEasymotion -f
 
 set -e
+
+log_info "Activate Hyprsunset (bluelight filter) Service"
+systemctl --user enable --now hyprsunset.service
 
 log_ok "Packages Install: done"
