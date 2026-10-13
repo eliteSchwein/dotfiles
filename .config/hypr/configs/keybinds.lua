@@ -45,7 +45,7 @@ hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Resets V Desktop
-hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd([[sh -c 'hyprctl reload; sleep 0.5; killall dms; dms run --daemon']]))
+hl.bind(mainMod .. " + F12", hl.dsp.exec_cmd([[sh -c 'hyprctl reload; sleep 0.5; killall dms; systemctl restart --user dms']]))
 
 -- Screenshots Combos
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd('bash "' .. scriptDir .. '/screenshot.sh"'))
