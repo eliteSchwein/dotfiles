@@ -28,7 +28,8 @@ if [[ ! -f "$PACMAN_CONF_SOURCE" ]]; then
 fi
 
 sudo rm -f /etc/pacman.conf
-sudo ln -s "$PACMAN_CONF_SOURCE" /etc/pacman.conf
+# relative, like stow creates it, so root_link.sh accepts it as its own later
+sudo ln -sr "$PACMAN_CONF_SOURCE" /etc/pacman.conf
 
 rustup default stable
 rustup update
