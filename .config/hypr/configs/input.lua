@@ -2,7 +2,7 @@
 
 hl.config({
     input = {
-        kb_layout = "eu",
+	kb_layout = "de",
         kb_variant = "",
         kb_model = "",
         kb_options = "fkeys:basic_13-24",
