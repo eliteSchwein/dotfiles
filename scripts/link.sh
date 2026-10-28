@@ -50,9 +50,42 @@ remove_target_if_not_symlink() {
 }
 
 extract_conflict_target() {
-  # Reads stow stderr/stdout text and prints a single conflicting target (relative to $HOME)
   local out="$1"
-  sed -nE 's/^.*over existing target ([^ ]+) since.*$/\1/p' <<<"$out" | head -n1
+  # GNU Stow reports conflicts in two different formats. Both use paths
+  # relative to the target directory ($HOME).
+  sed -nE \
+    -e 's/^.*over existing target ([^ ]+) since.*$/\1/p' \
+    -e 's/^[[:space:]]*\*[[:space:]]*existing target (is not owned by stow|is stowed to a different package):[[:space:]]*([^[:space:]]+).*$/\2/p' \
+    <<<"$out" | head -n1
+}
+
+backup_and_move_stow_conflict() {
+  local rel="$1"
+  local tgt="$HOME/$rel"
+
+  # Reject malformed paths and anything outside HOME.
+  if [[ -z "$rel" || "$rel" == /* || "$rel" == "." ||
+        "$rel" == ".." || "$rel" == ../* || "$rel" == */../* ||
+        "$rel" == */.. || "$rel" == ./* ]]; then
+    log_error "Unsafe stow conflict path: $rel"
+    return 1
+  fi
+
+  if [[ ! -e "$tgt" && ! -L "$tgt" ]]; then
+    log_error "Conflict target disappeared: $tgt"
+    return 1
+  fi
+
+  # Backup and move both regular targets and symlinks. The original version
+  # skipped symlinks, so a different-package conflict could never be fixed.
+  local dest="$HOME_BACKUP_DIR/$rel"
+  if [[ -e "$dest" || -L "$dest" ]]; then
+    log_error "Backup already exists, refusing to overwrite: $dest"
+    return 1
+  fi
+  log_info "Move conflicting target to backup: $tgt -> $dest"
+  mkdir -p "$(dirname "$dest")"
+  mv -- "$tgt" "$dest"
 }
 
 prepare_explicit_home_target() {
@@ -145,9 +178,8 @@ while true; do
   conflict_tgt="$HOME/$conflict_rel"
   log_warn "stow conflict: $conflict_tgt"
 
-  # backup + remove ONLY the target
-  backup_target_if_needed "$conflict_tgt" "$conflict_rel"
-  remove_target_if_not_symlink "$conflict_tgt"
+  # Preserve the original target, including symlinks, before retrying.
+  backup_and_move_stow_conflict "$conflict_rel"
 
   log_info "Retrying stow..."
 done

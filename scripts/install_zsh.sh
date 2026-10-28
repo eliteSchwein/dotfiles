@@ -32,4 +32,15 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 log_info "Install Powerlevel10k Theme"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
+log_info "Install Powerlevel10k recommended MesloLGS NF fonts"
+FONT_DIR="$HOME/.local/share/fonts/MesloLGS-NF"
+mkdir -p "$FONT_DIR"
+for style in "Regular" "Bold" "Italic" "Bold Italic"; do
+  filename="MesloLGS NF $style.ttf"
+  log_info "Downloading font: $filename"
+  curl -fL --retry 3 --output "$FONT_DIR/$filename" \
+    "https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/${filename// /%20}"
+done
+fc-cache -f "$FONT_DIR"
+
 log_ok "ZSH Install: done"
