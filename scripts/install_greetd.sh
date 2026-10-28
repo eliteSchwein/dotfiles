@@ -12,7 +12,7 @@ log_info "Greetd Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Greetd"
-paru -S greetd greetd-dms-greeter-git acl "${PACMAN_FLAGS[@]}"
+paru -S greetd dux-greeter-git acl "${PACMAN_FLAGS[@]}"
 
 log_info "Sync DankMaterialShell Greeter Configuration"
 DMS_PRIVESC=sudo dms-greeter sync

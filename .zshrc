@@ -1,3 +1,8 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -8,7 +13,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bira"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +75,7 @@ ZSH_THEME="bira"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git ssh sudo direnv zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,5 +117,16 @@ alias kys='command -v ddev >/dev/null 2>&1 && ddev poweroff; shutdown -h now'
 alias ree='command -v ddev >/dev/null 2>&1 && ddev poweroff; reboot'
 alias levelup="rustup update && paru -Syyu && hyprpm update -f -v"
 alias ssh="TERM=xterm-256color ssh"
+
+setopt autocd
+
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
+
+alias l="ls -lhrt"
+alias cd="z"
+alias vim="nvim"
+
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 export PATH="$PATH:/home/tludwig/.local/bin"

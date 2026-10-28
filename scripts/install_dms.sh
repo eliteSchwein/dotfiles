@@ -10,11 +10,11 @@ log_info "DMS Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Shell Packages"
-paru -S dms-shell-git qt5ct khal qt6ct-kde kimageformats cups-pk-helper \
+paru -S dux-shell qt5ct khal qt6ct-kde kimageformats cups-pk-helper \
   cava wl-clipboard i2c-tools qt5-wayland qt6-wayland cliphist brightnessctl qt6-multimedia accountsservice \
   matugen python-pywalfox "${PACMAN_FLAGS[@]}"
 
-DMS_DIR="dotfiles/.config/DankMaterialShell"
+DMS_DIR="dotfiles/.config/dms"
 CONF="$DMS_DIR/settings.json"
 DIST="$DMS_DIR/settings.json.dist"
 
@@ -61,7 +61,7 @@ install_plugin_if_missing() {
 
 install_plugin_if_missing "mediaPlayer"        "Desktop Media Player Plugin"
 install_plugin_if_missing "dankDesktopWeather" "Weather Plugin"
-install_plugin_if_missing "dankBatteryAlerts"  "Battery Alert Plugin"
+install_plugin_if_missing "batteryPlus"        "Battery Plus Plugin"
 install_plugin_if_missing "desktopCommand"     "Console Widget Plugin"
 
 log_info "Make empty DMS Hyprland settings"
@@ -100,9 +100,9 @@ ensure_file "$HYPR_DMS_DIR/windowrules.lua"
 
 log_info "Generate initial DMS Session"
 
-mkdir -p "$HOME/.local/state/DankMaterialShell"
+mkdir -p "$HOME/.local/state/dms"
 
-cat > "$HOME/.local/state/DankMaterialShell/session.json" <<EOF
+cat > "$HOME/.local/state/dms/session.json" <<EOF
 {
   "wallpaperPath": "$HOME/wallpapers/HighResScreenShot_2023-11-16_22-23-34.png",
   "wallpaperTransition": "stripes",

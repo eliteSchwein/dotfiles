@@ -10,7 +10,7 @@ log_info "ZSH Install: starting"
 PACMAN_FLAGS=(--noconfirm --needed)
 
 log_info "Install Zsh"
-sudo pacman -S zsh "${PACMAN_FLAGS[@]}"
+sudo pacman -S zsh zoxide fzf "${PACMAN_FLAGS[@]}"
 
 log_info "Remove present OhMyZsh"
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
@@ -28,5 +28,8 @@ log_info "Install OhMyZsh"
 log_info "Install OhMyZsh Plugins"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+log_info "Install Powerlevel10k Theme"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 log_ok "ZSH Install: done"

@@ -26,3 +26,6 @@ scripts
 
 
 .config/uwsm
+
+# only fonts and TauonMusicBox are linked from .local/share
+^/\.local/share/(?!fonts(/|$)|TauonMusicBox(/|$))[^/]+$

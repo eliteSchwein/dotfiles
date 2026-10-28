@@ -7,18 +7,24 @@
 .config/ags/node_modules
 .uuid
 .config/hypr/scripts/utils
-.config/DankMaterialShell/firefox.css
+.config/dms/firefox.css
 .config/matugen/scripts/lib/__pycache__/
-.config/DankMaterialShell/.firstlaunch
-.config/DankMaterialShell/.changelog-*
-.config/DankMaterialShell/settings.json
-.config/DankMaterialShell/plugins
-
+.config/dms/.firstlaunch
+.config/dms/.changelog-*
+.config/dms/settings.json
+.config/dms/plugins
+.config/kitty/*
+!.config/kitty/kitty.conf
 .config/hyprland-preview-share-picker/sharepicker.css
-
 .config/hypr/dms
+.config/nvim/lazy-lock*
 
 .stow-backups
 .stow-backups-home
 
 paru
+
+# only fonts and TauonMusicBox are tracked from .local/share
+.local/share/*
+!.local/share/fonts/
+!.local/share/TauonMusicBox/
