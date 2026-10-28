@@ -12,7 +12,7 @@ PACMAN_FLAGS=(--noconfirm --needed)
 log_info "Install Editor and CLI Tools"
 paru -S \
   neovim ripgrep lazygit yamllint unzip \
-  git git-lfs direnv "${PACMAN_FLAGS[@]}"
+  git git-lfs "${PACMAN_FLAGS[@]}"
 
 log_info "Install Languages and Toolchains"
 paru -S \

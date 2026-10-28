@@ -25,7 +25,7 @@ paru -S \
   power-profiles-daemon \
   seahorse wl-clipboard phinger-cursors \
   brightnessctl playerctl inotify-tools \
-  wf-recorder udiskie "${PACMAN_FLAGS[@]}"
+  wf-recorder udiskie direnv "${PACMAN_FLAGS[@]}"
 
 log_info "Install Utilities Packages"
 paru -S \
