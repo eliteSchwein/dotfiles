@@ -23,6 +23,7 @@ Word Wrap Marker=false
 2304x1536 screen: Window-Maximized=true
 2880x1920 screen: Window-Maximized=true
 3 screens: Window-Maximized=true
+4 screens: Window-Maximized=true
 
 [UiSettings]
 ColorScheme=BreezeDark

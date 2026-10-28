@@ -5,6 +5,7 @@ PreviewSize=22
 ShowCopyMoveMenu=true
 
 [DetailsMode]
+LeftPadding=0
 PreviewSize=22
 
 [General]

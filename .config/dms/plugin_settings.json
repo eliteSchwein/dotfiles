@@ -1,6 +1,12 @@
 {
   "dankBatteryAlerts": {
-    "enabled": true,
+    "enabled": false,
     "warningThreshold": 25
+  },
+  "mediaPlayer": {
+    "enabled": true
+  },
+  "batteryPlus": {
+    "enabled": true
   }
 }

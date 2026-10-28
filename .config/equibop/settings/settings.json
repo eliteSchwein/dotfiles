@@ -262,7 +262,7 @@
         },
         "MessageLogger": {
             "enabled": true,
-            "collapseDeleted": false,
+            "collapseDeleted": true,
             "deleteStyle": "text",
             "ignoreUsers": "",
             "ignoreChannels": "",
@@ -274,7 +274,8 @@
             "inlineEdits": true,
             "showEditDiffs": false,
             "separatedDiffs": false,
-            "ignoreSelfEdits": false
+            "ignoreSelfEdits": false,
+            "logDeletedAttachments": true
         },
         "MoreCommands": {
             "enabled": true,
@@ -456,7 +457,8 @@
         "ShowConnections": {
             "enabled": true,
             "iconSpacing": 1,
-            "iconSize": 32
+            "iconSize": 32,
+            "showOnModal": true
         },
         "ShowHiddenChannels": {
             "enabled": true,
@@ -520,7 +522,7 @@
             "service": "google",
             "receivedOutput": "en",
             "sentInput": "auto",
-            "sentOutput": "ru",
+            "sentOutput": "da",
             "showAutoTranslateTooltip": true
         },
         "TypingIndicator": {
@@ -590,14 +592,17 @@
             "addBack": false
         },
         "WebKeybinds": {
-            "enabled": true
+            "enabled": true,
+            "showNavigationButtons": true,
+            "overrideCommonKeybinds": true
         },
         "WebScreenShareFixes": {
             "enabled": true
         },
         "WhoReacted": {
             "enabled": true,
-            "avatarClick": false
+            "avatarClick": false,
+            "clickableAvatars": true
         },
         "XSOverlay": {
             "enabled": false
@@ -785,7 +790,7 @@
             "enabled": false
         },
         "MessageLoggerEnhanced": {
-            "enabled": true,
+            "enabled": false,
             "ShowLogsButton": true,
             "imageCacheDir": "/home/tludwig/.config/equibop/MessageLoggerData/savedImages",
             "logsDir": "/home/tludwig/.config/equibop/MessageLoggerData",
@@ -808,7 +813,8 @@
             "ignoreWebhooks": false,
             "timeBasedCleanupMinutes": 0,
             "clearLogsOnRestart": false,
-            "attachmentFileExtensions": "none"
+            "attachmentFileExtensions": "png,jpg,jpeg,gif,webp,mp4,webm,mp3,ogg,wav",
+            "permanentlyRemoveLogByDefault": false
         },
         "MessageTranslate": {
             "enabled": false
@@ -1120,23 +1126,6 @@
         },
         "StatsfmPresence": {
             "enabled": false
-        },
-        "EquicordHelper": {
-            "enabled": true,
-            "disableCreateDMButton": false,
-            "disableDMContextMenu": false,
-            "noMirroredCamera": false,
-            "removeActivitySection": false,
-            "showYourOwnActivityButtons": false,
-            "forceRoleIcon": false,
-            "restoreFileDownloadButton": false,
-            "noModalAnimation": false,
-            "disableAdoptTagPrompt": true,
-            "noBulletPoints": false,
-            "accountStandingButton": false,
-            "refreshSlashCommands": false,
-            "jsonGateway": false,
-            "hideVoiceIndicatorForMutedChannels": false
         },
         "RPCEditor": {
             "enabled": false
@@ -1467,9 +1456,6 @@
         "EquibopStreamFixes": {
             "enabled": false
         },
-        "FavouriteAnything": {
-            "enabled": false
-        },
         "FileUpload": {
             "enabled": false
         },
@@ -1562,6 +1548,69 @@
         },
         "MusicRichPresence": {
             "enabled": false
+        },
+        "AddAttachments": {
+            "enabled": false
+        },
+        "SurfaceClassesAPI": {
+            "enabled": false
+        },
+        "AdvancedPermissions": {
+            "enabled": false
+        },
+        "AutoJumpToMessage": {
+            "enabled": false
+        },
+        "SedEnhanced": {
+            "enabled": false
+        },
+        "ShowRolesInChat": {
+            "enabled": false
+        },
+        "VoiceMessagesInBackground": {
+            "enabled": false
+        },
+        "BetterImageEditor": {
+            "enabled": false
+        },
+        "ReactionTimestamps": {
+            "enabled": false
+        },
+        "ContextMenuAPI": {
+            "enabled": true
+        },
+        "NoticesAPI": {
+            "enabled": true
+        },
+        "GifProviderSwitcher": {
+            "enabled": false
+        },
+        "EquiTweaks": {
+            "enabled": true,
+            "disableCreateDMButton": false,
+            "disableDMContextMenu": false,
+            "noMirroredCamera": false,
+            "removeActivitySection": false,
+            "showYourOwnActivityButtons": false,
+            "forceRoleIcon": false,
+            "restoreFileDownloadButton": false,
+            "noModalAnimation": false,
+            "disableAdoptTagPrompt": true,
+            "noBulletPoints": false,
+            "accountStandingButton": false,
+            "refreshSlashCommands": false,
+            "jsonGateway": false,
+            "hideVoiceIndicatorForMutedChannels": false,
+            "noOnboarding": false,
+            "disableHolidayNotifications": false,
+            "showAllBadges": false,
+            "enableAutoCorrect": false
+        },
+        "FavoriteAnything": {
+            "enabled": false
+        },
+        "DirectFileDownload": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1575,7 +1624,7 @@
         "authenticated": false,
         "url": "https://cloud.equicord.org",
         "settingsSync": false,
-        "settingsSyncVersion": 1788970228673
+        "settingsSyncVersion": 1793138365626
     },
     "userCssVars": {},
     "ignoreResetWarning": false,
@@ -1590,5 +1639,6 @@
     "pinnedThemes": [],
     "mainWindowFrameless": false,
     "themeActivationModes": {},
-    "windowsMaterial": "none"
+    "windowsMaterial": "none",
+    "nativeTitleBar": false
 }
