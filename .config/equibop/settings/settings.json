@@ -274,8 +274,7 @@
             "inlineEdits": true,
             "showEditDiffs": false,
             "separatedDiffs": false,
-            "ignoreSelfEdits": false,
-            "logDeletedAttachments": true
+            "ignoreSelfEdits": false
         },
         "MoreCommands": {
             "enabled": true,
@@ -457,8 +456,7 @@
         "ShowConnections": {
             "enabled": true,
             "iconSpacing": 1,
-            "iconSize": 32,
-            "showOnModal": true
+            "iconSize": 32
         },
         "ShowHiddenChannels": {
             "enabled": true,
@@ -592,17 +590,14 @@
             "addBack": false
         },
         "WebKeybinds": {
-            "enabled": true,
-            "showNavigationButtons": true,
-            "overrideCommonKeybinds": true
+            "enabled": true
         },
         "WebScreenShareFixes": {
             "enabled": true
         },
         "WhoReacted": {
             "enabled": true,
-            "avatarClick": false,
-            "clickableAvatars": true
+            "avatarClick": false
         },
         "XSOverlay": {
             "enabled": false
@@ -792,8 +787,8 @@
         "MessageLoggerEnhanced": {
             "enabled": true,
             "ShowLogsButton": true,
-            "imageCacheDir": "/home/lpmitfuchs/.config/equibop/MessageLoggerData/savedImages",
-            "logsDir": "/home/lpmitfuchs/.config/equibop/MessageLoggerData",
+            "imageCacheDir": "/home/tludwig/.config/equibop/MessageLoggerData/savedImages",
+            "logsDir": "/home/tludwig/.config/equibop/MessageLoggerData",
             "cacheMessagesFromServers": false,
             "whitelistedIds": "",
             "ignoreBots": false,
@@ -813,8 +808,7 @@
             "ignoreWebhooks": false,
             "timeBasedCleanupMinutes": 0,
             "clearLogsOnRestart": false,
-            "attachmentFileExtensions": "none",
-            "permanentlyRemoveLogByDefault": false
+            "attachmentFileExtensions": "none"
         },
         "MessageTranslate": {
             "enabled": false
@@ -1126,6 +1120,23 @@
         },
         "StatsfmPresence": {
             "enabled": false
+        },
+        "EquicordHelper": {
+            "enabled": true,
+            "disableCreateDMButton": false,
+            "disableDMContextMenu": false,
+            "noMirroredCamera": false,
+            "removeActivitySection": false,
+            "showYourOwnActivityButtons": false,
+            "forceRoleIcon": false,
+            "restoreFileDownloadButton": false,
+            "noModalAnimation": false,
+            "disableAdoptTagPrompt": true,
+            "noBulletPoints": false,
+            "accountStandingButton": false,
+            "refreshSlashCommands": false,
+            "jsonGateway": false,
+            "hideVoiceIndicatorForMutedChannels": false
         },
         "RPCEditor": {
             "enabled": false
@@ -1456,6 +1467,9 @@
         "EquibopStreamFixes": {
             "enabled": false
         },
+        "FavouriteAnything": {
+            "enabled": false
+        },
         "FileUpload": {
             "enabled": false
         },
@@ -1548,58 +1562,6 @@
         },
         "MusicRichPresence": {
             "enabled": false
-        },
-        "AddAttachments": {
-            "enabled": false
-        },
-        "GifProviderSwitcher": {
-            "enabled": false
-        },
-        "SurfaceClassesAPI": {
-            "enabled": false
-        },
-        "AdvancedPermissions": {
-            "enabled": false
-        },
-        "AutoJumpToMessage": {
-            "enabled": false
-        },
-        "BetterImageEditor": {
-            "enabled": false
-        },
-        "ReactionTimestamps": {
-            "enabled": false
-        },
-        "SedEnhanced": {
-            "enabled": false
-        },
-        "ShowRolesInChat": {
-            "enabled": false
-        },
-        "VoiceMessagesInBackground": {
-            "enabled": false
-        },
-        "EquiTweaks": {
-            "enabled": true,
-            "disableCreateDMButton": false,
-            "disableDMContextMenu": false,
-            "noMirroredCamera": false,
-            "removeActivitySection": false,
-            "showYourOwnActivityButtons": false,
-            "forceRoleIcon": false,
-            "restoreFileDownloadButton": false,
-            "noModalAnimation": false,
-            "disableAdoptTagPrompt": true,
-            "noBulletPoints": false,
-            "accountStandingButton": false,
-            "refreshSlashCommands": false,
-            "jsonGateway": false,
-            "hideVoiceIndicatorForMutedChannels": false,
-            "noOnboarding": false,
-            "enableAutoCorrect": false
-        },
-        "FavoriteAnything": {
-            "enabled": false
         }
     },
     "notifications": {
@@ -1613,7 +1575,7 @@
         "authenticated": false,
         "url": "https://cloud.equicord.org",
         "settingsSync": false,
-        "settingsSyncVersion": 1793145765320
+        "settingsSyncVersion": 1788970228673
     },
     "userCssVars": {},
     "ignoreResetWarning": false,
@@ -1628,6 +1590,5 @@
     "pinnedThemes": [],
     "mainWindowFrameless": false,
     "themeActivationModes": {},
-    "windowsMaterial": "none",
-    "nativeTitleBar": false
+    "windowsMaterial": "none"
 }
