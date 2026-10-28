@@ -17,7 +17,7 @@
 !.config/kitty/kitty.conf
 .config/hyprland-preview-share-picker/sharepicker.css
 .config/hypr/dms
-.config/nvim/lazy-lock.json
+.config/nvim/lazy-lock*
 
 .stow-backups
 .stow-backups-home
