@@ -4,6 +4,10 @@ set -euo pipefail
 MODE="${1:-balanced}"  # max|min|balanced
 INTEL_CONF="/etc/power-profiles.d/intel-gpu-power.conf"
 
+# Balanced = "Max-Q": this percentage of the *stock* TDP (not the overdrive /
+# max limit). GPUs keep most of their performance at ~70% of stock power.
+MAXQ_PERCENT=70
+
 [[ "$EUID" -eq 0 ]] || {
   echo "This script must be run as root." >&2
   exit 1
@@ -38,13 +42,29 @@ get_intel_conf_value() {
   ' "$INTEL_CONF"
 }
 
+# ESDOTS_OVERDRIVE_TDP=1 allows AMD GPUs to use the full overdrive power cap
+# in "max" mode. Hooks run as a systemd service, which doesn't inherit
+# /etc/environment, so fall back to reading it from there.
+overdrive_tdp_enabled() {
+  local value="${ESDOTS_OVERDRIVE_TDP:-}"
+
+  if [[ -z "$value" && -f /etc/environment ]]; then
+    value="$(
+      sed -nE 's/^[[:space:]]*(export[[:space:]]+)?ESDOTS_OVERDRIVE_TDP=["'\'']?([^"'\''[:space:]]*).*/\2/p' \
+        /etc/environment | tail -n1
+    )"
+  fi
+
+  [[ "$value" == "1" ]]
+}
+
 is_number() {
   [[ "$1" =~ ^[0-9]+([.][0-9]+)?$ ]]
 }
 
 nvidia_power_cap() {
   local card="$1" dev="$2"
-  local pci_id query cur_cap min_cap max_cap new_cap verify_cap
+  local pci_id query cur_cap min_cap max_cap default_cap new_cap verify_cap
 
   if ! command -v nvidia-smi >/dev/null 2>&1; then
     log "NVIDIA GPU found at $(basename "$card"), but nvidia-smi is unavailable; skipping."
@@ -56,7 +76,7 @@ nvidia_power_cap() {
   query="$(
     nvidia-smi \
       -i "$pci_id" \
-      --query-gpu=power.limit,power.min_limit,power.max_limit \
+      --query-gpu=power.limit,power.min_limit,power.max_limit,power.default_limit \
       --format=csv,noheader,nounits \
       2>/dev/null || true
   )"
@@ -66,12 +86,16 @@ nvidia_power_cap() {
     return
   fi
 
-  IFS=',' read -r cur_cap min_cap max_cap <<< "$query"
+  IFS=',' read -r cur_cap min_cap max_cap default_cap <<< "$query"
 
   # Trim whitespace returned by nvidia-smi.
   cur_cap="${cur_cap//[[:space:]]/}"
   min_cap="${min_cap//[[:space:]]/}"
   max_cap="${max_cap//[[:space:]]/}"
+  default_cap="${default_cap//[[:space:]]/}"
+
+  # Stock TDP; fall back to max limit if the driver doesn't report a default.
+  is_number "$default_cap" || default_cap="$max_cap"
 
   if ! is_number "$cur_cap" || ! is_number "$min_cap" || ! is_number "$max_cap"; then
     log "NVIDIA power limits are unavailable for $pci_id; skipping."
@@ -84,9 +108,9 @@ nvidia_power_cap() {
       ;;
     balanced)
       new_cap="$(
-        awk -v max="$max_cap" -v min="$min_cap" '
+        awk -v stock="$default_cap" -v min="$min_cap" -v pct="$MAXQ_PERCENT" '
           BEGIN {
-            value = max * 0.80
+            value = stock * pct / 100
             if (value < min)
               value = min
             printf "%.0f", value
@@ -104,6 +128,7 @@ nvidia_power_cap() {
   log "PCI ID: $pci_id"
   log "Current: $cur_cap W"
   log "Max: $max_cap W"
+  log "Stock: $default_cap W"
   log "Min: $min_cap W"
   log "Mode: $MODE"
   log "New cap: $new_cap W -> nvidia-smi"
@@ -216,12 +241,38 @@ for card in /sys/class/drm/card[0-9]*; do
       continue
     fi
 
+    # Stock TDP. AMD: power1_cap_max is the overdrive limit (e.g. 402 W on a
+    # 7900 XTX), power1_cap_default is stock. Intel: max from conf/rated is stock.
+    default_cap="$max_cap"
+    if [[ "$vendor" == "0x1002" ]]; then
+      amd_default=0
+      [[ -f "$hwmon_dir/power1_cap_default" ]] && amd_default=$(< "$hwmon_dir/power1_cap_default")
+
+      if (( amd_default > 0 )); then
+        default_cap="$amd_default"
+      else
+        log "No power1_cap_default for $(basename "$card"); using max cap as stock."
+      fi
+    fi
+
     case "$MODE" in
       max)
-        new_cap="$max_cap"
+        new_cap="$default_cap"
+
+        # AMD: use stock TDP unless overdrive TDP is explicitly enabled.
+        if [[ "$vendor" == "0x1002" ]]; then
+          if overdrive_tdp_enabled; then
+            new_cap="$max_cap"
+            log "ESDOTS_OVERDRIVE_TDP=1: using overdrive max cap."
+          else
+            log "Using stock TDP (set ESDOTS_OVERDRIVE_TDP=1 for overdrive max)."
+          fi
+        fi
         ;;
       balanced)
-        new_cap=$(( max_cap * 80 / 100 ))
+        # Max-Q: fraction of stock TDP, never below the hardware minimum.
+        new_cap=$(( default_cap * MAXQ_PERCENT / 100 ))
+        (( min_cap > 0 && new_cap < min_cap )) && new_cap="$min_cap"
         ;;
       min)
         if (( min_cap > 0 )); then
@@ -238,6 +289,7 @@ for card in /sys/class/drm/card[0-9]*; do
     [[ "$vendor" == "0x8086" ]] && log "PCI ID: $pci_id"
     log "Current: $(( cur_cap / 1000000 )) W"
     log "Max: $(( max_cap / 1000000 )) W"
+    log "Stock: $(( default_cap / 1000000 )) W"
     (( min_cap > 0 )) && log "Min: $(( min_cap / 1000000 )) W"
     log "Mode: $MODE"
     log "New cap: $(( new_cap / 1000000 )) W -> $cap_file"

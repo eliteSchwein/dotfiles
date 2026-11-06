@@ -108,7 +108,8 @@ elseif has_amd then
     -- AMD dedicated GPU
     hl.env("LIBVA_DRIVER_NAME", "radeonsi")
     hl.env("__GLX_VENDOR_LIBRARY_NAME", "mesa")
-    hl.env("AMD_USERQ", "1")
+    -- Enable the following if you play star citizen and you have some issues
+    -- hl.env("AMD_USERQ", "1")
 
 elseif has_arc then
     -- Intel Arc dedicated GPU
