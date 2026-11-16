@@ -187,7 +187,7 @@ local function fit_fusion_marking_menu(w)
 
     local sel = "address:" .. w.address
     hl.dispatch(hl.dsp.window.resize({ x = m.width, y = m.height, window = sel }))
-    hl.dispatch(hl.dsp.window.move({ x = target.x, y = target.y, window = sel }))
+    hl.dispatch(hl.dsp.window.move({ x = target.x, y = target.y - 20, window = sel }))
 end
 
 -- Wine may resize the window again right after it maps, so re-check twice shortly after.
