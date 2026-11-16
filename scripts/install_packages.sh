@@ -15,7 +15,7 @@ paru -S \
   hyprqt6engine hyprland uwsm hyprland-preview-share-picker-git xdg-desktop-portal-gtk \
   xdg-desktop-portal-hyprland hyprpm hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
-  hyprshot kitty gnome-keyring curl wget cmake meson cpio pkg-config gcc wtype hyprsunset "${PACMAN_FLAGS[@]}"
+  hyprshot kitty curl wget cmake meson cpio pkg-config gcc wtype hyprsunset "${PACMAN_FLAGS[@]}"
 
 log_info "Install Addon Packages"
 paru -S \
@@ -23,7 +23,7 @@ paru -S \
   ydotool emote papirus-icon-theme-git satty \
   gimp clipse jq imagemagick \
   power-profiles-daemon \
-  seahorse wl-clipboard phinger-cursors \
+  wl-clipboard phinger-cursors \
   brightnessctl playerctl inotify-tools \
   wf-recorder udiskie direnv "${PACMAN_FLAGS[@]}"
 

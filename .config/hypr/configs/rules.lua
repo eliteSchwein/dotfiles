@@ -104,3 +104,15 @@ hl.layer_rule({
     match = { namespace = "^(dms)$" },
     no_anim = true,
 })
+
+hl.window_rule({
+    name = "fusion360-main",
+    match = {
+        class = "^steam_proton$",
+        title = ".*Autodesk Fusion.*",
+    },
+
+    no_blur = true,
+    no_shadow = true,
+    opaque = true,
+})
