@@ -18,14 +18,15 @@ log_info "Install Languages and Toolchains"
 paru -S \
   gcc nodejs npm python go rustup "${PACMAN_FLAGS[@]}"
 
-log_info "Install Kubernetes and Database Tools"
+log_info "Install Kubernetes, Docker and Database Tools"
 paru -S \
-  kubectl freelens-bin dbeaver "${PACMAN_FLAGS[@]}"
+  kubectl freelens-bin docker docker-compose docekr-buildx dbeaver "${PACMAN_FLAGS[@]}"
 
-log_info "Setup Rust Toolchain"
-if ! rustup toolchain list | grep -q .; then
-  rustup default stable
-fi
+  sudo usermod -aG docker $USER
+
+log_info "Install AI Tools"
+paru -S \
+  claude-code openai-codex-bin "${PACMAN_FLAGS[@]}"
 
 log_info "Setup Git LFS"
 git lfs install
