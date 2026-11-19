@@ -15,7 +15,7 @@ paru -S \
   hyprqt6engine hyprland uwsm hyprland-preview-share-picker-git xdg-desktop-portal-gtk \
   xdg-desktop-portal-hyprland hyprpm hyprutils hyprlang hyprcursor \
   xdg-desktop-portal hyprpicker hyprpolkitagent archlinux-xdg-menu rpm-tools \
-  hyprshot kitty curl wget cmake meson cpio pkg-config gcc wtype hyprsunset "${PACMAN_FLAGS[@]}"
+  hyprshot kitty curl wget cmake meson cpio pkg-config gcc wtype hyprsunset openssh "${PACMAN_FLAGS[@]}"
 
 log_info "Install Addon Packages"
 paru -S \
