@@ -16,7 +16,7 @@ paru -S \
 
 log_info "Install Languages and Toolchains"
 paru -S \
-  gcc nodejs npm python go rustup "${PACMAN_FLAGS[@]}"
+  gcc nodejs npm python go "${PACMAN_FLAGS[@]}"
 
 log_info "Install Kubernetes, Docker and Database Tools"
 paru -S \
